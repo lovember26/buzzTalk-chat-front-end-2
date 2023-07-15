@@ -2,8 +2,8 @@ import * as React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { logIn } from "../../redux/auth/authSlice";
-import { showPasswordHandler } from "../../helpers/showPasswordHandler";
+import { logIn } from "redux/auth/authSlice";
+import { showPasswordHandler } from "helpers/showPasswordHandler";
 import {
   LoginWrapper,
   LoginTitle,

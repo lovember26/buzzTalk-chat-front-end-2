@@ -1,5 +1,5 @@
-import { useLogOutRedirect } from "../../hooks/useLogOutRedirect";
-import Title from "../../components/common/Title/Title";
+import { useLogOutRedirect } from "hooks/useLogOutRedirect";
+import Title from "components/common/Title/Title";
 
 export const HomePage = () => {
   useLogOutRedirect();

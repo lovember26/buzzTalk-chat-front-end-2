@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
-import { logOut } from "../../redux/auth/authSlice";
-import { selectLogin } from "../../redux/auth/authSelectors";
+import { logOut } from "redux/auth/authSlice";
+import { selectLogin } from "redux/auth/authSelectors";
 import {
   UserMenuWrapper,
   UserMenuText,
