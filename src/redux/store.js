@@ -13,6 +13,10 @@ import { persistedAuthReducer } from "./auth/authSlice";
 import { userSlice } from "./user/userSlice";
 import { myItemSlice } from "./items/slice";
 
+const myMiddleWare = (store) => (next) => (action) => {
+  console.log("MiddleWare", action);
+};
+
 export const store = configureStore({
   reducer: {
     auth: persistedAuthReducer,
@@ -26,7 +30,9 @@ export const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
       // In order to display the store change in DevTools
-    }).concat(logger),
+    }),
+  myMiddleWare,
+  logger,
 });
 
 export const persistedStore = persistStore(store);
