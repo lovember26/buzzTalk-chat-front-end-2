@@ -12,9 +12,14 @@ export const MainNav = () => {
   return (
     <MainNavList>
       {isLoggedIn && (
-        <MainNavItem>
-          <MainNavigationNavLink to="/home">Home</MainNavigationNavLink>
-        </MainNavItem>
+        <>
+          <MainNavItem>
+            <MainNavigationNavLink to="/home">Home</MainNavigationNavLink>
+          </MainNavItem>
+          <MainNavItem>
+            <MainNavigationNavLink to="/posts">Posts</MainNavigationNavLink>
+          </MainNavItem>
+        </>
       )}
     </MainNavList>
   );
