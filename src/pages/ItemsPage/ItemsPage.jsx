@@ -2,12 +2,12 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { itemsOperations, itemsSelectors } from "redux/items";
 import Title from "components/common/Title/Title";
-import {
-  ItemsPageList,
-  ItemsPageItem,
-  ItemsPageText,
-  ItemsPageIconDelete,
-} from "./ItemsPage.styled";
+// import {
+//   ItemsPageList,
+//   ItemsPageItem,
+//   ItemsPageText,
+//   ItemsPageIconDelete,
+// } from "./ItemsPage.styled";
 
 export const ItemsPage = () => {
   const dispatch = useDispatch();
@@ -21,14 +21,14 @@ export const ItemsPage = () => {
   return (
     <>
       <Title title="Items Page" />
-      <ItemsPageList>
+      {/* <ItemsPageList>
         {items.map(({ id, title }) => (
           <ItemsPageItem key={id}>
             <ItemsPageText>{title}</ItemsPageText>
             <ItemsPageIconDelete size={30} />
           </ItemsPageItem>
         ))}
-      </ItemsPageList>
+      </ItemsPageList> */}
     </>
   );
 };

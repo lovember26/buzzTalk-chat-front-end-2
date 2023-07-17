@@ -1,5 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { itemsAPI } from "services";
+// eslint-disable-next-line no-unused-vars
+import { successNotification } from "helpers/notification";
+import { errorHandler } from "helpers/errorHandler";
 
 export const fetchItems = createAsyncThunk(
   "items/fetchItems",
@@ -8,7 +11,22 @@ export const fetchItems = createAsyncThunk(
       const items = await itemsAPI.fetchItems();
       return items;
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue(errorHandler(error));
+    }
+  }
+);
+
+export const deleteItem = createAsyncThunk(
+  "items/deleteItem",
+  async (id, { rejectWithValue }) => {
+    try {
+      const items = await itemsAPI.deleteItem(id);
+
+      successNotification("Removed success!");
+
+      return items;
+    } catch (error) {
+      return rejectWithValue(errorHandler(error));
     }
   }
 );
