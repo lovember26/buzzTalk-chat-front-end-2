@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { showPasswordHandler } from "helpers/showPasswordHandler";
+import { AppToastContainer } from "components/AppToastContainer/AppToastContainer";
 
 import {
   RegisterWrapper,
@@ -17,7 +18,7 @@ import {
   RegisterAuthLinkText,
   RegisterAuthLink,
 } from "./RegisterPage.styled";
-import { register } from "redux/auth/authOperations";
+import { register } from "redux/auth/authThunk";
 import { useDispatch } from "react-redux";
 
 export const RegisterPage = () => {
@@ -53,9 +54,9 @@ export const RegisterPage = () => {
     event.preventDefault();
 
     const user = { name, email, password };
-    console.log("user register", user);
 
     dispatch(register(user));
+
     setName("");
     setEmail("");
     setPassword("");
@@ -117,6 +118,7 @@ export const RegisterPage = () => {
           <RegisterAuthLink onClick={navigateToLogin}>Увійти</RegisterAuthLink>
         </RegisterAuthLinkWrapper>
       </RegisterWrapper>
+      <AppToastContainer size={30} />
     </>
   );
 };

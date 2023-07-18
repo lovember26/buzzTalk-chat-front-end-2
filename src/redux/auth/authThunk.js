@@ -7,7 +7,6 @@ export const register = createAsyncThunk(
   "auth/register",
   async (credentials, { rejectWithValue }) => {
     try {
-      console.log("credentials register createAsyncThunk", credentials);
       console.log("Вітаю! Ви успішно зареєструватися!");
       return successNotification("Вітаю! Ви успішно зареєструватися!");
     } catch (error) {
@@ -26,7 +25,6 @@ export const logIn = createAsyncThunk(
   "auth/login",
   async (credentials, { rejectWithValue }) => {
     try {
-      console.log("credentials login createAsyncThunk", credentials);
       console.log("Вітаю! Ви успішно увійшли в додаток!");
       return successNotification("Вітаю! Ви успішно увійшли в додаток!");
     } catch (error) {

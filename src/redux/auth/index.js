@@ -1,2 +1,2 @@
-export * as authOperations from "./authOperations";
+export * as authOperations from "./authThunk";
 export * as authSelectors from "./authSelectors";

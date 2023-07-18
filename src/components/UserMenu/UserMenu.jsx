@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { logOut } from "redux/auth/authOperations";
+import { logOut } from "redux/auth/authThunk";
 import { selectUser } from "redux/auth/authSelectors";
 import {
   UserMenuWrapper,

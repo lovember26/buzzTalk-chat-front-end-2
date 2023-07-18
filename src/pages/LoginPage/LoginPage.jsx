@@ -2,7 +2,8 @@ import * as React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { logIn } from "redux/auth/authOperations";
+import { logIn } from "redux/auth/authThunk";
+import { AppToastContainer } from "components/AppToastContainer/AppToastContainer";
 
 import { showPasswordHandler } from "helpers/showPasswordHandler";
 import {
@@ -51,7 +52,6 @@ export const LoginPage = () => {
     event.preventDefault();
 
     const user = { email, password };
-    console.log("user login", user);
 
     setEmail("");
     setPassword("");
@@ -103,6 +103,7 @@ export const LoginPage = () => {
           <LoginAuthLink onClick={navigateToRegister}>Реєстрація</LoginAuthLink>
         </LoginAuthLinkWrapper>
       </LoginWrapper>
+      <AppToastContainer size={30} />
     </>
   );
 };

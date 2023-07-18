@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchItems, deleteItem } from "./itemsOperations";
+import { fetchItems, deleteItem } from "./itemsThunk";
 import { initialState } from "./itemsInitialState";
 import { status } from "constants";
 
@@ -29,4 +29,4 @@ const itemsSlice = createSlice({
   },
 });
 
-export default itemsSlice.reducer;
+export const itemsReducer = itemsSlice.reducer;

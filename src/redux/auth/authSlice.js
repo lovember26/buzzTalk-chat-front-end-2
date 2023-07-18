@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { initialState } from "./authInitialState";
-import { register, logIn, logOut } from "./authOperations";
+import { register, logIn, logOut } from "./authThunk";
 
 const handlePending = (state) => {
   state.isLoggedIn = false;
@@ -20,7 +20,7 @@ export const authSlice = createSlice({
     builder
       .addCase(register.pending, handlePending)
       .addCase(register.fulfilled, (state, action) => {
-        console.log("action register.fulfilled", action.meta.arg);
+        console.log("register.fulfilled", action.meta.arg);
         // state.user = action.payload.user;
         state.user = action.meta.arg;
         state.isLoggedIn = true;
@@ -31,7 +31,7 @@ export const authSlice = createSlice({
 
       .addCase(logIn.pending, handlePending)
       .addCase(logIn.fulfilled, (state, action) => {
-        console.log("action logIn.fulfilled", action.meta.arg);
+        console.log("logIn.fulfilled", action.meta.arg);
         state.user = action.meta.arg;
         state.isLoggedIn = true;
         state.isLoading = false;

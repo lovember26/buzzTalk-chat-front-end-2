@@ -11,9 +11,8 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-// import logger from "redux-logger";
 import { authReducer } from "./auth/authSlice";
-import itemsSlice from "./items/itemsSlice";
+import { itemsReducer } from "./items/itemsSlice";
 
 const persistConfig = {
   key: "auth",
@@ -26,7 +25,7 @@ const persistedAuthReducer = persistReducer(persistConfig, authReducer);
 export const store = configureStore({
   reducer: {
     auth: persistedAuthReducer,
-    items: itemsSlice,
+    items: itemsReducer,
   },
   // In order to remove the error "A non-serializable value was detected in an action, in the path: `register`"
   middleware: (getDefaultMiddleware) =>
@@ -34,9 +33,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-      // In order to display the store change in DevTools
     }),
-  // .concat(logger),
 });
 
 export const persistedStore = persistStore(store);
