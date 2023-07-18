@@ -12,7 +12,7 @@ import {
 export function UserMenu() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { email } = useSelector(selectUser);
+  const { login } = useSelector(selectUser);
 
   const handlelogOut = () => {
     dispatch(logOut());
@@ -22,7 +22,7 @@ export function UserMenu() {
   return (
     <UserMenuWrapper>
       <FaUserCircleIcon size={30} />
-      <UserMenuText>{email}</UserMenuText>
+      <UserMenuText>{login}</UserMenuText>
       <UserMenuButton type="button" onClick={handlelogOut}>
         Log out
       </UserMenuButton>

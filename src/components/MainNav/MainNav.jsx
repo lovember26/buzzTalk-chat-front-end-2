@@ -17,7 +17,7 @@ export const MainNav = () => {
             <MainNavigationNavLink to="/home">Home</MainNavigationNavLink>
           </MainNavItem>
           <MainNavItem>
-            <MainNavigationNavLink to="/posts">Posts</MainNavigationNavLink>
+            <MainNavigationNavLink to="/items">Items</MainNavigationNavLink>
           </MainNavItem>
         </>
       )}

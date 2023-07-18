@@ -23,7 +23,7 @@ import {
 } from "./LoginPage.styled";
 
 export const LoginPage = () => {
-  const [email, setEmail] = useState("");
+  const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
@@ -39,8 +39,8 @@ export const LoginPage = () => {
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
-      case "email":
-        return setEmail(value);
+      case "login":
+        return setLogin(value);
       case "password":
         return setPassword(value);
       default:
@@ -51,9 +51,9 @@ export const LoginPage = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const user = { email, password };
+    const user = { login, password };
 
-    setEmail("");
+    setLogin("");
     setPassword("");
 
     dispatch(logIn(user));
@@ -72,13 +72,13 @@ export const LoginPage = () => {
       <LoginTitle>Exit</LoginTitle>
       <LoginWrapper>
         <LoginForm onSubmit={handleSubmit}>
-          <LoginLable>Email</LoginLable>
+          <LoginLable>Login</LoginLable>
           <LoginInput
-            type="email"
-            name="email"
-            value={email}
+            type="text"
+            name="login"
+            value={login}
             onChange={handleChange}
-            placeholder="Enter an email"
+            placeholder="Enter a login"
             required
           ></LoginInput>
           <LoginLable>Password</LoginLable>

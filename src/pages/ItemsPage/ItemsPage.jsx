@@ -1,31 +1,31 @@
-import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { itemsOperations, itemsSelectors } from "redux/items";
+// import { useEffect } from "react";
+// import { useSelector, useDispatch } from "react-redux";
+// import { itemsOperations, itemsSelectors } from "redux/items";
 import Title from "components/common/Title/Title";
-import {
-  ItemsPageList,
-  ItemsPageItem,
-  ItemsPageText,
-  ItemsPageIconDelete,
-} from "./ItemsPage.styled";
+// import {
+//   ItemsPageList,
+//   ItemsPageItem,
+//   ItemsPageText,
+//   ItemsPageIconDelete,
+// } from "./ItemsPage.styled";
 
 export const ItemsPage = () => {
-  const dispatch = useDispatch();
-  const items = useSelector(itemsSelectors.selectItems);
+  // const dispatch = useDispatch();
+  // const items = useSelector(itemsSelectors.selectItems);
 
-  useEffect(() => {
-    dispatch(itemsOperations.fetchItems());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(itemsOperations.fetchItems());
+  // }, [dispatch]);
 
-  const handleDeleteItem = (id) => {
-    console.log("id", id);
-    dispatch(itemsOperations.deleteItem(id));
-  };
+  // const handleDeleteItem = (id) => {
+  //   console.log("id", id);
+  //   dispatch(itemsOperations.deleteItem(id));
+  // };
 
   return (
     <>
       <Title title="Items Page" />
-      <ItemsPageList>
+      {/* <ItemsPageList>
         {items.map(({ id, title }) => (
           <ItemsPageItem key={id}>
             <ItemsPageText>{title}</ItemsPageText>
@@ -34,7 +34,7 @@ export const ItemsPage = () => {
             </button>
           </ItemsPageItem>
         ))}
-      </ItemsPageList>
+      </ItemsPageList> */}
     </>
   );
 };

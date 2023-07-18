@@ -3,5 +3,5 @@ export const routes = {
   REGISTER_PAGE: "/register",
   LOGIN_PAGE: "/login",
   HOME_PAGE: "/home",
-  POSTS_PAGE: "/posts",
+  ITEMS_PAGE: "/items",
 };

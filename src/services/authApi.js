@@ -1,12 +1,13 @@
 import axios from "axios";
-axios.defaults.baseURL = "https://jsonplaceholder.typicode.com/";
+axios.defaults.baseURL =
+  "http://buzz-talk-api.eu-west-3.elasticbeanstalk.com/api/accounts";
 
-export const fetchItems = async () => {
-  const { data } = await axios.get("/posts");
+export const registerUserService = async (credentials) => {
+  const { data } = await axios.post("/register/", credentials);
   return data;
 };
 
-export const deleteItem = async (id) => {
-  const { data } = await axios.delete(`/posts/${id}`);
+export const loginUserService = async (credentials) => {
+  const { data } = await axios.post("/token/", credentials);
   return data;
 };
