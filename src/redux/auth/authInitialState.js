@@ -1,4 +1,6 @@
 export const initialState = {
-  login: "",
+  user: { name: "", email: "", password: "" },
   isLoggedIn: false,
+  isLoading: false,
+  error: null,
 };

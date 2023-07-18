@@ -1,34 +1,53 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
 import { initialState } from "./authInitialState";
+import { register, logIn, logOut } from "./authOperations";
+
+const handlePending = (state) => {
+  state.isLoggedIn = false;
+  state.isLoading = true;
+  state.error = null;
+};
+
+const handleRejected = (state, action) => {
+  state.isLoading = false;
+  state.error = action.payload;
+};
 
 export const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {
-    registration(state, action) {},
-    logIn(state, action) {
-      state.login = action.payload;
-      state.isLoggedIn = true;
-    },
-    logOut(state, action) {
-      state.login = null;
-      state.isLoggedIn = false;
-    },
-    current(state, action) {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(register.pending, handlePending)
+      .addCase(register.fulfilled, (state, action) => {
+        console.log("action register.fulfilled", action.meta.arg);
+        // state.user = action.payload.user;
+        state.user = action.meta.arg;
+        state.isLoggedIn = true;
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(register.rejected, handleRejected)
+
+      .addCase(logIn.pending, handlePending)
+      .addCase(logIn.fulfilled, (state, action) => {
+        console.log("action logIn.fulfilled", action.meta.arg);
+        state.user = action.meta.arg;
+        state.isLoggedIn = true;
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(logIn.rejected, handleRejected)
+
+      .addCase(logOut.pending, handlePending)
+      .addCase(logOut.fulfilled, (state, action) => {
+        state.user = { name: "", email: "", password: "" };
+        state.isLoggedIn = false;
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(logOut.rejected, handleRejected);
   },
 });
 
-const persistConfig = {
-  key: "auth",
-  storage,
-  // whitelist: ["refreshToken", "accessToken"],
-};
-
-export const persistedAuthReducer = persistReducer(
-  persistConfig,
-  authSlice.reducer
-);
-
-export const { registration, logIn, logOut, current } = authSlice.actions;
+export const authReducer = authSlice.reducer;

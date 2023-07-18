@@ -13,7 +13,6 @@ const itemsSlice = createSlice({
         state.errors.get = null;
       })
       .addCase(fetchItems.fulfilled, (state, { payload }) => {
-        console.log("payload entities", payload);
         state.statuses.get = status.FULFILLED;
         state.entities = payload;
       })
@@ -21,16 +20,11 @@ const itemsSlice = createSlice({
         state.statuses.get = status.REJECTED;
         state.errors.get = payload;
       })
-      .addCase(deleteItem.pending, (state) => {
-        state.statuses.get = status.PENDING;
-        state.errors.get = null;
-      })
       .addCase(deleteItem.fulfilled, (state, action) => {
-        state.statuses.get = status.FULFILLED;
-      })
-      .addCase(deleteItem.rejected, (state, { payload }) => {
-        state.statuses.get = status.REJECTED;
-        state.errors.get = payload;
+        console.log("action deleteItem.fulfilled", action);
+        state.entities = state.entities.filter(
+          (item) => item.id !== action.meta.arg
+        );
       });
   },
 });

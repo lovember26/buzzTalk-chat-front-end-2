@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
-import { logOut } from "redux/auth/authSlice";
-import { selectLogin } from "redux/auth/authSelectors";
+import { useNavigate } from "react-router-dom";
+import { logOut } from "redux/auth/authOperations";
+import { selectUser } from "redux/auth/authSelectors";
 import {
   UserMenuWrapper,
   UserMenuText,
@@ -10,13 +11,19 @@ import {
 
 export function UserMenu() {
   const dispatch = useDispatch();
-  const { email } = useSelector(selectLogin);
+  const navigate = useNavigate();
+  const { email } = useSelector(selectUser);
+
+  const handlelogOut = () => {
+    dispatch(logOut());
+    navigate("/login", { replace: true });
+  };
 
   return (
     <UserMenuWrapper>
       <FaUserCircleIcon size={30} />
       <UserMenuText>{email}</UserMenuText>
-      <UserMenuButton type="button" onClick={() => dispatch(logOut())}>
+      <UserMenuButton type="button" onClick={handlelogOut}>
         Вийти
       </UserMenuButton>
     </UserMenuWrapper>

@@ -1,6 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { itemsAPI } from "services";
-// eslint-disable-next-line no-unused-vars
 import { successNotification } from "helpers/notification";
 import { errorHandler } from "helpers/errorHandler";
 

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { showPasswordHandler } from "helpers/showPasswordHandler";
+
 import {
   RegisterWrapper,
   RegisterTitle,
@@ -16,11 +17,16 @@ import {
   RegisterAuthLinkText,
   RegisterAuthLink,
 } from "./RegisterPage.styled";
+import { register } from "redux/auth/authOperations";
+import { useDispatch } from "react-redux";
 
 export const RegisterPage = () => {
+  const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
@@ -35,17 +41,26 @@ export const RegisterPage = () => {
     }
   };
 
+  const navigateToLogin = () => {
+    navigate("/login", { replace: true });
+  };
+
+  const navigateToHome = () => {
+    navigate("/home", { replace: true });
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    const user = { name, email, password };
+    console.log("user register", user);
+
+    dispatch(register(user));
     setName("");
     setEmail("");
     setPassword("");
-  };
 
-  const navigate = useNavigate();
-
-  const navigateToLogin = () => {
-    navigate("/login", { replace: true });
+    navigateToHome();
   };
 
   const showPassword = () => {

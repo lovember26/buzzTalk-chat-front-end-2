@@ -2,7 +2,7 @@ import axios from "axios";
 axios.defaults.baseURL = "https://jsonplaceholder.typicode.com/";
 
 export const fetchItems = async () => {
-  const { data } = await axios.get("/posts?_limit=5");
+  const { data } = await axios.get("/posts");
   return data;
 };
 

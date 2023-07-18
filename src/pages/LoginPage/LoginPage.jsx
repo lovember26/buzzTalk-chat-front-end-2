@@ -2,7 +2,8 @@ import * as React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { logIn } from "redux/auth/authSlice";
+import { logIn } from "redux/auth/authOperations";
+
 import { showPasswordHandler } from "helpers/showPasswordHandler";
 import {
   LoginWrapper,
@@ -47,15 +48,15 @@ export const LoginPage = () => {
   };
 
   const handleSubmit = (event) => {
-    const email = event.currentTarget.elements.email.value;
-    const password = event.currentTarget.elements.password.value;
-
-    dispatch(logIn({ email, password }));
-
     event.preventDefault();
+
+    const user = { email, password };
+    console.log("user login", user);
+
     setEmail("");
     setPassword("");
 
+    dispatch(logIn(user));
     navigateToHomePage();
   };
 
