@@ -1,56 +1,52 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { registerUserService, loginUserService } from "services/authApi";
 import { successNotification, errorNotification } from "helpers/notification";
-// import axios from "axios";
-// axios.defaults.baseURL = "https://connections-api.herokuapp.com";
 
-export const register = createAsyncThunk(
+export const registerThunk = createAsyncThunk(
   "auth/register",
   async (credentials, { rejectWithValue }) => {
     try {
-      console.log("Вітаю! Ви успішно зареєструватися!");
+      console.log("Successful registration!");
       const data = await registerUserService(credentials);
       console.log("data registerThank", data);
-      successNotification("Вітаю! Ви успішно зареєструватися!");
+      successNotification("Successful registration!");
       return data;
     } catch (error) {
-      console.log(
-        "Невірний формат електронної пошти або паролю, спробуйте ще."
-      );
+      console.log("Incorrect email or password format, please try again.");
       errorNotification(
-        "Невірний формат електронної пошти або паролю, спробуйте ще."
+        "Incorrect email or password format, please try again."
       );
       return rejectWithValue(error.message);
     }
   }
 );
 
-export const logIn = createAsyncThunk(
+export const logInThunk = createAsyncThunk(
   "auth/login",
   async (credentials, { rejectWithValue }) => {
     try {
-      console.log("Вітаю! Ви успішно увійшли в додаток!");
+      console.log("Successful log in!");
       const data = await loginUserService(credentials);
-      successNotification("Вітаю! Ви успішно увійшли в додаток!");
+      successNotification("Welcome to the app!");
       console.log("data token logInThank", data);
       return data;
     } catch (error) {
       errorNotification(
-        "Невірний формат електронної пошти або паролю, спробуйте ще."
+        "Incorrect email or password format, please try again."
       );
       return rejectWithValue(error.message);
     }
   }
 );
 
-export const logOut = createAsyncThunk(
+export const logOutThunk = createAsyncThunk(
   "auth/logout",
   async (_, { rejectWithValue }) => {
     try {
-      console.log("Вітаю! Ви успішно вийшли з додатку!");
-      return successNotification("Вітаю! Ви успішно вийшли з додатку!");
+      console.log("Successful log out.");
+      return successNotification("See you soon!");
     } catch (error) {
-      errorNotification("Сталася помилка при виході з додатку.");
+      errorNotification("An error occurred when exiting the application.");
       return rejectWithValue(error.message);
     }
   }

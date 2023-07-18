@@ -17,7 +17,7 @@ import {
   RegisterAuthLinkText,
   RegisterAuthLink,
 } from "./RegisterPage.styled";
-import { register } from "redux/auth/authThunk";
+import { registerThunk } from "redux/auth/authThunk";
 import { useDispatch } from "react-redux";
 
 export const RegisterPage = () => {
@@ -70,7 +70,7 @@ export const RegisterPage = () => {
       last_name: lastName,
     };
 
-    dispatch(register(user));
+    dispatch(registerThunk(user));
 
     setUserName("");
     setPassword("");

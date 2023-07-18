@@ -1,16 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { initialState } from "./authInitialState";
-import { register, logIn, logOut } from "./authThunk";
+import { registerThunk, logInThunk, logOutThunk } from "./authThunk";
+import { status } from "constants";
 
 const handlePending = (state) => {
-  state.isLoggedIn = false;
-  state.isLoading = true;
+  state.status = status.PENDING;
   state.error = null;
+  state.isLoggedIn = false;
 };
 
 const handleRejected = (state, action) => {
-  state.isLoading = false;
+  state.status = status.REJECTED;
   state.error = action.payload;
+  state.isLoggedIn = false;
 };
 
 export const authSlice = createSlice({
@@ -18,34 +20,38 @@ export const authSlice = createSlice({
   initialState,
   extraReducers: (builder) => {
     builder
-      .addCase(register.pending, handlePending)
-      .addCase(register.fulfilled, (state, action) => {
-        console.log("register.fulfilled action", action);
-        console.log("register.fulfilled action.meta.arg", action.meta.arg);
-        // Чому у payload записується undefine??
-        // state.user = action.payload.user;
-        state.user = action.payload;
-        state.isLoggedIn = true;
-        state.isLoading = false;
-        state.error = null;
-      })
-      .addCase(register.rejected, handleRejected)
 
-      .addCase(logIn.pending, handlePending)
-      .addCase(logIn.fulfilled, (state, action) => {
+      .addCase(registerThunk.pending, handlePending)
+      .addCase(registerThunk.fulfilled, (state, action) => {
+        console.log("register.fulfilled action", action);
+        state.user = action.payload;
+        state.status = status.FULFILLED;
+        state.error = null;
+        state.isLoggedIn = true;
+      })
+      .addCase(registerThunk.rejected, (state, action) => {
+        state.status = status.REJECTED;
+        state.error = action.payload;
+        state.isLoggedIn = false;
+      })
+
+      .addCase(logInThunk.pending, (state) => {
+        state.status.login = status.PENDING;
+        state.error.login = null;
+        state.isLoggedIn = false;
+      })
+      .addCase(logInThunk.fulfilled, (state, action) => {
         console.log("logIn.fulfilled action", action);
-        console.log("logIn.fulfilled action.meta.arg", action.meta.arg);
-        // state.user = action.meta.arg;
         state.accessToken = action.payload.access;
         state.refreshToken = action.payload.refresh;
-        state.isLoggedIn = true;
         state.isLoading = false;
         state.error = null;
+        state.isLoggedIn = true;
       })
-      .addCase(logIn.rejected, handleRejected)
+      .addCase(logInThunk.rejected, handleRejected)
 
-      .addCase(logOut.pending, handlePending)
-      .addCase(logOut.fulfilled, (state, action) => {
+      .addCase(logOutThunk.pending, handlePending)
+      .addCase(logOutThunk.fulfilled, (state) => {
         state.user = {
           username: "",
           password: "",
@@ -54,11 +60,11 @@ export const authSlice = createSlice({
           first_name: "",
           last_name: "",
         };
-        state.isLoggedIn = false;
         state.isLoading = false;
         state.error = null;
+        state.isLoggedIn = false;
       })
-      .addCase(logOut.rejected, handleRejected);
+      .addCase(logOutThunk.rejected, handleRejected);
   },
 });
 

@@ -2,7 +2,7 @@ import * as React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { logIn } from "redux/auth/authThunk";
+import { logInThunk } from "redux/auth/authThunk";
 import { AppToastContainer } from "components/AppToastContainer/AppToastContainer";
 
 import { showPasswordHandler } from "helpers/showPasswordHandler";
@@ -56,7 +56,7 @@ export const LoginPage = () => {
     setLogin("");
     setPassword("");
 
-    dispatch(logIn(user));
+    dispatch(logInThunk(user));
     navigateToHomePage();
   };
 

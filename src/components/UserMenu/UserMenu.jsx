@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { logOut } from "redux/auth/authThunk";
+import { logOutThunk } from "redux/auth/authThunk";
 import { selectUser } from "redux/auth/authSelectors";
 import {
   UserMenuWrapper,
@@ -15,7 +15,7 @@ export function UserMenu() {
   const { login } = useSelector(selectUser);
 
   const handlelogOut = () => {
-    dispatch(logOut());
+    dispatch(logOutThunk());
     navigate("/login", { replace: true });
   };
 
