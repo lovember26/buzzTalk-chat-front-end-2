@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { showPasswordHandler } from "helpers/showPasswordHandler";
 import { AppToastContainer } from "components/AppToastContainer/AppToastContainer";
-
 import {
   RegisterWrapper,
   RegisterTitle,

@@ -20,9 +20,11 @@ export const authSlice = createSlice({
     builder
       .addCase(register.pending, handlePending)
       .addCase(register.fulfilled, (state, action) => {
-        console.log("register.fulfilled", action.meta.arg);
+        console.log("register.fulfilled action", action);
+        console.log("register.fulfilled action.meta.arg", action.meta.arg);
+        // Чому у payload записується undefine??
         // state.user = action.payload.user;
-        state.user = action.meta.arg;
+        state.user = action.payload;
         state.isLoggedIn = true;
         state.isLoading = false;
         state.error = null;
@@ -31,8 +33,11 @@ export const authSlice = createSlice({
 
       .addCase(logIn.pending, handlePending)
       .addCase(logIn.fulfilled, (state, action) => {
-        console.log("logIn.fulfilled", action.meta.arg);
-        state.user = action.meta.arg;
+        console.log("logIn.fulfilled action", action);
+        console.log("logIn.fulfilled action.meta.arg", action.meta.arg);
+        // state.user = action.meta.arg;
+        state.accessToken = action.payload.access;
+        state.refreshToken = action.payload.refresh;
         state.isLoggedIn = true;
         state.isLoading = false;
         state.error = null;

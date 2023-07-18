@@ -9,5 +9,6 @@ export const registerUserService = async (credentials) => {
 
 export const loginUserService = async (credentials) => {
   const { data } = await axios.post("/token/", credentials);
+  console.log("data token loginUserService", data);
   return data;
 };

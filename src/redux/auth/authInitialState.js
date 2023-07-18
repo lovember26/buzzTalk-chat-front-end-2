@@ -7,6 +7,8 @@ export const initialState = {
     first_name: "",
     last_name: "",
   },
+  accessToken: null,
+  refreshToken: null,
   isLoggedIn: false,
   isLoading: false,
   error: null,
