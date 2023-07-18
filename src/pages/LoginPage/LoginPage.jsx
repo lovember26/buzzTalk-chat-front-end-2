@@ -69,19 +69,19 @@ export const LoginPage = () => {
 
   return (
     <>
-      <LoginTitle>Вхід</LoginTitle>
+      <LoginTitle>Exit</LoginTitle>
       <LoginWrapper>
         <LoginForm onSubmit={handleSubmit}>
-          <LoginLable>Пошта</LoginLable>
+          <LoginLable>Email</LoginLable>
           <LoginInput
             type="email"
             name="email"
             value={email}
             onChange={handleChange}
-            placeholder="Введіть пошту"
+            placeholder="Enter an email"
             required
           ></LoginInput>
-          <LoginLable>Пароль</LoginLable>
+          <LoginLable>Password</LoginLable>
           <LoginInputPasswordWrapper>
             <LoginInputPassword
               className="input-password-login"
@@ -89,18 +89,18 @@ export const LoginPage = () => {
               name="password"
               value={password}
               onChange={handleChange}
-              placeholder="Введіть пароль"
+              placeholder="Enter a password"
               required
             ></LoginInputPassword>
             <LoginButtonIconWrapper>
               <LoginButtonIcon size={25} onClick={showPassword} />
             </LoginButtonIconWrapper>
           </LoginInputPasswordWrapper>
-          <LoginButton type="submit">Вхід</LoginButton>
+          <LoginButton type="submit">Sign in</LoginButton>
         </LoginForm>
         <LoginAuthLinkWrapper>
-          <LoginAuthLinkText>Немає акаунту?</LoginAuthLinkText>
-          <LoginAuthLink onClick={navigateToRegister}>Реєстрація</LoginAuthLink>
+          <LoginAuthLinkText>Don't have an account?</LoginAuthLinkText>
+          <LoginAuthLink onClick={navigateToRegister}>Sign up</LoginAuthLink>
         </LoginAuthLinkWrapper>
       </LoginWrapper>
       <AppToastContainer size={30} />

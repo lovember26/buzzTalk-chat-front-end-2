@@ -24,7 +24,7 @@ export function UserMenu() {
       <FaUserCircleIcon size={30} />
       <UserMenuText>{email}</UserMenuText>
       <UserMenuButton type="button" onClick={handlelogOut}>
-        Вийти
+        Log out
       </UserMenuButton>
     </UserMenuWrapper>
   );
