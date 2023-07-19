@@ -52,11 +52,11 @@ export const LoginPage = () => {
     event.preventDefault();
 
     const user = { login, password };
+    dispatch(logInThunk(user));
 
     setLogin("");
     setPassword("");
 
-    dispatch(logInThunk(user));
     navigateToHomePage();
   };
 

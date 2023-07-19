@@ -1,6 +1,23 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { registerUserService, loginUserService } from "services/authApi";
+import axios from "axios";
+import {
+  registerUserService,
+  loginUserService,
+  // logOutUserService,
+} from "services/authApi";
 import { successNotification, errorNotification } from "helpers/notification";
+
+axios.defaults.baseURL =
+  "http://buzz-talk-api.eu-west-3.elasticbeanstalk.com/api/accounts";
+
+const token = {
+  set(token) {
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  },
+  unset() {
+    axios.defaults.headers.common.Authorization = "";
+  },
+};
 
 export const registerThunk = createAsyncThunk(
   "auth/register",
@@ -8,7 +25,6 @@ export const registerThunk = createAsyncThunk(
     try {
       console.log("Successful registration!");
       const data = await registerUserService(credentials);
-      console.log("data registerThank", data);
       successNotification("Successful registration!");
       return data;
     } catch (error) {
@@ -27,8 +43,8 @@ export const logInThunk = createAsyncThunk(
     try {
       console.log("Successful log in!");
       const data = await loginUserService(credentials);
+      token.set(data.access);
       successNotification("Welcome to the app!");
-      console.log("data token logInThank", data);
       return data;
     } catch (error) {
       errorNotification(
@@ -44,6 +60,8 @@ export const logOutThunk = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       console.log("Successful log out.");
+      // return const data = await logOutUserService(credentials);
+      // token.unset();
       return successNotification("See you soon!");
     } catch (error) {
       errorNotification("An error occurred when exiting the application.");

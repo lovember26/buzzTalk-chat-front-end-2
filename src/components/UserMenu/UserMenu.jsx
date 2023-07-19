@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logOutThunk } from "redux/auth/authThunk";
-import { selectUser } from "redux/auth/authSelectors";
+import { selectUserName } from "redux/auth/authSelectors";
 import {
   UserMenuWrapper,
   UserMenuText,
@@ -12,7 +12,7 @@ import {
 export function UserMenu() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { login } = useSelector(selectUser);
+  const username = useSelector(selectUserName);
 
   const handlelogOut = () => {
     dispatch(logOutThunk());
@@ -22,7 +22,7 @@ export function UserMenu() {
   return (
     <UserMenuWrapper>
       <FaUserCircleIcon size={30} />
-      <UserMenuText>{login}</UserMenuText>
+      <UserMenuText>{username}</UserMenuText>
       <UserMenuButton type="button" onClick={handlelogOut}>
         Log out
       </UserMenuButton>

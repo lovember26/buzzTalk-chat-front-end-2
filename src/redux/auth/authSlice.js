@@ -10,6 +10,7 @@ const handlePending = (state) => {
 };
 
 const handleRejected = (state, action) => {
+  console.log("logIn.handleRejected action", action);
   state.status = status.REJECTED;
   state.error = action.payload;
   state.isLoggedIn = false;
@@ -35,16 +36,12 @@ export const authSlice = createSlice({
         state.isLoggedIn = false;
       })
 
-      .addCase(logInThunk.pending, (state) => {
-        state.status.login = status.PENDING;
-        state.error.login = null;
-        state.isLoggedIn = false;
-      })
+      .addCase(logInThunk.pending, handlePending)
       .addCase(logInThunk.fulfilled, (state, action) => {
         console.log("logIn.fulfilled action", action);
         state.accessToken = action.payload.access;
         state.refreshToken = action.payload.refresh;
-        state.isLoading = false;
+        state.status = status.FULFILLED;
         state.error = null;
         state.isLoggedIn = true;
       })
@@ -60,7 +57,8 @@ export const authSlice = createSlice({
           first_name: "",
           last_name: "",
         };
-        state.isLoading = false;
+        state.accessToken = null;
+        state.refreshToken = null;
         state.error = null;
         state.isLoggedIn = false;
       })
