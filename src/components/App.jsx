@@ -7,6 +7,7 @@ import { AppBar } from "./AppBar/AppBar";
 // import { HomePage } from "../pages/HomePage/HomePage";
 
 import { WelcomePage, LoginPage, RegisterPage, HomePage } from "../pages";
+import { PrivateRoute } from "./PrivateRoute/PrivateRoute";
 
 export const App = () => {
   return (
@@ -16,7 +17,14 @@ export const App = () => {
         <Route path={routes.MAIN_PAGE} element={<WelcomePage />} />
         <Route path={routes.REGISTER_PAGE} element={<RegisterPage />} />
         <Route path={routes.LOGIN_PAGE} element={<LoginPage />} />
-        <Route path={routes.HOME_PAGE} element={<HomePage />} />
+        <Route
+          path={routes.HOME_PAGE}
+          element={
+            <PrivateRoute>
+              <HomePage />
+            </PrivateRoute>
+          }
+        />
         <Route path="*" element={<LoginPage />} />
       </Routes>
     </>
