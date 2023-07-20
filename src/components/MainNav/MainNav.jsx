@@ -5,16 +5,21 @@ import {
   MainNavigationNavLink,
 } from "./MainNav.styled";
 import { useSelector } from "react-redux";
-import { selectIsLoggedIn } from "../../redux/auth/authSelectors";
+import { selectIsLoggedIn } from "redux/auth/authSelectors";
 
 export const MainNav = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   return (
     <MainNavList>
       {isLoggedIn && (
-        <MainNavItem>
-          <MainNavigationNavLink to="/home">Home</MainNavigationNavLink>
-        </MainNavItem>
+        <>
+          <MainNavItem>
+            <MainNavigationNavLink to="/home">Home</MainNavigationNavLink>
+          </MainNavItem>
+          <MainNavItem>
+            <MainNavigationNavLink to="/items">Items</MainNavigationNavLink>
+          </MainNavItem>
+        </>
       )}
     </MainNavList>
   );

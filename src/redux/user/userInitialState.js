@@ -1,6 +1,6 @@
 export const initialState = {
   id: null,
-  name: null,
   email: null,
+  name: null,
   avatarURL: null,
 };

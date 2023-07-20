@@ -5,10 +5,10 @@ export const AuthNav = () => {
   return (
     <AuthList>
       <AuthListItem>
-        <AuthNavLink to="/register">Реєстрація</AuthNavLink>
+        <AuthNavLink to="/register">Sign up</AuthNavLink>
       </AuthListItem>
       <AuthListItem>
-        <AuthNavLink to="/login">Логін</AuthNavLink>
+        <AuthNavLink to="/login">Sign in</AuthNavLink>
       </AuthListItem>
     </AuthList>
   );

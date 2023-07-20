@@ -1,11 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { initialState } from "./userInitialState";
 
+// const handlePending = (state) => {
+//   state.isLoggedIn = false;
+//   state.isLoading = true;
+//   state.error = null;
+// };
+
+// const handleRejected = (state, action) => {
+//   state.isLoading = false;
+//   state.error = action.payload;
+// };
+
 export const userSlice = createSlice({
-  name: "auth",
+  name: "user",
   initialState,
-  reducers: {},
+  extraReducers: (builder) => {},
 });
 
-// eslint-disable-next-line no-empty-pattern
-export const {} = userSlice.actions;
+export const userReducer = userSlice.reducer;

@@ -25,10 +25,11 @@ export const UserMenuButton = styled.button`
   padding: 8px 12px;
   border: 1px solid gray;
   border-radius: 30px;
-  font-size: 16px;
   background-color: rgba(247, 242, 242, 0.3);
-  color: dimgray;
-  cursor: pointer;
+  font-family: cursive;
+  font-size: 18px;
+  color: gray;
+  text-decoration: none;
 
   &:hover,
   &:focus {

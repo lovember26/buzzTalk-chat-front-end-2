@@ -1,13 +1,14 @@
 import { Route, Routes } from "react-router-dom";
-import { routes } from "../constants/routes";
-import { AppBar } from "./AppBar/AppBar";
-// import { WelcomePage } from "../pages/WelcomePage/WelcomePage";
-// import { LoginPage } from "../pages/LoginPage/LoginPage";
-// import { RegisterPage } from "../pages/RegisterPage/RegisterPage";
-// import { HomePage } from "../pages/HomePage/HomePage";
-
-import { WelcomePage, LoginPage, RegisterPage, HomePage } from "../pages";
+import { routes } from "constants/routes";
+import { AppBar } from "components/AppBar/AppBar";
 import { PrivateRoute } from "./PrivateRoute/PrivateRoute";
+import {
+  WelcomePage,
+  LoginPage,
+  RegisterPage,
+  HomePage,
+  ItemsPage,
+} from "pages";
 
 export const App = () => {
   return (
@@ -22,6 +23,14 @@ export const App = () => {
           element={
             <PrivateRoute>
               <HomePage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={routes.ITEMS_PAGE}
+          element={
+            <PrivateRoute>
+              <ItemsPage />
             </PrivateRoute>
           }
         />
