@@ -4,6 +4,7 @@ import {
   registerUserService,
   loginUserService,
   // logOutUserService,
+  verifyUserService,
 } from "services/authApi";
 import { successNotification, errorNotification } from "helpers/notification";
 
@@ -65,6 +66,20 @@ export const logOutThunk = createAsyncThunk(
       return successNotification("See you soon!");
     } catch (error) {
       errorNotification("An error occurred when exiting the application.");
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const verifyThunk = createAsyncThunk(
+  "auth/verify",
+  async (credentials, { rejectWithValue }) => {
+    try {
+      const data = await verifyUserService(credentials);
+      successNotification("Success verification!");
+      return data;
+    } catch (error) {
+      errorNotification("Error verification!");
       return rejectWithValue(error.message);
     }
   }
