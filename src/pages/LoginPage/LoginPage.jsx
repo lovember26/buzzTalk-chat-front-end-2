@@ -1,8 +1,8 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { logInThunk } from "redux/auth/authThunk";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { logInThunk, verifyThunk } from "redux/auth/authThunk";
 import { AppToastContainer } from "components/AppToastContainer/AppToastContainer";
 
 import { showPasswordHandler } from "helpers/showPasswordHandler";
@@ -25,9 +25,20 @@ import {
 export const LoginPage = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+  const [searchParams] = useSearchParams();
+  const email = searchParams.get("email");
+  const token = searchParams.get("token");
+  const verifyQuery = { email, token };
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (email && token) {
+      dispatch(verifyThunk(verifyQuery));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const navigateToRegister = () => {
     navigate("/register", { replace: true });
@@ -96,6 +107,7 @@ export const LoginPage = () => {
               <LoginButtonIcon size={25} onClick={showPassword} />
             </LoginButtonIconWrapper>
           </LoginInputPasswordWrapper>
+          <Link to="/forgot-password">Forgot Password</Link>
           <LoginButton type="submit">Sign in</LoginButton>
         </LoginForm>
         <LoginAuthLinkWrapper>

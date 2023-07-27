@@ -54,9 +54,9 @@ export const RegisterPage = () => {
     navigate("/login", { replace: true });
   };
 
-  const navigateToHome = () => {
-    navigate("/home", { replace: true });
-  };
+  // const navigateToHome = () => {
+  //   navigate("/home", { replace: true });
+  // };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -79,7 +79,7 @@ export const RegisterPage = () => {
     setFirstName("");
     setLastName("");
 
-    navigateToHome();
+    navigate("/verify", { replace: true });
   };
 
   const showPassword = () => {

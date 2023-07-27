@@ -8,6 +8,9 @@ import {
   RegisterPage,
   HomePage,
   ItemsPage,
+  VerifyPage,
+  ForgotPasswordPage,
+  ResetPasswordPage,
 } from "pages";
 
 export const App = () => {
@@ -17,7 +20,16 @@ export const App = () => {
       <Routes>
         <Route path={routes.MAIN_PAGE} element={<WelcomePage />} />
         <Route path={routes.REGISTER_PAGE} element={<RegisterPage />} />
+        <Route path={routes.VERIFY_PAGE} element={<VerifyPage />} />
         <Route path={routes.LOGIN_PAGE} element={<LoginPage />} />
+        <Route
+          path={routes.FORGOT_PASSWORD_PAGE}
+          element={<ForgotPasswordPage />}
+        />
+        <Route
+          path={routes.RESET_PASSSWORD_PAGE}
+          element={<ResetPasswordPage />}
+        />
         <Route
           path={routes.HOME_PAGE}
           element={
