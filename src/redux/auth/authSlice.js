@@ -1,6 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { initialState } from "./authInitialState";
-import { registerThunk, logInThunk, logOutThunk } from "./authThunk";
+import {
+  registerThunk,
+  logInThunk,
+  logOutThunk,
+  currentUserThunk,
+} from "./authThunk";
 import { status } from "constants";
 
 const handlePending = (state) => {
@@ -10,7 +15,6 @@ const handlePending = (state) => {
 };
 
 const handleRejected = (state, action) => {
-  console.log("logIn.handleRejected action", action);
   state.status = status.REJECTED;
   state.error = action.payload;
   state.isLoggedIn = false;
@@ -25,7 +29,6 @@ export const authSlice = createSlice({
       .addCase(registerThunk.pending, handlePending)
       .addCase(registerThunk.fulfilled, (state, action) => {
         console.log("register.fulfilled action", action);
-        state.user = action.payload;
         state.status = status.FULFILLED;
         state.error = null;
         state.isLoggedIn = true;
@@ -49,20 +52,18 @@ export const authSlice = createSlice({
 
       .addCase(logOutThunk.pending, handlePending)
       .addCase(logOutThunk.fulfilled, (state) => {
-        state.user = {
-          username: "",
-          password: "",
-          confirm_password: "",
-          email: "",
-          first_name: "",
-          last_name: "",
-        };
         state.accessToken = null;
         state.refreshToken = null;
         state.error = null;
         state.isLoggedIn = false;
       })
-      .addCase(logOutThunk.rejected, handleRejected);
+      .addCase(logOutThunk.rejected, handleRejected)
+      .addCase(currentUserThunk.pending, handlePending)
+      .addCase(currentUserThunk.fulfilled, (state) => {
+        state.error = null;
+        state.isLoggedIn = true;
+      })
+      .addCase(currentUserThunk.rejected, handleRejected);
   },
 });
 

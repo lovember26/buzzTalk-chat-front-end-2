@@ -49,9 +49,7 @@ export const RegisterInput = styled.input`
 
   background-color: ${(props) => props.theme.colors.input};
 
-  margin-bottom: 15px;
   padding: 6px 10px;
-  margin-bottom: 16px;
 
   &:hover {
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
@@ -118,7 +116,7 @@ export const RegisterButton = styled.button`
   margin-bottom: 15px;
   border: 1px solid gray;
   border-radius: 30px;
-  background-color: rgba(247, 242, 242, 0.6);
+  background-color: whitesmoke;
 
   font-family: cursive;
   font-size: 18px;
@@ -128,6 +126,10 @@ export const RegisterButton = styled.button`
   &:hover,
   &:focus {
     background-color: lightgreen;
+  }
+
+  &:disabled {
+    background-color: lightgray;
   }
 `;
 
@@ -162,7 +164,6 @@ export const RegisterButtonIconWrapper = styled.div`
 
 export const RegisterInputLoginWrapper = styled.div`
   position: relative;
-  margin-bottom: 20px;
 `;
 
 export const RegisterAuthLinkWrapper = styled.div`
@@ -185,4 +186,19 @@ export const RegisterAuthLink = styled.p`
   font-size: 18px;
   text-decoration: underline;
   cursor: pointer;
+`;
+
+export const RegisterErrorText = styled.p`
+  font-family: cursive;
+  font-size: 14px;
+  text-decoration: none;
+`;
+
+export const RegisterInputWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+
+  margin-bottom: 24px;
 `;

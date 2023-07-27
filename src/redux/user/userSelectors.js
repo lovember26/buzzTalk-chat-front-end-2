@@ -1,7 +1,9 @@
-// export const selectName = (state) => state.auth.user.name;
-// export const selectEmail = (state) => state.auth.user.email;
-// export const selectLogin = (state) => state.auth.user.login;
+export const selectUserId = (state) => state.user.id;
+export const selectUserName = (state) => state.user.username;
+export const selectEmail = (state) => state.user.email;
 
-export const selectUser = (state) => state.auth.user;
+export const selectUserFirstName = (state) => state.user.first_name;
+export const selectUserLAstName = (state) => state.user.last_name;
 
-export const selectIsLoggedIn = (state) => state.auth.isLoggedIn;
+export const selectUserError = (state) => state.user.error;
+export const selectUserIsLoggedIn = (state) => state.user.isLoggedIn;

@@ -5,10 +5,10 @@ import {
   MainNavigationNavLink,
 } from "./MainNav.styled";
 import { useSelector } from "react-redux";
-import { selectIsLoggedIn } from "redux/auth/authSelectors";
+import { selectAuthIsLoggedIn } from "redux/auth/authSelectors";
 
 export const MainNav = () => {
-  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const isLoggedIn = useSelector(selectAuthIsLoggedIn);
   return (
     <MainNavList>
       {isLoggedIn && (

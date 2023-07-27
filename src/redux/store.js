@@ -12,6 +12,7 @@ import {
   REGISTER,
 } from "redux-persist";
 import { authReducer } from "./auth/authSlice";
+import { userReducer } from "./user/userSlice";
 import { itemsReducer } from "./items/itemsSlice";
 
 const persistConfig = {
@@ -25,6 +26,7 @@ const persistedAuthReducer = persistReducer(persistConfig, authReducer);
 export const store = configureStore({
   reducer: {
     auth: persistedAuthReducer,
+    user: userReducer,
     items: itemsReducer,
   },
   // In order to remove the error "A non-serializable value was detected in an action, in the path: `register`"

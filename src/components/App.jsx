@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { routes } from "constants/routes";
 import { AppBar } from "components/AppBar/AppBar";
 import { PrivateRoute } from "./PrivateRoute/PrivateRoute";
@@ -12,8 +14,19 @@ import {
   ForgotPasswordPage,
   ResetPasswordPage,
 } from "pages";
+import { currentUserThunk } from "redux/auth/authThunk";
+import { selectAccessToken } from "redux/auth/authSelectors";
 
 export const App = () => {
+  const dispatch = useDispatch();
+  const accessToken = useSelector(selectAccessToken);
+
+  useEffect(() => {
+    if (accessToken) {
+      dispatch(currentUserThunk());
+    }
+  }, [dispatch, accessToken]);
+
   return (
     <>
       <AppBar />

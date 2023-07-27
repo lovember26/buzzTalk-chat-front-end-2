@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { showPasswordHandler } from "helpers/showPasswordHandler";
 import { AppToastContainer } from "components/AppToastContainer/AppToastContainer";
+import { Checkbox } from "components/CheckBox/CheckBox";
 import {
   RegisterWrapper,
   RegisterTitle,
@@ -16,35 +17,29 @@ import {
   RegisterAuthLinkWrapper,
   RegisterAuthLinkText,
   RegisterAuthLink,
+  RegisterInputWrapper,
+  RegisterErrorText,
 } from "./RegisterPage.styled";
 import { registerThunk } from "redux/auth/authThunk";
 import { useDispatch } from "react-redux";
 
 export const RegisterPage = () => {
   const dispatch = useDispatch();
-  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [email, setEmail] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [agree, setAgree] = useState(false);
 
   const navigate = useNavigate();
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
-      case "username":
-        return setUserName(value);
+      case "email":
+        return setEmail(value);
       case "password":
         return setPassword(value);
       case "confirm-password":
         return setConfirmPassword(value);
-      case "email":
-        return setEmail(value);
-      case "first-name":
-        return setFirstName(value);
-      case "last-name":
-        return setLastName(value);
       default:
         return;
     }
@@ -54,36 +49,40 @@ export const RegisterPage = () => {
     navigate("/login", { replace: true });
   };
 
-  // const navigateToHome = () => {
-  //   navigate("/home", { replace: true });
-  // };
+  const handleCheckboxChange = (event) => {
+    setAgree(event.currentTarget.checked);
+  };
+
+  const validate = () => {
+    if (email.trim() && password.trim() && confirmPassword.trim() && agree) {
+      return true;
+    }
+
+    return false;
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     const user = {
-      username: userName,
+      email: email,
       password: password,
       confirm_password: confirmPassword,
-      email: email,
-      first_name: firstName,
-      last_name: lastName,
     };
 
     dispatch(registerThunk(user));
 
-    setUserName("");
+    setEmail("");
     setPassword("");
     setConfirmPassword("");
-    setEmail("");
-    setFirstName("");
-    setLastName("");
 
     navigate("/verify", { replace: true });
   };
 
   const showPassword = () => {
-    const visibilityIcons = document.querySelector("div form div div");
+    const visibilityIcons = document.querySelector(
+      "div form div .password-wrapper"
+    );
     const passwordInput = document.querySelector(
       "form .input-password-register"
     );
@@ -93,8 +92,9 @@ export const RegisterPage = () => {
 
   const showConfirmPassword = () => {
     const visibilityIcons = document.querySelector(
-      "div form .confirm-password"
+      "div form div .confirm-password-wrapper"
     );
+
     const passwordInput = document.querySelector(
       "form .input-password-register-confirm"
     );
@@ -107,81 +107,80 @@ export const RegisterPage = () => {
       <RegisterTitle>User registration</RegisterTitle>
       <RegisterWrapper>
         <RegisterForm onSubmit={handleSubmit}>
-          <RegisterLable>Username</RegisterLable>
-          <RegisterInput
-            type="text"
-            name="username"
-            value={userName}
-            placeholder="Enter a name"
-            required
-            onChange={handleChange}
-          ></RegisterInput>
-          <RegisterLable>Password</RegisterLable>
-          <RegisterInputLoginWrapper>
-            <LoginInputPassword
-              className="input-password-register"
-              type="password"
-              name="password"
-              value={password}
-              placeholder="Enter a password"
+          <RegisterInputWrapper>
+            <RegisterLable>Email</RegisterLable>
+            <RegisterInput
+              type="email"
+              name="email"
+              value={email}
+              placeholder="Enter a name"
               required
               onChange={handleChange}
-            ></LoginInputPassword>
-            <RegisterButtonIconWrapper className="register-icon-wrapper-password">
-              <RegisterButtonIcon
-                size={25}
-                onClick={showPassword}
-                className="password"
-              />
-            </RegisterButtonIconWrapper>
-          </RegisterInputLoginWrapper>
-          <RegisterLable>Confirm password</RegisterLable>
-          <RegisterInputLoginWrapper>
-            <LoginInputPassword
-              className="input-password-register-confirm"
-              type="password"
-              name="confirm-password"
-              value={confirmPassword}
-              placeholder="Enter a password"
-              required
-              onChange={handleChange}
-            ></LoginInputPassword>
-            <RegisterButtonIconWrapper className="register-icon-wrapper-confirm-password">
-              <RegisterButtonIcon
-                size={25}
-                onClick={showConfirmPassword}
-                className="confirm-password"
-              />
-            </RegisterButtonIconWrapper>
-          </RegisterInputLoginWrapper>
-          <RegisterLable>Email</RegisterLable>
-          <RegisterInput
-            type="email"
-            name="email"
-            value={email}
-            placeholder="Enter an email"
-            required
-            onChange={handleChange}
-          ></RegisterInput>
-          <RegisterLable>First name</RegisterLable>
-          <RegisterInput
-            type="text"
-            name="first-name"
-            value={firstName}
-            placeholder="Enter a first name"
-            required
-            onChange={handleChange}
-          ></RegisterInput>
-          <RegisterLable>Last name</RegisterLable>
-          <RegisterInput
-            type="text"
-            name="last-name"
-            value={lastName}
-            placeholder="Enter a last name"
-            required
-            onChange={handleChange}
-          ></RegisterInput>
-          <RegisterButton type="submit">Sign up</RegisterButton>
+            ></RegisterInput>
+            <RegisterErrorText>
+              Please enter the email address associated with your account.
+            </RegisterErrorText>
+          </RegisterInputWrapper>
+
+          <RegisterInputWrapper>
+            <RegisterLable>Create password</RegisterLable>
+            <RegisterInputLoginWrapper className="password-wrapper">
+              <LoginInputPassword
+                className="input-password-register"
+                type="password"
+                name="password"
+                value={password}
+                placeholder="Enter a password"
+                required
+                onChange={handleChange}
+              ></LoginInputPassword>
+              <RegisterButtonIconWrapper>
+                <RegisterButtonIcon
+                  size={25}
+                  onClick={showPassword}
+                  className="password"
+                />
+              </RegisterButtonIconWrapper>
+            </RegisterInputLoginWrapper>
+            <RegisterErrorText>
+              Please enter the email address associated with your account.
+            </RegisterErrorText>
+          </RegisterInputWrapper>
+
+          <RegisterInputWrapper>
+            <RegisterLable>Confirm password</RegisterLable>
+            <RegisterInputLoginWrapper className="confirm-password-wrapper">
+              <LoginInputPassword
+                className="input-password-register-confirm"
+                type="password"
+                name="confirm-password"
+                value={confirmPassword}
+                placeholder="Enter a password"
+                required
+                onChange={handleChange}
+              ></LoginInputPassword>
+              <RegisterButtonIconWrapper>
+                <RegisterButtonIcon
+                  size={25}
+                  onClick={showConfirmPassword}
+                  className="confirm-password"
+                />
+              </RegisterButtonIconWrapper>
+            </RegisterInputLoginWrapper>
+            <RegisterErrorText>
+              Please enter the email address associated with your account.
+            </RegisterErrorText>
+          </RegisterInputWrapper>
+
+          <Checkbox
+            text="I accept the
+        policy and terms"
+            onChange={handleCheckboxChange}
+          />
+
+          <RegisterButton type="submit" disabled={!validate()}>
+            Sign up
+          </RegisterButton>
         </RegisterForm>
         <RegisterAuthLinkWrapper>
           <RegisterAuthLinkText>Already have an account?</RegisterAuthLinkText>
