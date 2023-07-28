@@ -1,24 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { initialState } from "./authInitialState";
-import {
-  registerThunk,
-  logInThunk,
-  logOutThunk,
-  currentUserThunk,
-} from "./authThunk";
+import { registerThunk, logInThunk, logOutThunk } from "./authThunk";
 import { status } from "constants";
-
-const handlePending = (state) => {
-  state.status = status.PENDING;
-  state.error = null;
-  state.isLoggedIn = false;
-};
-
-const handleRejected = (state, action) => {
-  state.status = status.REJECTED;
-  state.error = action.payload;
-  state.isLoggedIn = false;
-};
 
 export const authSlice = createSlice({
   name: "auth",
@@ -26,44 +9,60 @@ export const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
 
-      .addCase(registerThunk.pending, handlePending)
-      .addCase(registerThunk.fulfilled, (state, action) => {
-        console.log("register.fulfilled action", action);
-        state.status = status.FULFILLED;
-        state.error = null;
+      // registerThunk
+      .addCase(registerThunk.pending, (state) => {
+        state.statuses.register = status.PENDING;
+        state.errors.register = null;
+        state.isLoggedIn = false;
+      })
+      .addCase(registerThunk.fulfilled, (state) => {
+        state.statuses.register = status.FULFILLED;
+        state.errors.register = null;
         state.isLoggedIn = true;
       })
       .addCase(registerThunk.rejected, (state, action) => {
-        state.status = status.REJECTED;
-        state.error = action.payload;
+        state.statuses.register = status.REJECTED;
+        state.errors.register = action.payload;
         state.isLoggedIn = false;
       })
 
-      .addCase(logInThunk.pending, handlePending)
+      // logInThunk
+      .addCase(logInThunk.pending, (state) => {
+        state.statuses.login = status.PENDING;
+        state.errors.login = null;
+        state.isLoggedIn = false;
+      })
       .addCase(logInThunk.fulfilled, (state, action) => {
-        console.log("logIn.fulfilled action", action);
         state.accessToken = action.payload.access;
         state.refreshToken = action.payload.refresh;
-        state.status = status.FULFILLED;
-        state.error = null;
+        state.statuses.login = status.FULFILLED;
+        state.errors.login = null;
         state.isLoggedIn = true;
       })
-      .addCase(logInThunk.rejected, handleRejected)
-
-      .addCase(logOutThunk.pending, handlePending)
-      .addCase(logOutThunk.fulfilled, (state) => {
-        state.accessToken = null;
-        state.refreshToken = null;
-        state.error = null;
+      .addCase(logInThunk.rejected, (state, action) => {
+        state.statuses.login = status.REJECTED;
+        state.errors.login = action.payload;
         state.isLoggedIn = false;
       })
-      .addCase(logOutThunk.rejected, handleRejected)
-      .addCase(currentUserThunk.pending, handlePending)
-      .addCase(currentUserThunk.fulfilled, (state) => {
-        state.error = null;
-        state.isLoggedIn = true;
+
+      // logOutThunk
+      .addCase(logOutThunk.pending, (state) => {
+        state.statuses.logout = status.PENDING;
+        state.errors.logout = null;
+        state.isLoggedIn = false;
       })
-      .addCase(currentUserThunk.rejected, handleRejected);
+      .addCase(logOutThunk.fulfilled, (state) => {
+        state.statuses.logout = status.FULFILLED;
+        state.accessToken = null;
+        state.refreshToken = null;
+        state.errors.logout = null;
+        state.isLoggedIn = false;
+      })
+      .addCase(logOutThunk.rejected, (state, action) => {
+        state.statuses.logout = status.REJECTED;
+        state.errors.logout = action.payload;
+        state.isLoggedIn = false;
+      });
   },
 });
 

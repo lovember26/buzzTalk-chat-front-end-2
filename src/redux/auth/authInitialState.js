@@ -4,6 +4,16 @@ export const initialState = {
   accessToken: null,
   refreshToken: null,
   isLoggedIn: false,
-  status: status.IDLE,
-  error: null,
+
+  statuses: {
+    register: status.IDLE,
+    login: status.IDLE,
+    logout: status.IDLE,
+  },
+
+  errors: {
+    register: null,
+    login: null,
+    logout: null,
+  },
 };
