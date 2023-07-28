@@ -13,8 +13,12 @@ export const loginUserService = async (credentials) => {
   return data;
 };
 
-export const logOutUserService = async (credentials) => {
-  const { data } = await axios.post("/logout/", credentials);
+export const currentUserService = async (accessToken) => {
+  const { data } = await axios.get("/me", {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
   return data;
 };
 

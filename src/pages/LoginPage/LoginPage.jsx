@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { logInThunk, verifyThunk } from "redux/auth/authThunk";
 import { AppToastContainer } from "components/AppToastContainer/AppToastContainer";
 
@@ -20,6 +20,7 @@ import {
   LoginAuthLinkWrapper,
   LoginAuthLinkText,
   LoginAuthLink,
+  LoginAuthLinkForgotPassword,
 } from "./LoginPage.styled";
 
 export const LoginPage = () => {
@@ -39,6 +40,14 @@ export const LoginPage = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const validate = () => {
+    if (login.trim() && password.trim()) {
+      return true;
+    }
+
+    return false;
+  };
 
   const navigateToRegister = () => {
     navigate("/register", { replace: true });
@@ -80,7 +89,7 @@ export const LoginPage = () => {
 
   return (
     <>
-      <LoginTitle>Exit</LoginTitle>
+      <LoginTitle>Log In</LoginTitle>
       <LoginWrapper>
         <LoginForm onSubmit={handleSubmit}>
           <LoginLable>Login</LoginLable>
@@ -107,11 +116,15 @@ export const LoginPage = () => {
               <LoginButtonIcon size={25} onClick={showPassword} />
             </LoginButtonIconWrapper>
           </LoginInputPasswordWrapper>
-          <Link to="/forgot-password">Forgot Password</Link>
-          <LoginButton type="submit">Sign in</LoginButton>
+          <LoginAuthLinkForgotPassword to="/forgot-password">
+            Forgot Password
+          </LoginAuthLinkForgotPassword>
+          <LoginButton type="submit" disabled={!validate()}>
+            Sign in
+          </LoginButton>
         </LoginForm>
         <LoginAuthLinkWrapper>
-          <LoginAuthLinkText>Don't have an account?</LoginAuthLinkText>
+          <LoginAuthLinkText>Back to</LoginAuthLinkText>
           <LoginAuthLink onClick={navigateToRegister}>Sign up</LoginAuthLink>
         </LoginAuthLinkWrapper>
       </LoginWrapper>

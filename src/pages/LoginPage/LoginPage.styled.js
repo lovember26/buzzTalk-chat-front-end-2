@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { AiFillEye } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 export const LoginWrapper = styled.div`
   margin-left: auto;
@@ -169,14 +170,25 @@ export const LoginAuthLinkWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: row;
 `;
 
 export const LoginAuthLinkText = styled.p`
+  margin-right: 5px;
   color: gray;
-  margin-right: 8px;
 
   font-family: cursive;
   font-size: 18px;
+`;
+
+export const LoginAuthLinkForgotPassword = styled(Link)`
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 15px;
+  color: gray;
+  font-family: cursive;
+  font-size: 18px;
+  text-decoration: underline;
 `;
 
 export const LoginAuthLink = styled.p`
