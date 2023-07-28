@@ -2,25 +2,20 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { showPasswordHandler } from "helpers/showPasswordHandler";
 import { AppToastContainer } from "components/AppToastContainer/AppToastContainer";
-import { Checkbox } from "components/CheckBox/CheckBox";
+import { BasicInput } from "components/common/BasicInput/BasicInput";
+import { PasswordInput } from "components/common/PasswordInput/PasswordInput";
+import { MainButton } from "components/common/MainButton/MainButton";
+import { Checkbox } from "components/common/CheckBox/CheckBox";
 import {
-  RegisterWrapper,
-  RegisterTitle,
-  RegisterForm,
-  RegisterLable,
-  RegisterInput,
-  LoginInputPassword,
-  RegisterButton,
-  RegisterButtonIcon,
-  RegisterButtonIconWrapper,
-  RegisterInputLoginWrapper,
-  RegisterAuthLinkWrapper,
-  RegisterAuthLink,
-  RegisterInputWrapper,
-  RegisterErrorText,
+  RegisterPageTitle,
+  RegisterPageWrapper,
+  RegisterPageForm,
+  RegisterPageRedirectLinkWrapper,
+  RegisterPageRedirectLink,
 } from "./RegisterPage.styled";
 import { registerThunk } from "redux/auth/authThunk";
 import { useDispatch } from "react-redux";
+import { registerPageRules } from "constants";
 
 export const RegisterPage = () => {
   const dispatch = useDispatch();
@@ -103,73 +98,49 @@ export const RegisterPage = () => {
 
   return (
     <>
-      <RegisterTitle>Sign up</RegisterTitle>
-      <RegisterWrapper>
-        <RegisterForm onSubmit={handleSubmit}>
-          <RegisterInputWrapper>
-            <RegisterLable>Email</RegisterLable>
-            <RegisterInput
-              type="email"
-              name="email"
-              value={email}
-              placeholder="Enter a name"
-              required
-              onChange={handleChange}
-            ></RegisterInput>
-            <RegisterErrorText>
-              Please enter the email address associated with your account.
-            </RegisterErrorText>
-          </RegisterInputWrapper>
+      <RegisterPageTitle>Sign up</RegisterPageTitle>
+      <RegisterPageWrapper>
+        <RegisterPageForm onSubmit={handleSubmit}>
+          <BasicInput
+            lable={"Email"}
+            type={"email"}
+            name={"email"}
+            value={email}
+            placeholder={"Enter an email"}
+            required
+            onChange={handleChange}
+            ruleText={registerPageRules.EMAIL}
+          />
 
-          <RegisterInputWrapper>
-            <RegisterLable>Create password</RegisterLable>
-            <RegisterInputLoginWrapper className="password-wrapper">
-              <LoginInputPassword
-                className="input-password-register"
-                type="password"
-                name="password"
-                value={password}
-                placeholder="Enter a password"
-                required
-                onChange={handleChange}
-              ></LoginInputPassword>
-              <RegisterButtonIconWrapper>
-                <RegisterButtonIcon
-                  size={25}
-                  onClick={showPassword}
-                  className="password"
-                />
-              </RegisterButtonIconWrapper>
-            </RegisterInputLoginWrapper>
-            <RegisterErrorText>
-              Please enter the email address associated with your account.
-            </RegisterErrorText>
-          </RegisterInputWrapper>
+          <PasswordInput
+            classNameWrapper={"password-wrapper"}
+            classNameInput={"input-password-register"}
+            classNameButton={"password"}
+            lable={"Create password"}
+            type={"password"}
+            name={"password"}
+            value={password}
+            placeholder={"Enter a password"}
+            required
+            onChange={handleChange}
+            ruleText={registerPageRules.PASSWORD}
+            onClick={showPassword}
+          />
 
-          <RegisterInputWrapper>
-            <RegisterLable>Confirm password</RegisterLable>
-            <RegisterInputLoginWrapper className="confirm-password-wrapper">
-              <LoginInputPassword
-                className="input-password-register-confirm"
-                type="password"
-                name="confirm-password"
-                value={confirmPassword}
-                placeholder="Enter a password"
-                required
-                onChange={handleChange}
-              ></LoginInputPassword>
-              <RegisterButtonIconWrapper>
-                <RegisterButtonIcon
-                  size={25}
-                  onClick={showConfirmPassword}
-                  className="confirm-password"
-                />
-              </RegisterButtonIconWrapper>
-            </RegisterInputLoginWrapper>
-            <RegisterErrorText>
-              Please enter the email address associated with your account.
-            </RegisterErrorText>
-          </RegisterInputWrapper>
+          <PasswordInput
+            classNameWrapper={"confirm-password-wrapper"}
+            classNameInput={"input-password-register-confirm"}
+            classNameButton={"confirm-password"}
+            lable={"Confirm password"}
+            type={"password"}
+            name={"confirm-password"}
+            value={confirmPassword}
+            placeholder={"Enter a password"}
+            required
+            onChange={handleChange}
+            ruleText={registerPageRules.CONFIRM_PASSWORD}
+            onClick={showConfirmPassword}
+          />
 
           <Checkbox
             text="I accept the
@@ -177,16 +148,19 @@ export const RegisterPage = () => {
             onChange={handleCheckboxChange}
           />
 
-          <RegisterButton type="submit" disabled={!validate()}>
-            Sign up
-          </RegisterButton>
-        </RegisterForm>
-        <RegisterAuthLinkWrapper>
-          <RegisterAuthLink onClick={navigateToLogin}>
+          <MainButton
+            type="submit"
+            text="Sign up"
+            disabledHandler={!validate()}
+          />
+        </RegisterPageForm>
+
+        <RegisterPageRedirectLinkWrapper>
+          <RegisterPageRedirectLink onClick={navigateToLogin}>
             I’am already registered
-          </RegisterAuthLink>
-        </RegisterAuthLinkWrapper>
-      </RegisterWrapper>
+          </RegisterPageRedirectLink>
+        </RegisterPageRedirectLinkWrapper>
+      </RegisterPageWrapper>
       <AppToastContainer size={30} />
     </>
   );

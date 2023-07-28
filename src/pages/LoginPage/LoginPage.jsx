@@ -4,26 +4,22 @@ import { useDispatch } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { logInThunk } from "redux/auth/authThunk";
 import { AppToastContainer } from "components/AppToastContainer/AppToastContainer";
-
+import { BasicInput } from "components/common/BasicInput/BasicInput";
+import { PasswordInput } from "components/common/PasswordInput/PasswordInput";
+import { MainButton } from "components/common/MainButton/MainButton";
 import { showPasswordHandler } from "helpers/showPasswordHandler";
 import {
-  LoginWrapper,
-  LoginTitle,
-  LoginForm,
-  LoginLable,
-  LoginInput,
-  LoginInputPassword,
-  LoginButton,
-  LoginButtonIcon,
-  LoginInputPasswordWrapper,
-  LoginButtonIconWrapper,
-  LoginAuthLinkWrapper,
-  LoginAuthLinkText,
-  LoginAuthLink,
-  LoginAuthLinkForgotPassword,
+  LoginPageTitle,
+  LoginPageWrapper,
+  LoginPageForm,
+  LoginPageLinkForgotPassword,
+  LoginPageRedirectLinkWrapper,
+  LoginPageRedirectText,
+  LoginPageRedirectLink,
 } from "./LoginPage.styled";
 import { verifyUserService } from "services/authApi";
 import { errorNotification, successNotification } from "helpers/notification";
+import { loginPageRules } from "constants";
 
 export const LoginPage = () => {
   const [login, setLogin] = useState("");
@@ -99,45 +95,49 @@ export const LoginPage = () => {
 
   return (
     <>
-      <LoginTitle>Log In</LoginTitle>
-      <LoginWrapper>
-        <LoginForm onSubmit={handleSubmit}>
-          <LoginLable>Login</LoginLable>
-          <LoginInput
-            type="text"
-            name="login"
+      <LoginPageTitle>Log In</LoginPageTitle>
+      <LoginPageWrapper>
+        <LoginPageForm onSubmit={handleSubmit}>
+          <BasicInput
+            lable={"Login"}
+            type={"text"}
+            name={"login"}
             value={login}
-            onChange={handleChange}
-            placeholder="Enter a login"
+            placeholder={"Enter a login"}
             required
-          ></LoginInput>
-          <LoginLable>Password</LoginLable>
-          <LoginInputPasswordWrapper>
-            <LoginInputPassword
-              className="input-password-login"
-              type="password"
-              name="password"
-              value={password}
-              onChange={handleChange}
-              placeholder="Enter a password"
-              required
-            ></LoginInputPassword>
-            <LoginButtonIconWrapper>
-              <LoginButtonIcon size={25} onClick={showPassword} />
-            </LoginButtonIconWrapper>
-          </LoginInputPasswordWrapper>
-          <LoginAuthLinkForgotPassword to="/forgot-password">
+            onChange={handleChange}
+            ruleText={loginPageRules.LOGIN}
+          />
+
+          <PasswordInput
+            classNameWrapper={"password-wrapper"}
+            classNameInput={"input-password-login"}
+            classNameButton={"password"}
+            lable={"Password"}
+            type={"password"}
+            name={"password"}
+            value={password}
+            placeholder={"Enter a password"}
+            required
+            onChange={handleChange}
+            ruleText={loginPageRules.PASSWORD}
+            onClick={showPassword}
+          />
+
+          <LoginPageLinkForgotPassword to="/forgot-password">
             Forgot Password
-          </LoginAuthLinkForgotPassword>
-          <LoginButton type="submit" disabled={!validate()}>
-            Sign in
-          </LoginButton>
-        </LoginForm>
-        <LoginAuthLinkWrapper>
-          <LoginAuthLinkText>Back to</LoginAuthLinkText>
-          <LoginAuthLink onClick={navigateToRegister}>Sign up</LoginAuthLink>
-        </LoginAuthLinkWrapper>
-      </LoginWrapper>
+          </LoginPageLinkForgotPassword>
+
+          <MainButton type="submit" text="Sign in" disabled={!validate()} />
+        </LoginPageForm>
+
+        <LoginPageRedirectLinkWrapper LoginAuthLinkWrapper>
+          <LoginPageRedirectText>Back to</LoginPageRedirectText>
+          <LoginPageRedirectLink onClick={navigateToRegister}>
+            Sign up
+          </LoginPageRedirectLink>
+        </LoginPageRedirectLinkWrapper>
+      </LoginPageWrapper>
       <AppToastContainer size={30} />
     </>
   );
