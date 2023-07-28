@@ -6,10 +6,4 @@ export const initialState = {
   isLoggedIn: false,
   status: status.IDLE,
   error: null,
-
-  // error: {
-  //   register: null,
-  //   login: null,
-  //   logout: null,
-  // },
 };
