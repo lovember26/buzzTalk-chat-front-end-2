@@ -128,7 +128,11 @@ export const LoginPage = () => {
             Forgot Password
           </LoginPageLinkForgotPassword>
 
-          <MainButton type="submit" text="Sign in" disabled={!validate()} />
+          <MainButton
+            type="submit"
+            text="Sign in"
+            disabledHandler={!validate()}
+          />
         </LoginPageForm>
 
         <LoginPageRedirectLinkWrapper LoginAuthLinkWrapper>
