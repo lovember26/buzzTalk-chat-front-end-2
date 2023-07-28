@@ -6,7 +6,6 @@ export const initialState = {
   email: null,
   first_name: null,
   last_name: null,
-
   isLoggedIn: false,
   status: status.IDLE,
   error: null,
