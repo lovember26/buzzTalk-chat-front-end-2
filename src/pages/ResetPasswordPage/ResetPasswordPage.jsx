@@ -8,6 +8,7 @@ import { ResetPasswordForm } from "./ResetPasswordPage.styled";
 import { useSearchParams } from "react-router-dom";
 import { useState } from "react";
 import { resetPassword } from "services/authApi";
+import { errorNotification, successNotification } from "helpers/notification";
 
 export const ResetPasswordPage = () => {
   const [searchParams] = useSearchParams();
@@ -24,15 +25,20 @@ export const ResetPasswordPage = () => {
     setConfirmPassword(target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    resetPassword({
-      email,
-      password,
-      confirm_password,
-      token,
-    });
+    try {
+      await resetPassword({
+        email,
+        password,
+        confirm_password,
+        token,
+      });
+      successNotification("You have successfully changed your password.");
+    } catch (error) {
+      errorNotification(error.message);
+    }
   };
   return (
     <Container>

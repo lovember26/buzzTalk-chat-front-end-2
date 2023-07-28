@@ -4,7 +4,6 @@ import {
   registerUserService,
   loginUserService,
   currentUserService,
-  verifyUserService,
 } from "services/authApi";
 import { selectAccessToken } from "./authSelectors";
 import { successNotification, errorNotification } from "helpers/notification";
@@ -66,37 +65,6 @@ export const logOutThunk = createAsyncThunk(
       return successNotification("See you soon!");
     } catch (error) {
       errorNotification("An error occurred when exiting the application.");
-      return rejectWithValue(error.message);
-    }
-  }
-);
-
-export const currentUserThunk = createAsyncThunk(
-  "auth/current",
-  async (_, { rejectWithValue, getState }) => {
-    const accessToken = selectAccessToken(getState());
-
-    try {
-      const data = await currentUserService(accessToken);
-      token.set(accessToken);
-
-      return data;
-    } catch (error) {
-      errorNotification("An error occurred while retrieving the user.");
-      return rejectWithValue(error.message);
-    }
-  }
-);
-
-export const verifyThunk = createAsyncThunk(
-  "auth/verify",
-  async (credentials, { rejectWithValue }) => {
-    try {
-      const data = await verifyUserService(credentials);
-      successNotification("Success verification!");
-      return data;
-    } catch (error) {
-      errorNotification("Error verification!");
       return rejectWithValue(error.message);
     }
   }
