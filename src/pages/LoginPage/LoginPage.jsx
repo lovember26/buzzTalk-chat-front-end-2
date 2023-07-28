@@ -2,7 +2,7 @@ import * as React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { logInThunk, verifyThunk } from "redux/auth/authThunk";
+import { logInThunk } from "redux/auth/authThunk";
 import { AppToastContainer } from "components/AppToastContainer/AppToastContainer";
 
 import { showPasswordHandler } from "helpers/showPasswordHandler";
@@ -22,6 +22,8 @@ import {
   LoginAuthLink,
   LoginAuthLinkForgotPassword,
 } from "./LoginPage.styled";
+import { verifyUserService } from "services/authApi";
+import { errorNotification, successNotification } from "helpers/notification";
 
 export const LoginPage = () => {
   const [login, setLogin] = useState("");
@@ -36,7 +38,15 @@ export const LoginPage = () => {
 
   useEffect(() => {
     if (email && token) {
-      dispatch(verifyThunk(verifyQuery));
+      const verifyUser = async () => {
+        try {
+          await verifyUserService(verifyQuery);
+          successNotification("Verification success!");
+        } catch (error) {
+          errorNotification(error.message);
+        }
+      };
+      verifyUser();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
