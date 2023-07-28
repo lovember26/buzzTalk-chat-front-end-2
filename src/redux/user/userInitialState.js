@@ -7,6 +7,12 @@ export const initialState = {
   first_name: null,
   last_name: null,
   isLoggedIn: false,
-  status: status.IDLE,
-  error: null,
+
+  statuses: {
+    current: status.IDLE,
+  },
+
+  errors: {
+    current: null,
+  },
 };
