@@ -69,3 +69,20 @@ export const logOutThunk = createAsyncThunk(
     }
   }
 );
+
+export const currentUserThunk = createAsyncThunk(
+  "auth/current",
+  async (_, { rejectWithValue, getState }) => {
+    const accessToken = selectAccessToken(getState());
+
+    try {
+      const data = await currentUserService(accessToken);
+      token.set(accessToken);
+
+      return data;
+    } catch (error) {
+      errorNotification("An error occurred while retrieving the user.");
+      return rejectWithValue(error.message);
+    }
+  }
+);
