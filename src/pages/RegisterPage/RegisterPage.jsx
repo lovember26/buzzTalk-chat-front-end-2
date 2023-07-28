@@ -15,7 +15,6 @@ import {
   RegisterButtonIconWrapper,
   RegisterInputLoginWrapper,
   RegisterAuthLinkWrapper,
-  RegisterAuthLinkText,
   RegisterAuthLink,
   RegisterInputWrapper,
   RegisterErrorText,
@@ -104,7 +103,7 @@ export const RegisterPage = () => {
 
   return (
     <>
-      <RegisterTitle>User registration</RegisterTitle>
+      <RegisterTitle>Sign up</RegisterTitle>
       <RegisterWrapper>
         <RegisterForm onSubmit={handleSubmit}>
           <RegisterInputWrapper>
@@ -183,8 +182,9 @@ export const RegisterPage = () => {
           </RegisterButton>
         </RegisterForm>
         <RegisterAuthLinkWrapper>
-          <RegisterAuthLinkText>Already have an account?</RegisterAuthLinkText>
-          <RegisterAuthLink onClick={navigateToLogin}>Sign in</RegisterAuthLink>
+          <RegisterAuthLink onClick={navigateToLogin}>
+            I’am already registered
+          </RegisterAuthLink>
         </RegisterAuthLinkWrapper>
       </RegisterWrapper>
       <AppToastContainer size={30} />
