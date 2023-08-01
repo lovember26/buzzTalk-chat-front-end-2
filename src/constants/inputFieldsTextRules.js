@@ -1,5 +1,5 @@
 export const registerPageRules = {
-  EMAIL: "Please enter the email address associated with your account.",
+  EMAIL: "*Please enter the email address associated with your account.",
   PASSWORD: "*The password should be minimum 8 characters long",
   CONFIRM_PASSWORD: "*Repeat created password",
 };
