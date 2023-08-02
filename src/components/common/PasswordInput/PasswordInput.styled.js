@@ -22,6 +22,8 @@ export const InputWrapper = styled.div`
 `;
 
 export const Input = styled.input`
+  display: flex;
+  align-items: center;
   border: 2px solid ${(props) => props.theme.colors.border};
   border-radius: 4px;
   width: 350px;
@@ -37,6 +39,7 @@ export const Input = styled.input`
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
     transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
   }
+
   &:focus {
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
     transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);

@@ -113,3 +113,15 @@ export const InputErrorText = styled.p`
   text-decoration: none;
   color: red;
 `;
+
+export const Lable = styled.label`
+  font-family: cursive;
+  font-size: 18px;
+  color: gray;
+  text-decoration: none;
+  margin-bottom: 4px;
+`;
+
+export const InputWrapper = styled.div`
+  position: relative;
+`;

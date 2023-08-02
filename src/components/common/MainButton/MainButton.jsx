@@ -2,9 +2,9 @@ import * as React from "react";
 // import { ButtonPropTypes } from "./Button.props";
 import { Button } from "./MainButton.styled";
 
-export const MainButton = ({ type, text, disabledHandler }) => {
+export const MainButton = ({ type, text, disabled }) => {
   return (
-    <Button type={type} disabled={disabledHandler}>
+    <Button type={type} disabled={disabled}>
       {text}
     </Button>
   );
