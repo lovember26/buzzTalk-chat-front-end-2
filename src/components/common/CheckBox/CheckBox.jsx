@@ -5,11 +5,11 @@ import {
   CheckboxWrapperLable,
 } from "./CheckBox.styled";
 
-export const Checkbox = ({ text, onChange }) => {
+export const Checkbox = ({ text, register }) => {
   return (
     <CheckboxWrapper>
       <CheckboxWrapperLable>{text}</CheckboxWrapperLable>
-      <CheckboxWrapperInput type="checkbox" onChange={onChange} />
+      <CheckboxWrapperInput {...register("checkbox")} type="checkbox" />
     </CheckboxWrapper>
   );
 };

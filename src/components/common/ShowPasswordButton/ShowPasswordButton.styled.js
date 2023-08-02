@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
   &::after {
     position: absolute;
     content: "";
-    top: 21px;
+    top: 16px;
     right: 10px;
     width: 28px;
     height: 2px;
@@ -24,7 +24,7 @@ export const Wrapper = styled.div`
 
 export const ShowPasswordIcon = styled(AiFillEye)`
   position: absolute;
-  top: 10px;
+  top: 5px;
   right: 12px;
   color: lightgray;
   cursor: pointer;

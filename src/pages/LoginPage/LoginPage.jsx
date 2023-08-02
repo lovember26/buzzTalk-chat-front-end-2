@@ -1,5 +1,8 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { joiResolver } from "@hookform/resolvers/joi";
+import { inputLoginSchema } from "middlewares";
 import { useDispatch } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { logInThunk } from "redux/auth/authThunk";
@@ -7,7 +10,6 @@ import { AppToastContainer } from "components/AppToastContainer/AppToastContaine
 import { BasicInput } from "components/common/BasicInput/BasicInput";
 import { PasswordInput } from "components/common/PasswordInput/PasswordInput";
 import { MainButton } from "components/common/MainButton/MainButton";
-import { showPasswordHandler } from "helpers/showPasswordHandler";
 import {
   LoginPageTitle,
   LoginPageWrapper,
@@ -18,12 +20,10 @@ import {
   LoginPageRedirectLink,
 } from "./LoginPage.styled";
 import { verifyUserService } from "services/authApi";
+import { showPasswordOnLoginPage } from "helpers/showPasswordHandler";
 import { errorNotification, successNotification } from "helpers/notification";
-import { loginPageRules } from "constants";
 
 export const LoginPage = () => {
-  const [login, setLogin] = useState("");
-  const [password, setPassword] = useState("");
   const [searchParams] = useSearchParams();
   const email = searchParams.get("email");
   const token = searchParams.get("token");
@@ -31,6 +31,16 @@ export const LoginPage = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isValid },
+  } = useForm({
+    mode: "onChange",
+    resolver: joiResolver(inputLoginSchema),
+  });
 
   useEffect(() => {
     if (email && token) {
@@ -47,14 +57,6 @@ export const LoginPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const validate = () => {
-    if (login.trim() && password.trim()) {
-      return true;
-    }
-
-    return false;
-  };
-
   const navigateToRegister = () => {
     navigate("/register", { replace: true });
   };
@@ -63,76 +65,47 @@ export const LoginPage = () => {
     navigate("/home", { replace: true });
   };
 
-  const handleChange = ({ target: { name, value } }) => {
-    switch (name) {
-      case "login":
-        return setLogin(value);
-      case "password":
-        return setPassword(value);
-      default:
-        return;
-    }
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    const user = { login, password };
-    dispatch(logInThunk(user));
-
-    setLogin("");
-    setPassword("");
-
-    navigateToHomePage();
-  };
-
-  const showPassword = () => {
-    const visibilityIcons = document.querySelector("div form div div");
-    const passwordInput = document.querySelector("form .input-password-login");
-
-    showPasswordHandler(visibilityIcons, passwordInput);
+  const onSubmit = async (data) => {
+    try {
+      const user = { login: data.login, password: data.password };
+      dispatch(logInThunk(user));
+      reset();
+      navigateToHomePage();
+    } catch (error) {}
   };
 
   return (
     <>
       <LoginPageTitle>Log In</LoginPageTitle>
       <LoginPageWrapper>
-        <LoginPageForm onSubmit={handleSubmit}>
+        <LoginPageForm onSubmit={handleSubmit(onSubmit)}>
           <BasicInput
+            register={register}
+            error={errors["login"]}
             lable={"Login"}
             type={"text"}
             name={"login"}
-            value={login}
             placeholder={"Enter a login"}
-            required
-            onChange={handleChange}
-            ruleText={loginPageRules.LOGIN}
           />
 
           <PasswordInput
+            register={register}
+            error={errors["password"]}
             classNameWrapper={"password-wrapper"}
             classNameInput={"input-password-login"}
             classNameButton={"password"}
             lable={"Password"}
             type={"password"}
             name={"password"}
-            value={password}
             placeholder={"Enter a password"}
-            required
-            onChange={handleChange}
-            ruleText={loginPageRules.PASSWORD}
-            onClick={showPassword}
+            onClick={showPasswordOnLoginPage}
           />
 
           <LoginPageLinkForgotPassword to="/forgot-password">
             Forgot Password
           </LoginPageLinkForgotPassword>
 
-          <MainButton
-            type="submit"
-            text="Sign in"
-            disabledHandler={!validate()}
-          />
+          <MainButton type="submit" text="Sign in" disabled={!isValid} />
         </LoginPageForm>
 
         <LoginPageRedirectLinkWrapper LoginAuthLinkWrapper>

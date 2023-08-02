@@ -1,6 +1,9 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { showPasswordHandler } from "helpers/showPasswordHandler";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { joiResolver } from "@hookform/resolvers/joi";
+import { registerThunk } from "redux/auth/authThunk";
+import { inputRegisterSchema } from "middlewares";
 import { AppToastContainer } from "components/AppToastContainer/AppToastContainer";
 import { BasicInput } from "components/common/BasicInput/BasicInput";
 import { PasswordInput } from "components/common/PasswordInput/PasswordInput";
@@ -13,146 +16,88 @@ import {
   RegisterPageRedirectLinkWrapper,
   RegisterPageRedirectLink,
 } from "./RegisterPage.styled";
-import { registerThunk } from "redux/auth/authThunk";
-import { useDispatch } from "react-redux";
-import { registerPageRules } from "constants";
+import { showPassword, showConfirmPassword } from "helpers/showPasswordHandler";
 
 export const RegisterPage = () => {
   const dispatch = useDispatch();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [agree, setAgree] = useState(false);
-
   const navigate = useNavigate();
 
-  const handleChange = ({ target: { name, value } }) => {
-    switch (name) {
-      case "email":
-        return setEmail(value);
-      case "password":
-        return setPassword(value);
-      case "confirm-password":
-        return setConfirmPassword(value);
-      default:
-        return;
-    }
-  };
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isValid },
+  } = useForm({
+    mode: "onChange",
+    resolver: joiResolver(inputRegisterSchema),
+  });
 
   const navigateToLogin = () => {
     navigate("/login", { replace: true });
   };
 
-  const handleCheckboxChange = (event) => {
-    setAgree(event.currentTarget.checked);
-  };
+  const onSubmit = async (data) => {
+    console.log("onSubmit data", data);
+    try {
+      const user = {
+        email: data.email,
+        password: data.password,
+        confirm_password: data.confirm,
+      };
 
-  const validate = () => {
-    if (email.trim() && password.trim() && confirmPassword.trim() && agree) {
-      return true;
-    }
-
-    return false;
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    const user = {
-      email: email,
-      password: password,
-      confirm_password: confirmPassword,
-    };
-
-    dispatch(registerThunk(user));
-
-    setEmail("");
-    setPassword("");
-    setConfirmPassword("");
-
-    navigate("/verify", { replace: true });
-  };
-
-  const showPassword = () => {
-    const visibilityIcons = document.querySelector(
-      "div form div .password-wrapper"
-    );
-    const passwordInput = document.querySelector(
-      "form .input-password-register"
-    );
-
-    showPasswordHandler(visibilityIcons, passwordInput);
-  };
-
-  const showConfirmPassword = () => {
-    const visibilityIcons = document.querySelector(
-      "div form div .confirm-password-wrapper"
-    );
-
-    const passwordInput = document.querySelector(
-      "form .input-password-register-confirm"
-    );
-
-    showPasswordHandler(visibilityIcons, passwordInput);
+      dispatch(registerThunk(user));
+      navigate("/verify", { replace: true });
+      reset();
+    } catch (error) {}
   };
 
   return (
     <>
       <RegisterPageTitle>Sign up</RegisterPageTitle>
       <RegisterPageWrapper>
-        <RegisterPageForm onSubmit={handleSubmit}>
+        <RegisterPageForm onSubmit={handleSubmit(onSubmit)}>
           <BasicInput
+            register={register}
+            error={errors["email"]}
+            name="email"
             lable={"Email"}
-            type={"email"}
-            name={"email"}
-            value={email}
+            type="email"
             placeholder={"Enter an email"}
-            required
-            onChange={handleChange}
-            ruleText={registerPageRules.EMAIL}
           />
 
           <PasswordInput
+            register={register}
+            error={errors["password"]}
             classNameWrapper={"password-wrapper"}
             classNameInput={"input-password-register"}
             classNameButton={"password"}
+            name={"password"}
             lable={"Create password"}
             type={"password"}
-            name={"password"}
-            value={password}
             placeholder={"Enter a password"}
-            required
-            onChange={handleChange}
-            ruleText={registerPageRules.PASSWORD}
             onClick={showPassword}
           />
 
           <PasswordInput
+            register={register}
+            error={errors["confirm"]}
             classNameWrapper={"confirm-password-wrapper"}
             classNameInput={"input-password-register-confirm"}
             classNameButton={"confirm-password"}
             lable={"Confirm password"}
             type={"password"}
-            name={"confirm-password"}
-            value={confirmPassword}
+            name={"confirm"}
             placeholder={"Enter a password"}
-            required
-            onChange={handleChange}
-            ruleText={registerPageRules.CONFIRM_PASSWORD}
             onClick={showConfirmPassword}
           />
 
           <Checkbox
+            register={register}
             text="I accept the
         policy and terms"
-            onChange={handleCheckboxChange}
           />
 
-          <MainButton
-            type="submit"
-            text="Sign up"
-            disabledHandler={!validate()}
-          />
+          <MainButton type="submit" text="Sign up" disabled={!isValid} />
         </RegisterPageForm>
 
         <RegisterPageRedirectLinkWrapper>
