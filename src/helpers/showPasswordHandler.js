@@ -28,3 +28,12 @@ export const showConfirmPassword = () => {
 
   showPasswordHandler(visibilityIcons, passwordInput);
 };
+
+export const showPasswordOnLoginPage = () => {
+  const visibilityIcons = document.querySelector(
+    "div form div .password-wrapper"
+  );
+  const passwordInput = document.querySelector("form .input-password-login");
+
+  showPasswordHandler(visibilityIcons, passwordInput);
+};

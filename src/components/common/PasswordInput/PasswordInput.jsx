@@ -37,6 +37,7 @@ export const PasswordInput = forwardRef(
             type={type}
             name={name}
             placeholder={placeholder}
+            error={error}
             // ref={ref}
           ></Input>
           <ShowPasswordButton

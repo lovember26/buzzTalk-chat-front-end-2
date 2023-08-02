@@ -10,7 +10,6 @@ import { AppToastContainer } from "components/AppToastContainer/AppToastContaine
 import { BasicInput } from "components/common/BasicInput/BasicInput";
 import { PasswordInput } from "components/common/PasswordInput/PasswordInput";
 import { MainButton } from "components/common/MainButton/MainButton";
-import { showPasswordHandler } from "helpers/showPasswordHandler";
 import {
   LoginPageTitle,
   LoginPageWrapper,
@@ -21,6 +20,7 @@ import {
   LoginPageRedirectLink,
 } from "./LoginPage.styled";
 import { verifyUserService } from "services/authApi";
+import { showPasswordOnLoginPage } from "helpers/showPasswordHandler";
 import { errorNotification, successNotification } from "helpers/notification";
 
 export const LoginPage = () => {
@@ -66,20 +66,12 @@ export const LoginPage = () => {
   };
 
   const onSubmit = async (data) => {
-    console.log("onSubmit data", data);
     try {
       const user = { login: data.login, password: data.password };
       dispatch(logInThunk(user));
       reset();
       navigateToHomePage();
     } catch (error) {}
-  };
-
-  const showPassword = () => {
-    const visibilityIcons = document.querySelector("div form div div");
-    const passwordInput = document.querySelector("form .input-password-login");
-
-    showPasswordHandler(visibilityIcons, passwordInput);
   };
 
   return (
@@ -106,7 +98,7 @@ export const LoginPage = () => {
             type={"password"}
             name={"password"}
             placeholder={"Enter a password"}
-            onClick={showPassword}
+            onClick={showPasswordOnLoginPage}
           />
 
           <LoginPageLinkForgotPassword to="/forgot-password">

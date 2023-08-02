@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import { joiResolver } from "@hookform/resolvers/joi";
+import { registerThunk } from "redux/auth/authThunk";
 import { inputRegisterSchema } from "middlewares";
-import { showPassword, showConfirmPassword } from "helpers/showPasswordHandler";
 import { AppToastContainer } from "components/AppToastContainer/AppToastContainer";
 import { BasicInput } from "components/common/BasicInput/BasicInput";
 import { PasswordInput } from "components/common/PasswordInput/PasswordInput";
@@ -15,8 +16,7 @@ import {
   RegisterPageRedirectLinkWrapper,
   RegisterPageRedirectLink,
 } from "./RegisterPage.styled";
-import { registerThunk } from "redux/auth/authThunk";
-import { useDispatch } from "react-redux";
+import { showPassword, showConfirmPassword } from "helpers/showPasswordHandler";
 
 export const RegisterPage = () => {
   const dispatch = useDispatch();
