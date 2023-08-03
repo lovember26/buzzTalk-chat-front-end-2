@@ -29,11 +29,12 @@ export const verifyUserService = async (credentials) => {
 
 export const resetPasswordToken = async (credentials) => {
   const { data } = await axios.post("/reset-password-token/", credentials);
-
+  console.log(data);
   return data;
 };
 
 export const resetPassword = async (credentials) => {
   const { data } = await axios.post("/reset-password/", credentials);
+  console.log(data);
   return data;
 };

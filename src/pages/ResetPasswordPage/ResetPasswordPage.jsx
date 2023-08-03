@@ -6,36 +6,45 @@ import {
 import { StyledLink, VerifyWrapper } from "pages/VerifyPage/VerifyPage.styled";
 import { ResetPasswordForm } from "./ResetPasswordPage.styled";
 import { useSearchParams } from "react-router-dom";
-import { useState } from "react";
+
 import { resetPassword } from "services/authApi";
 import { errorNotification, successNotification } from "helpers/notification";
+import { ToastContainer } from "react-toastify";
+import { showConfirmPassword, showPassword } from "helpers/showPasswordHandler";
+import { inputResetPasswordSchema } from "middlewares";
+import { PasswordInput } from "components/common/PasswordInput/PasswordInput";
+import { useForm } from "react-hook-form";
+
+import { joiResolver } from "@hookform/resolvers/joi";
 
 export const ResetPasswordPage = () => {
   const [searchParams] = useSearchParams();
-  const [password, setPassword] = useState("");
-  const [confirm_password, setConfirmPassword] = useState("");
+
   const email = searchParams.get("email");
   const token = searchParams.get("token");
 
-  const handlePassword = ({ target }) => {
-    setPassword(target.value);
-  };
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isValid },
+  } = useForm({
+    mode: "onChange",
+    resolver: joiResolver(inputResetPasswordSchema),
+  });
 
-  const handleConfirmPassword = ({ target }) => {
-    setConfirmPassword(target.value);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const onSubmit = async (data) => {
+    console.log(data);
 
     try {
       await resetPassword({
         email,
-        password,
-        confirm_password,
+        password: data.password,
+        confirm_password: data.confirm,
         token,
       });
       successNotification("You have successfully changed your password.");
+      reset();
     } catch (error) {
       errorNotification(error.message);
     }
@@ -48,25 +57,38 @@ export const ResetPasswordPage = () => {
         <ForgotPassText>
           Your new password must be different from used password
         </ForgotPassText>
-        <ResetPasswordForm onSubmit={handleSubmit}>
-          <label htmlFor="new-password">New Password</label>
-          <input
-            type="passsword"
-            name="new-password"
-            value={password}
-            onChange={handlePassword}
+        <ResetPasswordForm onSubmit={handleSubmit(onSubmit)}>
+          <PasswordInput
+            register={register}
+            error={errors["password"]}
+            classNameWrapper={"password-wrapper"}
+            classNameInput={"input-password-register"}
+            classNameButton={"password"}
+            name={"password"}
+            lable={"Create password"}
+            type={"password"}
+            placeholder={"Enter a password"}
+            onClick={showPassword}
           />
-          <p>*The password should be minimum 8 characters long</p>
-          <label htmlFor="confirm-password">Confirm Password</label>
-          <input
-            type="confirm-passsword"
-            name="confirm-password"
-            value={confirm_password}
-            onChange={handleConfirmPassword}
+
+          <PasswordInput
+            register={register}
+            error={errors["confirm"]}
+            classNameWrapper={"confirm-password-wrapper"}
+            classNameInput={"input-password-register-confirm"}
+            classNameButton={"confirm-password"}
+            lable={"Confirm password"}
+            type={"password"}
+            name={"confirm"}
+            placeholder={"Enter a password"}
+            onClick={showConfirmPassword}
           />
-          <button type="submit">Save</button>
+          <button type="submit" disabled={!isValid}>
+            Save
+          </button>
         </ResetPasswordForm>
       </VerifyWrapper>
+      <ToastContainer />
     </Container>
   );
 };
