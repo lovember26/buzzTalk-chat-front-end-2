@@ -26,11 +26,19 @@ export const RegisterPage = () => {
     register,
     handleSubmit,
     reset,
+    getValues,
     formState: { errors, isValid },
   } = useForm({
     mode: "onChange",
     resolver: joiResolver(inputRegisterSchema),
+    defaultValues: {
+      agreePolicy: false,
+    },
   });
+
+  const { agreePolicy } = getValues();
+  console.log("agreePolicy", agreePolicy);
+  console.log("isValid RegisterPage", isValid);
 
   const navigateToLogin = () => {
     navigate("/login", { replace: true });
@@ -93,8 +101,10 @@ export const RegisterPage = () => {
 
           <Checkbox
             register={register}
+            name={"agreePolicy"}
             text="I accept the
         policy and terms"
+            error={errors["agreePolicy"]}
           />
 
           <MainButton type="submit" text="Sign up" disabled={!isValid} />

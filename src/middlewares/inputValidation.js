@@ -44,7 +44,8 @@ export const inputRegisterSchema = Joi.object({
       "any.required": "*This field is required",
       "any.only": "*Passwords do not match",
     }),
-  checkbox: Joi.boolean().valid(true).required().messages({}),
+  // agreePolicy: Joi.required().messages({ "any.required": "*Required" }),
+  agreePolicy: Joi.boolean().valid(true).messages({ "any.only": "*Required" }),
 });
 
 export const inputLoginSchema = Joi.object({
@@ -67,6 +68,12 @@ export const inputLoginSchema = Joi.object({
       "string.empty": "*This field is required",
       "any.required": "*This field is required",
     }),
+  // rememberMe: Joi.boolean().required(),
+  // rememberMe: Joi.boolean().valid(true).messages({
+  //   "any.only": "*Required",
+  // }),
+  // rememberMe: Joi.required(),
+  rememberMe: Joi.optional(),
 });
 
 export const inputEmailSchema = Joi.object({

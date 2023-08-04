@@ -10,9 +10,9 @@ export const Wrapper = styled.div`
 `;
 
 export const LableText = styled.label`
+  color: ${({ error }) => (error ? "red" : "gray")};
   font-family: cursive;
   font-size: 18px;
-  color: gray;
   text-decoration: none;
   margin-bottom: 4px;
 `;

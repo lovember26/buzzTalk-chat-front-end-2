@@ -7,13 +7,15 @@ import {
   InputRuleText,
   InputErrorText,
 } from "./BasicInput.styled";
-import { registerPageRules } from "constants";
+import { registerPageRules, loginPageRules } from "constants";
 
 export const BasicInput = forwardRef(
-  ({ name, lable, type, placeholder, error, register }, ref) => {
+  ({ name, value, lable, type, placeholder, error, register }, ref) => {
     return (
       <Wrapper>
-        <LableText htmlFor="test">{lable}</LableText>
+        <LableText htmlFor="test" error={error}>
+          {lable}
+        </LableText>
         <Input
           {...register(`${name}`)}
           type={type}
@@ -24,7 +26,9 @@ export const BasicInput = forwardRef(
         {error ? (
           <InputErrorText>{error?.message || "*Error"}</InputErrorText>
         ) : (
-          <InputRuleText>{registerPageRules.EMAIL}</InputRuleText>
+          <InputRuleText>
+            {name === "email" ? registerPageRules.EMAIL : loginPageRules.LOGIN}
+          </InputRuleText>
         )}
       </Wrapper>
     );
