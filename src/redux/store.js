@@ -13,7 +13,6 @@ import {
 } from "redux-persist";
 import { authReducer } from "./auth/authSlice";
 import { userReducer } from "./user/userSlice";
-// import { itemsReducer } from "./items/itemsSlice";
 
 const persistConfig = {
   key: "auth",

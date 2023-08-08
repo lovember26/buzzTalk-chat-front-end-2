@@ -43,7 +43,9 @@ export const LoginPage = () => {
     mode: "onChange",
     resolver: joiResolver(inputLoginSchema),
     defaultValues: {
-      rememberMe: false,
+      login: "",
+      password: "",
+      rememberMe: true,
     },
   });
 
@@ -72,8 +74,6 @@ export const LoginPage = () => {
 
   const onSubmit = async ({ login, password, rememberMe }) => {
     try {
-      // console.log("onSubmit isValid LoginPage", isValid);
-      // console.log("onSubmit login state rememberMe before submit:", rememberMe);
       const user = { login: login, password: password };
 
       if (!rememberMe) {

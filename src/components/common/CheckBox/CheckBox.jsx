@@ -9,16 +9,14 @@ import {
   InputErrorText,
 } from "./CheckBox.styled";
 
-export const Checkbox = forwardRef(
-  ({ text, register, name, error }, ref) => {
-    return (
-      <Wrapper>
-        <CheckboxWrapper>
-          <CheckboxWrapperLable>{text}</CheckboxWrapperLable>
-          <CheckboxWrapperInput {...register(`${name}`)} type="checkbox" />
-        </CheckboxWrapper>
-        <InputErrorText>{error?.message}</InputErrorText>
-      </Wrapper>
-    );
-  }
-);
+export const Checkbox = forwardRef(({ text, register, name, error }, ref) => {
+  return (
+    <Wrapper>
+      <CheckboxWrapper>
+        <CheckboxWrapperLable>{text}</CheckboxWrapperLable>
+        <CheckboxWrapperInput {...register(`${name}`)} type="checkbox" />
+      </CheckboxWrapper>
+      <InputErrorText>{error?.message}</InputErrorText>
+    </Wrapper>
+  );
+});
