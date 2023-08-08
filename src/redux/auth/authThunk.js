@@ -24,7 +24,7 @@ export const registerThunk = createAsyncThunk(
   "auth/register",
   async (credentials, { rejectWithValue }) => {
     try {
-      console.log("Successful registration!");
+      // console.log("Successful registration!");
       const data = await registerUserService(credentials);
       successNotification("Successful registration!");
       return data;
@@ -42,7 +42,7 @@ export const logInThunk = createAsyncThunk(
   "auth/login",
   async (credentials, { rejectWithValue }) => {
     try {
-      console.log("Successful log in!");
+      // console.log("Successful log in!");
       const data = await loginUserService(credentials);
       token.set(data.access);
       successNotification("Welcome to the app!");
@@ -60,7 +60,7 @@ export const logOutThunk = createAsyncThunk(
   "auth/logout",
   async (_, { rejectWithValue }) => {
     try {
-      console.log("Successful log out.");
+      // console.log("Successful log out.");
       token.unset();
       return successNotification("See you soon!");
     } catch (error) {

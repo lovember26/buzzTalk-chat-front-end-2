@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { persistedStore } from "redux/store";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { inputLoginSchema } from "middlewares";
 import { useDispatch } from "react-redux";
@@ -10,6 +11,7 @@ import { AppToastContainer } from "components/AppToastContainer/AppToastContaine
 import { BasicInput } from "components/common/BasicInput/BasicInput";
 import { PasswordInput } from "components/common/PasswordInput/PasswordInput";
 import { MainButton } from "components/common/MainButton/MainButton";
+import { Checkbox } from "components/common/CheckBox/CheckBox";
 import {
   LoginPageTitle,
   LoginPageWrapper,
@@ -40,6 +42,11 @@ export const LoginPage = () => {
   } = useForm({
     mode: "onChange",
     resolver: joiResolver(inputLoginSchema),
+    defaultValues: {
+      login: "",
+      password: "",
+      rememberMe: true,
+    },
   });
 
   useEffect(() => {
@@ -65,12 +72,27 @@ export const LoginPage = () => {
     navigate("/home", { replace: true });
   };
 
-  const onSubmit = async (data) => {
+  const onSubmit = async ({ login, password, rememberMe }) => {
     try {
-      const user = { login: data.login, password: data.password };
-      dispatch(logInThunk(user));
-      reset();
+      const user = { login: login, password: password };
+
+      if (!rememberMe) {
+        persistedStore.pause();
+        persistedStore.flush().then(() => {
+          return persistedStore.purge();
+        });
+      }
+
+      const {
+        payload: { access },
+      } = await dispatch(logInThunk(user));
+
+      if (!access) {
+        return;
+      }
+
       navigateToHomePage();
+      reset();
     } catch (error) {}
   };
 
@@ -99,6 +121,13 @@ export const LoginPage = () => {
             name={"password"}
             placeholder={"Enter a password"}
             onClick={showPasswordOnLoginPage}
+          />
+
+          <Checkbox
+            register={register}
+            error={errors["rememberMe"]}
+            name={"rememberMe"}
+            text="Remember me"
           />
 
           <LoginPageLinkForgotPassword to="/forgot-password">

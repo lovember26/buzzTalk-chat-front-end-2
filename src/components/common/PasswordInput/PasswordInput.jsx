@@ -29,7 +29,7 @@ export const PasswordInput = forwardRef(
   ) => {
     return (
       <Wrapper>
-        <Lable>{lable}</Lable>
+        <Lable error={error}>{lable}</Lable>
         <InputWrapper className={classNameWrapper}>
           <Input
             {...register(`${name}`)}

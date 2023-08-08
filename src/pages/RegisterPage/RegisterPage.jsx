@@ -30,6 +30,12 @@ export const RegisterPage = () => {
   } = useForm({
     mode: "onChange",
     resolver: joiResolver(inputRegisterSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+      confirm: "",
+      agreePolicy: false,
+    },
   });
 
   const navigateToLogin = () => {
@@ -93,8 +99,10 @@ export const RegisterPage = () => {
 
           <Checkbox
             register={register}
+            name={"agreePolicy"}
             text="I accept the
         policy and terms"
+            error={errors["agreePolicy"]}
           />
 
           <MainButton type="submit" text="Sign up" disabled={!isValid} />
