@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { AiFillExclamationCircle } from "react-icons/ai";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -7,6 +8,10 @@ export const Wrapper = styled.div`
   flex-direction: column;
 
   margin-bottom: 24px;
+`;
+
+export const InputWrapper = styled.div`
+  position: relative;
 `;
 
 export const LableText = styled.label`
@@ -56,20 +61,11 @@ export const Input = styled.input`
   }
 `;
 
-export const InputRuleText = styled.p`
-  font-family: cursive;
-  font-size: 14px;
-  text-decoration: none;
-  color: black;
+export const Icon = styled(AiFillExclamationCircle)`
+  position: absolute;
+  top: 5px;
+  right: 12px;
+  cursor: pointer;
 
-  /* &.error {
-    color: red;
-  } */
-`;
-
-export const InputErrorText = styled.p`
-  font-family: cursive;
-  font-size: 14px;
-  text-decoration: none;
-  color: red;
+  color: ${({ error }) => (error ? "red" : "transparent")};
 `;

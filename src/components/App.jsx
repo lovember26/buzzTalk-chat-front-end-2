@@ -9,10 +9,10 @@ import {
   LoginPage,
   RegisterPage,
   HomePage,
-  ItemsPage,
   VerifyPage,
   ForgotPasswordPage,
   ResetPasswordPage,
+  ProfilePage,
 } from "pages";
 import { currentUserThunk } from "redux/auth/authThunk";
 import { selectAccessToken } from "redux/auth/authSelectors";
@@ -52,10 +52,10 @@ export const App = () => {
           }
         />
         <Route
-          path={routes.ITEMS_PAGE}
+          path={routes.PROFILE_PAGE}
           element={
             <PrivateRoute>
-              <ItemsPage />
+              <ProfilePage />
             </PrivateRoute>
           }
         />

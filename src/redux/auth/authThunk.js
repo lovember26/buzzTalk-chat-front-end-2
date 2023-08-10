@@ -8,8 +8,7 @@ import {
 import { selectAccessToken } from "./authSelectors";
 import { successNotification, errorNotification } from "helpers/notification";
 
-axios.defaults.baseURL =
-  "http://buzz-talk-api.eu-west-3.elasticbeanstalk.com/api/accounts";
+axios.defaults.baseURL = "https://buzz-talk-api.onrender.com/api/accounts";
 
 const token = {
   set(token) {
@@ -42,7 +41,6 @@ export const logInThunk = createAsyncThunk(
   "auth/login",
   async (credentials, { rejectWithValue }) => {
     try {
-      // console.log("Successful log in!");
       const data = await loginUserService(credentials);
       token.set(data.access);
       successNotification("Welcome to the app!");
@@ -51,7 +49,7 @@ export const logInThunk = createAsyncThunk(
       errorNotification(
         "Incorrect email or password format, please try again."
       );
-      return rejectWithValue(error.message);
+      return rejectWithValue(error.response.data);
     }
   }
 );

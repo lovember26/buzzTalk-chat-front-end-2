@@ -9,6 +9,7 @@ import {
 } from "./ForgotPasswordPage.styled";
 import { resetPasswordToken } from "services/authApi";
 import { BasicInput } from "components/common/BasicInput/BasicInput";
+import { selectInputNotification } from "helpers/selectWrongPasswordNotification";
 
 import { useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
@@ -46,7 +47,7 @@ export const ForgotPasswordPage = () => {
         <ForgotPassForm onSubmit={handleSubmit(onSubmit)}>
           <BasicInput
             register={register}
-            error={errors["email"]}
+            error={selectInputNotification(errors["email"])}
             name="email"
             lable={"Email"}
             type="email"

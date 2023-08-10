@@ -9,6 +9,7 @@ import { BasicInput } from "components/common/BasicInput/BasicInput";
 import { PasswordInput } from "components/common/PasswordInput/PasswordInput";
 import { MainButton } from "components/common/MainButton/MainButton";
 import { Checkbox } from "components/common/CheckBox/CheckBox";
+import { selectInputNotification } from "helpers/selectWrongPasswordNotification";
 import {
   RegisterPageTitle,
   RegisterPageWrapper,
@@ -64,7 +65,7 @@ export const RegisterPage = () => {
         <RegisterPageForm onSubmit={handleSubmit(onSubmit)}>
           <BasicInput
             register={register}
-            error={errors["email"]}
+            error={selectInputNotification(errors["email"])}
             name="email"
             lable={"Email"}
             type="email"
@@ -73,7 +74,7 @@ export const RegisterPage = () => {
 
           <PasswordInput
             register={register}
-            error={errors["password"]}
+            error={selectInputNotification(errors["password"])}
             classNameWrapper={"password-wrapper"}
             classNameInput={"input-password-register"}
             classNameButton={"password"}
@@ -86,7 +87,7 @@ export const RegisterPage = () => {
 
           <PasswordInput
             register={register}
-            error={errors["confirm"]}
+            error={selectInputNotification(errors["confirm"])}
             classNameWrapper={"confirm-password-wrapper"}
             classNameInput={"input-password-register-confirm"}
             classNameButton={"confirm-password"}
