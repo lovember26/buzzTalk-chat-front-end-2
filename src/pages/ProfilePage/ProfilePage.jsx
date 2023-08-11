@@ -1,17 +1,35 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { selectUserName } from "redux/user/userSelectors";
-import { MainButton } from "components/common/MainButton/MainButton";
 import avatar from "images/avatar.jpg";
 
 import {
   ProfilePageWrapper,
   ProfilePageUserInfoWrapper,
-  ProfilePageUserSettingsWrapper,
+  ProfilePageUserButtonEditButton,
+  ProfilePageUserButtonEdit,
   ProfilePageUserAvatarWrapper,
   ProfilePageUserAvatar,
   ProfilePageUserInfoTextWrapper,
   ProfilePageUserInfoNickname,
+  ProfilePageUserInfoTextLink,
+  ProfilePageUserInfoLink,
+  ProfilePageUserStatusBlockWrapper,
+  ProfilePageUserStatusBlockIcon,
+  ProfilePageUserStatusIcon,
+  ProfilePageUserStatusBlockIconText,
+  ProfilePageUserStatusBlock,
+  ProfilePageUserStatusText,
+  ProfilePageUserSettingsWrapper,
+  ProfilePageUserSettingsItem,
+  ProfilePageUserSettingsItemNotification,
+  ProfilePageUserSettingsItemText,
+  ProfilePageUserSettingsIcon,
+  ProfilePageUserArrowButton,
+  ProfilePageUserSettingsIconArrow,
+  ProfilePageUserButtonsWrapper,
+  ProfilePageUserLogout,
+  ProfilePageUserDeleteAccount,
 } from "./ProfilePage.styled";
 
 export const ProfilePage = () => {
@@ -25,10 +43,72 @@ export const ProfilePage = () => {
         </ProfilePageUserAvatarWrapper>
         <ProfilePageUserInfoTextWrapper>
           <ProfilePageUserInfoNickname>{username}</ProfilePageUserInfoNickname>
+          <ProfilePageUserInfoTextLink>
+            Link to your profile to chat with you
+          </ProfilePageUserInfoTextLink>
+          <ProfilePageUserInfoLink>
+            https://bz.me/mari@gmail.com
+          </ProfilePageUserInfoLink>
         </ProfilePageUserInfoTextWrapper>
+        <ProfilePageUserButtonEditButton>
+          <ProfilePageUserButtonEdit size={30} />
+        </ProfilePageUserButtonEditButton>
       </ProfilePageUserInfoWrapper>
-      <ProfilePageUserSettingsWrapper></ProfilePageUserSettingsWrapper>
-      {/* <MainButton type="button" text="Log out" /> */}
+      <ProfilePageUserStatusBlockWrapper>
+        <ProfilePageUserStatusBlockIcon>
+          <ProfilePageUserStatusIcon size={30} />
+          <ProfilePageUserStatusBlockIconText>
+            Set status
+          </ProfilePageUserStatusBlockIconText>
+        </ProfilePageUserStatusBlockIcon>
+        <ProfilePageUserStatusBlock>
+          <ProfilePageUserStatusText>Online</ProfilePageUserStatusText>
+          <ProfilePageUserArrowButton>
+            <ProfilePageUserSettingsIconArrow size={35} />
+          </ProfilePageUserArrowButton>
+        </ProfilePageUserStatusBlock>
+      </ProfilePageUserStatusBlockWrapper>
+      <ProfilePageUserSettingsWrapper>
+        <ProfilePageUserSettingsItem>
+          <ProfilePageUserSettingsItemNotification>
+            <ProfilePageUserSettingsIcon size={30} />
+            <ProfilePageUserSettingsItemText>
+              Privacy and security
+            </ProfilePageUserSettingsItemText>
+          </ProfilePageUserSettingsItemNotification>
+          <ProfilePageUserArrowButton>
+            <ProfilePageUserSettingsIconArrow size={35} />
+          </ProfilePageUserArrowButton>
+        </ProfilePageUserSettingsItem>
+        <ProfilePageUserSettingsItem>
+          <ProfilePageUserSettingsItemNotification>
+            <ProfilePageUserSettingsIcon size={30} />
+            <ProfilePageUserSettingsItemText>
+              Notifications and sounds
+            </ProfilePageUserSettingsItemText>
+          </ProfilePageUserSettingsItemNotification>
+          <ProfilePageUserArrowButton>
+            <ProfilePageUserSettingsIconArrow size={35} />
+          </ProfilePageUserArrowButton>
+        </ProfilePageUserSettingsItem>
+        <ProfilePageUserSettingsItem>
+          <ProfilePageUserSettingsItemNotification>
+            <ProfilePageUserSettingsIcon size={30} />
+            <ProfilePageUserSettingsItemText>
+              Language
+            </ProfilePageUserSettingsItemText>
+          </ProfilePageUserSettingsItemNotification>
+          <ProfilePageUserArrowButton>
+            <ProfilePageUserSettingsIconArrow size={35} />
+          </ProfilePageUserArrowButton>
+        </ProfilePageUserSettingsItem>
+      </ProfilePageUserSettingsWrapper>
+      <ProfilePageUserButtonsWrapper>
+        <ProfilePageUserDeleteAccount>
+          Delete account
+        </ProfilePageUserDeleteAccount>
+        <ProfilePageUserLogout to="/login">Log out</ProfilePageUserLogout>
+      </ProfilePageUserButtonsWrapper>
     </ProfilePageWrapper>
   );
 };

@@ -40,6 +40,8 @@ export const LoginPage = () => {
   const [wrongPasswordCount, setWrongPasswordCount] = useState(0);
   const [attempts, setAttempts] = useState(3);
 
+  console.log("wrongPasswordCount", wrongPasswordCount);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -129,6 +131,7 @@ export const LoginPage = () => {
           lable={"Email or username"}
           type={"text"}
           name={"login"}
+          wrongPasswordCount={wrongPasswordCount}
         />
 
         <PasswordInput
@@ -145,22 +148,27 @@ export const LoginPage = () => {
           type={"password"}
           name={"password"}
           onClick={showPasswordOnLoginPage}
+          wrongPasswordCount={wrongPasswordCount}
         />
 
-        <Checkbox
-          register={register}
-          error={errors["rememberMe"]}
-          name={"rememberMe"}
-          text="Remember me"
-        />
+        {wrongPasswordCount < 3 && (
+          <Checkbox
+            register={register}
+            error={errors["rememberMe"]}
+            name={"rememberMe"}
+            text="Remember me"
+          />
+        )}
 
         <InputNotification
           text={selectWrongPasswordNotification(wrongPasswordCount, attempts)}
-          color={wrongPasswordCount !== 3 ? "red" : "#777777"}
+          color={wrongPasswordCount >= 3 ? "#777777" : "red"}
           mb={15}
         />
 
-        <MainButton type="submit" text="Sign in" disabled={!isValid} />
+        {wrongPasswordCount < 3 && (
+          <MainButton type="submit" text="Sign in" disabled={!isValid} />
+        )}
       </LoginPageForm>
 
       <LoginPageLinksWrapper>

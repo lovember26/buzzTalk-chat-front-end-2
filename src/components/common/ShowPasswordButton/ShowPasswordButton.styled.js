@@ -15,7 +15,6 @@ export const Wrapper = styled.div`
     right: 13px;
     width: 28px;
     height: 2px;
-    /* background-color: ${({ theme }) => theme.colors.black[100]}; */
     background-color: ${({ error, theme }) =>
       error ? theme.colors.red[100] : theme.colors.black[100]};
     transform: rotate(45deg);
@@ -28,7 +27,6 @@ export const ShowPasswordIcon = styled(AiFillEye)`
   position: absolute;
   top: 13px;
   right: 12px;
-  /* color: ${({ theme }) => theme.colors.black[100]}; */
   cursor: pointer;
 
   color: ${({ error, theme }) =>

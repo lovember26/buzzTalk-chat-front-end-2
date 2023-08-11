@@ -65,11 +65,16 @@ export const theme = {
       200: "#777777", //input notification text
       300: "#B5B5B5", //button disabled color
       400: "#B5B5B5", //button hover/focus
+      500: "#F4F4F4", //button edit background color
     },
 
     red: {
       100: "#e74a3b", // validation error
       200: "#FFF5EC", // validation error input background validation error
+    },
+
+    blue: {
+      100: "#7B97F8",
     },
   },
 
