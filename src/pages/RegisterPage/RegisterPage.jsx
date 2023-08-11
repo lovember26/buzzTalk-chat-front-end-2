@@ -12,7 +12,6 @@ import { Checkbox } from "components/common/CheckBox/CheckBox";
 import { selectInputNotification } from "helpers/selectWrongPasswordNotification";
 import {
   RegisterPageTitle,
-  RegisterPageWrapper,
   RegisterPageForm,
   RegisterPageRedirectLinkWrapper,
   RegisterPageRedirectLink,
@@ -61,60 +60,55 @@ export const RegisterPage = () => {
   return (
     <>
       <RegisterPageTitle>Sign up</RegisterPageTitle>
-      <RegisterPageWrapper>
-        <RegisterPageForm onSubmit={handleSubmit(onSubmit)}>
-          <BasicInput
-            register={register}
-            error={selectInputNotification(errors["email"])}
-            name="email"
-            lable={"Email"}
-            type="email"
-            placeholder={"Enter an email"}
-          />
+      <RegisterPageForm onSubmit={handleSubmit(onSubmit)}>
+        <BasicInput
+          register={register}
+          error={selectInputNotification(errors["email"])}
+          name="email"
+          lable={"Email"}
+          type="email"
+        />
 
-          <PasswordInput
-            register={register}
-            error={selectInputNotification(errors["password"])}
-            classNameWrapper={"password-wrapper"}
-            classNameInput={"input-password-register"}
-            classNameButton={"password"}
-            name={"password"}
-            lable={"Create password"}
-            type={"password"}
-            placeholder={"Enter a password"}
-            onClick={showPassword}
-          />
+        <PasswordInput
+          register={register}
+          error={selectInputNotification(errors["password"])}
+          classNameWrapper={"password-wrapper"}
+          classNameInput={"input-password-register"}
+          classNameButton={"password"}
+          name={"password"}
+          lable={"Create password"}
+          type={"password"}
+          onClick={showPassword}
+        />
 
-          <PasswordInput
-            register={register}
-            error={selectInputNotification(errors["confirm"])}
-            classNameWrapper={"confirm-password-wrapper"}
-            classNameInput={"input-password-register-confirm"}
-            classNameButton={"confirm-password"}
-            lable={"Confirm password"}
-            type={"password"}
-            name={"confirm"}
-            placeholder={"Enter a password"}
-            onClick={showConfirmPassword}
-          />
+        <PasswordInput
+          register={register}
+          error={selectInputNotification(errors["confirm"])}
+          classNameWrapper={"confirm-password-wrapper"}
+          classNameInput={"input-password-register-confirm"}
+          classNameButton={"confirm-password"}
+          lable={"Confirm password"}
+          type={"password"}
+          name={"confirm"}
+          onClick={showConfirmPassword}
+        />
 
-          <Checkbox
-            register={register}
-            name={"agreePolicy"}
-            text="I accept the
+        <Checkbox
+          register={register}
+          name={"agreePolicy"}
+          text="I accept the
         policy and terms"
-            error={errors["agreePolicy"]}
-          />
+          error={errors["agreePolicy"]}
+        />
 
-          <MainButton type="submit" text="Sign up" disabled={!isValid} />
-        </RegisterPageForm>
+        <MainButton type="submit" text="Sign up" disabled={!isValid} />
+      </RegisterPageForm>
 
-        <RegisterPageRedirectLinkWrapper>
-          <RegisterPageRedirectLink onClick={navigateToLogin}>
-            I’am already registered
-          </RegisterPageRedirectLink>
-        </RegisterPageRedirectLinkWrapper>
-      </RegisterPageWrapper>
+      <RegisterPageRedirectLinkWrapper>
+        <RegisterPageRedirectLink onClick={navigateToLogin}>
+          I’am already registered
+        </RegisterPageRedirectLink>
+      </RegisterPageRedirectLinkWrapper>
       <AppToastContainer size={30} />
     </>
   );

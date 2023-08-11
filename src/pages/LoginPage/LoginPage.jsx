@@ -19,8 +19,8 @@ import {
 } from "helpers/selectWrongPasswordNotification";
 import {
   LoginPageTitle,
-  LoginPageWrapper,
   LoginPageForm,
+  LoginPageLinksWrapper,
   LoginPageLinkForgotPassword,
   LoginPageRedirectLinkWrapper,
   LoginPageRedirectText,
@@ -118,62 +118,55 @@ export const LoginPage = () => {
   return (
     <>
       <LoginPageTitle>Log In</LoginPageTitle>
-      <LoginPageWrapper>
-        <LoginPageForm onSubmit={handleSubmit(onSubmit)}>
-          <BasicInput
-            register={register}
-            error={selectWrongPasswordInputNotification(
-              wrongPasswordCount,
-              "login",
-              errors["login"]
-            )}
-            lable={"Email or username"}
-            type={"text"}
-            name={"login"}
-            placeholder={"Enter a login"}
-          />
-
-          <PasswordInput
-            register={register}
-            error={selectWrongPasswordInputNotification(
-              wrongPasswordCount,
-              "password",
-              errors["password"]
-            )}
-            classNameWrapper={"password-wrapper"}
-            classNameInput={"input-password-login"}
-            classNameButton={"password"}
-            lable={"Password"}
-            type={"password"}
-            name={"password"}
-            placeholder={"Enter a password"}
-            onClick={showPasswordOnLoginPage}
-          />
-
-          <Checkbox
-            register={register}
-            error={errors["rememberMe"]}
-            name={"rememberMe"}
-            text="Remember me"
-          />
-
-          {wrongPasswordCount > 0 && (
-            <InputNotification
-              text={selectWrongPasswordNotification(
-                wrongPasswordCount,
-                attempts
-              )}
-              color={"red"}
-              mb={15}
-            />
+      <LoginPageForm onSubmit={handleSubmit(onSubmit)}>
+        <BasicInput
+          register={register}
+          error={selectWrongPasswordInputNotification(
+            wrongPasswordCount,
+            "login",
+            errors["login"]
           )}
+          lable={"Email or username"}
+          type={"text"}
+          name={"login"}
+        />
 
-          <LoginPageLinkForgotPassword to="/forgot-password">
-            Forgot Password
-          </LoginPageLinkForgotPassword>
+        <PasswordInput
+          register={register}
+          error={selectWrongPasswordInputNotification(
+            wrongPasswordCount,
+            "password",
+            errors["password"]
+          )}
+          classNameWrapper={"password-wrapper"}
+          classNameInput={"input-password-login"}
+          classNameButton={"password"}
+          lable={"Password"}
+          type={"password"}
+          name={"password"}
+          onClick={showPasswordOnLoginPage}
+        />
 
-          <MainButton type="submit" text="Sign in" disabled={!isValid} />
-        </LoginPageForm>
+        <Checkbox
+          register={register}
+          error={errors["rememberMe"]}
+          name={"rememberMe"}
+          text="Remember me"
+        />
+
+        <InputNotification
+          text={selectWrongPasswordNotification(wrongPasswordCount, attempts)}
+          color={wrongPasswordCount !== 3 ? "red" : "#777777"}
+          mb={15}
+        />
+
+        <MainButton type="submit" text="Sign in" disabled={!isValid} />
+      </LoginPageForm>
+
+      <LoginPageLinksWrapper>
+        <LoginPageLinkForgotPassword to="/forgot-password">
+          Forgot Password
+        </LoginPageLinkForgotPassword>
 
         <LoginPageRedirectLinkWrapper LoginAuthLinkWrapper>
           <LoginPageRedirectText>Back to</LoginPageRedirectText>
@@ -181,7 +174,7 @@ export const LoginPage = () => {
             Sign up
           </LoginPageRedirectLink>
         </LoginPageRedirectLinkWrapper>
-      </LoginPageWrapper>
+      </LoginPageLinksWrapper>
       <AppToastContainer size={30} />
     </>
   );

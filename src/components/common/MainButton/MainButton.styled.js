@@ -4,24 +4,22 @@ export const Button = styled.button`
   display: flex;
   justify-content: center;
   align-self: center;
+  align-items: center;
+  height: 48px;
+  width: 150px;
 
-  padding: 8px 18px;
-  margin-bottom: 15px;
+  color: ${({ theme }) => theme.colors.white[100]};
+  background-color: ${({ theme }) => theme.colors.black[100]};
+
   border: 1px solid gray;
   border-radius: 30px;
-  background-color: whitesmoke;
-
-  font-family: cursive;
-  font-size: 18px;
-  color: gray;
-  text-decoration: none;
 
   &:hover,
   &:focus {
-    background-color: lightgreen;
+    background-color: ${({ theme }) => theme.colors.gray[400]};
   }
 
   &:disabled {
-    background-color: lightgray;
+    background-color: ${({ theme }) => theme.colors.gray[300]};
   }
 `;

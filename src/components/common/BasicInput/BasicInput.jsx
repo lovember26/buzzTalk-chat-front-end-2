@@ -24,7 +24,7 @@ export const BasicInput = forwardRef(
             placeholder={placeholder}
             error={error}
           ></Input>
-          <Icon size={22} error={error} />
+          <Icon size={28} error={error} />
         </InputWrapper>
         {error ? (
           <InputNotification text={error} color={"red"} />

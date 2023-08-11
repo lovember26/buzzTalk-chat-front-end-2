@@ -11,11 +11,13 @@ export const Wrapper = styled.div`
   &::after {
     position: absolute;
     content: "";
-    top: 16px;
-    right: 10px;
+    top: 27px;
+    right: 13px;
     width: 28px;
     height: 2px;
-    background-color: lightgray;
+    /* background-color: ${({ theme }) => theme.colors.black[100]}; */
+    background-color: ${({ error, theme }) =>
+      error ? theme.colors.red[100] : theme.colors.black[100]};
     transform: rotate(45deg);
     transition: 0.3s all ease;
     opacity: 1;
@@ -24,8 +26,11 @@ export const Wrapper = styled.div`
 
 export const ShowPasswordIcon = styled(AiFillEye)`
   position: absolute;
-  top: 5px;
+  top: 13px;
   right: 12px;
-  color: lightgray;
+  /* color: ${({ theme }) => theme.colors.black[100]}; */
   cursor: pointer;
+
+  color: ${({ error, theme }) =>
+    error ? theme.colors.red[100] : theme.colors.black[100]};
 `;

@@ -1,7 +1,7 @@
 import { Container } from "components/common/Container/Container.styled";
 import { successNotification, errorNotification } from "helpers/notification";
 import { ToastContainer } from "react-toastify";
-import { StyledLink, VerifyWrapper } from "pages/VerifyPage/VerifyPage.styled";
+import { VerifyWrapper } from "pages/VerifyPage/VerifyPage.styled";
 import {
   ForgotPassForm,
   ForgotPassText,
@@ -40,7 +40,6 @@ export const ForgotPasswordPage = () => {
   return (
     <Container>
       <VerifyWrapper>
-        <StyledLink to="/">Logo</StyledLink>
         <ForgotPassTitle>Forgot Password</ForgotPassTitle>
         <ForgotPassText>Enter the email used for registration.</ForgotPassText>
         <ForgotPassText>We'll send you a password reset link.</ForgotPassText>

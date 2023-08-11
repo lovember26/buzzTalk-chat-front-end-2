@@ -34,9 +34,9 @@ export const PasswordInput = forwardRef(
             error={error}
           ></Input>
           <ShowPasswordButton
-            size={25}
             onClick={onClick}
             className={classNameButton}
+            error={error}
           />
         </InputWrapper>
         {error ? (

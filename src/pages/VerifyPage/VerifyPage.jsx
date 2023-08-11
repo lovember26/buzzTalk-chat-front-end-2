@@ -1,7 +1,6 @@
 import { Container } from "components/common/Container/Container.styled";
 import {
   ResendText,
-  StyledLink,
   VerifyButton,
   VerifyText,
   VerifyTitle,
@@ -12,7 +11,6 @@ export const VerifyPage = () => {
   return (
     <Container>
       <VerifyWrapper>
-        <StyledLink to="/">Logo</StyledLink>
         <VerifyTitle>
           Sign up<span>is successful!</span>
         </VerifyTitle>
