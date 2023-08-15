@@ -2,14 +2,8 @@ import * as React from "react";
 import { forwardRef } from "react";
 import { registerPageRules } from "constants";
 import { ShowPasswordButton } from "../ShowPasswordButton/ShowPasswordButton";
-import {
-  Wrapper,
-  Lable,
-  InputWrapper,
-  Input,
-  InputRuleText,
-  InputErrorText,
-} from "./PasswordInput.styled";
+import { InputNotification } from "../InputNotification/InputNotification";
+import { Wrapper, Lable, InputWrapper, Input } from "./PasswordInput.styled";
 
 export const PasswordInput = forwardRef(
   (
@@ -38,18 +32,24 @@ export const PasswordInput = forwardRef(
             name={name}
             placeholder={placeholder}
             error={error}
-            // ref={ref}
           ></Input>
           <ShowPasswordButton
-            size={25}
             onClick={onClick}
             className={classNameButton}
+            error={error}
           />
         </InputWrapper>
         {error ? (
-          <InputErrorText>{error?.message || "*Error"}</InputErrorText>
+          <InputNotification text={error} color={"red"} />
         ) : (
-          <InputRuleText>{registerPageRules.PASSWORD}</InputRuleText>
+          <InputNotification
+            text={
+              name === "password"
+                ? registerPageRules.PASSWORD
+                : registerPageRules.CONFIRM_PASSWORD
+            }
+            color={"gray"}
+          />
         )}
       </Wrapper>
     );

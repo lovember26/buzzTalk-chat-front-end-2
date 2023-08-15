@@ -1,14 +1,19 @@
 import * as React from "react";
-import { AuthList, AuthListItem, AuthNavLink } from "./AuthNav.styled";
+import {
+  AuthList,
+  AuthListItem,
+  AuthNavSignUpLink,
+  AuthNavSignInLink,
+} from "./AuthNav.styled";
 
 export const AuthNav = () => {
   return (
     <AuthList>
       <AuthListItem>
-        <AuthNavLink to="/register">Sign up</AuthNavLink>
+        <AuthNavSignUpLink to="/register">Sign up</AuthNavSignUpLink>
       </AuthListItem>
       <AuthListItem>
-        <AuthNavLink to="/login">Sign in</AuthNavLink>
+        <AuthNavSignInLink to="/login">Sign in</AuthNavSignInLink>
       </AuthListItem>
     </AuthList>
   );

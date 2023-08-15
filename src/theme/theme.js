@@ -36,61 +36,45 @@ export const theme = {
   },
 
   radii: {
-    sm: "4px", //tablet-mobile delete icon bg
-    md: "6px", //button
-    lg: "8px", //title bg, recipe image, card
-    xl: "30px", //form
+    sm: "4px",
+    md: "6px",
+    lg: "8px",
+    xl: "30px",
   },
 
-  shadows: {
-    base: "0px 4px 48px rgba(0, 0, 0, 0.1)", //form, modal
-    select: "0px 6.51852px 7.82222px rgba(0, 0, 0, 0.0314074)", //select
-    switchBody: "inset 0px 6px 8px 3px rgba(0, 0, 0, 0.1)", //switch body
-    mainTitle: "0px 4px 4px rgba(0, 0, 0, 0.25)", //main title
-    paginationList: "0px 4px 4px rgba(135, 135, 135, 0.2)", //pagination list
-  },
+  shadows: {},
 
   gradients: {
-    switch: "linear-gradient(180deg, #FFFFFF 0%, #E8EAEA 100%)",
+    main: "linear-gradient(#fad0ae 100%, #fad0ae 47%, #fad0ae 100%)",
   },
 
   colors: {
     white: {
-      100: "#FFFFFF", //card-title bg
-      200: "#FAFAFA", //main light text color
-      300: "#EFEFEF", //switch body bg
-      400: "#F5F5F5", //textarea, inputs bg
+      100: "#FFFFFF",
     },
 
     black: {
-      100: "#000000", //notfound page text
-      200: "#23262A", //modal input, main dark text color
-      300: "#2A2C36", //form bg-color
-      400: "#22252A", //search-icon color, user name color, yummy color, black-button bg
-      500: "#1E1F28", //subscribe button
+      100: "#000000",
+      200: "#444444", //welcome page button background color
     },
 
-    green: {
-      100: "#EBF3D4", //delete-icon bg, pagination number hover, ingredient card bg
-      200: "#8BAA36", //main green color
-      300: "#3CBC81", // validation success
-      400: "#656565", // pagination button color
-    },
+    green: {},
 
     gray: {
-      100: "#BDBDBD", //tab color, input text in search
-      200: "#D9D9D9", //user photo bg, gray button bg, text-aria bg, input bg
-      300: "#333333", //close button
-      400: "#001833", //category text color, page title color
-      500: "#3E4462", //card-title color,page subtitle color, ingredient title color, arrow
-      600: "#E0E0E0", //text input
-      700: "#707070", //border
-      800: "#7E7E7E",
-      900: "#656565", //pagination
+      100: "#EBEBEB", //input background color
+      200: "#777777", //input notification text
+      300: "#B5B5B5", //button disabled color
+      400: "#B5B5B5", //button hover/focus
+      500: "#F4F4F4", //button edit background color
     },
 
     red: {
       100: "#e74a3b", // validation error
+      200: "#FFF5EC", // validation error input background validation error
+    },
+
+    blue: {
+      100: "#7B97F8",
     },
   },
 

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { persistedStore } from "redux/store";
 import { joiResolver } from "@hookform/resolvers/joi";
@@ -12,10 +12,15 @@ import { BasicInput } from "components/common/BasicInput/BasicInput";
 import { PasswordInput } from "components/common/PasswordInput/PasswordInput";
 import { MainButton } from "components/common/MainButton/MainButton";
 import { Checkbox } from "components/common/CheckBox/CheckBox";
+import { InputNotification } from "components/common/InputNotification/InputNotification";
+import {
+  selectWrongPasswordInputNotification,
+  selectWrongPasswordNotification,
+} from "helpers/selectWrongPasswordNotification";
 import {
   LoginPageTitle,
-  LoginPageWrapper,
   LoginPageForm,
+  LoginPageLinksWrapper,
   LoginPageLinkForgotPassword,
   LoginPageRedirectLinkWrapper,
   LoginPageRedirectText,
@@ -30,6 +35,10 @@ export const LoginPage = () => {
   const email = searchParams.get("email");
   const token = searchParams.get("token");
   const verifyQuery = { email, token };
+
+  //To generate notifications about the number of password attempts
+  const [wrongPasswordCount, setWrongPasswordCount] = useState(0);
+  const [attempts, setAttempts] = useState(3);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -83,11 +92,21 @@ export const LoginPage = () => {
         });
       }
 
-      const {
-        payload: { access },
-      } = await dispatch(logInThunk(user));
+      //Fix when an error code will be sent from the backend
+      const data = await dispatch(logInThunk(user));
 
-      if (!access) {
+      // if (data.payload === "Request failed with status code 400") {
+      //   setWrongPasswordCount(wrongPasswordCount + 1);
+      //   setAttempts(attempts - 1);
+      // }
+
+      if (data.payload[4001]) {
+        setWrongPasswordCount(wrongPasswordCount + 1);
+        setAttempts(attempts - 1);
+      }
+
+      // Delete when the routes are configured correctly
+      if (!data.payload.access) {
         return;
       }
 
@@ -99,43 +118,61 @@ export const LoginPage = () => {
   return (
     <>
       <LoginPageTitle>Log In</LoginPageTitle>
-      <LoginPageWrapper>
-        <LoginPageForm onSubmit={handleSubmit(onSubmit)}>
-          <BasicInput
-            register={register}
-            error={errors["login"]}
-            lable={"Login"}
-            type={"text"}
-            name={"login"}
-            placeholder={"Enter a login"}
-          />
+      <LoginPageForm onSubmit={handleSubmit(onSubmit)}>
+        <BasicInput
+          register={register}
+          error={selectWrongPasswordInputNotification(
+            wrongPasswordCount,
+            "login",
+            errors["login"]
+          )}
+          lable={"Email or username"}
+          type={"text"}
+          name={"login"}
+          wrongPasswordCount={wrongPasswordCount}
+        />
 
-          <PasswordInput
-            register={register}
-            error={errors["password"]}
-            classNameWrapper={"password-wrapper"}
-            classNameInput={"input-password-login"}
-            classNameButton={"password"}
-            lable={"Password"}
-            type={"password"}
-            name={"password"}
-            placeholder={"Enter a password"}
-            onClick={showPasswordOnLoginPage}
-          />
+        <PasswordInput
+          register={register}
+          error={selectWrongPasswordInputNotification(
+            wrongPasswordCount,
+            "password",
+            errors["password"]
+          )}
+          classNameWrapper={"password-wrapper"}
+          classNameInput={"input-password-login"}
+          classNameButton={"password"}
+          lable={"Password"}
+          type={"password"}
+          name={"password"}
+          onClick={showPasswordOnLoginPage}
+          wrongPasswordCount={wrongPasswordCount}
+        />
 
+        {wrongPasswordCount < 3 && (
           <Checkbox
             register={register}
             error={errors["rememberMe"]}
             name={"rememberMe"}
             text="Remember me"
           />
+        )}
 
-          <LoginPageLinkForgotPassword to="/forgot-password">
-            Forgot Password
-          </LoginPageLinkForgotPassword>
+        <InputNotification
+          text={selectWrongPasswordNotification(wrongPasswordCount, attempts)}
+          color={wrongPasswordCount >= 3 ? "#777777" : "red"}
+          mb={15}
+        />
 
+        {wrongPasswordCount < 3 && (
           <MainButton type="submit" text="Sign in" disabled={!isValid} />
-        </LoginPageForm>
+        )}
+      </LoginPageForm>
+
+      <LoginPageLinksWrapper>
+        <LoginPageLinkForgotPassword to="/forgot-password">
+          Forgot Password
+        </LoginPageLinkForgotPassword>
 
         <LoginPageRedirectLinkWrapper LoginAuthLinkWrapper>
           <LoginPageRedirectText>Back to</LoginPageRedirectText>
@@ -143,7 +180,7 @@ export const LoginPage = () => {
             Sign up
           </LoginPageRedirectLink>
         </LoginPageRedirectLinkWrapper>
-      </LoginPageWrapper>
+      </LoginPageLinksWrapper>
       <AppToastContainer size={30} />
     </>
   );

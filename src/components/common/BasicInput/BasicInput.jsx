@@ -1,34 +1,40 @@
 import * as React from "react";
 import { forwardRef } from "react";
+import { InputNotification } from "../InputNotification/InputNotification";
 import {
   Wrapper,
+  InputWrapper,
   LableText,
   Input,
-  InputRuleText,
-  InputErrorText,
+  Icon,
 } from "./BasicInput.styled";
 import { registerPageRules, loginPageRules } from "constants";
 
 export const BasicInput = forwardRef(
-  ({ name, value, lable, type, placeholder, error, register }, ref) => {
+  ({ name, lable, type, placeholder, error, register }, ref) => {
     return (
       <Wrapper>
         <LableText htmlFor="test" error={error}>
           {lable}
         </LableText>
-        <Input
-          {...register(`${name}`)}
-          type={type}
-          placeholder={placeholder}
-          error={error}
-          // ref={ref}
-        ></Input>
+        <InputWrapper>
+          <Input
+            {...register(`${name}`)}
+            type={type}
+            placeholder={placeholder}
+            error={error}
+          ></Input>
+          <Icon size={28} error={error} />
+        </InputWrapper>
         {error ? (
-          <InputErrorText>{error?.message || "*Error"}</InputErrorText>
+          <InputNotification text={error} color={"red"} />
         ) : (
-          <InputRuleText>
-            {name === "email" ? registerPageRules.EMAIL : loginPageRules.LOGIN}
-          </InputRuleText>
+          <InputNotification
+            text={
+              name === "email" ? registerPageRules.EMAIL : loginPageRules.LOGIN
+            }
+            color={"gray"}
+          />
         )}
       </Wrapper>
     );
