@@ -1,5 +1,5 @@
-import { useSelector, useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+// import { Link, useNavigate } from "react-router-dom";
 import { selectUserName } from "redux/user/userSelectors";
 import avatar from "images/avatar.jpg";
 
