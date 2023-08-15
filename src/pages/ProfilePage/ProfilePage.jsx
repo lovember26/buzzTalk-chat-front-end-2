@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { logOutThunk } from "redux/auth/authThunk";
 import { selectUserName } from "redux/user/userSelectors";
 import avatar from "images/avatar.jpg";
 
@@ -33,7 +34,14 @@ import {
 } from "./ProfilePage.styled";
 
 export const ProfilePage = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const username = useSelector(selectUserName);
+
+  const handlelogOut = () => {
+    dispatch(logOutThunk());
+    navigate("/login", { replace: true });
+  };
 
   return (
     <ProfilePageWrapper>
@@ -50,7 +58,7 @@ export const ProfilePage = () => {
             https://bz.me/mari@gmail.com
           </ProfilePageUserInfoLink>
         </ProfilePageUserInfoTextWrapper>
-        <ProfilePageUserButtonEditButton>
+        <ProfilePageUserButtonEditButton to="/edit">
           <ProfilePageUserButtonEdit size={30} />
         </ProfilePageUserButtonEditButton>
       </ProfilePageUserInfoWrapper>
@@ -107,7 +115,9 @@ export const ProfilePage = () => {
         <ProfilePageUserDeleteAccount>
           Delete account
         </ProfilePageUserDeleteAccount>
-        <ProfilePageUserLogout to="/login">Log out</ProfilePageUserLogout>
+        <ProfilePageUserLogout onClick={handlelogOut}>
+          Log out
+        </ProfilePageUserLogout>
       </ProfilePageUserButtonsWrapper>
     </ProfilePageWrapper>
   );

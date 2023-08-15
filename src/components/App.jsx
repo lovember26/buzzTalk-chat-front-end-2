@@ -13,6 +13,8 @@ import {
   ForgotPasswordPage,
   ResetPasswordPage,
   ProfilePage,
+  EditProfilePage,
+  NotFoundPage,
 } from "pages";
 import { currentUserThunk } from "redux/auth/authThunk";
 import { selectAccessToken } from "redux/auth/authSelectors";
@@ -39,10 +41,12 @@ export const App = () => {
           path={routes.FORGOT_PASSWORD_PAGE}
           element={<ForgotPasswordPage />}
         />
+
         <Route
           path={routes.RESET_PASSSWORD_PAGE}
           element={<ResetPasswordPage />}
         />
+
         <Route
           path={routes.HOME_PAGE}
           element={
@@ -51,6 +55,7 @@ export const App = () => {
             </PrivateRoute>
           }
         />
+
         <Route
           path={routes.PROFILE_PAGE}
           element={
@@ -59,7 +64,31 @@ export const App = () => {
             </PrivateRoute>
           }
         />
-        <Route path="*" element={<LoginPage />} />
+
+        <Route
+          path={routes.EDIT_PROFILE_PAGE}
+          element={
+            <PrivateRoute>
+              <EditProfilePage />
+            </PrivateRoute>
+          }
+        />
+
+        {/* <Route
+          path={routes.PROFILE_PAGE}
+          element={
+            <PrivateRoute>
+              <ProfilePage />
+            </PrivateRoute>
+          }
+        >
+          <Route
+            path={routes.EDIT_PROFILE_PAGE}
+            element={<EditProfilePage />}
+          />
+        </Route> */}
+
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>
   );

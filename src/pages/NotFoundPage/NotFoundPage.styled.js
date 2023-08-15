@@ -221,7 +221,7 @@ export const ProfilePageUserDeleteAccount = styled.button`
   margin-bottom: 10px;
 `;
 
-export const ProfilePageUserLogout = styled.button`
+export const ProfilePageUserLogout = styled(Link)`
   font-family: cursive;
   font-size: 20px;
   color: ${({ theme }) => theme.colors.black[100]};

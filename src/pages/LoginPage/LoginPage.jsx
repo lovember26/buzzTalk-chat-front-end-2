@@ -40,8 +40,6 @@ export const LoginPage = () => {
   const [wrongPasswordCount, setWrongPasswordCount] = useState(0);
   const [attempts, setAttempts] = useState(3);
 
-  console.log("wrongPasswordCount", wrongPasswordCount);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
