@@ -2,7 +2,6 @@
   "name": "buzz-talk-chat-front-end",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://OlhaSuchok.github.io/buzzTalk-chat-front-end",
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
@@ -14,6 +13,7 @@
     "axios": "^1.4.0",
     "joi": "^17.9.2",
     "modern-normalize": "^2.0.0",
+    "netlify-cli": "^16.0.3",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -29,7 +29,7 @@
   },
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "netlify deploy -p",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
