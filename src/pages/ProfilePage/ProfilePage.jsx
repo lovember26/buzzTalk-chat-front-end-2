@@ -6,7 +6,6 @@ import {
   selectImage,
   selectDescription,
 } from "redux/user/userSelectors";
-import avatar from "images/avatar.jpg";
 
 import {
   ProfilePageWrapper,
@@ -20,19 +19,19 @@ import {
   ProfilePageUserAvatar,
   ProfilePageUserInfoTextWrapper,
   ProfilePageUserInfoNickname,
-  ProfilePageUserInfoTextLink,
-  ProfilePageUserInfoLink,
+  // ProfilePageUserInfoTextLink,
+  // ProfilePageUserInfoLink,
   ProfilePageUserStatusBlockWrapper,
   ProfilePageUserStatusBlockIcon,
   ProfilePageUserStatusIcon,
   ProfilePageUserStatusBlockIconText,
   ProfilePageUserStatusBlock,
   ProfilePageUserStatusText,
-  ProfilePageUserSettingsWrapper,
-  ProfilePageUserSettingsItem,
-  ProfilePageUserSettingsItemNotification,
-  ProfilePageUserSettingsItemText,
-  ProfilePageUserSettingsIcon,
+  // ProfilePageUserSettingsWrapper,
+  // ProfilePageUserSettingsItem,
+  // ProfilePageUserSettingsItemNotification,
+  // ProfilePageUserSettingsItemText,
+  // ProfilePageUserSettingsIcon,
   ProfilePageUserArrowButton,
   ProfilePageUserSettingsIconArrow,
   ProfilePageUserButtonsWrapper,
@@ -55,7 +54,6 @@ export const ProfilePage = () => {
     <ProfilePageWrapper>
       <ProfilePageUserInfoWrapper>
         <ProfilePageUserAvatarWrapper>
-          {/* <ProfilePageUserAvatar src={avatar} /> */}
           <ProfilePageUserAvatar src={image} />
         </ProfilePageUserAvatarWrapper>
         <ProfilePageUserInfoTextWrapper>

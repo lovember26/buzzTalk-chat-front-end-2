@@ -4,11 +4,8 @@ export const initialState = {
   id: null,
   username: null,
   email: null,
-  // first_name: null,
-  // last_name: null,
   image: "null",
   description: null,
-  // isLoggedIn: false,
 
   statuses: {
     current: status.IDLE,
