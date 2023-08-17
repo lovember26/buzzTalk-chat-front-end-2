@@ -1,10 +1,14 @@
 import { Outlet } from "react-router-dom";
 import { ReactComponent as PersonIcon } from "../../../images/man.svg";
-import { StyledFriendsNav, StyledLink } from "./FriendsBar.styled";
+import {
+  FriendsContainer,
+  StyledFriendsNav,
+  StyledLink,
+} from "./FriendsBar.styled";
 
 export const FriendsBar = () => {
   return (
-    <div>
+    <FriendsContainer>
       <StyledFriendsNav>
         <div>
           <PersonIcon />
@@ -28,6 +32,6 @@ export const FriendsBar = () => {
         </ul>
       </StyledFriendsNav>
       <Outlet />
-    </div>
+    </FriendsContainer>
   );
 };
