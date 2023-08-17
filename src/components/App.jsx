@@ -8,7 +8,7 @@ import {
   WelcomePage,
   LoginPage,
   RegisterPage,
-  HomePage,
+  ChatRoomsPage,
   VerifyPage,
   ForgotPasswordPage,
   ResetPasswordPage,
@@ -18,6 +18,11 @@ import {
 } from "pages";
 import { currentUserThunk } from "redux/auth/authThunk";
 import { selectAccessToken } from "redux/auth/authSelectors";
+import { FriendsBar } from "./ChatRooms/FriendsBar/FriendsBar";
+import { AddFriend } from "./ChatRooms/FriendsBar/AddFriend.jsx/AddFriend";
+import { AllFriends } from "./ChatRooms/FriendsBar/AllFriends/AllFriends";
+import { OnlineFriends } from "./ChatRooms/FriendsBar/OnlineFriends/OnlineFriends";
+import { BlockedUsers } from "./ChatRooms/FriendsBar/BlockedUsers/BlockedUsers";
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -48,13 +53,20 @@ export const App = () => {
         />
 
         <Route
-          path={routes.HOME_PAGE}
+          path={routes.CHAT_ROOMS_PAGE}
           element={
             <PrivateRoute>
-              <HomePage />
+              <ChatRoomsPage />
             </PrivateRoute>
           }
-        />
+        >
+          <Route path="friends" element={<FriendsBar />}>
+            <Route path="all" element={<AllFriends />} />
+            <Route path="online" element={<OnlineFriends />} />
+            <Route path="blocked" element={<BlockedUsers />} />
+            <Route path="add-friend" element={<AddFriend />} />
+          </Route>
+        </Route>
 
         <Route
           path={routes.PROFILE_PAGE}
