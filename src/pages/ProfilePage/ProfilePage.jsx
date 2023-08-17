@@ -1,13 +1,20 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logOutThunk } from "redux/auth/authThunk";
-import { selectUserName } from "redux/user/userSelectors";
+import {
+  selectUserName,
+  selectImage,
+  selectDescription,
+} from "redux/user/userSelectors";
 import avatar from "images/avatar.jpg";
 
 import {
   ProfilePageWrapper,
   ProfilePageUserInfoWrapper,
+  EditProfilePageUserButtonBackText,
+  EditProfilePageUserButtonBack,
   ProfilePageUserButtonEditButton,
+  EditProfilePageUserButtonBackIconArrow,
   ProfilePageUserButtonEdit,
   ProfilePageUserAvatarWrapper,
   ProfilePageUserAvatar,
@@ -37,27 +44,37 @@ export const ProfilePage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const username = useSelector(selectUserName);
+  const description = useSelector(selectDescription);
+  const image = useSelector(selectImage);
 
   const handlelogOut = () => {
     dispatch(logOutThunk());
     navigate("/login", { replace: true });
   };
-
   return (
     <ProfilePageWrapper>
       <ProfilePageUserInfoWrapper>
         <ProfilePageUserAvatarWrapper>
-          <ProfilePageUserAvatar src={avatar} />
+          {/* <ProfilePageUserAvatar src={avatar} /> */}
+          <ProfilePageUserAvatar src={image} />
         </ProfilePageUserAvatarWrapper>
         <ProfilePageUserInfoTextWrapper>
           <ProfilePageUserInfoNickname>{username}</ProfilePageUserInfoNickname>
-          <ProfilePageUserInfoTextLink>
+          <p>{description}</p>
+          {/* <ProfilePageUserInfoTextLink>
             Link to your profile to chat with you
-          </ProfilePageUserInfoTextLink>
-          <ProfilePageUserInfoLink>
+          </ProfilePageUserInfoTextLink> */}
+          {/* <ProfilePageUserInfoLink>
             https://bz.me/mari@gmail.com
-          </ProfilePageUserInfoLink>
+          </ProfilePageUserInfoLink> */}
         </ProfilePageUserInfoTextWrapper>
+        <EditProfilePageUserButtonBack to="/home">
+          <EditProfilePageUserButtonBackIconArrow size={30} />
+
+          <EditProfilePageUserButtonBackText>
+            Back
+          </EditProfilePageUserButtonBackText>
+        </EditProfilePageUserButtonBack>
         <ProfilePageUserButtonEditButton to="/edit">
           <ProfilePageUserButtonEdit size={30} />
         </ProfilePageUserButtonEditButton>
@@ -76,7 +93,7 @@ export const ProfilePage = () => {
           </ProfilePageUserArrowButton>
         </ProfilePageUserStatusBlock>
       </ProfilePageUserStatusBlockWrapper>
-      <ProfilePageUserSettingsWrapper>
+      {/* <ProfilePageUserSettingsWrapper>
         <ProfilePageUserSettingsItem>
           <ProfilePageUserSettingsItemNotification>
             <ProfilePageUserSettingsIcon size={30} />
@@ -110,7 +127,7 @@ export const ProfilePage = () => {
             <ProfilePageUserSettingsIconArrow size={35} />
           </ProfilePageUserArrowButton>
         </ProfilePageUserSettingsItem>
-      </ProfilePageUserSettingsWrapper>
+      </ProfilePageUserSettingsWrapper> */}
       <ProfilePageUserButtonsWrapper>
         <ProfilePageUserDeleteAccount>
           Delete account

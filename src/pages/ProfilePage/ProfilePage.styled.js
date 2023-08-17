@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { IoIosTimer } from "react-icons/io";
 import { RiNotification2Fill } from "react-icons/ri";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
+import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import { GrEdit } from "react-icons/gr";
 
 export const ProfilePageWrapper = styled.div`
@@ -21,6 +22,31 @@ export const ProfilePageUserInfoWrapper = styled.div`
   align-items: center;
 
   width: 600px;
+`;
+
+export const EditProfilePageUserButtonBack = styled(Link)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: absolute;
+  top: 20px;
+  left: 20px;
+`;
+
+export const EditProfilePageUserButtonBackText = styled.p`
+  font-family: cursive;
+  font-size: 24px;
+  color: ${({ theme }) => theme.colors.blue[100]};
+  font-weight: 500;
+  text-decoration: none;
+`;
+
+export const EditProfilePageUserButtonBackIconArrow = styled(
+  MdOutlineKeyboardArrowLeft
+)`
+  margin-right: 8px;
+  color: ${({ theme }) => theme.colors.blue[100]};
 `;
 
 export const ProfilePageUserButtonEditButton = styled(Link)`
