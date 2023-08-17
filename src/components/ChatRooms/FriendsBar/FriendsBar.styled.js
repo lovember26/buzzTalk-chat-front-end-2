@@ -1,10 +1,14 @@
 import styled from "@emotion/styled";
 import { NavLink } from "react-router-dom";
 
+export const FriendsContainer = styled.div`
+  flex: 1;
+`;
+
 export const StyledFriendsNav = styled.nav`
   height: 80px;
-  width: 100vw;
   padding-left: 26px;
+
   display: flex;
   align-items: center;
   gap: 68px;

@@ -1,3 +1,5 @@
+import { NoFriends } from "../../NoFriends";
+
 export const AllFriends = () => {
-  return <p>All</p>;
+  return <NoFriends />;
 };

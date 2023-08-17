@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { joiResolver } from "@hookform/resolvers/joi";
@@ -23,6 +24,8 @@ export const RegisterPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isRegistered = useSelector(selectAuthRegisterStatus);
+  const [email, setEmail] = useState("");
+
   const {
     register,
     handleSubmit,
@@ -39,6 +42,11 @@ export const RegisterPage = () => {
     },
   });
 
+  useEffect(() => {
+    if (isRegistered === "fulfilled") {
+      navigate(`/verify?email=${email}`, { replace: true });
+    }
+  }, [isRegistered, email, navigate]);
   const navigateToLogin = () => {
     navigate("/login", { replace: true });
   };
@@ -51,12 +59,9 @@ export const RegisterPage = () => {
         password: data.password,
         confirm_password: data.confirm,
       };
-
+      setEmail(data.email);
       await dispatch(registerThunk(user));
-      console.log(isRegistered);
-      if (isRegistered === "fulfilled") {
-        navigate(`/verify?email=${data.email}`, { replace: true });
-      }
+
       reset();
     } catch (error) {}
   };
