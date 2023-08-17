@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { registerThunk } from "redux/auth/authThunk";
 import { inputRegisterSchema } from "middlewares";
@@ -17,11 +17,12 @@ import {
   RegisterPageRedirectLink,
 } from "./RegisterPage.styled";
 import { showPassword, showConfirmPassword } from "helpers/showPasswordHandler";
+import { selectAuthRegisterStatus } from "redux/auth/authSelectors";
 
 export const RegisterPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const isRegistered = useSelector(selectAuthRegisterStatus);
   const {
     register,
     handleSubmit,
@@ -51,8 +52,11 @@ export const RegisterPage = () => {
         confirm_password: data.confirm,
       };
 
-      dispatch(registerThunk(user));
-      navigate("/verify", { replace: true });
+      await dispatch(registerThunk(user));
+      console.log(isRegistered);
+      if (isRegistered === "fulfilled") {
+        navigate(`/verify?email=${data.email}`, { replace: true });
+      }
       reset();
     } catch (error) {}
   };

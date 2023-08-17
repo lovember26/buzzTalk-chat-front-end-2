@@ -78,7 +78,7 @@ export const LoginPage = () => {
   };
 
   const navigateToHomePage = () => {
-    navigate("/home", { replace: true });
+    navigate("/chat-rooms/friends/all", { replace: true });
   };
 
   const onSubmit = async ({ login, password, rememberMe }) => {

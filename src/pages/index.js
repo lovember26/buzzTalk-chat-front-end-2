@@ -1,5 +1,5 @@
 export * from "./MainPage/MainPage";
-export * from "./HomePage/HomePage";
+export * from "./ChatRoomsPage/ChatRoomsPage";
 export * from "./LoginPage/LoginPage";
 export * from "./RegisterPage/RegisterPage";
 export * from "./WelcomePage/WelcomePage";
