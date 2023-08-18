@@ -4,15 +4,20 @@ export const initialState = {
   id: null,
   username: null,
   email: null,
-  first_name: null,
-  last_name: null,
-  isLoggedIn: false,
+  image: "null",
+  description: null,
 
   statuses: {
     current: status.IDLE,
+    update: status.IDLE,
+    generateGravatar: status.IDLE,
+    removeAvatar: status.IDLE,
   },
 
   errors: {
     current: null,
+    update: null,
+    generateGravatar: null,
+    removeAvatar: null,
   },
 };

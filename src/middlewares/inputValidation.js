@@ -1,4 +1,5 @@
 import Joi from "joi";
+import * as yup from "yup";
 
 export const inputRegisterSchema = Joi.object({
   email: Joi.string()
@@ -107,4 +108,21 @@ export const inputResetPasswordSchema = Joi.object({
       "any.required": "*This field is required",
       "any.only": "*Passwords do not match",
     }),
+});
+
+export const inputEditUserSchema = yup.object({
+  name: yup.string().min(1).max(150),
+  //   .messages({
+  //   "string.min": "*The username should be minimum 1 characters long",
+  //   "string.max": "*The username exceeds the maximum 150 length",
+  //   "string.pattern.base":
+  //     "*At least one uppercase letter, one lowercase letter and one number",
+  // }),
+  aboutMe: yup.string().min(1).max(150),
+  // .messages({
+  // "string.min": "*The username should be minimum 1 characters long",
+  // "string.max": "*The username exceeds the maximum 150 length",
+  //   "string.pattern.base":
+  //     "*At least one uppercase letter, one lowercase letter and one number",
+  // }),
 });

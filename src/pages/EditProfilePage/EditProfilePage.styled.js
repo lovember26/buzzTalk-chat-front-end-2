@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 
 export const EditProfilePageWrapper = styled.div`
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
