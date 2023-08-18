@@ -37,3 +37,8 @@ export const resetPassword = async (credentials) => {
   console.log(data);
   return data;
 };
+
+export const resendEmail = async (credentials) => {
+  const { data } = await axios.post("/refresh-activation-token/", credentials);
+  return data;
+};
