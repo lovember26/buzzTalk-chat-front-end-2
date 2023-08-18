@@ -11,11 +11,13 @@ export const initialState = {
     current: status.IDLE,
     update: status.IDLE,
     generateGravatar: status.IDLE,
+    removeAvatar: status.IDLE,
   },
 
   errors: {
     current: null,
     update: null,
     generateGravatar: null,
+    removeAvatar: null,
   },
 };

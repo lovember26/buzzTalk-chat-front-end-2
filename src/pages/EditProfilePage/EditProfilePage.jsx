@@ -7,6 +7,7 @@ import { inputEditUserSchema } from "middlewares";
 import {
   updateUserInfoThunk,
   generateGravatarUserInfoThunk,
+  removeUserAvatarInfoThunk,
 } from "redux/user/userThunk";
 import {
   selectUserName,
@@ -72,6 +73,10 @@ export const EditProfilePage = () => {
     // const formData = new FormData();
     // formData.append("image", file);
     // await dispatch(updateUserInfoThunk(formData));
+  };
+
+  const handleRemoveAvatar = async () => {
+    await dispatch(removeUserAvatarInfoThunk());
   };
 
   const onSubmit = async ({ name, aboutMe }) => {
@@ -144,6 +149,10 @@ export const EditProfilePage = () => {
             accept="image/*,.png,.jpg,.gif,.web,.webp"
             onChange={handleChangeAvatar}
           />
+
+          <button type="button" onClick={handleRemoveAvatar}>
+            Delete avatar
+          </button>
         </EditProfilePageFormInputWrapper>
       </EditProfilePageForm>
     </EditProfilePageWrapper>

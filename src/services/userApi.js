@@ -11,3 +11,11 @@ export const generateGravatarUserService = async (credentials) => {
   const { data } = await axios.get("/users/generate-gravatar/", credentials);
   return data;
 };
+
+export const removeUserAvatarService = async (credentials) => {
+  const { data } = await axios.delete(
+    "/users/delete-profile-image/",
+    credentials
+  );
+  return data;
+};

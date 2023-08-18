@@ -95,10 +95,7 @@ export const LoginPage = () => {
       //Fix when an error code will be sent from the backend
       const data = await dispatch(logInThunk(user));
 
-      // if (data.payload === "Request failed with status code 400") {
-      //   setWrongPasswordCount(wrongPasswordCount + 1);
-      //   setAttempts(attempts - 1);
-      // }
+      console.log("data", data);
 
       if (data.payload[4001]) {
         setWrongPasswordCount(wrongPasswordCount + 1);

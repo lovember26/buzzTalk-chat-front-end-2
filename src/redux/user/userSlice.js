@@ -4,6 +4,7 @@ import { currentUserThunk } from "redux/auth/authThunk";
 import {
   updateUserInfoThunk,
   generateGravatarUserInfoThunk,
+  removeUserAvatarInfoThunk,
 } from "./userThunk";
 import { status } from "constants";
 
@@ -62,6 +63,21 @@ export const userSlice = createSlice({
       .addCase(generateGravatarUserInfoThunk.rejected, (state, action) => {
         state.statuses.generateGravatar = status.REJECTED;
         state.errors.generateGravatar = action.payload;
+      })
+
+      // remove avatar
+      .addCase(removeUserAvatarInfoThunk.pending, (state) => {
+        state.statuses.removeAvatar = status.PENDING;
+        state.errors.removeAvatar = null;
+      })
+      .addCase(removeUserAvatarInfoThunk.fulfilled, (state, action) => {
+        state.statuses.removeAvatar = status.FULFILLED;
+        state.image = null;
+        state.errors.removeAvatar = null;
+      })
+      .addCase(removeUserAvatarInfoThunk.rejected, (state, action) => {
+        state.statuses.removeAvatar = status.REJECTED;
+        state.errors.removeAvatar = action.payload;
       });
   },
 });
