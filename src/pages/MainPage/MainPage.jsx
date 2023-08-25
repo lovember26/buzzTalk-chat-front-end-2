@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useLocation, Navigate, useNavigate } from "react-router-dom";
 import { AuthNav } from "components/AuthNav/AuthNav";
 import {
   Wrapper,

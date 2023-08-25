@@ -1,11 +1,6 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
-import {
-  useLocation,
-  Navigate,
-  useNavigate,
-  useSearchParams,
-} from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { persistedStore } from "redux/store";
 import { joiResolver } from "@hookform/resolvers/joi";
@@ -47,12 +42,6 @@ export const LoginPage = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
-
-  const fromPage = location.state?.from?.pathname || "/";
-
-  console.log("location", location);
-  console.log("fromPage", fromPage);
 
   const {
     register,
@@ -88,10 +77,6 @@ export const LoginPage = () => {
     navigate("/register", { replace: true });
   };
 
-  const navigateToHomePage = () => {
-    navigate("/chat-rooms/friends/all", { replace: true });
-  };
-
   const onSubmit = async ({ login, password, rememberMe }) => {
     try {
       const user = { login: login, password: password };
@@ -106,19 +91,11 @@ export const LoginPage = () => {
       //Fix when an error code will be sent from the backend
       const data = await dispatch(logInThunk(user));
 
-      // console.log("data", data);
-
       if (data.payload[4001]) {
         setWrongPasswordCount(wrongPasswordCount + 1);
         setAttempts(attempts - 1);
       }
 
-      // Delete when the routes are configured correctly
-      if (!data.payload.access) {
-        return;
-      }
-
-      navigateToHomePage();
       reset();
     } catch (error) {}
   };

@@ -1,7 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { Routes, Route, useNavigate } from "react-router-dom";
-import PrivatePage from "pages/access/PrivatePage";
-import { EditProfilePage } from "pages";
+import { useNavigate } from "react-router-dom";
 import { logOutThunk } from "redux/auth/authThunk";
 import {
   selectUserName,
@@ -21,19 +19,12 @@ import {
   ProfilePageUserAvatar,
   ProfilePageUserInfoTextWrapper,
   ProfilePageUserInfoNickname,
-  // ProfilePageUserInfoTextLink,
-  // ProfilePageUserInfoLink,
   ProfilePageUserStatusBlockWrapper,
   ProfilePageUserStatusBlockIcon,
   ProfilePageUserStatusIcon,
   ProfilePageUserStatusBlockIconText,
   ProfilePageUserStatusBlock,
   ProfilePageUserStatusText,
-  // ProfilePageUserSettingsWrapper,
-  // ProfilePageUserSettingsItem,
-  // ProfilePageUserSettingsItemNotification,
-  // ProfilePageUserSettingsItemText,
-  // ProfilePageUserSettingsIcon,
   ProfilePageUserArrowButton,
   ProfilePageUserSettingsIconArrow,
   ProfilePageUserButtonsWrapper,
@@ -52,7 +43,6 @@ export const ProfilePage = () => {
 
   const handlelogOut = () => {
     dispatch(logOutThunk());
-    navigate("/login", { replace: true });
   };
 
   return (
@@ -64,12 +54,6 @@ export const ProfilePage = () => {
         <ProfilePageUserInfoTextWrapper>
           <ProfilePageUserInfoNickname>{username}</ProfilePageUserInfoNickname>
           <p>{description}</p>
-          {/* <ProfilePageUserInfoTextLink>
-            Link to your profile to chat with you
-          </ProfilePageUserInfoTextLink> */}
-          {/* <ProfilePageUserInfoLink>
-            https://bz.me/mari@gmail.com
-          </ProfilePageUserInfoLink> */}
         </ProfilePageUserInfoTextWrapper>
         <EditProfilePageUserButtonBack onClick={goBack}>
           <EditProfilePageUserButtonBackIconArrow size={30} />
@@ -95,41 +79,6 @@ export const ProfilePage = () => {
           </ProfilePageUserArrowButton>
         </ProfilePageUserStatusBlock>
       </ProfilePageUserStatusBlockWrapper>
-      {/* <ProfilePageUserSettingsWrapper>
-        <ProfilePageUserSettingsItem>
-          <ProfilePageUserSettingsItemNotification>
-            <ProfilePageUserSettingsIcon size={30} />
-            <ProfilePageUserSettingsItemText>
-              Privacy and security
-            </ProfilePageUserSettingsItemText>
-          </ProfilePageUserSettingsItemNotification>
-          <ProfilePageUserArrowButton>
-            <ProfilePageUserSettingsIconArrow size={35} />
-          </ProfilePageUserArrowButton>
-        </ProfilePageUserSettingsItem>
-        <ProfilePageUserSettingsItem>
-          <ProfilePageUserSettingsItemNotification>
-            <ProfilePageUserSettingsIcon size={30} />
-            <ProfilePageUserSettingsItemText>
-              Notifications and sounds
-            </ProfilePageUserSettingsItemText>
-          </ProfilePageUserSettingsItemNotification>
-          <ProfilePageUserArrowButton>
-            <ProfilePageUserSettingsIconArrow size={35} />
-          </ProfilePageUserArrowButton>
-        </ProfilePageUserSettingsItem>
-        <ProfilePageUserSettingsItem>
-          <ProfilePageUserSettingsItemNotification>
-            <ProfilePageUserSettingsIcon size={30} />
-            <ProfilePageUserSettingsItemText>
-              Language
-            </ProfilePageUserSettingsItemText>
-          </ProfilePageUserSettingsItemNotification>
-          <ProfilePageUserArrowButton>
-            <ProfilePageUserSettingsIconArrow size={35} />
-          </ProfilePageUserArrowButton>
-        </ProfilePageUserSettingsItem>
-      </ProfilePageUserSettingsWrapper> */}
       <ProfilePageUserButtonsWrapper>
         <ProfilePageUserDeleteAccount>
           Delete account
@@ -141,44 +90,3 @@ export const ProfilePage = () => {
     </ProfilePageWrapper>
   );
 };
-
-// import { useEffect } from "react";
-// import { useSelector, useDispatch } from "react-redux";
-// import { itemsOperations, itemsSelectors } from "redux/items";
-// import Title from "components/common/Title/Title";
-// import {
-//   ItemsPageList,
-//   ItemsPageItem,
-//   ItemsPageText,
-//   ItemsPageIconDelete,
-// } from "./ItemsPage.styled";
-
-// export const ItemsPage = () => {
-//   const dispatch = useDispatch();
-//   const items = useSelector(itemsSelectors.selectItems);
-
-//   useEffect(() => {
-//     dispatch(itemsOperations.fetchItems());
-//   }, [dispatch]);
-
-//   const handleDeleteItem = (id) => {
-//     console.log("id", id);
-//     dispatch(itemsOperations.deleteItem(id));
-//   };
-
-//   return (
-//     <>
-//       <Title title="Items Page" />
-//       <ItemsPageList>
-//         {items.map(({ id, title }) => (
-//           <ItemsPageItem key={id}>
-//             <ItemsPageText>{title}</ItemsPageText>
-//             <button onClick={() => handleDeleteItem(id)}>
-//               <ItemsPageIconDelete size={30} />
-//             </button>
-//           </ItemsPageItem>
-//         ))}
-//       </ItemsPageList>
-//     </>
-//   );
-// };
