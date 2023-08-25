@@ -1,10 +1,29 @@
 import * as React from "react";
+import { useLocation, Navigate, useNavigate } from "react-router-dom";
 import { AuthNav } from "components/AuthNav/AuthNav";
+import {
+  Wrapper,
+  WelcomePageWrapper,
+  WelcomePageTextWrapper,
+  WelcomePageText,
+  LoginPageLinkForgotPassword,
+} from "./MainPage.styled";
 
 export const MainPage = () => {
   return (
-    <>
-      <AuthNav />
-    </>
+    <Wrapper>
+      <WelcomePageWrapper>
+        <WelcomePageTextWrapper>
+          <WelcomePageText>
+            Hi! You are at BuzzTalk messenger) <br />
+            Sign Up or Log In to start messaging
+          </WelcomePageText>
+        </WelcomePageTextWrapper>
+        <AuthNav />
+        <LoginPageLinkForgotPassword to="/forgot-password">
+          Forgot Password
+        </LoginPageLinkForgotPassword>
+      </WelcomePageWrapper>
+    </Wrapper>
   );
 };

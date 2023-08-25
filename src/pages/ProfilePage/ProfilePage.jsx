@@ -1,5 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import PrivatePage from "pages/access/PrivatePage";
+import { EditProfilePage } from "pages";
 import { logOutThunk } from "redux/auth/authThunk";
 import {
   selectUserName,
@@ -46,10 +48,13 @@ export const ProfilePage = () => {
   const description = useSelector(selectDescription);
   const image = useSelector(selectImage);
 
+  const goBack = () => navigate(-1);
+
   const handlelogOut = () => {
     dispatch(logOutThunk());
     navigate("/login", { replace: true });
   };
+
   return (
     <ProfilePageWrapper>
       <ProfilePageUserInfoWrapper>
@@ -66,14 +71,13 @@ export const ProfilePage = () => {
             https://bz.me/mari@gmail.com
           </ProfilePageUserInfoLink> */}
         </ProfilePageUserInfoTextWrapper>
-        <EditProfilePageUserButtonBack to="/home">
+        <EditProfilePageUserButtonBack onClick={goBack}>
           <EditProfilePageUserButtonBackIconArrow size={30} />
-
           <EditProfilePageUserButtonBackText>
             Back
           </EditProfilePageUserButtonBackText>
         </EditProfilePageUserButtonBack>
-        <ProfilePageUserButtonEditButton to="/edit">
+        <ProfilePageUserButtonEditButton to="edit">
           <ProfilePageUserButtonEdit size={30} />
         </ProfilePageUserButtonEditButton>
       </ProfilePageUserInfoWrapper>

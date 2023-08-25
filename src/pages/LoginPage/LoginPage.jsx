@@ -1,11 +1,16 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
+import {
+  useLocation,
+  Navigate,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { persistedStore } from "redux/store";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { inputLoginSchema } from "middlewares";
 import { useDispatch } from "react-redux";
-import { useNavigate, useSearchParams } from "react-router-dom";
 import { logInThunk } from "redux/auth/authThunk";
 import { AppToastContainer } from "components/AppToastContainer/AppToastContainer";
 import { BasicInput } from "components/common/BasicInput/BasicInput";
@@ -42,6 +47,12 @@ export const LoginPage = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const fromPage = location.state?.from?.pathname || "/";
+
+  console.log("location", location);
+  console.log("fromPage", fromPage);
 
   const {
     register,
@@ -95,7 +106,7 @@ export const LoginPage = () => {
       //Fix when an error code will be sent from the backend
       const data = await dispatch(logInThunk(user));
 
-      console.log("data", data);
+      // console.log("data", data);
 
       if (data.payload[4001]) {
         setWrongPasswordCount(wrongPasswordCount + 1);

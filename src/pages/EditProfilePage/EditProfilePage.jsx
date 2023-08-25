@@ -34,6 +34,7 @@ import {
   EditProfilePageFormInput,
   EditProfilePageFormInputAbout,
 } from "./EditProfilePage.styled";
+import { useNavigate } from "react-router";
 
 export const EditProfilePage = () => {
   const [file, setFile] = useState("");
@@ -44,6 +45,7 @@ export const EditProfilePage = () => {
 
   const filePicker = useRef(null);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -58,6 +60,8 @@ export const EditProfilePage = () => {
       aboutMe: description,
     },
   });
+
+  const goBack = () => navigate(-1);
 
   const handleClick = () => {
     filePicker.current.click();
@@ -105,7 +109,7 @@ export const EditProfilePage = () => {
           </EditProfilePageUserInfoNickname>
         </EditProfilePageUserInfoTextWrapper>
 
-        <EditProfilePageUserButtonBack to="/profile">
+        <EditProfilePageUserButtonBack onClick={goBack}>
           <EditProfilePageUserButtonBackIconArrow size={30} />
 
           <EditProfilePageUserButtonBackText>
