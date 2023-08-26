@@ -9,8 +9,9 @@ import { routes } from "constants/routes";
 import PrivatePage from "pages/access/PrivatePage";
 import RestrictedPage from "pages/access/RestrictedPage";
 
+import Layout from "./Layout/Layout";
+
 // For dynamically importing a module
-const Layout = lazy(() => import("components/Layout/Layout"));
 const MainPage = lazy(() => import("pages/MainPage"));
 const LoginPage = lazy(() => import("pages/LoginPage"));
 const RegisterPage = lazy(() => import("pages/RegisterPage"));
@@ -67,7 +68,6 @@ export const App = () => {
             element={<RestrictedPage component={<ResetPasswordPage />} />}
           />
         </Route>
-
         <Route
           path={routes.CHAT_ROOMS_PAGE}
           element={<PrivatePage component={<ChatRoomsPage />} />}
@@ -94,7 +94,6 @@ export const App = () => {
             />
           </Route>
         </Route>
-
         <Route
           path={routes.PROFILE_PAGE}
           element={<PrivatePage component={<ProfilePage />} />}

@@ -2,7 +2,6 @@ import { Suspense } from "react";
 import { useSelector } from "react-redux";
 import { useLocation, Navigate } from "react-router-dom";
 import { selectAccessToken } from "redux/auth/authSelectors";
-import { Loader } from "components/common/Loader/Loader";
 import { routes } from "constants";
 
 export default function RestrictedPage({
@@ -16,7 +15,6 @@ export default function RestrictedPage({
   return isAuthenticated ? (
     <Navigate to={to} state={{ from: location }} replace />
   ) : (
-    // Component
-    <Suspense fallback={<Loader />}>{Component}</Suspense>
+    <Suspense fallback={null}>{Component}</Suspense>
   );
 }

@@ -2,7 +2,6 @@ import { Suspense } from "react";
 import { useSelector } from "react-redux";
 import { useLocation, Navigate } from "react-router-dom";
 import { selectAccessToken } from "redux/auth/authSelectors";
-import { Loader } from "components/common/Loader/Loader";
 import { routes } from "constants";
 
 export default function PrivatePage({
@@ -16,6 +15,5 @@ export default function PrivatePage({
     return <Navigate to={redirect} state={{ from: location }} />;
   }
 
-  // return Component;
-  return <Suspense fallback={<Loader />}>{Component}</Suspense>;
+  return <Suspense fallback={null}>{Component}</Suspense>;
 }
