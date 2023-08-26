@@ -10,7 +10,7 @@ import {
 import { resendEmail } from "services/authApi";
 import { useSearchParams } from "react-router-dom";
 
-export const VerifyPage = () => {
+export default function VerifyPage() {
   const [searchParams] = useSearchParams();
   const email = searchParams.get("email");
 
@@ -35,4 +35,4 @@ export const VerifyPage = () => {
       </VerifyWrapper>
     </Container>
   );
-};
+}

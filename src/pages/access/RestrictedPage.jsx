@@ -1,10 +1,13 @@
+import { Suspense } from "react";
 import { useSelector } from "react-redux";
 import { useLocation, Navigate } from "react-router-dom";
 import { selectAccessToken } from "redux/auth/authSelectors";
+import { Loader } from "components/common/Loader/Loader";
+import { routes } from "constants";
 
 export default function RestrictedPage({
   component: Component,
-  redirect = "/chat-rooms/friends",
+  redirect = routes.RESTRICTED_PUBLIC_PAGE,
 }) {
   const location = useLocation();
   const to = location.state?.from || redirect;
@@ -13,6 +16,7 @@ export default function RestrictedPage({
   return isAuthenticated ? (
     <Navigate to={to} state={{ from: location }} replace />
   ) : (
-    Component
+    // Component
+    <Suspense fallback={<Loader />}>{Component}</Suspense>
   );
 }

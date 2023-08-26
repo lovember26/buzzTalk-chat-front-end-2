@@ -6,6 +6,8 @@ export const initialState = {
   email: null,
   image: "null",
   description: null,
+  // When reload page and request to server for user info
+  isFetchingCurrentUser: false,
 
   statuses: {
     current: status.IDLE,

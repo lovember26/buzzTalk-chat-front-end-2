@@ -18,6 +18,7 @@ export const userSlice = createSlice({
       .addCase(currentUserThunk.pending, (state) => {
         state.statuses.current = status.PENDING;
         state.errors.current = null;
+        state.isFetchingCurrentUser = true;
       })
       .addCase(currentUserThunk.fulfilled, (state, action) => {
         state.statuses.current = status.FULFILLED;
@@ -27,10 +28,12 @@ export const userSlice = createSlice({
         state.image = action.payload.image;
         state.description = action.payload.description;
         state.errors.current = null;
+        state.isFetchingCurrentUser = false;
       })
       .addCase(currentUserThunk.rejected, (state, action) => {
         state.statuses.current = status.REJECTED;
         state.errors.current = action.payload;
+        state.isFetchingCurrentUser = false;
       })
 
       // update

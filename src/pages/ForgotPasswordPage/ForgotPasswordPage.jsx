@@ -15,7 +15,7 @@ import { useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { inputEmailSchema } from "middlewares";
 
-export const ForgotPasswordPage = () => {
+export default function ForgotPasswordPage() {
   const {
     register,
     handleSubmit,
@@ -60,4 +60,4 @@ export const ForgotPasswordPage = () => {
       <ToastContainer />
     </Container>
   );
-};
+}

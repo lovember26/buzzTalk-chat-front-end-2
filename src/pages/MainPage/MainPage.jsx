@@ -8,7 +8,7 @@ import {
   LoginPageLinkForgotPassword,
 } from "./MainPage.styled";
 
-export const MainPage = () => {
+export default function MainPage() {
   return (
     <Wrapper>
       <WelcomePageWrapper>
@@ -25,4 +25,4 @@ export const MainPage = () => {
       </WelcomePageWrapper>
     </Wrapper>
   );
-};
+}

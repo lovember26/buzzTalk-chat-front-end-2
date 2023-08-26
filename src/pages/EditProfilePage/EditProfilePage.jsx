@@ -1,7 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
-// import { joiResolver } from "@hookform/resolvers/joi";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { inputEditUserSchema } from "middlewares";
 import {
@@ -36,9 +35,8 @@ import {
 } from "./EditProfilePage.styled";
 import { useNavigate } from "react-router";
 
-export const EditProfilePage = () => {
+export default function EditProfilePage() {
   const [file, setFile] = useState("");
-  // console.log("file", file);
   const username = useSelector(selectUserName);
   const description = useSelector(selectDescription);
   const image = useSelector(selectImage);
@@ -47,12 +45,7 @@ export const EditProfilePage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const {
-    register,
-    handleSubmit,
-    // reset,
-    // formState: { errors, isValid },
-  } = useForm({
+  const { register, handleSubmit } = useForm({
     mode: "onChange",
     resolver: yupResolver(inputEditUserSchema),
     defaultValues: {
@@ -73,10 +66,6 @@ export const EditProfilePage = () => {
 
   const handleChangeAvatar = async (event) => {
     setFile(event.target.files[0]);
-
-    // const formData = new FormData();
-    // formData.append("image", file);
-    // await dispatch(updateUserInfoThunk(formData));
   };
 
   const handleRemoveAvatar = async () => {
@@ -161,4 +150,4 @@ export const EditProfilePage = () => {
       </EditProfilePageForm>
     </EditProfilePageWrapper>
   );
-};
+}

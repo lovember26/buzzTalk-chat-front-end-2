@@ -1,7 +1,7 @@
 import { ReactComponent as AddChatButton } from "../../../images/addChatBtn.svg";
 import { ReactComponent as ChatsBtn } from "../../../images/chatsBtn.svg";
 import { ReactComponent as SearchIcon } from "../../../images/search.svg";
-import { NoFriends } from "./NoFriends/NoFriends";
+import NoFriends from "./NoFriends/NoFriends";
 import {
   SearchBar,
   StyledChatsBtn,
@@ -9,7 +9,7 @@ import {
   StyledSideBar,
 } from "./SideBar.styled";
 
-export const SideBar = () => {
+export default function SideBar() {
   return (
     <StyledSideBar>
       <StyledNav>
@@ -30,4 +30,4 @@ export const SideBar = () => {
       </SearchBar>
     </StyledSideBar>
   );
-};
+}

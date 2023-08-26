@@ -7,7 +7,7 @@ import {
   StyledLink,
 } from "./FriendsBar.styled";
 
-export const FriendsBar = () => {
+export default function FriendsBar() {
   return (
     <FriendsContainer>
       <StyledFriendsNav>
@@ -34,4 +34,4 @@ export const FriendsBar = () => {
       <Outlet />
     </FriendsContainer>
   );
-};
+}

@@ -32,7 +32,7 @@ import {
   ProfilePageUserDeleteAccount,
 } from "./ProfilePage.styled";
 
-export const ProfilePage = () => {
+export default function ProfilePage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const username = useSelector(selectUserName);
@@ -89,4 +89,4 @@ export const ProfilePage = () => {
       </ProfilePageUserButtonsWrapper>
     </ProfilePageWrapper>
   );
-};
+}

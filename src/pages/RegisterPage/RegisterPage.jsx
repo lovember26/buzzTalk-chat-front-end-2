@@ -20,7 +20,7 @@ import {
 import { showPassword, showConfirmPassword } from "helpers/showPasswordHandler";
 import { selectAuthRegisterStatus } from "redux/auth/authSelectors";
 
-export const RegisterPage = () => {
+export default function RegisterPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isRegistered = useSelector(selectAuthRegisterStatus);
@@ -121,4 +121,4 @@ export const RegisterPage = () => {
       <AppToastContainer size={30} />
     </>
   );
-};
+}

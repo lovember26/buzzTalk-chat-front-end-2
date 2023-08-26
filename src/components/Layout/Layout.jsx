@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 import Logo from "components/Logo/Logo";
 import { Header, LogoWrapper, LogoTitle } from "./Layout.styled";
 
-export const Layout = () => {
+export default function Layout() {
   return (
     <>
       <Header>
@@ -21,4 +21,4 @@ export const Layout = () => {
       </main>
     </>
   );
-};
+}

@@ -17,7 +17,7 @@ import { useForm } from "react-hook-form";
 
 import { joiResolver } from "@hookform/resolvers/joi";
 
-export const ResetPasswordPage = () => {
+export default function ResetPasswordPage() {
   const [searchParams] = useSearchParams();
 
   const email = searchParams.get("email");
@@ -91,4 +91,4 @@ export const ResetPasswordPage = () => {
       <ToastContainer />
     </Container>
   );
-};
+}

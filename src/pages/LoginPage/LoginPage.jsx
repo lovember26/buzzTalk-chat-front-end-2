@@ -30,7 +30,7 @@ import { verifyUserService } from "services/authApi";
 import { showPasswordOnLoginPage } from "helpers/showPasswordHandler";
 import { errorNotification, successNotification } from "helpers/notification";
 
-export const LoginPage = () => {
+export default function LoginPage() {
   const [searchParams] = useSearchParams();
   const email = searchParams.get("email");
   const token = searchParams.get("token");
@@ -169,4 +169,4 @@ export const LoginPage = () => {
       <AppToastContainer size={30} />
     </>
   );
-};
+}

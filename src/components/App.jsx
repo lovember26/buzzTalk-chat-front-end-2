@@ -1,35 +1,39 @@
-import { useEffect } from "react";
+import { lazy, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { currentUserThunk } from "redux/auth/authThunk";
+import { selectAccessToken } from "redux/auth/authSelectors";
+import { selectIsFetchingCurrentUser } from "redux/user/userSelectors";
 import { routes } from "constants/routes";
-import { Layout } from "components/Layout/Layout";
 
 import PrivatePage from "pages/access/PrivatePage";
 import RestrictedPage from "pages/access/RestrictedPage";
 
-import {
-  MainPage,
-  LoginPage,
-  RegisterPage,
-  ChatRoomsPage,
-  VerifyPage,
-  ForgotPasswordPage,
-  ResetPasswordPage,
-  ProfilePage,
-  EditProfilePage,
-  NotFoundPage,
-} from "pages";
-import { currentUserThunk } from "redux/auth/authThunk";
-import { selectAccessToken } from "redux/auth/authSelectors";
-import { FriendsBar } from "./ChatRooms/FriendsBar/FriendsBar";
-import { AddFriend } from "./ChatRooms/FriendsBar/AddFriend.jsx/AddFriend";
-import { AllFriends } from "./ChatRooms/FriendsBar/AllFriends/AllFriends";
-import { OnlineFriends } from "./ChatRooms/FriendsBar/OnlineFriends/OnlineFriends";
-import { BlockedUsers } from "./ChatRooms/FriendsBar/BlockedUsers/BlockedUsers";
+// For dynamically importing a module
+const Layout = lazy(() => import("components/Layout/Layout"));
+const MainPage = lazy(() => import("pages/MainPage"));
+const LoginPage = lazy(() => import("pages/LoginPage"));
+const RegisterPage = lazy(() => import("pages/RegisterPage"));
+const ChatRoomsPage = lazy(() => import("pages/ChatRoomsPage"));
+const VerifyPage = lazy(() => import("pages/VerifyPage"));
+const ForgotPasswordPage = lazy(() => import("pages/ForgotPasswordPage"));
+const ResetPasswordPage = lazy(() => import("pages/ResetPasswordPage"));
+const ProfilePage = lazy(() => import("pages/ProfilePage"));
+const EditProfilePage = lazy(() => import("pages/EditProfilePage"));
+const NotFoundPage = lazy(() => import("pages/NotFoundPage"));
+
+const FriendsBar = lazy(() => import("./ChatRooms/FriendsBar/FriendsBar"));
+const AddFriend = lazy(() => import("./ChatRooms/FriendsBar/AddFriend"));
+const AllFriends = lazy(() => import("./ChatRooms/FriendsBar/AllFriends"));
+const BlockedUsers = lazy(() => import("./ChatRooms/FriendsBar/BlockedUsers"));
+const OnlineFriends = lazy(() =>
+  import("./ChatRooms/FriendsBar/OnlineFriends")
+);
 
 export const App = () => {
   const dispatch = useDispatch();
   const accessToken = useSelector(selectAccessToken);
+  const isFetchingCurrentUser = useSelector(selectIsFetchingCurrentUser);
 
   useEffect(() => {
     if (accessToken) {
@@ -38,7 +42,7 @@ export const App = () => {
   }, [dispatch, accessToken]);
 
   return (
-    <>
+    !isFetchingCurrentUser && (
       <Routes>
         <Route path={routes.MAIN_PAGE} element={<Layout />}>
           <Route index element={<RestrictedPage component={<MainPage />} />} />
@@ -101,6 +105,6 @@ export const App = () => {
         />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
-    </>
+    )
   );
 };

@@ -1,3 +1,3 @@
-export const BlockedUsers = () => {
+export default function BlockedUsers() {
   return <p>Blocked</p>;
-};
+}
