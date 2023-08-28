@@ -8,9 +8,10 @@ export const Loader = () => {
       width="80"
       ariaLabel="comment-loading"
       wrapperStyle={{
-        marginTop: "200px",
-        marginLeft: "50%",
-        marginRight: "50%",
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        margin: "-40px 0 0 -40px",
       }}
       wrapperClass="comment-wrapper"
       color="#fff"
