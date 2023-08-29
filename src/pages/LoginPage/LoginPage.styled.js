@@ -10,29 +10,6 @@ export const LoginPageTitle = styled.h1`
   font-family: cursive;
 `;
 
-export const LoginPageWrapper = styled.div`
-  margin-left: auto;
-  margin-right: auto;
-  width: 400px;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-`;
-
-export const LoginPageForm = styled.form`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  margin-bottom: 20px;
-
-  margin-left: auto;
-  margin-right: auto;
-  width: 343px;
-`;
-
 export const LoginPageLinksWrapper = styled.div`
   display: flex;
   justify-content: center;

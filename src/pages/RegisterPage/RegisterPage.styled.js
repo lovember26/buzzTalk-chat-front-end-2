@@ -9,18 +9,6 @@ export const RegisterPageTitle = styled.h1`
   font-family: cursive;
 `;
 
-export const RegisterPageForm = styled.form`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  margin-bottom: 20px;
-
-  margin-left: auto;
-  margin-right: auto;
-  width: 343px;
-`;
-
 export const RegisterPageRedirectLinkWrapper = styled.div`
   display: flex;
   justify-content: center;

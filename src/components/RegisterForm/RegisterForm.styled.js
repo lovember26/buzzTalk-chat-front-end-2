@@ -1,7 +1,19 @@
 import styled from "@emotion/styled";
 import { AiFillExclamationCircle } from "react-icons/ai";
 
-export const Wrapper = styled.div`
+export const RegisterPageForm = styled.form`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 20px;
+
+  margin-left: auto;
+  margin-right: auto;
+  width: 343px;
+`;
+
+export const BlockInputWrapper = styled.div`
   margin-bottom: 24px;
 `;
 
@@ -9,16 +21,19 @@ export const InputWrapper = styled.div`
   position: relative;
 `;
 
-export const LableText = styled.label`
+export const Lable = styled.label`
   color: ${({ error, theme }) =>
     error ? theme.colors.red[100] : theme.colors.black[100]};
   font-family: cursive;
   font-size: 18px;
   text-decoration: none;
-  margin-bottom: 2px;
+  margin-bottom: 4px;
 `;
 
 export const Input = styled.input`
+  display: flex;
+  align-items: center;
+
   border-style: solid;
   border-width: 1px;
   border-radius: 15px;
@@ -28,6 +43,7 @@ export const Input = styled.input`
   width: 343px;
   height: 56px;
   margin-bottom: 2px;
+  color: ${(props) => props.theme.colors.mainText};
   font-size: ${(props) => props.theme.fontSizes.m};
   font-weight: ${(props) => props.theme.fontWeights.text};
 
