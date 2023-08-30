@@ -3,6 +3,8 @@ import { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { inputEditUserSchema } from "middlewares";
+import { editPageRules } from "constants";
+import { selectInputNotification } from "helpers/selectWrongPasswordNotification";
 import {
   updateUserInfoThunk,
   generateGravatarUserInfoThunk,
@@ -32,6 +34,7 @@ import {
   EditProfilePageFormLableText,
   EditProfilePageFormInput,
   EditProfilePageFormInputAbout,
+  EditProfilePageImageButton,
 } from "./EditProfilePage.styled";
 import { useNavigate } from "react-router";
 
@@ -45,7 +48,12 @@ export default function EditProfilePage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { register, handleSubmit } = useForm({
+  const {
+    register,
+    watch,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm({
     mode: "onChange",
     resolver: yupResolver(inputEditUserSchema),
     defaultValues: {
@@ -86,6 +94,9 @@ export default function EditProfilePage() {
     }
   };
 
+  const usernameError = selectInputNotification(errors["name"]);
+  const aboutError = selectInputNotification(errors["aboutMe"]);
+
   return (
     <EditProfilePageWrapper>
       <EditProfilePageUserInfoWrapper>
@@ -106,34 +117,67 @@ export default function EditProfilePage() {
           </EditProfilePageUserButtonBackText>
         </EditProfilePageUserButtonBack>
 
-        <EditProfilePageUserButtonSave type="submit" form="edit">
+        <EditProfilePageUserButtonSave
+          type="submit"
+          form="edit"
+          disabled={!isValid}
+        >
           Done
         </EditProfilePageUserButtonSave>
       </EditProfilePageUserInfoWrapper>
 
       <EditProfilePageForm onSubmit={handleSubmit(onSubmit)} id="edit">
         <EditProfilePageFormInputWrapper>
-          <EditProfilePageFormLableText>Username</EditProfilePageFormLableText>
-          <EditProfilePageFormInput {...register("name")} />
+          <EditProfilePageFormLableText error={usernameError}>
+            Username
+          </EditProfilePageFormLableText>
+          <EditProfilePageFormInput
+            {...register("name")}
+            value={watch("name")}
+            error={usernameError}
+          />
+          {usernameError ? (
+            <InputNotification
+              text={usernameError}
+              error={usernameError}
+              color={"red"}
+            />
+          ) : (
+            <InputNotification text={editPageRules.USERNAME} />
+          )}
         </EditProfilePageFormInputWrapper>
 
         <EditProfilePageFormInputWrapper>
-          <EditProfilePageFormLableText>About me</EditProfilePageFormLableText>
-          <EditProfilePageFormInputAbout {...register("aboutMe")} />
-          <InputNotification text="You can use maximum 60 characters" />
+          <EditProfilePageFormLableText error={aboutError}>
+            About me
+          </EditProfilePageFormLableText>
+          <EditProfilePageFormInputAbout
+            {...register("aboutMe")}
+            value={watch("aboutMe")}
+            error={aboutError}
+          />
+          {aboutError ? (
+            <InputNotification
+              text={aboutError}
+              error={aboutError}
+              color={"red"}
+            />
+          ) : (
+            <InputNotification text={editPageRules.ABOUT} />
+          )}
         </EditProfilePageFormInputWrapper>
 
         <EditProfilePageFormInputWrapper>
           <EditProfilePageFormLableText>
             Change avatar
           </EditProfilePageFormLableText>
-          <button type="button" onClick={handleClick}>
+          <EditProfilePageImageButton type="button" onClick={handleClick}>
             Pick File
-          </button>
+          </EditProfilePageImageButton>
 
-          <button type="button" onClick={handleSetGravatar}>
+          <EditProfilePageImageButton type="button" onClick={handleSetGravatar}>
             Set photo for Name
-          </button>
+          </EditProfilePageImageButton>
           <EditProfilePageFormInputAbout
             className="hide"
             type="file"
@@ -143,9 +187,12 @@ export default function EditProfilePage() {
             onChange={handleChangeAvatar}
           />
 
-          <button type="button" onClick={handleRemoveAvatar}>
+          <EditProfilePageImageButton
+            type="button"
+            onClick={handleRemoveAvatar}
+          >
             Delete avatar
-          </button>
+          </EditProfilePageImageButton>
         </EditProfilePageFormInputWrapper>
       </EditProfilePageForm>
     </EditProfilePageWrapper>

@@ -111,18 +111,11 @@ export const inputResetPasswordSchema = Joi.object({
 });
 
 export const inputEditUserSchema = yup.object({
-  name: yup.string().min(1).max(150),
-  //   .messages({
-  //   "string.min": "*The username should be minimum 1 characters long",
-  //   "string.max": "*The username exceeds the maximum 150 length",
-  //   "string.pattern.base":
-  //     "*At least one uppercase letter, one lowercase letter and one number",
-  // }),
-  aboutMe: yup.string().min(1).max(150),
-  // .messages({
-  // "string.min": "*The username should be minimum 1 characters long",
-  // "string.max": "*The username exceeds the maximum 150 length",
-  //   "string.pattern.base":
-  //     "*At least one uppercase letter, one lowercase letter and one number",
-  // }),
+  name: yup
+    .string()
+    .min(1, "*Username must contain at least one letter")
+    .max(15, "*The username exceeds the maximum 60 length"),
+  aboutMe: yup
+    .string()
+    .max(15, "*The about me field exceeds the maximum 60 length"),
 });

@@ -49,6 +49,10 @@ export const EditProfilePageUserButtonSave = styled.button`
   color: ${({ theme }) => theme.colors.blue[100]};
   font-weight: 500;
   text-decoration: none;
+
+  &:disabled {
+    color: ${({ theme }) => theme.colors.gray[300]};
+  }
 `;
 
 export const EditProfilePageUserButtonBackIconArrow = styled(
@@ -119,7 +123,7 @@ export const EditProfilePageFormLableText = styled.label`
   font-family: cursive;
   font-size: 18px;
   text-decoration: none;
-  margin-bottom: 2px;
+  margin-bottom: 20px;
 `;
 
 export const EditProfilePageFormInput = styled.input`
@@ -155,8 +159,9 @@ export const EditProfilePageFormInput = styled.input`
 
   &[value] {
     font-family: cursive;
-    font-size: 24px;
-    color: gray;
+    font-size: 20px;
+    color: ${({ theme, error }) =>
+      error ? theme.colors.red[100] : theme.colors.gray[200]};
   }
 `;
 
@@ -193,7 +198,19 @@ export const EditProfilePageFormInputAbout = styled.input`
 
   &[value] {
     font-family: cursive;
-    font-size: 24px;
-    color: gray;
+    font-size: 20px;
+
+    color: ${({ theme, error }) =>
+      error ? theme.colors.red[100] : theme.colors.gray[200]};
   }
+`;
+
+export const EditProfilePageImageButton = styled.button`
+  color: ${({ error, theme }) =>
+    error ? theme.colors.red[100] : theme.colors.black[100]};
+  font-family: cursive;
+  font-size: 18px;
+  text-decoration: none;
+
+  margin-bottom: 10px;
 `;

@@ -182,3 +182,11 @@ export const Icon = styled(AiFillExclamationCircle)`
     return "transparent";
   }};
 `;
+
+export const TextAttemptError = styled.p`
+  font-family: cursive;
+  font-size: 14px;
+  text-decoration: none;
+  color: ${({ theme, wrong }) =>
+    wrong < 3 ? theme.colors.red[100] : theme.colors.gray[200]};
+`;

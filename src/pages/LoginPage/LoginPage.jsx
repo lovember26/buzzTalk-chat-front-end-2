@@ -31,6 +31,7 @@ import {
   Lable,
   InputWrapper,
   Input,
+  TextAttemptError,
 } from "./LoginPage.styled";
 
 export default function LoginPage() {
@@ -203,11 +204,9 @@ export default function LoginPage() {
           />
         )}
 
-        <InputNotification
-          text={selectWrongPasswordNotification(wrongPasswordCount, attempts)}
-          mb={15}
-          wrong={wrongPasswordCount}
-        />
+        <TextAttemptError wrong={wrongPasswordCount}>
+          {selectWrongPasswordNotification(wrongPasswordCount, attempts)}
+        </TextAttemptError>
 
         {wrongPasswordCount < 3 && (
           <MainButton type="submit" text="Sign in" disabled={!isValid} />
@@ -219,7 +218,7 @@ export default function LoginPage() {
           Forgot Password
         </LoginPageLinkForgotPassword>
 
-        <LoginPageRedirectLinkWrapper LoginAuthLinkWrapper>
+        <LoginPageRedirectLinkWrapper>
           <LoginPageRedirectText>Back to</LoginPageRedirectText>
           <LoginPageRedirectLink onClick={navigateToRegister}>
             Sign up
