@@ -44,24 +44,10 @@ export const inputLoginSchema = Joi.object({
     "string.empty": "*This field is required",
     "any.required": "*This field is required",
   }),
-  password: Joi.string()
-    .min(8)
-    .max(20)
-    // .regex(
-    //   /(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}$/
-    // )
-    .regex(
-      /(?=.*[0-9])(?=.*[!@#$%^&*.-:;])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*.-:;]{8,}$/
-    )
-    .required()
-    .messages({
-      "string.min": "*The password should be minimum 8 characters long",
-      "string.max": "*The password exceeds the maximum allowed length",
-      "string.pattern.base":
-        "*At least one uppercase letter, one lowercase letter and one number",
-      "string.empty": "*This field is required",
-      "any.required": "*This field is required",
-    }),
+  password: Joi.string().required().messages({
+    "string.empty": "*This field is required",
+    "any.required": "*This field is required",
+  }),
   rememberMe: Joi.boolean(),
 });
 
