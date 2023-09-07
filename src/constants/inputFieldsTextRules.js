@@ -1,6 +1,6 @@
 export const loginPageRules = {
-  LOGIN: "Please enter the login associated with your account.",
-  PASSWORD: "*Please enter the password associated with your account.",
+  LOGIN: "Please enter the email or Username associated with your account.",
+  PASSWORD: "",
 };
 
 export const registerPageRules = {

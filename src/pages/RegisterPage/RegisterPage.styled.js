@@ -73,7 +73,7 @@ export const Input = styled.input`
   background-color: ${({ error, theme }) =>
     error ? theme.colors.red[200] : theme.colors.gray[100]};
 
-  padding: 6px 10px;
+  padding: 6px 50px 6px 10px;
 
   &:hover {
     border-width: 2px;

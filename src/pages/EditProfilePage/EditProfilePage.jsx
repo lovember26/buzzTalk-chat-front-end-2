@@ -35,6 +35,7 @@ import {
   EditProfilePageFormInput,
   EditProfilePageFormInputAbout,
   EditProfilePageImageButton,
+  Icon,
 } from "./EditProfilePage.styled";
 import { useNavigate } from "react-router";
 
@@ -136,6 +137,7 @@ export default function EditProfilePage() {
             value={watch("name")}
             error={usernameError}
           />
+          <Icon size={28} error={usernameError} />
           {usernameError ? (
             <InputNotification
               text={usernameError}
@@ -156,6 +158,7 @@ export default function EditProfilePage() {
             value={watch("aboutMe")}
             error={aboutError}
           />
+          <Icon size={28} error={aboutError} />
           {aboutError ? (
             <InputNotification
               text={aboutError}

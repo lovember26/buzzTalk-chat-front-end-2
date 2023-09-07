@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
+import { AiFillExclamationCircle } from "react-icons/ai";
 
 export const EditProfilePageWrapper = styled.div`
   position: relative;
@@ -111,6 +112,7 @@ export const EditProfilePageUserInfoNickname = styled.p`
 export const EditProfilePageForm = styled.form``;
 
 export const EditProfilePageFormInputWrapper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
 
@@ -123,7 +125,7 @@ export const EditProfilePageFormLableText = styled.label`
   font-family: cursive;
   font-size: 18px;
   text-decoration: none;
-  margin-bottom: 20px;
+  margin-bottom: 8px;
 `;
 
 export const EditProfilePageFormInput = styled.input`
@@ -142,7 +144,7 @@ export const EditProfilePageFormInput = styled.input`
   background-color: ${({ error, theme }) =>
     error ? theme.colors.red[200] : theme.colors.gray[100]};
 
-  padding: 6px 10px;
+  padding: 6px 50px 6px 10px;
 
   &:hover {
     border-width: 2px;
@@ -181,7 +183,7 @@ export const EditProfilePageFormInputAbout = styled.input`
   background-color: ${({ error, theme }) =>
     error ? theme.colors.red[200] : theme.colors.gray[100]};
 
-  padding: 6px 10px;
+  padding: 6px 50px 6px 10px;
 
   &:hover {
     border-width: 2px;
@@ -213,4 +215,18 @@ export const EditProfilePageImageButton = styled.button`
   text-decoration: none;
 
   margin-bottom: 10px;
+`;
+
+export const Icon = styled(AiFillExclamationCircle)`
+  position: absolute;
+  top: 42px;
+  right: 12px;
+  cursor: pointer;
+
+  color: ${({ error, theme }) => {
+    if (error) {
+      return theme.colors.red[100];
+    }
+    return "transparent";
+  }};
 `;
