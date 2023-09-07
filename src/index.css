@@ -86,3 +86,7 @@ button:active {
   clip-path: inset(50%);
   margin: -1px;
 }
+
+.error-attempts {
+  color: red;
+}

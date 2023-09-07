@@ -1,5 +1,5 @@
-import { NoFriends } from "../../NoFriends";
+import NoFriends from "../../NoFriends";
 
-export const AllFriends = () => {
+export default function AllFriends() {
   return <NoFriends />;
-};
+}

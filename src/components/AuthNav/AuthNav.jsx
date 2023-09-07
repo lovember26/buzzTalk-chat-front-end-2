@@ -10,10 +10,10 @@ export const AuthNav = () => {
   return (
     <AuthList>
       <AuthListItem>
-        <AuthNavSignUpLink to="/register">Sign up</AuthNavSignUpLink>
+        <AuthNavSignUpLink to="register">Sign up</AuthNavSignUpLink>
       </AuthListItem>
       <AuthListItem>
-        <AuthNavSignInLink to="/login">Sign in</AuthNavSignInLink>
+        <AuthNavSignInLink to="login">Sign in</AuthNavSignInLink>
       </AuthListItem>
     </AuthList>
   );

@@ -1,6 +1,6 @@
 import { ReactComponent as DefaultIcon } from "../../../../images/default.svg";
 import { NoFriendsWrap } from "./NoFriends.styled";
-export const NoFriends = () => {
+export default function NoFriends() {
   return (
     <NoFriendsWrap>
       <DefaultIcon />
@@ -8,4 +8,4 @@ export const NoFriends = () => {
       <button type="button>">Find a friend</button>
     </NoFriendsWrap>
   );
-};
+}

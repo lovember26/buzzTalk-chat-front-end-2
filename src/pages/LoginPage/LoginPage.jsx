@@ -1,62 +1,52 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { persistedStore } from "redux/store";
 import { joiResolver } from "@hookform/resolvers/joi";
-import { inputLoginSchema } from "middlewares";
-import { useDispatch } from "react-redux";
-import { useNavigate, useSearchParams } from "react-router-dom";
 import { logInThunk } from "redux/auth/authThunk";
+import { inputLoginSchema } from "middlewares";
+import { verifyUserService } from "services/authApi";
 import { AppToastContainer } from "components/AppToastContainer/AppToastContainer";
-import { BasicInput } from "components/common/BasicInput/BasicInput";
-import { PasswordInput } from "components/common/PasswordInput/PasswordInput";
+import { errorNotification, successNotification } from "helpers/notification";
+import { selectWrongPasswordInputNotification } from "helpers/selectWrongPasswordNotification";
+import { showPasswordOnLoginPage } from "helpers/showPasswordHandler";
+import { selectWrongPasswordNotification } from "helpers/selectWrongPasswordNotification";
+import { loginPageRules, registerPageRules } from "constants";
 import { MainButton } from "components/common/MainButton/MainButton";
+import { ShowPasswordButton } from "components/common/ShowPasswordButton/ShowPasswordButton";
 import { Checkbox } from "components/common/CheckBox/CheckBox";
 import { InputNotification } from "components/common/InputNotification/InputNotification";
 import {
-  selectWrongPasswordInputNotification,
-  selectWrongPasswordNotification,
-} from "helpers/selectWrongPasswordNotification";
-import {
   LoginPageTitle,
-  LoginPageForm,
   LoginPageLinksWrapper,
   LoginPageLinkForgotPassword,
   LoginPageRedirectLinkWrapper,
   LoginPageRedirectText,
   LoginPageRedirectLink,
+  LoginPageForm,
+  BlockInputWrapper,
+  Icon,
+  Lable,
+  InputWrapper,
+  Input,
+  TextAttemptError,
 } from "./LoginPage.styled";
-import { verifyUserService } from "services/authApi";
-import { showPasswordOnLoginPage } from "helpers/showPasswordHandler";
-import { errorNotification, successNotification } from "helpers/notification";
 
-export const LoginPage = () => {
+export default function LoginPage() {
   const [searchParams] = useSearchParams();
   const email = searchParams.get("email");
   const token = searchParams.get("token");
   const verifyQuery = { email, token };
 
-  //To generate notifications about the number of password attempts
   const [wrongPasswordCount, setWrongPasswordCount] = useState(0);
   const [attempts, setAttempts] = useState(3);
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // console.log("wrongPasswordCount", wrongPasswordCount);
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors, isValid },
-  } = useForm({
-    mode: "onChange",
-    resolver: joiResolver(inputLoginSchema),
-    defaultValues: {
-      login: "",
-      password: "",
-      rememberMe: true,
-    },
-  });
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (email && token) {
@@ -73,18 +63,27 @@ export const LoginPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const navigateToRegister = () => {
-    navigate("/register", { replace: true });
-  };
-
-  const navigateToHomePage = () => {
-    navigate("/chat-rooms/friends/all", { replace: true });
-  };
+  const {
+    register,
+    watch,
+    handleSubmit,
+    // reset,
+    formState: { errors, isValid },
+  } = useForm({
+    mode: "onChange",
+    resolver: joiResolver(inputLoginSchema),
+    defaultValues: {
+      login: "",
+      password: "",
+      rememberMe: true,
+    },
+  });
 
   const onSubmit = async ({ login, password, rememberMe }) => {
     try {
       const user = { login: login, password: password };
 
+      // Unwrites the token to LocalStorage
       if (!rememberMe) {
         persistedStore.pause();
         persistedStore.flush().then(() => {
@@ -95,58 +94,110 @@ export const LoginPage = () => {
       //Fix when an error code will be sent from the backend
       const data = await dispatch(logInThunk(user));
 
-      console.log("data", data);
-
       if (data.payload[4001]) {
         setWrongPasswordCount(wrongPasswordCount + 1);
         setAttempts(attempts - 1);
       }
 
-      // Delete when the routes are configured correctly
-      if (!data.payload.access) {
-        return;
-      }
-
-      navigateToHomePage();
-      reset();
-    } catch (error) {}
+      // reset();
+    } catch (error) {
+      console.log(error.message);
+    }
   };
+
+  const navigateToRegister = () => {
+    navigate("/register", { replace: true });
+  };
+
+  const loginError = selectWrongPasswordInputNotification(
+    wrongPasswordCount,
+    "login",
+    errors["login"]
+  );
+
+  const passwordError = selectWrongPasswordInputNotification(
+    wrongPasswordCount,
+    "password",
+    errors["password"]
+  );
 
   return (
     <>
       <LoginPageTitle>Log In</LoginPageTitle>
       <LoginPageForm onSubmit={handleSubmit(onSubmit)}>
-        <BasicInput
-          register={register}
-          error={selectWrongPasswordInputNotification(
-            wrongPasswordCount,
-            "login",
-            errors["login"]
+        <BlockInputWrapper>
+          <Lable
+            htmlFor="test"
+            error={loginError}
+            className="lable"
+            wrong={wrongPasswordCount}
+          >
+            Email or username
+          </Lable>
+          <InputWrapper>
+            <Input
+              {...register("login")}
+              type="text"
+              error={loginError}
+              wrong={wrongPasswordCount}
+              value={watch("login")}
+            />
+            <Icon size={28} error={loginError} wrong={wrongPasswordCount} />
+          </InputWrapper>
+          {loginError ? (
+            <InputNotification
+              text={loginError}
+              wrong={wrongPasswordCount}
+              error={loginError}
+            />
+          ) : (
+            <InputNotification
+              text={loginPageRules.LOGIN}
+              wrong={wrongPasswordCount}
+            />
           )}
-          lable={"Email or username"}
-          type={"text"}
-          name={"login"}
-          wrongPasswordCount={wrongPasswordCount}
-        />
+        </BlockInputWrapper>
 
-        <PasswordInput
-          register={register}
-          error={selectWrongPasswordInputNotification(
-            wrongPasswordCount,
-            "password",
-            errors["password"]
+        <BlockInputWrapper>
+          <Lable
+            error={passwordError}
+            className="lable"
+            wrong={wrongPasswordCount}
+          >
+            Password
+          </Lable>
+          <InputWrapper className="password-wrapper">
+            <Input
+              {...register("password")}
+              className="input-password-login"
+              type="password"
+              name="password"
+              error={passwordError}
+              wrong={wrongPasswordCount}
+              value={watch("password")}
+            />
+            <ShowPasswordButton
+              onClick={showPasswordOnLoginPage}
+              className="password"
+              error={passwordError}
+              wrong={wrongPasswordCount}
+            />
+          </InputWrapper>
+          {passwordError ? (
+            <InputNotification
+              text={passwordError}
+              wrong={wrongPasswordCount}
+              error={passwordError}
+            />
+          ) : (
+            <InputNotification
+              text={registerPageRules.PASSWORD}
+              wrong={wrongPasswordCount}
+            />
           )}
-          classNameWrapper={"password-wrapper"}
-          classNameInput={"input-password-login"}
-          classNameButton={"password"}
-          lable={"Password"}
-          type={"password"}
-          name={"password"}
-          onClick={showPasswordOnLoginPage}
-          wrongPasswordCount={wrongPasswordCount}
-        />
+        </BlockInputWrapper>
 
-        {wrongPasswordCount < 3 && (
+        {wrongPasswordCount < 5 && (
           <Checkbox
             register={register}
             error={errors["rememberMe"]}
@@ -155,13 +206,11 @@ export const LoginPage = () => {
           />
         )}
 
-        <InputNotification
-          text={selectWrongPasswordNotification(wrongPasswordCount, attempts)}
-          color={wrongPasswordCount >= 3 ? "#777777" : "red"}
-          mb={15}
-        />
+        <TextAttemptError wrong={wrongPasswordCount}>
+          {selectWrongPasswordNotification(wrongPasswordCount, attempts)}
+        </TextAttemptError>
 
-        {wrongPasswordCount < 3 && (
+        {wrongPasswordCount < 5 && (
           <MainButton type="submit" text="Sign in" disabled={!isValid} />
         )}
       </LoginPageForm>
@@ -171,7 +220,7 @@ export const LoginPage = () => {
           Forgot Password
         </LoginPageLinkForgotPassword>
 
-        <LoginPageRedirectLinkWrapper LoginAuthLinkWrapper>
+        <LoginPageRedirectLinkWrapper>
           <LoginPageRedirectText>Back to</LoginPageRedirectText>
           <LoginPageRedirectLink onClick={navigateToRegister}>
             Sign up
@@ -181,4 +230,4 @@ export const LoginPage = () => {
       <AppToastContainer size={30} />
     </>
   );
-};
+}

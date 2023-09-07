@@ -1,23 +1,29 @@
 import { Container } from "components/common/Container/Container.styled";
 import {
-  ForgotPassText,
+  Form,
+  BlockInputWrapper,
+  Lable,
+  InputWrapper,
+  Input,
+} from "pages/ResetPasswordPage/ResetPasswordPage.styled";
+import {
   ForgotPassTitle,
+  ForgotPassText,
 } from "pages/ForgotPasswordPage/ForgotPasswordPage.styled";
 import { StyledLink, VerifyWrapper } from "pages/VerifyPage/VerifyPage.styled";
-import { ResetPasswordForm } from "./ResetPasswordPage.styled";
 import { useSearchParams } from "react-router-dom";
-
-import { resetPassword } from "services/authApi";
-import { errorNotification, successNotification } from "helpers/notification";
-import { ToastContainer } from "react-toastify";
-import { showConfirmPassword, showPassword } from "helpers/showPasswordHandler";
-import { inputResetPasswordSchema } from "middlewares";
-import { PasswordInput } from "components/common/PasswordInput/PasswordInput";
 import { useForm } from "react-hook-form";
-
+import { ToastContainer } from "react-toastify";
 import { joiResolver } from "@hookform/resolvers/joi";
+import { resetPassword } from "services/authApi";
+import { inputResetPasswordSchema } from "middlewares";
+import { registerPageRules } from "constants";
+import { successNotification, errorNotification } from "helpers/notification";
+import { showPassword, showConfirmPassword } from "helpers/showPasswordHandler";
+import { ShowPasswordButton } from "components/common/ShowPasswordButton/ShowPasswordButton";
+import { InputNotification } from "components/common/InputNotification/InputNotification";
 
-export const ResetPasswordPage = () => {
+export default function ResetPasswordPage() {
   const [searchParams] = useSearchParams();
 
   const email = searchParams.get("email");
@@ -49,6 +55,10 @@ export const ResetPasswordPage = () => {
       errorNotification(error.message);
     }
   };
+
+  const resetError = errors["password"];
+  const resetConfirmError = errors["confirm"];
+
   return (
     <Container>
       <VerifyWrapper>
@@ -57,38 +67,68 @@ export const ResetPasswordPage = () => {
         <ForgotPassText>
           Your new password must be different from used password
         </ForgotPassText>
-        <ResetPasswordForm onSubmit={handleSubmit(onSubmit)}>
-          <PasswordInput
-            register={register}
-            error={errors["password"]}
-            classNameWrapper={"password-wrapper"}
-            classNameInput={"input-password-register"}
-            classNameButton={"password"}
-            name={"password"}
-            lable={"Create password"}
-            type={"password"}
-            placeholder={"Enter a password"}
-            onClick={showPassword}
-          />
 
-          <PasswordInput
-            register={register}
-            error={errors["confirm"]}
-            classNameWrapper={"confirm-password-wrapper"}
-            classNameInput={"input-password-register-confirm"}
-            classNameButton={"confirm-password"}
-            lable={"Confirm password"}
-            type={"password"}
-            name={"confirm"}
-            placeholder={"Enter a password"}
-            onClick={showConfirmPassword}
-          />
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <BlockInputWrapper>
+            <Lable error={resetError}>Create password</Lable>
+            <InputWrapper className="password-wrapper">
+              <Input
+                {...register("password")}
+                className="input-password-register"
+                type="password"
+                name="password"
+                error={resetError}
+                placeholder={"Enter a password"}
+              />
+              <ShowPasswordButton
+                onClick={showPassword}
+                className="password"
+                error={resetError}
+              />
+            </InputWrapper>
+            {resetError ? (
+              <InputNotification text={resetError} color={"red"} />
+            ) : (
+              <InputNotification
+                text={registerPageRules.PASSWORD}
+                color={"gray"}
+              />
+            )}
+          </BlockInputWrapper>
+
+          <BlockInputWrapper>
+            <Lable error={resetConfirmError}>Confirm password</Lable>
+            <InputWrapper className="confirm-password-wrapper">
+              <Input
+                {...register("password")}
+                className="input-password-register-confirm"
+                type="password"
+                name="confirm"
+                error={resetConfirmError}
+                placeholder={"Enter a password"}
+              />
+              <ShowPasswordButton
+                onClick={showConfirmPassword}
+                className="confirm-password"
+                error={resetConfirmError}
+              />
+            </InputWrapper>
+            {resetConfirmError ? (
+              <InputNotification text={resetConfirmError} color={"red"} />
+            ) : (
+              <InputNotification
+                text={registerPageRules.PASSWORD}
+                color={"gray"}
+              />
+            )}
+          </BlockInputWrapper>
+
           <button type="submit" disabled={!isValid}>
             Save
           </button>
-        </ResetPasswordForm>
+        </Form>
       </VerifyWrapper>
       <ToastContainer />
     </Container>
   );
-};
+}

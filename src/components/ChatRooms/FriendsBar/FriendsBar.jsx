@@ -1,12 +1,13 @@
 import { Outlet } from "react-router-dom";
 import { ReactComponent as PersonIcon } from "../../../images/man.svg";
+
 import {
   FriendsContainer,
   StyledFriendsNav,
   StyledLink,
 } from "./FriendsBar.styled";
 
-export const FriendsBar = () => {
+export default function FriendsBar() {
   return (
     <FriendsContainer>
       <StyledFriendsNav>
@@ -16,22 +17,21 @@ export const FriendsBar = () => {
         </div>
         <ul>
           <li>
-            <StyledLink to="/chat-rooms/friends/all">All</StyledLink>
+            <StyledLink to="all">All</StyledLink>
           </li>
           <li>
-            <StyledLink to="/chat-rooms/friends/online">Online</StyledLink>
+            <StyledLink to="online">Online</StyledLink>
           </li>
           <li>
-            <StyledLink to="/chat-rooms/friends/blocked">Blocked</StyledLink>
+            <StyledLink to="blocked">Blocked</StyledLink>
           </li>
           <li>
-            <StyledLink to="/chat-rooms/friends/add-friend">
-              Add friend
-            </StyledLink>
+            <StyledLink to="add-friend">Add friend</StyledLink>
           </li>
         </ul>
+        <StyledLink to="/profile">Profile</StyledLink>
       </StyledFriendsNav>
       <Outlet />
     </FriendsContainer>
   );
-};
+}

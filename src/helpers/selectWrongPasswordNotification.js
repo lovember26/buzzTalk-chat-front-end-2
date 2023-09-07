@@ -1,5 +1,3 @@
-// import { registerPageRules, loginPageRules } from "constants";
-
 export const selectWrongPasswordNotification = (
   wrongPasswordCount,
   attempts
@@ -27,21 +25,6 @@ export const selectWrongPasswordInputNotification = (
         return;
     }
   }
-
-  // if (!error) {
-  //   switch (name) {
-  //     case "email":
-  //       return registerPageRules.EMAIL;
-  //     case "password":
-  //       return loginPageRules.PASSWORD;
-  //     case "login":
-  //       return loginPageRules.LOGIN;
-  //     case "confirm":
-  //       return loginPageRules.CONFIRM_PASSWORD;
-  //     default:
-  //       return;
-  //   }
-  // }
 
   if (error) return error.message;
 };
