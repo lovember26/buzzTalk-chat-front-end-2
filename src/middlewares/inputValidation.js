@@ -47,8 +47,11 @@ export const inputLoginSchema = Joi.object({
   password: Joi.string()
     .min(8)
     .max(20)
+    // .regex(
+    //   /(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}$/
+    // )
     .regex(
-      /(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}$/
+      /(?=.*[0-9])(?=.*[!@#$%^&*.-:;])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*.-:;]{8,}$/
     )
     .required()
     .messages({
@@ -114,8 +117,8 @@ export const inputEditUserSchema = yup.object({
   name: yup
     .string()
     .min(1, "*Username must contain at least one letter")
-    .max(15, "*The username exceeds the maximum 60 length"),
+    .max(150, "*The username exceeds the maximum 150 length"),
   aboutMe: yup
     .string()
-    .max(15, "*The about me field exceeds the maximum 60 length"),
+    .max(60, "*The about me field exceeds the maximum 60 length"),
 });

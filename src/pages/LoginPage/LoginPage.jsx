@@ -43,6 +43,8 @@ export default function LoginPage() {
   const [wrongPasswordCount, setWrongPasswordCount] = useState(0);
   const [attempts, setAttempts] = useState(3);
 
+  // console.log("wrongPasswordCount", wrongPasswordCount);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -195,7 +197,7 @@ export default function LoginPage() {
           )}
         </BlockInputWrapper>
 
-        {wrongPasswordCount < 3 && (
+        {wrongPasswordCount < 5 && (
           <Checkbox
             register={register}
             error={errors["rememberMe"]}
@@ -208,7 +210,7 @@ export default function LoginPage() {
           {selectWrongPasswordNotification(wrongPasswordCount, attempts)}
         </TextAttemptError>
 
-        {wrongPasswordCount < 3 && (
+        {wrongPasswordCount < 5 && (
           <MainButton type="submit" text="Sign in" disabled={!isValid} />
         )}
       </LoginPageForm>

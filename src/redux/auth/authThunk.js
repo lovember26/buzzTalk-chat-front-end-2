@@ -45,6 +45,9 @@ export const logInThunk = createAsyncThunk(
       successNotification("Welcome to the app!");
       return data;
     } catch (error) {
+      console.log(error);
+      console.log(error.message);
+      console.log(error.response.data);
       errorNotification(
         "Incorrect email or password format, please try again."
       );
