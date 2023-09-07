@@ -1,9 +1,14 @@
-// import axios from "axios";
-// axios.defaults.baseURL = "https://jsonplaceholder.typicode.com/";
+import axios from "axios";
+import { BASE_URL } from "constants";
+axios.defaults.baseURL = `${BASE_URL}/accounts`;
 
-export const fetchItems = async () => {
-  // const { data } = await axios.get("/posts?_limit=5");
-  // return data;
+export const fetchUsers = async (token) => {
+  const { data } = await axios.get("/users", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return data;
 };
 
 export const deleteItem = async (id) => {

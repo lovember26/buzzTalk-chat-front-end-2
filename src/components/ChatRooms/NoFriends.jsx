@@ -1,10 +1,11 @@
 import { ReactComponent as DefaultBig } from "../../images/defaultBig.svg";
 import { NoFriendsContainer } from "./NoFriends.styled";
-export default function NoFriends() {
+
+export default function NoFriends({ text }) {
   return (
     <NoFriendsContainer>
       <DefaultBig />
-      <p>There are no friends yet</p>
+      <p>{text}</p>
     </NoFriendsContainer>
   );
 }

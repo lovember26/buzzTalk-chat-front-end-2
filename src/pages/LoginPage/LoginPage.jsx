@@ -210,7 +210,7 @@ export default function LoginPage() {
           {selectWrongPasswordNotification(wrongPasswordCount, attempts)}
         </TextAttemptError>
 
-        {wrongPasswordCount < 5 && (
+        {wrongPasswordCount < 3 && (
           <MainButton type="submit" text="Sign in" disabled={!isValid} />
         )}
       </LoginPageForm>
