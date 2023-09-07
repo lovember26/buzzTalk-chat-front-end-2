@@ -32,6 +32,7 @@ const OnlineFriends = lazy(() =>
   import("./ChatRooms/FriendsBar/OnlineFriends")
 );
 
+const Chat = lazy(() => import("./ChatRooms/Chat/Chat"));
 export const App = () => {
   const dispatch = useDispatch();
   const accessToken = useSelector(selectAccessToken);
@@ -95,6 +96,11 @@ export const App = () => {
             element={<PrivatePage component={<AddFriend />} />}
           />
         </Route>
+        <Route path="chats" element={<PrivatePage component={<Chat />} />} />
+        <Route
+          path="chats/:username"
+          element={<PrivatePage component={<Chat />} />}
+        />
       </Route>
       <Route
         path={routes.PROFILE_PAGE}

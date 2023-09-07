@@ -53,3 +53,9 @@ export const SearchBar = styled.div`
     }
   }
 `;
+
+export const NavButtons = styled.nav`
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+`;
