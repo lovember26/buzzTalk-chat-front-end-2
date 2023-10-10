@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Outlet } from "react-router-dom";
-import Logo from "components/Logo/Logo";
+import { ReactComponent as Logo } from "../../images/logo.svg";
 import { Header, LogoWrapper, LogoTitle } from "./Layout.styled";
 
 export default function Layout() {

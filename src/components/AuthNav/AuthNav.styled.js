@@ -1,13 +1,15 @@
 import styled from "@emotion/styled";
+import { TITLE_COLOR } from "constants";
+import { BTN_COLOR } from "constants";
 import { NavLink } from "react-router-dom";
 
 export const AuthList = styled.ul`
   display: flex;
+  gap: 24px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  list-style: none;
-  padding-bottom: 20px;
+  padding-bottom: 24px;
 `;
 
 export const AuthListItem = styled.li`
@@ -19,33 +21,27 @@ export const AuthListItem = styled.li`
 
   padding: 8px 16px;
   border: 1px solid ${({ theme }) => theme.colors.black[100]};
-  border-radius: 30px;
+  border-radius: 24px;
   background-color: ${({ theme }) => theme.colors.white[100]};
 
-  &:not(:last-child) {
-    margin-bottom: 20px;
-  }
-
   &:nth-of-type(even) {
-    background-color: ${({ theme }) => theme.colors.black[200]};
-    border: 1px solid ${({ theme }) => theme.colors.black[200]};
+    background-color: ${BTN_COLOR};
+    border: 1px solid ${BTN_COLOR};
   }
 
   &:hover,
   &:focus {
-    background-color: ${({ theme }) => theme.colors.gray[400]};
+    background-color: ${TITLE_COLOR};
   }
 `;
 
 export const AuthNavSignUpLink = styled(NavLink)`
-  font-family: cursive;
   font-size: 18px;
   color: ${({ theme }) => theme.colors.black[100]};
   text-decoration: none;
 `;
 
 export const AuthNavSignInLink = styled(NavLink)`
-  font-family: cursive;
   font-size: 18px;
   color: ${({ theme }) => theme.colors.white[100]};
   text-decoration: none;

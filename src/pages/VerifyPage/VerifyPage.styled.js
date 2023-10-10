@@ -5,7 +5,7 @@ export const VerifyWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 45px;
+  margin-top: 40px;
 `;
 
 export const VerifyTitle = styled.h1`

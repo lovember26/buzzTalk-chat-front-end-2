@@ -16,7 +16,7 @@ export const UserMenuText = styled.p`
   margin-top: 0;
   margin-bottom: 0;
   margin-right: 40px;
-  font-family: cursive;
+
   font-size: 18px;
   color: gray;
 `;
@@ -26,7 +26,7 @@ export const UserMenuButton = styled.button`
   border: 1px solid gray;
   border-radius: 30px;
   background-color: rgba(247, 242, 242, 0.3);
-  font-family: cursive;
+
   font-size: 18px;
   color: gray;
   text-decoration: none;

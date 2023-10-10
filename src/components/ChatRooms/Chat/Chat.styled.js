@@ -11,7 +11,7 @@ export const StyledHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-item: center;
-  background: #d9d9d9;
+  background: ${({ theme }) => theme.colors.purple};
 `;
 export const UserBar = styled.div`
   padding-left: 30px;

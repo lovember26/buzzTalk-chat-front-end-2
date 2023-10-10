@@ -25,14 +25,14 @@ export const ResetPasswordForm = styled.form`
     padding: 12px 60px;
     font-size: 14px;
     border-radius: 24px;
-    background: #000;
+    background: ${({ theme }) => theme.colors.pink};
     color: #fff;
   }
 `;
 
 export const Form = styled.form`
   margin-top: 24px;
-
+  width: 343px;
   display: flex;
   flex-direction: column;
 
@@ -54,8 +54,12 @@ export const Form = styled.form`
     padding: 12px 60px;
     font-size: 14px;
     border-radius: 24px;
-    background: #000;
+    background: ${({ theme }) => theme.colors.pink};
     color: #fff;
+    &:hover,
+    &:focus {
+      background: ${({ theme }) => theme.colors.purple};
+    }
   }
 `;
 
@@ -70,7 +74,7 @@ export const InputWrapper = styled.div`
 export const Lable = styled.label`
   color: ${({ error, theme }) =>
     error ? theme.colors.red[100] : theme.colors.black[100]};
-  font-family: cursive;
+
   font-size: 18px;
   text-decoration: none;
   margin-bottom: 4px;
@@ -106,13 +110,11 @@ export const Input = styled.input`
   }
 
   &::placeholder {
-    font-family: cursive;
     font-size: 18px;
     color: gray;
   }
 
   &[value] {
-    font-family: cursive;
     font-size: 24px;
     color: gray;
   }

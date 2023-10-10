@@ -33,7 +33,6 @@ export const MainNavItem = styled.li`
 `;
 
 export const MainNavigationNavLink = styled(NavLink)`
-  font-family: cursive;
   font-size: 18px;
   color: gray;
   text-decoration: none;
