@@ -59,7 +59,11 @@ export const theme = {
     },
 
     green: {},
-
+    pink: "#AE445A",
+    purple: "#451952",
+    lightPurple: "#7E5D88",
+    crimson: "#662549",
+    orange: "#F39F5A",
     gray: {
       100: "#EBEBEB", //input background color
       200: "#777777", //input notification text

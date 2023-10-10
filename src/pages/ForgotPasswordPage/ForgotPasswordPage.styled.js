@@ -2,22 +2,24 @@ import styled from "@emotion/styled";
 import { AiFillExclamationCircle } from "react-icons/ai";
 
 export const ForgotPassTitle = styled.h1`
-  margin: 24px 0;
   font-size: 24px;
+  margin-bottom: 16px;
 `;
 
 export const ForgotPassText = styled.p`
   color: #777;
-  font-size: 14px;
+  font-size: 16px;
   text-align: center;
+ 
 `;
 
 export const Form = styled.form`
-  margin-top: 24px;
+  margin-top: 32px;
 
   display: flex;
   flex-direction: column;
-
+  align-items: center;
+  width: 343px;
   label {
     font-size: 16px;
   }
@@ -34,10 +36,14 @@ export const Form = styled.form`
     width: fit-content;
     align-self: center;
     padding: 12px 60px;
-    font-size: 14px;
+    font-size: 16px;
     border-radius: 24px;
-    background: #000;
+    background: ${({ theme }) => theme.colors.pink};
     color: #fff;
+    &:hover,
+    &:focus {
+      background: ${({ theme }) => theme.colors.purple};
+    }
   }
 `;
 
@@ -52,7 +58,7 @@ export const InputWrapper = styled.div`
 export const Lable = styled.label`
   color: ${({ error, theme }) =>
     error ? theme.colors.red[100] : theme.colors.black[100]};
-  font-family: cursive;
+
   font-size: 18px;
   text-decoration: none;
   margin-bottom: 4px;
@@ -88,13 +94,11 @@ export const Input = styled.input`
   }
 
   &::placeholder {
-    font-family: cursive;
     font-size: 18px;
     color: gray;
   }
 
   &[value] {
-    font-family: cursive;
     font-size: 24px;
     color: gray;
   }

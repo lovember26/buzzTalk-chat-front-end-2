@@ -10,7 +10,7 @@ import {
   ForgotPassTitle,
   ForgotPassText,
 } from "pages/ForgotPasswordPage/ForgotPasswordPage.styled";
-import { StyledLink, VerifyWrapper } from "pages/VerifyPage/VerifyPage.styled";
+import { VerifyWrapper } from "pages/VerifyPage/VerifyPage.styled";
 import { useSearchParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
@@ -68,7 +68,6 @@ export default function ResetPasswordPage() {
   return (
     <Container>
       <VerifyWrapper>
-        <StyledLink>Logo</StyledLink>
         <ForgotPassTitle>Enter New Password</ForgotPassTitle>
         <ForgotPassText>
           Your new password must be different from used password

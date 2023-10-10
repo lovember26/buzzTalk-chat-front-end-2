@@ -6,5 +6,4 @@ export const TitleText = styled.h1`
   margin-top: 60px;
   color: gray;
   font-size: 36px;
-  font-family: cursive;
 `;

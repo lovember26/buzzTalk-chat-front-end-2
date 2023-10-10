@@ -35,7 +35,6 @@ export const EditProfilePageUserButtonBack = styled(Link)`
 `;
 
 export const EditProfilePageUserButtonBackText = styled.p`
-  font-family: cursive;
   font-size: 24px;
   color: ${({ theme }) => theme.colors.blue[100]};
   font-weight: 500;
@@ -94,7 +93,6 @@ export const ProfilePageUserInfoTextWrapper = styled.div`
 `;
 
 export const ProfilePageUserInfoNickname = styled.p`
-  font-family: cursive;
   font-size: 28px;
   color: ${({ theme }) => theme.colors.black[100]};
   font-weight: 600;
@@ -114,7 +112,6 @@ export const ProfilePageUserInfoNickname = styled.p`
 `;
 
 export const ProfilePageUserInfoTextLink = styled.p`
-  font-family: cursive;
   font-size: 24px;
   color: ${({ theme }) => theme.colors.gray[400]};
   font-weight: 500;
@@ -124,7 +121,6 @@ export const ProfilePageUserInfoTextLink = styled.p`
 `;
 
 export const ProfilePageUserInfoLink = styled.p`
-  font-family: cursive;
   font-size: 24px;
   color: ${({ theme }) => theme.colors.blue[100]};
   font-weight: 500;
@@ -158,7 +154,6 @@ export const ProfilePageUserStatusBlock = styled.div`
 `;
 
 export const ProfilePageUserStatusText = styled.p`
-  font-family: cursive;
   font-size: 20px;
   color: ${({ theme }) => theme.colors.black[100]};
   text-decoration: none;
@@ -177,7 +172,6 @@ export const ProfilePageUserStatusText = styled.p`
 `;
 
 export const ProfilePageUserStatusBlockIconText = styled.p`
-  font-family: cursive;
   font-size: 20px;
   color: ${({ theme }) => theme.colors.black[100]};
   text-decoration: none;
@@ -208,7 +202,6 @@ export const ProfilePageUserSettingsItemNotification = styled.div`
 `;
 
 export const ProfilePageUserSettingsItemText = styled.p`
-  font-family: cursive;
   font-size: 20px;
   color: ${({ theme }) => theme.colors.black[100]};
   text-decoration: none;
@@ -238,7 +231,6 @@ export const ProfilePageUserButtonsWrapper = styled.div`
 `;
 
 export const ProfilePageUserDeleteAccount = styled.button`
-  font-family: cursive;
   font-size: 20px;
   color: ${({ theme }) => theme.colors.black[100]};
   text-decoration: none;
@@ -248,7 +240,6 @@ export const ProfilePageUserDeleteAccount = styled.button`
 `;
 
 export const ProfilePageUserLogout = styled.button`
-  font-family: cursive;
   font-size: 20px;
   color: ${({ theme }) => theme.colors.black[100]};
   text-decoration: none;

@@ -4,7 +4,6 @@ import {
   Wrapper,
   WelcomePageWrapper,
   WelcomePageTextWrapper,
-  WelcomePageText,
   LoginPageLinkForgotPassword,
 } from "./MainPage.styled";
 
@@ -13,10 +12,8 @@ export default function MainPage() {
     <Wrapper>
       <WelcomePageWrapper>
         <WelcomePageTextWrapper>
-          <WelcomePageText>
-            Hi! You are at BuzzTalk messenger) <br />
-            Sign Up or Log In to start messaging
-          </WelcomePageText>
+          <p>Hi! You are at BuzzTalk messenger!</p>
+          <p>Sign Up or Log In to start messaging.</p>
         </WelcomePageTextWrapper>
         <AuthNav />
         <LoginPageLinkForgotPassword to="/forgot-password">

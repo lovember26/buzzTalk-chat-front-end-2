@@ -12,7 +12,7 @@ export const StyledNav = styled.nav`
   flex-direction: column;
   gap: 16px;
 
-  background-color: #696969;
+  background-color: ${({ theme }) => theme.colors.purple};
 `;
 
 export const StyledChatsBtn = styled.button`
@@ -23,7 +23,7 @@ export const StyledChatsBtn = styled.button`
 export const SearchBar = styled.div`
   width: 256px;
   padding: 27px 16px;
-  background: #7d7d7d;
+  background: ${({ theme }) => theme.colors.lightPurple};
   p {
     color: #fff;
     font-size: 18px;
@@ -43,7 +43,7 @@ export const SearchBar = styled.div`
     padding: 12px 12px 12px 31px;
     margin-bottom: 11px;
     border-radius: 24px;
-    background: #696969;
+    background: ${({ theme }) => theme.colors.crimson};
     border: none;
     color: #fff;
     font-size: 10px;
