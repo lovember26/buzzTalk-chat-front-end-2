@@ -10,7 +10,8 @@ export const StyledHeader = styled.div`
   height: 80px;
   display: flex;
   justify-content: space-between;
-  align-item: center;
+  /* align-item: center; */
+  align-items: center;
   background: #d9d9d9;
 `;
 export const UserBar = styled.div`
