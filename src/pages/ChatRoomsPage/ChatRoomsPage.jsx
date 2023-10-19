@@ -1,4 +1,4 @@
-import SideBar from "components/ChatRooms/SideBar/SideBar";
+import SideBar from "components/ChatRooms/SideBar/SidePanel/SidePanel";
 import { RoomsWrapper } from "./ChatRooms.styled";
 
 export default function ChatRoomsPage() {

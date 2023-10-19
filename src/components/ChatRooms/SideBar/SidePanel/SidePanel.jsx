@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
-import { ReactComponent as AddChatButton } from "../../../images/addChatBtn.svg";
-import { ReactComponent as ChatsBtn } from "../../../images/chatsBtn.svg";
-import { ReactComponent as SearchIcon } from "../../../images/search.svg";
+import { ReactComponent as AddChatButton } from "../../../../images/addChatBtn.svg";
+import { ReactComponent as ChatsBtn } from "../../../../images/chatsBtn.svg";
+import { ReactComponent as SearchIcon } from "../../../../images/search.svg";
 
 import {
   NavButtons,
@@ -9,11 +9,11 @@ import {
   StyledChatsBtn,
   StyledNav,
   StyledSideBar,
-} from "./SideBar.styled";
-import { StyledLink } from "../FriendsBar/FriendsBar.styled";
-import { FriendsList } from "../FriendsList/FriendsList";
+} from "./SidePanel.styled";
+import { StyledLink } from "../../FriendsBar/FriendsBar.styled";
+import { FriendsList } from "../../FriendsList/FriendsList";
 
-export default function SideBar() {
+export default function SidePanel() {
   return (
     <>
       <StyledSideBar>

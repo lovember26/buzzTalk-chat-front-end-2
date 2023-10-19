@@ -13,6 +13,9 @@ export const routes = {
   FRIENDS_BLOCKED_PAGE: "blocked",
   ADD_FRIENDS_PAGE: "add-friend",
 
+  CHAT_ROOMS_CHAT_PAGE: "/chat-rooms/chats",
+  CHAT_ROOMS_PRIVATE_CHAT_PAGE: "/chat-rooms/chats/:username",
+
   PROFILE_PAGE: "/profile",
   EDIT_PROFILE_PAGE: "/profile/edit",
 
