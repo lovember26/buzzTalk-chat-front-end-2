@@ -9,14 +9,17 @@ import {
   MessageListItemUsernameImage,
   MessageListItemUsername,
   MessageListItemMessage,
-  StyledForm,
+  Timestamp,
 } from "./Chat.styled";
 
 class Chat extends React.Component {
-  state = { message: "" };
+  //The state announcement works the same way
+  // state = { message: "" };
 
   constructor(props) {
     super(props);
+    //The state announcement works the same way
+    this.state = {};
 
     this.waitForSocketConnection(() => {
       WebSocketInstance.addCallbacks(
@@ -82,6 +85,29 @@ class Chat extends React.Component {
     });
   };
 
+  renderTimestamp = (timestamp) => {
+    let prefix = "";
+    const timeDiff = Math.round(
+      (new Date().getTime() - new Date(timestamp).getTime()) / 60000
+    );
+    if (timeDiff < 1) {
+      // less than one minute ago
+      prefix = "just now...";
+    } else if (timeDiff < 60 && timeDiff > 1) {
+      // less than sixty minutes ago
+      prefix = `${timeDiff} minutes ago`;
+    } else if (timeDiff < 24 * 60 && timeDiff > 60) {
+      // less than 24 hours ago
+      prefix = `${Math.round(timeDiff / 60)} hours ago`;
+    } else if (timeDiff < 31 * 24 * 60 && timeDiff > 24 * 60) {
+      // less than 7 days ago
+      prefix = `${Math.round(timeDiff / (60 * 24))} days ago`;
+    } else {
+      prefix = `${new Date(timestamp)}`;
+    }
+    return prefix;
+  };
+
   renderMessages = (messages) => {
     const currentUser = this.props.params.username;
 
@@ -95,6 +121,7 @@ class Chat extends React.Component {
           <MessageListItemUsernameImage alt="avatar" />
         </MessageListItemUsernameWrapper>
         <MessageListItemMessage>{message.content}</MessageListItemMessage>
+        <Timestamp>{this.renderTimestamp(message.timestamp)}</Timestamp>
       </MessageListItem>
     ));
   };
@@ -105,7 +132,13 @@ class Chat extends React.Component {
 
     return (
       <>
-        <div style={{ marginBottom: "20px" }}>
+        <div
+          style={{
+            marginBottom: "20px",
+            marginTop: "20px",
+            marginLeft: "16px",
+          }}
+        >
           CHAT with <span style={{ fontWeight: 800 }}>{username}</span>
         </div>
 

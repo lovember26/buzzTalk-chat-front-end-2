@@ -51,18 +51,19 @@ export const MessageList = styled.ul`
 `;
 
 export const MessageListItem = styled.li`
+  display: flex;
+  flex-direction: column;
   border: 1px solid gray;
   border-radius: 15px;
   margin-bottom: 8px;
   padding: 8px 10px;
   width: fit-content;
-  background-color: whitesmoke;
 `;
 
 export const MessageListItemUsernameWrapper = styled.div`
   display: flex;
-  justify-content: baseline;
-  align-items: center;
+  flex-direction: row;
+  justify-content: center;
 `;
 
 export const MessageListItemUsername = styled.p`
@@ -74,11 +75,17 @@ export const MessageListItemUsername = styled.p`
 
 export const MessageListItemUsernameImage = styled.img``;
 
-export const MessageListItemMessage = styled.p``;
+export const MessageListItemMessage = styled.p`
+  margin-bottom: 4px;
+`;
 
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0 20px;
   min-height: 100%;
+`;
+
+export const Timestamp = styled.p`
+  margin-left: auto;
 `;
