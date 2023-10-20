@@ -90,3 +90,11 @@ button:active {
 .error-attempts {
   color: red;
 }
+
+.sent {
+  margin-left: auto;
+}
+
+.replies {
+  margin-right: auto;
+}

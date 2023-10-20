@@ -91,11 +91,20 @@ export const MessageListItem = styled.li`
   width: fit-content;
 `;
 
+export const MessageListItemUsernameWrapper = styled.div`
+  display: flex;
+  justify-content: baseline;
+  align-items: center;
+`;
+
 export const MessageListItemUsername = styled.p`
   font-weight: 700;
   font-size: 18px;
   margin-bottom: 8px;
+  margin-right: 8px;
 `;
+
+export const MessageListItemUsernameImage = styled.img``;
 
 export const MessageListItemMessage = styled.p``;
 

@@ -4,6 +4,8 @@ import WebSocketInstance from "websocket";
 import {
   MessageList,
   MessageListItem,
+  MessageListItemUsernameWrapper,
+  MessageListItemUsernameImage,
   MessageListItemUsername,
   MessageListItemMessage,
   StyledForm,
@@ -83,8 +85,14 @@ class Chat extends React.Component {
     const currentUser = this.props.params.username;
 
     return messages.map((message, i, arr) => (
-      <MessageListItem key={message.id}>
-        <MessageListItemUsername>{currentUser}:</MessageListItemUsername>
+      <MessageListItem
+        key={message.id}
+        className={message.author === currentUser ? "sent" : "replies"}
+      >
+        <MessageListItemUsernameWrapper>
+          <MessageListItemUsername>{currentUser}:</MessageListItemUsername>
+          <MessageListItemUsernameImage alt="avatar" />
+        </MessageListItemUsernameWrapper>
         <MessageListItemMessage>{message.content}</MessageListItemMessage>
       </MessageListItem>
     ));
