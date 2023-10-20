@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 export const StyledForm = styled.form`
   position: relative;
   height: 60px;
-  margin: 200px 16px 30px 16px;
+  margin: 0 16px 0 16px;
   border-radius: 24px;
   background: #d9d9d9;
   padding: 13px 60px;

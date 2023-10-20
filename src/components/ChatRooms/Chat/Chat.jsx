@@ -1,6 +1,7 @@
 import React from "react";
 import withRouter from "helpers/withRouter";
 import WebSocketInstance from "websocket";
+import { MessageInput } from "components/MessageInput/MessageInput";
 import {
   MessageList,
   MessageListItem,
@@ -104,19 +105,16 @@ class Chat extends React.Component {
 
     return (
       <>
-        <h3>Chat Page</h3>
         <div style={{ marginBottom: "20px" }}>
           CHAT with <span style={{ fontWeight: 800 }}>{username}</span>
         </div>
 
         <MessageList>{messages && this.renderMessages(messages)}</MessageList>
-        <StyledForm onSubmit={this.sendMessageHandler}>
-          <input
-            onChange={this.messageChangeHandler}
-            value={this.state.message}
-          />
-          <button>Send</button>
-        </StyledForm>
+        <MessageInput
+          onSubmit={this.sendMessageHandler}
+          onChange={this.messageChangeHandler}
+          value={this.state.message}
+        />
       </>
     );
   }
