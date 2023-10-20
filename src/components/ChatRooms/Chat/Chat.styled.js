@@ -78,6 +78,9 @@ export const MessageList = styled.ul`
   margin-bottom: 20px;
   padding: 10px 20px;
   flex: 1 1 auto;
+
+  max-height: 600px;
+  overflow-y: scroll;
 `;
 
 export const MessageListItem = styled.li`

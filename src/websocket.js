@@ -30,7 +30,6 @@ class WebSocketService {
       })
     );
     this.socketRef.onmessage = (e) => {
-      console.log("event in socketRef.onmessage", e);
       this.socketNewMessage(e.data);
     };
     this.socketRef.onerror = (e) => {
@@ -83,7 +82,6 @@ class WebSocketService {
   }
 
   sendMessage(data) {
-    console.log("data in sendMessage websocket.js", data);
     try {
       this.socketRef.send(JSON.stringify({ ...data }));
     } catch (err) {

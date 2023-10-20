@@ -65,17 +65,12 @@ class Chat extends React.Component {
   sendMessageHandler = (event) => {
     event.preventDefault();
 
-    console.log("this.state.message in sendMessageHandler", this.state.message);
-
     const messageObject = {
       from: this.props.params.username,
       content: this.state.message,
       chatId: 1,
       // chatId: this.props.match.params.chatID,
     };
-
-    // I added it myself and the code started working
-    // this.addMessage(this.state.message);
 
     WebSocketInstance.newChatMessage(messageObject);
 
@@ -85,13 +80,11 @@ class Chat extends React.Component {
   };
 
   renderMessages = (messages) => {
-    console.log("messages in renderMessages", messages);
     const currentUser = this.props.params.username;
 
     return messages.map((message, i, arr) => (
-      <MessageListItem key={Date.now()}>
+      <MessageListItem key={message.id}>
         <MessageListItemUsername>{currentUser}:</MessageListItemUsername>
-        {/* From video but it is not work */}
         <MessageListItemMessage>{message.content}</MessageListItemMessage>
       </MessageListItem>
     ));
@@ -100,8 +93,6 @@ class Chat extends React.Component {
   render() {
     const messages = this.state.messages;
     const { username } = this.props.params;
-
-    console.log("this.state", this.state);
 
     return (
       <>
