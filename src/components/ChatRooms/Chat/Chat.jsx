@@ -1,12 +1,19 @@
 import React from "react";
 import withRouter from "helpers/withRouter";
 import WebSocketInstance from "websocket";
-import { MessageList, StyledForm } from "./Chat.styled";
+import {
+  MessageList,
+  MessageListItem,
+  MessageListItemUsername,
+  MessageListItemMessage,
+  StyledForm,
+} from "./Chat.styled";
 
 class Chat extends React.Component {
+  state = { message: "" };
+
   constructor(props) {
     super(props);
-    this.state = { messages: [], message: "" };
 
     this.waitForSocketConnection(() => {
       WebSocketInstance.addCallbacks(
@@ -15,22 +22,15 @@ class Chat extends React.Component {
       );
       // In video this.props.currentUser and without this.props.match.params.chatID
       WebSocketInstance.fetchMessages(
-        this.props.username
+        this.props.username,
         // this.props.match.params.chatID
+        1
       );
     });
   }
 
-  // message or messages?
-  // state = { message: "" };
-  // state = { messages: [] };
-  // state = { messages: "" };
-
   componentDidMount() {
     WebSocketInstance.connect();
-
-    console.log("this.state.message", this.state.message);
-    console.log("this.state.messages", this.state.messages);
   }
 
   waitForSocketConnection(callback) {
@@ -56,52 +56,52 @@ class Chat extends React.Component {
     this.setState({ messages: messages.reverse() });
   }
 
-  sendMessageHandler = (e) => {
-    e.preventDefault();
+  messageChangeHandler = (event) => {
+    this.setState({
+      message: event.target.value,
+    });
+  };
+
+  sendMessageHandler = (event) => {
+    event.preventDefault();
+
+    console.log("this.state.message in sendMessageHandler", this.state.message);
 
     const messageObject = {
       from: this.props.params.username,
-      // from video
-      // from: this.props.username,
       content: this.state.message,
+      chatId: 1,
       // chatId: this.props.match.params.chatID,
     };
+
+    // I added it myself and the code started working
+    // this.addMessage(this.state.message);
+
     WebSocketInstance.newChatMessage(messageObject);
+
     this.setState({
       message: "",
     });
   };
 
-  messageChangeHandler = (event) => {
-    this.setState({
-      // Why message?? From video
-      message: event.target.value,
-      // messages: event.target.value,
-    });
-  };
-
   renderMessages = (messages) => {
-    // const currentUser = this.props.username;
+    console.log("messages in renderMessages", messages);
     const currentUser = this.props.params.username;
 
     return messages.map((message, i, arr) => (
-      <li key={message.id}>
-        <p>{currentUser}</p>
-        <p>{message.content}</p>
-      </li>
+      <MessageListItem key={Date.now()}>
+        <MessageListItemUsername>{currentUser}:</MessageListItemUsername>
+        {/* From video but it is not work */}
+        <MessageListItemMessage>{message.content}</MessageListItemMessage>
+      </MessageListItem>
     ));
   };
 
   render() {
-    console.log("this.state.message in render", this.state.message);
-    console.log("this.state.messages in render", this.state.messages);
-
     const messages = this.state.messages;
     const { username } = this.props.params;
 
-    // console.log("messages", messages);
-    // console.log("username", username);
-    // console.log("this.props.params.username", this.props.params.username);
+    console.log("this.state", this.state);
 
     return (
       <>
@@ -109,16 +109,13 @@ class Chat extends React.Component {
         <div style={{ marginBottom: "20px" }}>
           CHAT with <span style={{ fontWeight: 800 }}>{username}</span>
         </div>
+
         <MessageList>{messages && this.renderMessages(messages)}</MessageList>
-        {/* <MessageList>{messages && this.renderMessages(messages)}</MessageList> */}
         <StyledForm onSubmit={this.sendMessageHandler}>
           <input
             onChange={this.messageChangeHandler}
-            // Why message?? From video
             value={this.state.message}
-            // value={this.state.messages}
-            placeholder="Write a message"
-          ></input>
+          />
           <button>Send</button>
         </StyledForm>
       </>

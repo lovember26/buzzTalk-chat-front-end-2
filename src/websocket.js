@@ -30,6 +30,7 @@ class WebSocketService {
       })
     );
     this.socketRef.onmessage = (e) => {
+      console.log("event in socketRef.onmessage", e);
       this.socketNewMessage(e.data);
     };
     this.socketRef.onerror = (e) => {
@@ -57,20 +58,22 @@ class WebSocketService {
     }
   }
   //   fetchMessages(username, chatId)  ?? In video without chatId
-  fetchMessages(username) {
+  fetchMessages(username, chatId) {
     this.sendMessage({
       command: "fetch_messages",
       username: username,
-      //   chat_id: chatId,
+      chat_id: chatId,
     });
   }
   //   In video without chat_id
   newChatMessage(message) {
+    console.log("message in the newChatMessage websocket.js", message);
     this.sendMessage({
       command: "new_message",
       from: message.from,
       message: message.content,
-      //   chat_id: message.chatId,
+      // Comment
+      chat_id: message.chatId,
     });
   }
 
@@ -80,6 +83,7 @@ class WebSocketService {
   }
 
   sendMessage(data) {
+    console.log("data in sendMessage websocket.js", data);
     try {
       this.socketRef.send(JSON.stringify({ ...data }));
     } catch (err) {
