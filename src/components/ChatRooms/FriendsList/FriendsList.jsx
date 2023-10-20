@@ -14,7 +14,6 @@ export const FriendsList = () => {
     const getUsers = async () => {
       try {
         const data = await fetchUsers(accessToken);
-        console.log(data);
         if (data) {
           setUsersList(data);
         }

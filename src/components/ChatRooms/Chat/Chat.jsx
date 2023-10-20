@@ -1,21 +1,132 @@
 import React from "react";
-class Chat extends React.Component {
-  state = { message: "" };
+import withRouter from "helpers/withRouter";
+import WebSocketInstance from "websocket";
+import { MessageList, StyledForm } from "./Chat.styled";
 
-  componentDidMount() {
-    console.log("this.props", this.props);
+class Chat extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { messages: [], message: "" };
+
+    this.waitForSocketConnection(() => {
+      WebSocketInstance.addCallbacks(
+        this.setMessages.bind(this),
+        this.addMessage.bind(this)
+      );
+      // In video this.props.currentUser and without this.props.match.params.chatID
+      WebSocketInstance.fetchMessages(
+        this.props.username
+        // this.props.match.params.chatID
+      );
+    });
   }
 
-  render() {
-    const messages = this.state.message;
-    console.log("messages", messages);
+  // message or messages?
+  // state = { message: "" };
+  // state = { messages: [] };
+  // state = { messages: "" };
 
-    return <div>CHAT with username</div>;
+  componentDidMount() {
+    WebSocketInstance.connect();
+
+    console.log("this.state.message", this.state.message);
+    console.log("this.state.messages", this.state.messages);
+  }
+
+  waitForSocketConnection(callback) {
+    const component = this;
+
+    setTimeout(function () {
+      if (WebSocketInstance.state() === 1) {
+        console.log("Connection is secure");
+        callback();
+        return;
+      } else {
+        console.log("wait for connection...");
+        component.waitForSocketConnection(callback);
+      }
+    }, 100);
+  }
+
+  addMessage(message) {
+    this.setState({ messages: [...this.state.messages, message] });
+  }
+
+  setMessages(messages) {
+    this.setState({ messages: messages.reverse() });
+  }
+
+  sendMessageHandler = (e) => {
+    e.preventDefault();
+
+    const messageObject = {
+      from: this.props.params.username,
+      // from video
+      // from: this.props.username,
+      content: this.state.message,
+      // chatId: this.props.match.params.chatID,
+    };
+    WebSocketInstance.newChatMessage(messageObject);
+    this.setState({
+      message: "",
+    });
+  };
+
+  messageChangeHandler = (event) => {
+    this.setState({
+      // Why message?? From video
+      message: event.target.value,
+      // messages: event.target.value,
+    });
+  };
+
+  renderMessages = (messages) => {
+    // const currentUser = this.props.username;
+    const currentUser = this.props.params.username;
+
+    return messages.map((message, i, arr) => (
+      <li key={message.id}>
+        <p>{currentUser}</p>
+        <p>{message.content}</p>
+      </li>
+    ));
+  };
+
+  render() {
+    console.log("this.state.message in render", this.state.message);
+    console.log("this.state.messages in render", this.state.messages);
+
+    const messages = this.state.messages;
+    const { username } = this.props.params;
+
+    // console.log("messages", messages);
+    // console.log("username", username);
+    // console.log("this.props.params.username", this.props.params.username);
+
+    return (
+      <>
+        <h3>Chat Page</h3>
+        <div style={{ marginBottom: "20px" }}>
+          CHAT with <span style={{ fontWeight: 800 }}>{username}</span>
+        </div>
+        <MessageList>{messages && this.renderMessages(messages)}</MessageList>
+        {/* <MessageList>{messages && this.renderMessages(messages)}</MessageList> */}
+        <StyledForm onSubmit={this.sendMessageHandler}>
+          <input
+            onChange={this.messageChangeHandler}
+            // Why message?? From video
+            value={this.state.message}
+            // value={this.state.messages}
+            placeholder="Write a message"
+          ></input>
+          <button>Send</button>
+        </StyledForm>
+      </>
+    );
   }
 }
 
-export default Chat;
-
+export default withRouter(Chat);
 // ===============================================================
 // The same code in React Component
 // import { useState } from "react";
@@ -49,10 +160,10 @@ export default Chat;
 //         WebSocketInstance.connect(this.props.match.params.chatID);
 //     }
 
-//     constructor(props) {
-//         super(props);
-//         this.initializeChat();
-//     }
+// constructor(props) {
+//     super(props);
+//     this.initializeChat();
+// }
 
 //     componentWillReceiveProps(newProps) {
 //         if (this.props.match.params.chatID !== newProps.match.params.chatID) {
@@ -83,32 +194,32 @@ export default Chat;
 //         }, 100);
 //     }
 
-//     addMessage(message) {
-//         this.setState({ messages: [...this.state.messages, message] });
-//     }
+// addMessage(message) {
+//     this.setState({ messages: [...this.state.messages, message] });
+// }
 
-//     setMessages(messages) {
-//         this.setState({ messages: messages.reverse()});
-//     }
+// setMessages(messages) {
+//     this.setState({ messages: messages.reverse()});
+// }
 
-//     messageChangeHandler = (event) =>  {
-//         this.setState({
-//             message: event.target.value
-//         })
-//     }
+// messageChangeHandler = (event) =>  {
+//     this.setState({
+//         message: event.target.value
+//     })
+// }
 
-//     sendMessageHandler = (e) => {
-//         e.preventDefault();
-//         const messageObject = {
-//             from: this.props.username,
-//             content: this.state.message,
-//             chatId: this.props.match.params.chatID
-//         };
-//         WebSocketInstance.newChatMessage(messageObject);
-//         this.setState({
-//             message: ''
-//         });
-//     }
+// sendMessageHandler = (e) => {
+//     e.preventDefault();
+//     const messageObject = {
+//         from: this.props.username,
+//         content: this.state.message,
+//         chatId: this.props.match.params.chatID
+//     };
+//     WebSocketInstance.newChatMessage(messageObject);
+//     this.setState({
+//         message: ''
+//     });
+// }
 
 //     renderTimestamp = timestamp => {
 //         let prefix = '';
@@ -127,23 +238,23 @@ export default Chat;
 //         return prefix
 //     }
 
-//     renderMessages = (messages) => {
-//         const currentUser = this.props.username;
-//         return messages.map((message, i, arr) => (
-//             <li
-//                 key={message.id}
-//                 style={{marginBottom: arr.length - 1 === i ? '300px' : '15px'}}
-//                 className={message.author === currentUser ? 'sent' : 'replies'}>
-//                 <img src="http://emilcarlsson.se/assets/mikeross.png" />
-//                 <p>{message.content}
-//                     <br />
-//                     <small>
-//                         {this.renderTimestamp(message.timestamp)}
-//                     </small>
-//                 </p>
-//             </li>
-//         ));
-//     }
+// renderMessages = (messages) => {
+//     const currentUser = this.props.username;
+//     return messages.map((message, i, arr) => (
+//         <li
+//             key={message.id}
+//             style={{marginBottom: arr.length - 1 === i ? '300px' : '15px'}}
+//             className={message.author === currentUser ? 'sent' : 'replies'}>
+//             <img src="http://emilcarlsson.se/assets/mikeross.png" />
+//             <p>{message.content}
+//                 <br />
+//                 <small>
+//                     {this.renderTimestamp(message.timestamp)}
+//                 </small>
+//             </p>
+//         </li>
+//     ));
+// }
 
 //     scrollToBottom = () => {
 //         this.messagesEnd.scrollIntoView({ behavior: "smooth" });
@@ -177,8 +288,8 @@ export default Chat;
 //                     <form onSubmit={this.sendMessageHandler}>
 //                         <div className="wrap">
 //                             <input
-//                                 onChange={this.messageChangeHandler}
-//                                 value={this.state.message}
+// onChange={this.messageChangeHandler}
+// value={this.state.message}
 //                                 required
 //                                 id="chat-message-input"
 //                                 type="text"
