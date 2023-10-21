@@ -10,7 +10,6 @@ export const StyledHeader = styled.div`
   height: 80px;
   display: flex;
   justify-content: space-between;
-  /* align-item: center; */
   align-items: center;
   background: #d9d9d9;
 `;
@@ -46,7 +45,7 @@ export const MessageList = styled.ul`
   padding: 10px 20px;
   flex: 1 1 auto;
 
-  max-height: 650px;
+  max-height: 630px;
   overflow-y: scroll;
 `;
 
