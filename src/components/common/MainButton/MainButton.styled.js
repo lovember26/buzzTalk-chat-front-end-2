@@ -7,16 +7,16 @@ export const Button = styled.button`
   align-items: center;
   height: 48px;
   width: 150px;
-
+  font-size: 16px;
   color: ${({ theme }) => theme.colors.white[100]};
-  background-color: ${({ theme }) => theme.colors.black[100]};
+  background-color: ${({ theme }) => theme.colors.pink};
 
   border: 1px solid gray;
   border-radius: 30px;
 
   &:hover,
   &:focus {
-    background-color: ${({ theme }) => theme.colors.gray[400]};
+    background-color: ${({ theme }) => theme.colors.purple};
   }
 
   &:disabled {

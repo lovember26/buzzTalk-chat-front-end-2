@@ -7,7 +7,6 @@ export const RegisterPageTitle = styled.h1`
   margin-top: 40px;
   color: black;
   font-size: 36px;
-  font-family: cursive;
 `;
 
 export const RegisterPageRedirectLinkWrapper = styled.div`
@@ -18,7 +17,7 @@ export const RegisterPageRedirectLinkWrapper = styled.div`
 
 export const RegisterPageRedirectLink = styled.p`
   color: black;
-  font-family: cursive;
+
   font-size: 18px;
   text-decoration: underline;
   cursor: pointer;
@@ -47,7 +46,7 @@ export const InputWrapper = styled.div`
 export const Lable = styled.label`
   color: ${({ error, theme }) =>
     error ? theme.colors.red[100] : theme.colors.black[100]};
-  font-family: cursive;
+
   font-size: 18px;
   text-decoration: none;
   margin-bottom: 4px;
@@ -83,13 +82,11 @@ export const Input = styled.input`
   }
 
   &::placeholder {
-    font-family: cursive;
     font-size: 18px;
     color: gray;
   }
 
   &[value] {
-    font-family: cursive;
     font-size: 24px;
     color: ${({ error, theme }) =>
       error ? theme.colors.red[100] : theme.colors.gray[200]};

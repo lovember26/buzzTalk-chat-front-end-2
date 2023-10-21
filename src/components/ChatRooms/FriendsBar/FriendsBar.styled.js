@@ -12,7 +12,7 @@ export const StyledFriendsNav = styled.nav`
   display: flex;
   align-items: center;
   gap: 68px;
-  background: #d9d9d9;
+  background: ${({ theme }) => theme.colors.purple};
   color: #696969;
   font-size: 14px;
   font-weight: 700;

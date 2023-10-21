@@ -1,6 +1,6 @@
 import { Container } from "components/common/Container/Container.styled";
 import { successNotification, errorNotification } from "helpers/notification";
-import { ToastContainer } from "react-toastify";
+
 import { useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { inputEmailSchema } from "middlewares";
@@ -19,6 +19,7 @@ import {
   Input,
   Icon,
 } from "./ForgotPasswordPage.styled";
+import { AppToastContainer } from "components/AppToastContainer/AppToastContainer";
 
 export default function ForgotPasswordPage() {
   const {
@@ -32,7 +33,6 @@ export default function ForgotPasswordPage() {
   });
 
   const onSubmit = async (data) => {
-    console.log("hello");
     const email = data.email;
     try {
       await resetPasswordToken({ email });
@@ -80,7 +80,7 @@ export default function ForgotPasswordPage() {
           </button>
         </Form>
       </VerifyWrapper>
-      <ToastContainer />
+      <AppToastContainer />
     </Container>
   );
 }

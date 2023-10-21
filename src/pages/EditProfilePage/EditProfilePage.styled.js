@@ -33,7 +33,6 @@ export const EditProfilePageUserButtonBack = styled(Link)`
 `;
 
 export const EditProfilePageUserButtonBackText = styled.p`
-  font-family: cursive;
   font-size: 24px;
   color: ${({ theme }) => theme.colors.blue[100]};
   font-weight: 500;
@@ -45,7 +44,6 @@ export const EditProfilePageUserButtonSave = styled.button`
   top: 20px;
   right: 20px;
 
-  font-family: cursive;
   font-size: 24px;
   color: ${({ theme }) => theme.colors.blue[100]};
   font-weight: 500;
@@ -90,7 +88,6 @@ export const EditProfilePageUserInfoTextWrapper = styled.div`
 `;
 
 export const EditProfilePageUserInfoNickname = styled.p`
-  font-family: cursive;
   font-size: 28px;
   color: ${({ theme }) => theme.colors.black[100]};
   font-weight: 600;
@@ -122,7 +119,7 @@ export const EditProfilePageFormInputWrapper = styled.div`
 export const EditProfilePageFormLableText = styled.label`
   color: ${({ error, theme }) =>
     error ? theme.colors.red[100] : theme.colors.black[100]};
-  font-family: cursive;
+
   font-size: 18px;
   text-decoration: none;
   margin-bottom: 8px;
@@ -154,13 +151,11 @@ export const EditProfilePageFormInput = styled.input`
   }
 
   &::placeholder {
-    font-family: cursive;
     font-size: 18px;
     color: gray;
   }
 
   &[value] {
-    font-family: cursive;
     font-size: 20px;
     color: ${({ theme, error }) =>
       error ? theme.colors.red[100] : theme.colors.gray[200]};
@@ -193,13 +188,11 @@ export const EditProfilePageFormInputAbout = styled.input`
   }
 
   &::placeholder {
-    font-family: cursive;
     font-size: 18px;
     color: gray;
   }
 
   &[value] {
-    font-family: cursive;
     font-size: 20px;
 
     color: ${({ theme, error }) =>
@@ -210,7 +203,7 @@ export const EditProfilePageFormInputAbout = styled.input`
 export const EditProfilePageImageButton = styled.button`
   color: ${({ error, theme }) =>
     error ? theme.colors.red[100] : theme.colors.black[100]};
-  font-family: cursive;
+
   font-size: 18px;
   text-decoration: none;
 

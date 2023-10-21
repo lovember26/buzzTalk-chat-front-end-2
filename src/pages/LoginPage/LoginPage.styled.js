@@ -2,14 +2,14 @@ import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 
 import { AiFillExclamationCircle } from "react-icons/ai";
+import { TEXT_COLOR } from "constants";
 
 export const LoginPageTitle = styled.h1`
   text-align: center;
-  margin-bottom: 20px;
-  margin-top: 60px;
-  color: black;
-  font-size: 36px;
-  font-family: cursive;
+  margin-bottom: 24px;
+  margin-top: 40px;
+  color: ${TEXT_COLOR};
+  font-size: 32px;
 `;
 
 export const LoginPageLinksWrapper = styled.div`
@@ -24,7 +24,7 @@ export const LoginPageLinkForgotPassword = styled(Link)`
   margin-right: auto;
   margin-bottom: 15px;
   color: black;
-  font-family: cursive;
+
   font-size: 18px;
   text-decoration: underline;
 `;
@@ -40,13 +40,12 @@ export const LoginPageRedirectText = styled.p`
   margin-right: 5px;
   color: black;
 
-  font-family: cursive;
   font-size: 18px;
 `;
 
 export const LoginPageRedirectLink = styled.p`
   color: black;
-  font-family: cursive;
+
   font-size: 18px;
   text-decoration: underline;
   cursor: pointer;
@@ -57,7 +56,7 @@ export const LoginPageForm = styled.form`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 
   margin-left: auto;
   margin-right: auto;
@@ -85,10 +84,10 @@ export const Lable = styled.label`
     return theme.colors.black[100];
   }};
 
-  font-family: cursive;
-  font-size: 18px;
-  text-decoration: none;
-  margin-bottom: 4px;
+  font-size: 16px;
+  font-weight: 400;
+
+  margin-bottom: 2px;
 `;
 
 export const Input = styled.input`
@@ -142,14 +141,12 @@ export const Input = styled.input`
   }
 
   &::placeholder {
-    font-family: cursive;
     font-size: 18px;
     color: gray;
   }
 
   &[value] {
-    font-family: cursive;
-    font-size: 24px;
+    font-size: 14px;
     color: ${({ error, theme, wrong }) => {
       if (error && wrong < 3) {
         return theme.colors.red[100];
@@ -159,7 +156,7 @@ export const Input = styled.input`
         return theme.colors.gray[200];
       }
 
-      return theme.colors.gray[200];
+      return theme.colors.black;
     }};
   }
 `;
@@ -184,8 +181,7 @@ export const Icon = styled(AiFillExclamationCircle)`
 `;
 
 export const TextAttemptError = styled.p`
-  font-family: cursive;
-  font-size: 14px;
+  font-size: 12px;
   text-decoration: none;
   color: ${({ theme, wrong }) =>
     wrong < 3 ? theme.colors.red[100] : theme.colors.gray[200]};

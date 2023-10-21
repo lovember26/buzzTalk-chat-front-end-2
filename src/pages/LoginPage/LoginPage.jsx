@@ -132,7 +132,7 @@ export default function LoginPage() {
             className="lable"
             wrong={wrongPasswordCount}
           >
-            Email or username
+            Email or Username
           </Lable>
           <InputWrapper>
             <Input
@@ -211,7 +211,7 @@ export default function LoginPage() {
         </TextAttemptError>
 
         {wrongPasswordCount < 3 && (
-          <MainButton type="submit" text="Sign in" disabled={!isValid} />
+          <MainButton type="submit" text="Log In" disabled={!isValid} />
         )}
       </LoginPageForm>
 

@@ -10,18 +10,21 @@ import {
   ForgotPassTitle,
   ForgotPassText,
 } from "pages/ForgotPasswordPage/ForgotPasswordPage.styled";
-import { StyledLink, VerifyWrapper } from "pages/VerifyPage/VerifyPage.styled";
+import { VerifyWrapper } from "pages/VerifyPage/VerifyPage.styled";
 import { useSearchParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { ToastContainer } from "react-toastify";
+
 import { joiResolver } from "@hookform/resolvers/joi";
 import { resetPassword } from "services/authApi";
 import { inputResetPasswordSchema } from "middlewares";
 import { registerPageRules } from "constants";
 import { successNotification, errorNotification } from "helpers/notification";
 import { showPassword, showConfirmPassword } from "helpers/showPasswordHandler";
-import { ShowPasswordButton } from "components/common/ShowPasswordButton/ShowPasswordButton";
+
 import { InputNotification } from "components/common/InputNotification/InputNotification";
+import { ShowPasswordRegisterPageButton } from "components/common/ShowPasswordRegisterPageButton/ShowPasswordRegisterPageButton";
+import { selectInputNotification } from "helpers/selectWrongPasswordNotification";
+import { AppToastContainer } from "components/AppToastContainer/AppToastContainer";
 
 export default function ResetPasswordPage() {
   const [searchParams] = useSearchParams();
@@ -33,15 +36,18 @@ export default function ResetPasswordPage() {
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors, isValid },
   } = useForm({
     mode: "onChange",
     resolver: joiResolver(inputResetPasswordSchema),
+    defaultValues: {
+      password: "",
+      confirm: "",
+    },
   });
 
   const onSubmit = async (data) => {
-    console.log(data);
-
     try {
       await resetPassword({
         email,
@@ -56,13 +62,12 @@ export default function ResetPasswordPage() {
     }
   };
 
-  const resetError = errors["password"];
-  const resetConfirmError = errors["confirm"];
+  const passwordError = selectInputNotification(errors["password"]);
+  const confirmPasswordError = selectInputNotification(errors["confirm"]);
 
   return (
     <Container>
       <VerifyWrapper>
-        <StyledLink>Logo</StyledLink>
         <ForgotPassTitle>Enter New Password</ForgotPassTitle>
         <ForgotPassText>
           Your new password must be different from used password
@@ -70,56 +75,58 @@ export default function ResetPasswordPage() {
 
         <Form onSubmit={handleSubmit(onSubmit)}>
           <BlockInputWrapper>
-            <Lable error={resetError}>Create password</Lable>
+            <Lable error={passwordError}>Create password</Lable>
             <InputWrapper className="password-wrapper">
               <Input
                 {...register("password")}
                 className="input-password-register"
                 type="password"
+                value={watch("password")}
                 name="password"
-                error={resetError}
-                placeholder={"Enter a password"}
+                error={passwordError}
               />
-              <ShowPasswordButton
+              <ShowPasswordRegisterPageButton
                 onClick={showPassword}
                 className="password"
-                error={resetError}
+                error={passwordError}
               />
             </InputWrapper>
-            {resetError ? (
-              <InputNotification text={resetError} color={"red"} />
-            ) : (
+            {passwordError ? (
               <InputNotification
-                text={registerPageRules.PASSWORD}
-                color={"gray"}
+                text={passwordError}
+                error={passwordError}
+                color={"red"}
               />
+            ) : (
+              <InputNotification text={registerPageRules.PASSWORD} />
             )}
           </BlockInputWrapper>
 
           <BlockInputWrapper>
-            <Lable error={resetConfirmError}>Confirm password</Lable>
+            <Lable error={confirmPasswordError}>Confirm password</Lable>
             <InputWrapper className="confirm-password-wrapper">
               <Input
-                {...register("password")}
+                {...register("confirm")}
                 className="input-password-register-confirm"
                 type="password"
                 name="confirm"
-                error={resetConfirmError}
-                placeholder={"Enter a password"}
+                value={watch("confirm")}
+                error={confirmPasswordError}
               />
-              <ShowPasswordButton
+              <ShowPasswordRegisterPageButton
                 onClick={showConfirmPassword}
                 className="confirm-password"
-                error={resetConfirmError}
+                error={confirmPasswordError}
               />
             </InputWrapper>
-            {resetConfirmError ? (
-              <InputNotification text={resetConfirmError} color={"red"} />
-            ) : (
+            {confirmPasswordError ? (
               <InputNotification
-                text={registerPageRules.PASSWORD}
-                color={"gray"}
+                text={confirmPasswordError}
+                error={confirmPasswordError}
+                color={"red"}
               />
+            ) : (
+              <InputNotification text={registerPageRules.CONFIRM_PASSWORD} />
             )}
           </BlockInputWrapper>
 
@@ -128,7 +135,7 @@ export default function ResetPasswordPage() {
           </button>
         </Form>
       </VerifyWrapper>
-      <ToastContainer />
+      <AppToastContainer />
     </Container>
   );
 }
