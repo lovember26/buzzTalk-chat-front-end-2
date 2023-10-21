@@ -1,16 +1,23 @@
-import { StyledForm } from "./MessageInput.styled";
+import {
+  StyledForm,
+  SendMessageButton,
+  SendMessageButtonIcon,
+} from "./MessageInput.styled";
 import { ReactComponent as PinIcon } from "../../images/pin.svg";
 import { ReactComponent as MicIcon } from "../../images/mic.svg";
 import { ReactComponent as EmojiIcon } from "../../images/emoji.svg";
 
-export const MessageInput = () => {
+export const MessageInput = ({ onSubmit, onChange, value }) => {
   return (
-    <StyledForm>
+    <StyledForm onSubmit={onSubmit}>
       <PinIcon className="pin" />
-      <input />
+      <input onChange={onChange} value={value} />
       <EmojiIcon className="emoji" />
 
       <MicIcon className="mic" />
+      <SendMessageButton>
+        <SendMessageButtonIcon size={22} />
+      </SendMessageButton>
     </StyledForm>
   );
 };

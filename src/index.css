@@ -90,3 +90,15 @@ button:active {
 .error-attempts {
   color: red;
 }
+
+.sent {
+  margin-left: auto;
+  background-color: whitesmoke;
+  /* color: black; */
+}
+
+.replies {
+  margin-right: auto;
+  background-color: rgb(198, 219, 219);
+  /* color: white; */
+}
