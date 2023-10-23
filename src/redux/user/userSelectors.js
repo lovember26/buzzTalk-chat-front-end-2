@@ -1,3 +1,5 @@
+export const selectAllUsers = (state) => state.user.all;
+
 export const selectUserId = (state) => state.user.id;
 export const selectUserName = (state) => state.user.username;
 export const selectEmail = (state) => state.user.email;

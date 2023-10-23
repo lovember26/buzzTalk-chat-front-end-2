@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { initialState } from "./userInitialState";
 import { currentUserThunk } from "redux/auth/authThunk";
 import {
+  fetchAllUsersThunk,
   updateUserInfoThunk,
   generateGravatarUserInfoThunk,
   removeUserAvatarInfoThunk,
@@ -13,6 +14,20 @@ export const userSlice = createSlice({
   initialState,
   extraReducers: (builder) => {
     builder
+      // fetch all users
+      .addCase(fetchAllUsersThunk.pending, (state) => {
+        state.statuses.fetchAll = status.PENDING;
+        state.errors.fetchAll = null;
+      })
+      .addCase(fetchAllUsersThunk.fulfilled, (state, action) => {
+        state.statuses.fetchAll = status.FULFILLED;
+        state.all = action.payload;
+        state.errors.fetchAll = null;
+      })
+      .addCase(fetchAllUsersThunk.rejected, (state, action) => {
+        state.statuses.fetchAll = status.REJECTED;
+        state.errors.fetchAll = action.payload;
+      })
 
       // current
       .addCase(currentUserThunk.pending, (state) => {

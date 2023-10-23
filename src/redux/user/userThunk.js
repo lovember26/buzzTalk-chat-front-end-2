@@ -1,10 +1,25 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
+  fetchAllUsersService,
   updateUserService,
   generateGravatarUserService,
   removeUserAvatarService,
 } from "services/userApi";
+
+// import { userAPI } from "services";
 import { successNotification } from "helpers/notification";
+
+export const fetchAllUsersThunk = createAsyncThunk(
+  "users/fetchAll",
+  async (_, { rejectWithValue }) => {
+    try {
+      const users = await fetchAllUsersService();
+      return users;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
 
 export const updateUserInfoThunk = createAsyncThunk(
   "users/update",

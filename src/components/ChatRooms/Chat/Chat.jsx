@@ -2,6 +2,10 @@ import React from "react";
 import withRouter from "helpers/withRouter";
 import WebSocketInstance from "websocket";
 import { MessageInput } from "components/MessageInput/MessageInput";
+
+   // Check data message
+// import { getMessagesService } from "services/chatApi";
+
 import {
   MessageList,
   MessageListItem,
@@ -37,6 +41,8 @@ class Chat extends React.Component {
 
   componentDidMount() {
     WebSocketInstance.connect();
+    // Check data message
+    // const data = getMessagesService();
   }
 
   waitForSocketConnection(callback) {
