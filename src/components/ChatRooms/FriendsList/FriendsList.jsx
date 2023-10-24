@@ -1,4 +1,3 @@
-// export default FriendsList;
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -13,9 +12,11 @@ export const FriendsList = () => {
   const username = useSelector(selectUserName);
   const [chats, setChats] = useState([]);
 
+  // console.log("chats", chats);
+
   useEffect(() => {
     if (accessToken !== null && username !== null) {
-      // Change after fix bag
+      // Change default name to current user name after bugfix
       getUserChats(accessToken, "suchok_olya");
     }
   }, [accessToken, username]);
@@ -40,7 +41,7 @@ export const FriendsList = () => {
             <Contact
               key={chat.id}
               chat={chat}
-              name="Some active chat number -"
+              name={`Chat name with id ${chat.id}`}
             />
           ))}
         </ul>

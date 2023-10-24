@@ -57,7 +57,6 @@ class WebSocketService {
       this.callbacks[command](parsedData.message);
     }
   }
-  //   fetchMessages(username, chatId)  ?? In video without chatId
   fetchMessages(username, chatId) {
     this.sendMessage({
       command: "fetch_messages",

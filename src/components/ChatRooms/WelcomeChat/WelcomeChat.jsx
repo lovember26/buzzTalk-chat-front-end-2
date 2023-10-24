@@ -1,5 +1,5 @@
 export default function WelcomeChat() {
-  return <div>You can choose some friend for chat.</div>;
+  return <div>You can choose some chat to start messaging.</div>;
 }
 
 // Just to check how redux requests work
@@ -14,26 +14,19 @@ export default function WelcomeChat() {
 
 // export default function WelcomeChat() {
 //   const accessToken = useSelector(selectAccessToken);
-//   const [messages, setMessages] = useState([]);
-//   const [messagesById, setMessagesById] = useState([]);
+//   const [data, setData] = useState([]);
 //   const dispatch = useDispatch();
-
-//   // console.log("messages", messages.payload);
-//   // console.log("messages by Id", messagesById.payload);
 
 //   useEffect(() => {
 //     const getUsers = async () => {
 //       try {
 //         if (accessToken) {
-//           const messages = await dispatch(fetchAllMessagesThunk(accessToken));
-//           const messagesById = await dispatch(fetchMessageByIdThunk(1));
-//           // console.log("messagesById", messagesById);
+//           const response = await dispatch(fetchAllMessagesThunk(accessToken));
+//           const response = await dispatch(fetchMessageByIdThunk(1));
+//           console.log("response WelcomeChat", response);
 
-//           if (messages) {
-//             setMessages(messages);
-//           }
-//           if (messagesById) {
-//             setMessagesById(messagesById);
+//           if (response) {
+//             setData(response);
 //           }
 //         }
 //       } catch (error) {

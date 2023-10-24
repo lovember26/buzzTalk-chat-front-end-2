@@ -3,13 +3,14 @@ import { Route, Routes } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { currentUserThunk } from "redux/auth/authThunk";
 import { selectAccessToken } from "redux/auth/authSelectors";
-import { selectIsFetchingCurrentUser } from "redux/user/userSelectors";
+import {
+  selectIsFetchingCurrentUser,
+  selectUserName,
+} from "redux/user/userSelectors";
 import { routes } from "constants/routes";
 
 import PrivatePage from "pages/access/PrivatePage";
 import RestrictedPage from "pages/access/RestrictedPage";
-
-import { selectUserName } from "redux/user/userSelectors";
 
 import Layout from "./Layout/Layout";
 import { Loader } from "./common/Loader/Loader";

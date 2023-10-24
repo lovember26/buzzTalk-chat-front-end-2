@@ -1,42 +1,18 @@
-// Class component
-// import React from "react";
-// import { NavLink } from "react-router-dom";
-
-// const Contact = (props) => (
-//   <NavLink to={`chats/${props.chatURL}`} style={{ color: "#fff" }}>
-//     <li className="contact">
-//       <div className="wrap">
-//         <span className={`contact-status ${props.status}`}></span>
-//         {/* <img src={props.picURL} alt="" /> */}
-//         <div className="meta">
-//           <p className="name">{props.name}</p>
-//         </div>
-//       </div>
-//     </li>
-//   </NavLink>
-// );
-
-// export default Contact;
-
 // React component
-import { NavLink } from "react-router-dom";
 import { ReactComponent as DefaultIcon } from "../../../images/default.svg";
+import { ActiveChatInfo, ActiveChatName } from "./Contact.styled";
 
 const Contact = ({ chat, name }) => (
   <li key={chat.id}>
-    <NavLink to={`chats/${chat.id}`}>
+    <ActiveChatInfo to={`chats/${chat.id}`}>
       {chat.image ? <img src={chat.image} alt="avatar" /> : <DefaultIcon />}
-      <p>
-        {name}
-        {chat.id}
-      </p>
-    </NavLink>
+      <ActiveChatName>{name}</ActiveChatName>
+    </ActiveChatInfo>
   </li>
 );
 
 export default Contact;
 
-// ================================================================================
 // Code who works
 // import { NavLink } from "react-router-dom";
 // import { ReactComponent as DefaultIcon } from "../../../images/default.svg";

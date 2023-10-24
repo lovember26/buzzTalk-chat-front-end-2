@@ -15,9 +15,6 @@ import {
 } from "./Chat.styled";
 
 class Chat extends React.Component {
-  //The state announcement works the same way
-  // state = { message: "" };
-
   constructor(props) {
     super(props);
     //The state announcement works the same way
@@ -29,6 +26,7 @@ class Chat extends React.Component {
         this.addMessage.bind(this)
       );
       // In video this.props.currentUser and without this.props.match.params.chatID
+      // Change default name to current user name after bugfix
       WebSocketInstance.fetchMessages("suchok_olya", this.props.params.chatId);
     });
     WebSocketInstance.connect(this.props.params.chatId);
@@ -37,8 +35,6 @@ class Chat extends React.Component {
   componentDidMount() {
     WebSocketInstance.connect();
     this.scrollToBottom();
-    // console.log("this.props CHAT", this.props);
-    // console.log("this.props.params.chatId chat", this.props.params.chatId);
   }
 
   scrollToBottom = () => {
@@ -82,6 +78,7 @@ class Chat extends React.Component {
     event.preventDefault();
 
     const messageObject = {
+      // Change default name to current user name after bugfix
       from: "suchok_olya",
       // from: this.props.username,
       content: this.state.message,
@@ -138,8 +135,7 @@ class Chat extends React.Component {
 
   render() {
     const messages = this.state.messages;
-    // const { username } = this.props.params;
-    const username = this.props.username;
+    const chat = this.props.params.chatId;
 
     return (
       <Hoc>
@@ -150,7 +146,7 @@ class Chat extends React.Component {
             marginLeft: "16px",
           }}
         >
-          CHAT with <span style={{ fontWeight: 800 }}>{username}</span>
+          CHAT number <span style={{ fontWeight: 800 }}>{chat}</span>
         </div>
 
         <MessageList>
