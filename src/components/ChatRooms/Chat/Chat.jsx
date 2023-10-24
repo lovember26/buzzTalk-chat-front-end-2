@@ -3,9 +3,6 @@ import withRouter from "helpers/withRouter";
 import WebSocketInstance from "websocket";
 import { MessageInput } from "components/MessageInput/MessageInput";
 
-   // Check data message
-// import { getMessagesService } from "services/chatApi";
-
 import {
   MessageList,
   MessageListItem,
@@ -38,11 +35,18 @@ class Chat extends React.Component {
       );
     });
   }
-
+  //Functionality of scrolling scrolling to the latest messages
   componentDidMount() {
     WebSocketInstance.connect();
-    // Check data message
-    // const data = getMessagesService();
+    this.scrollToBottom();
+  }
+
+  scrollToBottom = () => {
+    this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+  };
+
+  componentDidUpdate() {
+    this.scrollToBottom();
   }
 
   waitForSocketConnection(callback) {
@@ -148,7 +152,16 @@ class Chat extends React.Component {
           CHAT with <span style={{ fontWeight: 800 }}>{username}</span>
         </div>
 
-        <MessageList>{messages && this.renderMessages(messages)}</MessageList>
+        <MessageList>
+          {messages && this.renderMessages(messages)}
+          {/* Functionality of scrolling scrolling to the latest messages */}
+          <div
+            style={{ float: "left", clear: "both" }}
+            ref={(el) => {
+              this.messagesEnd = el;
+            }}
+          ></div>
+        </MessageList>
         <MessageInput
           onSubmit={this.sendMessageHandler}
           onChange={this.messageChangeHandler}
