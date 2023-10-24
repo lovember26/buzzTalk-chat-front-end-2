@@ -1,6 +1,8 @@
 import { status } from "constants";
 
 export const initialState = {
+  all: [],
+
   id: null,
   username: null,
   email: null,
@@ -10,6 +12,7 @@ export const initialState = {
   isFetchingCurrentUser: false,
 
   statuses: {
+    fetchAll: status.IDLE,
     current: status.IDLE,
     update: status.IDLE,
     generateGravatar: status.IDLE,
@@ -17,6 +20,7 @@ export const initialState = {
   },
 
   errors: {
+    fetchAll: null,
     current: null,
     update: null,
     generateGravatar: null,
