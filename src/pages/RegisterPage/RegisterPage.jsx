@@ -14,17 +14,19 @@ import { Checkbox } from "components/common/CheckBox/CheckBox";
 import { InputNotification } from "components/common/InputNotification/InputNotification";
 import { AppToastContainer } from "components/AppToastContainer/AppToastContainer";
 import {
-  RegisterPageTitle,
+  AuthTitle,
   RegisterPageRedirectLinkWrapper,
   RegisterPageRedirectLink,
   RegisterPageForm,
   BlockInputWrapper,
-  Lable,
+  Label,
   InputWrapper,
   Input,
   Icon,
+  Wrapper,
 } from "./RegisterPage.styled";
 import { selectAuthRegisterStatus } from "redux/auth/authSelectors";
+import { Container } from "components/common/Container/Container.styled";
 
 export default function RegisterPage() {
   const navigate = useNavigate();
@@ -77,106 +79,108 @@ export default function RegisterPage() {
   const confirmPasswordError = selectInputNotification(errors["confirm"]);
 
   return (
-    <>
-      <RegisterPageTitle>Sign up</RegisterPageTitle>
-      <RegisterPageForm onSubmit={handleSubmit(onSubmit)}>
-        <BlockInputWrapper>
-          <Lable htmlFor="test" error={emailError}>
-            Email
-          </Lable>
-          <InputWrapper>
-            <Input
-              {...register("email")}
-              type="email"
-              error={emailError}
-              value={watch("email")}
-            />
-            <Icon size={28} error={emailError} />
-          </InputWrapper>
-          {emailError ? (
-            <InputNotification
-              text={emailError}
-              error={emailError}
-              registerError={emailError}
-              color={"red"}
-            />
-          ) : (
-            <InputNotification text={registerPageRules.EMAIL} />
-          )}
-        </BlockInputWrapper>
+    <Container>
+      <Wrapper>
+        <AuthTitle>Sign up</AuthTitle>
+        <RegisterPageForm onSubmit={handleSubmit(onSubmit)}>
+          <BlockInputWrapper>
+            <Label htmlFor="test" error={emailError}>
+              Email
+            </Label>
+            <InputWrapper>
+              <Input
+                {...register("email")}
+                type="email"
+                error={emailError}
+                value={watch("email")}
+              />
+              <Icon size={28} error={emailError} />
+            </InputWrapper>
+            {emailError ? (
+              <InputNotification
+                text={emailError}
+                error={emailError}
+                registerError={emailError}
+                color={"#BD2816"}
+              />
+            ) : (
+              <InputNotification text={registerPageRules.EMAIL} />
+            )}
+          </BlockInputWrapper>
 
-        <BlockInputWrapper>
-          <Lable error={passwordError}>Create password</Lable>
-          <InputWrapper className="password-wrapper">
-            <Input
-              {...register("password")}
-              className="input-password-register"
-              type="password"
-              value={watch("password")}
-              name="password"
-              error={passwordError}
-            />
-            <ShowPasswordRegisterPageButton
-              onClick={showPassword}
-              className="password"
-              error={passwordError}
-            />
-          </InputWrapper>
-          {passwordError ? (
-            <InputNotification
-              text={passwordError}
-              error={passwordError}
-              color={"red"}
-            />
-          ) : (
-            <InputNotification text={registerPageRules.PASSWORD} />
-          )}
-        </BlockInputWrapper>
+          <BlockInputWrapper>
+            <Label error={passwordError}>Create password</Label>
+            <InputWrapper className="password-wrapper">
+              <Input
+                {...register("password")}
+                className="input-password-register"
+                type="password"
+                value={watch("password")}
+                name="password"
+                error={passwordError}
+              />
+              <ShowPasswordRegisterPageButton
+                onClick={showPassword}
+                className="password"
+                error={passwordError}
+              />
+            </InputWrapper>
+            {passwordError ? (
+              <InputNotification
+                text={passwordError}
+                error={passwordError}
+                color={"#BD2816"}
+              />
+            ) : (
+              <InputNotification text={registerPageRules.PASSWORD} />
+            )}
+          </BlockInputWrapper>
 
-        <BlockInputWrapper>
-          <Lable error={confirmPasswordError}>Confirm password</Lable>
-          <InputWrapper className="confirm-password-wrapper">
-            <Input
-              {...register("confirm")}
-              className="input-password-register-confirm"
-              type="password"
-              name="confirm"
-              value={watch("confirm")}
-              error={confirmPasswordError}
-            />
-            <ShowPasswordRegisterPageButton
-              onClick={showConfirmPassword}
-              className="confirm-password"
-              error={confirmPasswordError}
-            />
-          </InputWrapper>
-          {confirmPasswordError ? (
-            <InputNotification
-              text={confirmPasswordError}
-              error={confirmPasswordError}
-              color={"red"}
-            />
-          ) : (
-            <InputNotification text={registerPageRules.CONFIRM_PASSWORD} />
-          )}
-        </BlockInputWrapper>
+          <BlockInputWrapper>
+            <Label error={confirmPasswordError}>Confirm password</Label>
+            <InputWrapper className="confirm-password-wrapper">
+              <Input
+                {...register("confirm")}
+                className="input-password-register-confirm"
+                type="password"
+                name="confirm"
+                value={watch("confirm")}
+                error={confirmPasswordError}
+              />
+              <ShowPasswordRegisterPageButton
+                onClick={showConfirmPassword}
+                className="confirm-password"
+                error={confirmPasswordError}
+              />
+            </InputWrapper>
+            {confirmPasswordError ? (
+              <InputNotification
+                text={confirmPasswordError}
+                error={confirmPasswordError}
+                color={"#BD2816"}
+              />
+            ) : (
+              <InputNotification text={registerPageRules.CONFIRM_PASSWORD} />
+            )}
+          </BlockInputWrapper>
 
-        <Checkbox
-          register={register}
-          name={"agreePolicy"}
-          text="I accept the
+          <Checkbox
+            register={register}
+            name={"agreePolicy"}
+            text="I accept the
         policy and terms"
-          error={errors["agreePolicy"]}
-        />
+            error={errors["agreePolicy"]}
+          />
 
-        <MainButton type="submit" text="Sign up" disabled={!isValid} />
-      </RegisterPageForm>
-      <RegisterPageRedirectLinkWrapper>
-        <RegisterPageRedirectLink onClick={navigateToLogin}>
-          I’am already registered
-        </RegisterPageRedirectLink>
-      </RegisterPageRedirectLinkWrapper>
-      <AppToastContainer size={30} />
-    </>
+          <MainButton type="submit" text="Sign up" disabled={!isValid} />
+        </RegisterPageForm>
+        <RegisterPageRedirectLinkWrapper>
+          <RegisterPageRedirectLink onClick={navigateToLogin}>
+            I’am already registered
+          </RegisterPageRedirectLink>
+        </RegisterPageRedirectLinkWrapper>
+        <AppToastContainer size={30} />
+      </Wrapper>
+    </Container>
   );
 }

@@ -1,31 +1,51 @@
 import styled from "@emotion/styled";
-import { TEXT_COLOR } from "constants";
+
 import { Link } from "react-router-dom";
 
-export const Wrapper = styled.div``;
-
-export const WelcomePageWrapper = styled.div`
+export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  padding-top: 24px;
+  p {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
 `;
-
-export const WelcomePageTextWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  align-items: center;
-  margin-top: 100px;
-  margin-bottom: 80px;
-  color: ${TEXT_COLOR};
-  font-size: 20px;
-  font-weight: 600;
+export const SignUpBtn = styled(Link)`
+  cursor: pointer;
+  margin-bottom: 16px;
+  padding: 12px 50px;
+  border-radius: 24px;
+  border: 1px solid ${({ theme }) => theme.colors.white[100]};
+  font-size: ${({ theme }) => theme.fontSizes[3]};
+  text-transform: capitalize;
+  color: ${({ theme }) => theme.colors.white[100]};
+  background: transparent;
+  text-decoration: none;
+  &:hover,
+  &:focus {
+    background-color: ${({ theme }) => theme.colors.BTN_COLOR_HOVER};
+  }
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints[1]}) {
+    color: ${({ theme }) => theme.colors.black[100]};
+    border: 1px solid ${({ theme }) => theme.colors.black[100]};
+  }
 `;
-
-export const LoginPageLinkForgotPassword = styled(Link)`
-  color: ${TEXT_COLOR};
-
+export const ForgotPasswordLink = styled(Link)`
+  cursor: pointer;
+  margin-top: 16px;
+  color: ${({ theme }) => theme.colors.white[100]};
   font-size: 16px;
   text-decoration: underline;
+  &:hover,
+  &:focus {
+    color: ${({ theme }) => theme.colors.BTN_COLOR_HOVER};
+  }
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints[1]}) {
+    color: ${({ theme }) => theme.colors.black[100]};
+  }
 `;
