@@ -17,11 +17,15 @@ export const Wrapper = styled.div`
     height: 2px;
 
     background-color: ${({ error, theme }) =>
-      error ? theme.colors.red[100] : theme.colors.black[100]};
+      error ? theme.colors.red[200] : theme.colors.white[100]};
 
     transform: rotate(45deg);
     transition: 0.3s all ease;
     opacity: 1;
+    @media screen and (min-width: ${({ theme }) => theme.breakpoints[1]}) {
+      background-color: ${({ error, theme }) =>
+        error ? theme.colors.red[200] : theme.colors.black[100]};
+    }
   }
 `;
 
@@ -32,5 +36,9 @@ export const ShowPasswordIcon = styled(AiFillEye)`
   cursor: pointer;
 
   color: ${({ error, theme }) =>
-    error ? theme.colors.red[100] : theme.colors.black[100]};
+    error ? theme.colors.red[200] : theme.colors.white[100]};
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints[1]}) {
+    color: ${({ error, theme }) =>
+      error ? theme.colors.red[200] : theme.colors.black[100]};
+  }
 `;

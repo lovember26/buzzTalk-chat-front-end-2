@@ -4,22 +4,23 @@ import { successNotification, errorNotification } from "helpers/notification";
 import { useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { inputEmailSchema } from "middlewares";
-import { registerPageRules } from "constants";
+
 import { InputNotification } from "components/common/InputNotification/InputNotification";
 import { selectInputNotification } from "helpers/selectWrongPasswordNotification";
 import { resetPasswordToken } from "services/authApi";
-import { VerifyWrapper } from "pages/VerifyPage/VerifyPage.styled";
+import { ReactComponent as Line } from "../../images/line-black.svg";
 import {
   ForgotPassText,
   ForgotPassTitle,
   Form,
   BlockInputWrapper,
-  Lable,
   InputWrapper,
   Input,
   Icon,
+  SignUpLink,
 } from "./ForgotPasswordPage.styled";
 import { AppToastContainer } from "components/AppToastContainer/AppToastContainer";
+import { Label, Wrapper } from "pages/RegisterPage/RegisterPage.styled";
 
 export default function ForgotPasswordPage() {
   const {
@@ -47,39 +48,29 @@ export default function ForgotPasswordPage() {
 
   return (
     <Container>
-      <VerifyWrapper>
+      <Wrapper>
         <ForgotPassTitle>Forgot Password</ForgotPassTitle>
         <ForgotPassText>Enter the email used for registration.</ForgotPassText>
         <ForgotPassText>We'll send you a password reset link.</ForgotPassText>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <BlockInputWrapper>
-            <Lable htmlFor="test" error={error}>
+            <Label htmlFor="test" error={error}>
               Email
-            </Lable>
+            </Label>
             <InputWrapper>
-              <Input
-                {...register("email")}
-                type="email"
-                error={error}
-                placeholder={"Enter an email"}
-              />
+              <Input {...register("email")} type="email" error={error} />
               <Icon size={28} error={error} />
             </InputWrapper>
-            {error ? (
-              <InputNotification text={error} color={"red"} />
-            ) : (
-              <InputNotification
-                text={registerPageRules.EMAIL}
-                color={"gray"}
-              />
-            )}
+            {error && <InputNotification text={error} color={"#BD2816"} />}
           </BlockInputWrapper>
 
           <button type="submit" disabled={!isValid}>
             Reset password
           </button>
         </Form>
-      </VerifyWrapper>
+        <SignUpLink to="/register">Back to Sign up</SignUpLink>
+        <Line />
+      </Wrapper>
       <AppToastContainer />
     </Container>
   );

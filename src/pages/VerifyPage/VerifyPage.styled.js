@@ -1,13 +1,6 @@
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 
-export const VerifyWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 40px;
-`;
-
 export const VerifyTitle = styled.h1`
   display: flex;
   flex-direction: column;
@@ -15,8 +8,11 @@ export const VerifyTitle = styled.h1`
   color: #0dc841;
   text-align: center;
   font-size: 24px;
-  margin-top: 24px;
+
   margin-bottom: 40px;
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints[1]}) {
+    margin-top: 24px;
+  }
 `;
 
 export const VerifyText = styled.p`
@@ -26,9 +22,13 @@ export const VerifyText = styled.p`
 `;
 
 export const ResendText = styled.p`
-  color: #777;
+  color: #fff;
   font-size: 12px;
   text-align: center;
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints[1]}) {
+    font-size: 14px;
+    color: #777;
+  }
 `;
 
 export const VerifyButton = styled.p`

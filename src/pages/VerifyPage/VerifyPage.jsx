@@ -4,11 +4,11 @@ import {
   VerifyButton,
   VerifyText,
   VerifyTitle,
-  VerifyWrapper,
 } from "./VerifyPage.styled";
 
 import { resendEmail } from "services/authApi";
 import { useSearchParams } from "react-router-dom";
+import { Wrapper } from "pages/RegisterPage/RegisterPage.styled";
 
 export default function VerifyPage() {
   const [searchParams] = useSearchParams();
@@ -19,7 +19,7 @@ export default function VerifyPage() {
   };
   return (
     <Container>
-      <VerifyWrapper>
+      <Wrapper>
         <VerifyTitle>
           Sign up<span>is successful!</span>
         </VerifyTitle>
@@ -32,7 +32,7 @@ export default function VerifyPage() {
         <VerifyButton type="button" onClick={handleClick}>
           Resend Confirmation Email
         </VerifyButton>
-      </VerifyWrapper>
+      </Wrapper>
     </Container>
   );
 }

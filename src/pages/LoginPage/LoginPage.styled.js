@@ -2,31 +2,39 @@ import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 
 import { AiFillExclamationCircle } from "react-icons/ai";
-import { TEXT_COLOR } from "constants";
-
-export const LoginPageTitle = styled.h1`
-  text-align: center;
-  margin-bottom: 24px;
-  margin-top: 40px;
-  color: ${TEXT_COLOR};
-  font-size: 32px;
-`;
 
 export const LoginPageLinksWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  gap: 12px;
+  & svg {
+    stroke: rgba(255, 255, 255, 0.5);
+  }
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints[1]}) {
+    gap: 24px;
+    & svg {
+      stroke: ${({ theme }) => theme.colors.black[100]};
+    }
+  }
 `;
 
 export const LoginPageLinkForgotPassword = styled(Link)`
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 15px;
-  color: black;
 
-  font-size: 18px;
-  text-decoration: underline;
+  color: ${({ theme }) => theme.colors.white[100]};
+
+  font-size: 16px;
+  &:hover,
+  &:focus {
+    color: ${({ theme }) => theme.colors.BTN_COLOR_HOVER};
+  }
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints[1]}) {
+    color: ${({ theme }) => theme.colors.black[100]};
+    text-decoration: underline;
+  }
 `;
 
 export const LoginPageRedirectLinkWrapper = styled.div`
@@ -38,17 +46,27 @@ export const LoginPageRedirectLinkWrapper = styled.div`
 
 export const LoginPageRedirectText = styled.p`
   margin-right: 5px;
-  color: black;
+  color: ${({ theme }) => theme.colors.white[100]};
 
-  font-size: 18px;
+  font-size: 16px;
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints[1]}) {
+    color: ${({ theme }) => theme.colors.black[100]};
+  }
 `;
 
 export const LoginPageRedirectLink = styled.p`
-  color: black;
+  color: ${({ theme }) => theme.colors.white[100]};
+  &:hover,
+  &:focus {
+    color: ${({ theme }) => theme.colors.BTN_COLOR_HOVER};
+  }
+  font-size: 16px;
 
-  font-size: 18px;
-  text-decoration: underline;
   cursor: pointer;
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints[1]}) {
+    color: ${({ theme }) => theme.colors.black[100]};
+    text-decoration: underline;
+  }
 `;
 
 export const LoginPageForm = styled.form`
@@ -69,25 +87,6 @@ export const BlockInputWrapper = styled.div`
 
 export const InputWrapper = styled.div`
   position: relative;
-`;
-
-export const Lable = styled.label`
-  color: ${({ error, theme, wrong }) => {
-    if (error && wrong < 3) {
-      return theme.colors.red[100];
-    }
-
-    if (wrong >= 3) {
-      return theme.colors.gray[200];
-    }
-
-    return theme.colors.black[100];
-  }};
-
-  font-size: 16px;
-  font-weight: 400;
-
-  margin-bottom: 2px;
 `;
 
 export const Input = styled.input`
@@ -121,23 +120,23 @@ export const Input = styled.input`
 
   background-color: ${({ error, theme, wrong }) => {
     if (error && wrong < 3) {
-      return theme.colors.red[200];
+      return theme.colors.ERROR_BACKGROUND;
     }
 
     if (wrong >= 3) {
       return theme.colors.gray[100];
     }
 
-    return theme.colors.gray[100];
+    return theme.colors.BTN_COLOR_HOVER;
   }};
 
   padding: 6px 50px 6px 10px;
 
   &:hover {
-    border-width: 2px;
+    border-width: 1px;
   }
   &:focus {
-    border-width: 2px;
+    border-width: 1px;
   }
 
   &::placeholder {
@@ -156,8 +155,24 @@ export const Input = styled.input`
         return theme.colors.gray[200];
       }
 
-      return theme.colors.black;
+      return theme.colors.white[100];
     }};
+  }
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints[1]}) {
+    background-color: ${({ error, theme, wrong }) => {
+      if (error && wrong < 3) {
+        return theme.colors.ERROR_BACKGROUND;
+      }
+
+      if (wrong >= 3) {
+        return theme.colors.gray[100];
+      }
+
+      return theme.colors.gray[100];
+    }};
+    &[value] {
+      color: ${(props) => props.theme.colors.black[100]};
+    }
   }
 `;
 
