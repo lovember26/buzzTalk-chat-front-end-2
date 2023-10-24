@@ -1,19 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import {
-  fetchAllUsersService,
-  updateUserService,
-  generateGravatarUserService,
-  removeUserAvatarService,
-} from "services/userApi";
-
-// import { userAPI } from "services";
+import { userAPI } from "services";
 import { successNotification } from "helpers/notification";
 
 export const fetchAllUsersThunk = createAsyncThunk(
   "users/fetchAll",
   async (_, { rejectWithValue }) => {
     try {
-      const users = await fetchAllUsersService();
+      const users = await userAPI.fetchAllUsersService();
       return users;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -25,7 +18,7 @@ export const updateUserInfoThunk = createAsyncThunk(
   "users/update",
   async (credentials, { rejectWithValue }) => {
     try {
-      const data = await updateUserService(credentials);
+      const data = await userAPI.updateUserService(credentials);
       successNotification("Updating successful");
 
       return data;
@@ -40,7 +33,7 @@ export const generateGravatarUserInfoThunk = createAsyncThunk(
   "users/generate-gravatar",
   async (credentials, { rejectWithValue }) => {
     try {
-      const data = await generateGravatarUserService(credentials);
+      const data = await userAPI.generateGravatarUserService(credentials);
       successNotification("Generating successful");
 
       return data;
@@ -55,7 +48,7 @@ export const removeUserAvatarInfoThunk = createAsyncThunk(
   "users/remove-avatar",
   async (credentials, { rejectWithValue }) => {
     try {
-      const data = await removeUserAvatarService(credentials);
+      const data = await userAPI.removeUserAvatarService(credentials);
       successNotification("Successful remove avatar");
 
       return data;
