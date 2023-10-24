@@ -19,8 +19,9 @@ export const fetchMessageByIdThunk = createAsyncThunk(
   "chat/fetchMessageById",
   async (credentials, { rejectWithValue }) => {
     try {
-      const messages = await chatAPI.getChatByIdService(credentials);
-      return messages;
+      const chat = await chatAPI.getChatByIdService(credentials);
+      console.log("chat", chat);
+      return chat;
     } catch (error) {
       return rejectWithValue(error.message);
     }

@@ -23,7 +23,7 @@ export const createMessagesService = async (participants, messages) => {
 // Parameters - id
 // Response - object with id participants and messages values
 export const getChatByIdService = async (id) => {
-  const { data } = await axios.get(`/chat/${id}/`);
+  const { data } = await axios.get(`/chat/${id}`);
   console.log("getChatByIdService", data);
   return data;
 };
