@@ -20,8 +20,6 @@
 //   );
 // };
 
-import styled, { keyframes } from "styled-components";
-
 import { LoaderContainer } from "./Loader.styled";
 // const scaleAnimation = keyframes`
 //   0% {
