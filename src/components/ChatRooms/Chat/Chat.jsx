@@ -2,6 +2,7 @@ import React from "react";
 import withRouter from "helpers/withRouter";
 import WebSocketInstance from "websocket";
 import { MessageInput } from "components/MessageInput/MessageInput";
+import Hoc from "hoc/hoc";
 
 import {
   MessageList,
@@ -14,9 +15,6 @@ import {
 } from "./Chat.styled";
 
 class Chat extends React.Component {
-  //The state announcement works the same way
-  // state = { message: "" };
-
   constructor(props) {
     super(props);
     //The state announcement works the same way
@@ -28,12 +26,14 @@ class Chat extends React.Component {
         this.addMessage.bind(this)
       );
       // In video this.props.currentUser and without this.props.match.params.chatID
+      // Change default name to current user name after bugfix
       WebSocketInstance.fetchMessages(
         this.props.username,
-        // this.props.match.params.chatID
-        1
+        this.props.params.chatId
       );
+      // WebSocketInstance.fetchMessages("suchok_olya", this.props.params.chatId);
     });
+    WebSocketInstance.connect(this.props.params.chatId);
   }
   //Functionality of scrolling scrolling to the latest messages
   componentDidMount() {
@@ -82,10 +82,11 @@ class Chat extends React.Component {
     event.preventDefault();
 
     const messageObject = {
-      from: this.props.params.username,
+      // Change default name to current user name after bugfix
+      // from: "olgasuchok21",
+      from: this.props.username,
       content: this.state.message,
-      chatId: 1,
-      // chatId: this.props.match.params.chatID,
+      chatId: this.props.params.chatId,
     };
 
     WebSocketInstance.newChatMessage(messageObject);
@@ -119,7 +120,7 @@ class Chat extends React.Component {
   };
 
   renderMessages = (messages) => {
-    const currentUser = this.props.params.username;
+    const currentUser = this.props.username;
 
     return messages.map((message, i, arr) => (
       <MessageListItem
@@ -127,7 +128,8 @@ class Chat extends React.Component {
         className={message.author === currentUser ? "sent" : "replies"}
       >
         <MessageListItemUsernameWrapper>
-          <MessageListItemUsername>{currentUser}:</MessageListItemUsername>
+          {/* <MessageListItemUsername>{currentUser}:</MessageListItemUsername> */}
+          <MessageListItemUsername>Name:</MessageListItemUsername>
           <MessageListItemUsernameImage alt="avatar" />
         </MessageListItemUsernameWrapper>
         <MessageListItemMessage>{message.content}</MessageListItemMessage>
@@ -138,10 +140,10 @@ class Chat extends React.Component {
 
   render() {
     const messages = this.state.messages;
-    const { username } = this.props.params;
+    const chat = this.props.params.chatId;
 
     return (
-      <>
+      <Hoc>
         <div
           style={{
             marginBottom: "20px",
@@ -149,7 +151,7 @@ class Chat extends React.Component {
             marginLeft: "16px",
           }}
         >
-          CHAT with <span style={{ fontWeight: 800 }}>{username}</span>
+          CHAT number <span style={{ fontWeight: 800 }}>{chat}</span>
         </div>
 
         <MessageList>
@@ -167,7 +169,7 @@ class Chat extends React.Component {
           onChange={this.messageChangeHandler}
           value={this.state.message}
         />
-      </>
+      </Hoc>
     );
   }
 }

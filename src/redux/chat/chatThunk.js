@@ -1,46 +1,44 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { chatAPI } from "services";
-// import { successNotification } from "helpers/notification";
 
-export const fetchAllMessagesThunk = createAsyncThunk(
+export const fetchAllChatsThunk = createAsyncThunk(
   "chat/fetchAll",
   async (_, { rejectWithValue }) => {
     try {
-      const messages = await chatAPI.getMessagesService();
-      console.log("messages in fetchAllMessages", messages);
-      return messages;
+      const chats = await chatAPI.getAllChatsService();
+      return chats;
     } catch (error) {
       return rejectWithValue(error.message);
     }
   }
 );
 
-export const fetchMessageByIdThunk = createAsyncThunk(
-  "chat/fetchMessageById",
+export const fetchChatByIdThunk = createAsyncThunk(
+  "chat/fetchChatById",
   async (credentials, { rejectWithValue }) => {
     try {
-      const messages = await chatAPI.getChatByIdService(credentials);
-      return messages;
+      const chat = await chatAPI.getChatByIdService(credentials);
+      return chat;
     } catch (error) {
       return rejectWithValue(error.message);
     }
   }
 );
 
-export const createMessageThunk = createAsyncThunk(
-  "chat/createMessage",
+export const createChatThunk = createAsyncThunk(
+  "chat/createChat",
   async (credentials, { rejectWithValue }) => {
     try {
-      const messages = await chatAPI.createMessagesService(credentials);
-      return messages;
+      const data = await chatAPI.createChatService(credentials);
+      return data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
   }
 );
 
-export const deleteMessageByIdThunk = createAsyncThunk(
-  "chat/deleteMessage",
+export const deleteChatByIdThunk = createAsyncThunk(
+  "chat/deleteChat",
   async (credentials, { rejectWithValue }) => {
     try {
       await chatAPI.deleteChatByIdService(credentials);
@@ -50,24 +48,24 @@ export const deleteMessageByIdThunk = createAsyncThunk(
   }
 );
 
-export const updateMessageThunk = createAsyncThunk(
-  "chat/updateMessage",
+export const updateChatByIdThunk = createAsyncThunk(
+  "chat/updateChat",
   async (credentials, { rejectWithValue }) => {
     try {
-      const messages = await chatAPI.updateMessageService(credentials);
-      return messages;
+      const data = await chatAPI.updateChatByIdService(credentials);
+      return data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
   }
 );
 
-export const changeMessageThunk = createAsyncThunk(
-  "chat/changeMessage",
+export const changeChatByIdThunk = createAsyncThunk(
+  "chat/changeChat",
   async (credentials, { rejectWithValue }) => {
     try {
-      const messages = await chatAPI.changeMessageService(credentials);
-      return messages;
+      const data = await chatAPI.changeChatByIdService(credentials);
+      return data;
     } catch (error) {
       return rejectWithValue(error.message);
     }

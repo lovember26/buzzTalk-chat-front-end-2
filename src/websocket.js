@@ -17,8 +17,9 @@ class WebSocketService {
     this.socketRef = null;
   }
 
-  connect() {
-    const path = "wss://buzz-talk-api.onrender.com/ws/chat/1/";
+  connect(chatId) {
+    // const path = "wss://buzz-talk-api.onrender.com/ws/chat/1/";
+    const path = `wss://buzz-talk-api.onrender.com/ws/chat/${chatId}/`;
     this.socketRef = new WebSocket(path);
 
     this.socketRef.onopen = () => {
@@ -56,7 +57,6 @@ class WebSocketService {
       this.callbacks[command](parsedData.message);
     }
   }
-  //   fetchMessages(username, chatId)  ?? In video without chatId
   fetchMessages(username, chatId) {
     this.sendMessage({
       command: "fetch_messages",
@@ -71,7 +71,6 @@ class WebSocketService {
       command: "new_message",
       from: message.from,
       message: message.content,
-      // Comment
       chat_id: message.chatId,
     });
   }

@@ -14,7 +14,8 @@ export const routes = {
   ADD_FRIENDS_PAGE: "add-friend",
 
   CHAT_ROOMS_CHAT_PAGE: "/chat-rooms/chats",
-  CHAT_ROOMS_PRIVATE_CHAT_PAGE: "/chat-rooms/chats/:username",
+  // CHAT_ROOMS_PRIVATE_CHAT_PAGE: "/chat-rooms/chats/:username",
+  CHAT_ROOMS_PRIVATE_CHAT_PAGE: "/chat-rooms/chats/:chatId",
 
   PROFILE_PAGE: "/profile",
   EDIT_PROFILE_PAGE: "/profile/edit",
