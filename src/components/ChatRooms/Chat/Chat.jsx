@@ -27,7 +27,11 @@ class Chat extends React.Component {
       );
       // In video this.props.currentUser and without this.props.match.params.chatID
       // Change default name to current user name after bugfix
-      WebSocketInstance.fetchMessages("suchok_olya", this.props.params.chatId);
+      WebSocketInstance.fetchMessages(
+        this.props.username,
+        this.props.params.chatId
+      );
+      // WebSocketInstance.fetchMessages("suchok_olya", this.props.params.chatId);
     });
     WebSocketInstance.connect(this.props.params.chatId);
   }
@@ -79,8 +83,8 @@ class Chat extends React.Component {
 
     const messageObject = {
       // Change default name to current user name after bugfix
-      from: "suchok_olya",
-      // from: this.props.username,
+      // from: "olgasuchok21",
+      from: this.props.username,
       content: this.state.message,
       chatId: this.props.params.chatId,
     };
@@ -124,7 +128,8 @@ class Chat extends React.Component {
         className={message.author === currentUser ? "sent" : "replies"}
       >
         <MessageListItemUsernameWrapper>
-          <MessageListItemUsername>{currentUser}:</MessageListItemUsername>
+          {/* <MessageListItemUsername>{currentUser}:</MessageListItemUsername> */}
+          <MessageListItemUsername>Name:</MessageListItemUsername>
           <MessageListItemUsernameImage alt="avatar" />
         </MessageListItemUsernameWrapper>
         <MessageListItemMessage>{message.content}</MessageListItemMessage>

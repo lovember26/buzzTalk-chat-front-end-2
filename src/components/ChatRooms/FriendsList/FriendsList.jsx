@@ -12,12 +12,13 @@ export const FriendsList = () => {
   const username = useSelector(selectUserName);
   const [chats, setChats] = useState([]);
 
-  // console.log("chats", chats);
+  console.log("chats", chats);
 
   useEffect(() => {
     if (accessToken !== null && username !== null) {
       // Change default name to current user name after bugfix
-      getUserChats(accessToken, "suchok_olya");
+      // getUserChats(accessToken, "suchok_olya");
+      getUserChats(accessToken, username);
     }
   }, [accessToken, username]);
 
@@ -29,6 +30,12 @@ export const FriendsList = () => {
           Authorization: `Bearer ${token}`,
         },
       }
+      // `https://buzz-talk-api.onrender.com/api/chat/`,
+      // {
+      //   headers: {
+      //     Authorization: `Bearer ${token}`,
+      //   },
+      // }
     );
     setChats(data);
   };

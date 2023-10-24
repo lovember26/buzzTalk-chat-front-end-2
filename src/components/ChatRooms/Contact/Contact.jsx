@@ -1,14 +1,18 @@
 // React component
 import { ReactComponent as DefaultIcon } from "../../../images/default.svg";
-import { ActiveChatInfo, ActiveChatName } from "./Contact.styled";
+import {
+  ActiveChatWrapper,
+  ActiveChatInfo,
+  ActiveChatName,
+} from "./Contact.styled";
 
 const Contact = ({ chat, name }) => (
-  <li key={chat.id}>
+  <ActiveChatWrapper key={chat.id}>
     <ActiveChatInfo to={`chats/${chat.id}`}>
       {chat.image ? <img src={chat.image} alt="avatar" /> : <DefaultIcon />}
       <ActiveChatName>{name}</ActiveChatName>
     </ActiveChatInfo>
-  </li>
+  </ActiveChatWrapper>
 );
 
 export default Contact;
