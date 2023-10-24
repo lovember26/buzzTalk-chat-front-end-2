@@ -1,1 +1,1 @@
-export const selectFetchAllMessages= (state) => state.chat.messages;
+export const selectFetchAllChats= (state) => state.chats.all;

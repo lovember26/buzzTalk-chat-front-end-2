@@ -2,6 +2,7 @@ import React from "react";
 import withRouter from "helpers/withRouter";
 import WebSocketInstance from "websocket";
 import { MessageInput } from "components/MessageInput/MessageInput";
+import Hoc from "hoc/hoc";
 
 import {
   MessageList,
@@ -28,17 +29,16 @@ class Chat extends React.Component {
         this.addMessage.bind(this)
       );
       // In video this.props.currentUser and without this.props.match.params.chatID
-      WebSocketInstance.fetchMessages(
-        this.props.username,
-        // this.props.match.params.chatID
-        1
-      );
+      WebSocketInstance.fetchMessages("suchok_olya", this.props.params.chatId);
     });
+    WebSocketInstance.connect(this.props.params.chatId);
   }
   //Functionality of scrolling scrolling to the latest messages
   componentDidMount() {
     WebSocketInstance.connect();
     this.scrollToBottom();
+    // console.log("this.props CHAT", this.props);
+    // console.log("this.props.params.chatId chat", this.props.params.chatId);
   }
 
   scrollToBottom = () => {
@@ -82,10 +82,10 @@ class Chat extends React.Component {
     event.preventDefault();
 
     const messageObject = {
-      from: this.props.params.username,
+      from: "suchok_olya",
+      // from: this.props.username,
       content: this.state.message,
-      chatId: 1,
-      // chatId: this.props.match.params.chatID,
+      chatId: this.props.params.chatId,
     };
 
     WebSocketInstance.newChatMessage(messageObject);
@@ -119,7 +119,7 @@ class Chat extends React.Component {
   };
 
   renderMessages = (messages) => {
-    const currentUser = this.props.params.username;
+    const currentUser = this.props.username;
 
     return messages.map((message, i, arr) => (
       <MessageListItem
@@ -138,10 +138,11 @@ class Chat extends React.Component {
 
   render() {
     const messages = this.state.messages;
-    const { username } = this.props.params;
+    // const { username } = this.props.params;
+    const username = this.props.username;
 
     return (
-      <>
+      <Hoc>
         <div
           style={{
             marginBottom: "20px",
@@ -167,7 +168,7 @@ class Chat extends React.Component {
           onChange={this.messageChangeHandler}
           value={this.state.message}
         />
-      </>
+      </Hoc>
     );
   }
 }

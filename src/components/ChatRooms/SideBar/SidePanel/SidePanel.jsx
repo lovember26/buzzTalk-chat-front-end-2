@@ -12,6 +12,7 @@ import {
 } from "./SidePanel.styled";
 import { StyledLink } from "../../FriendsBar/FriendsBar.styled";
 import { FriendsList } from "../../FriendsList/FriendsList";
+// import FriendsList from "../../FriendsList/FriendsList";
 
 export default function SidePanel() {
   return (

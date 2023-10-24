@@ -9,6 +9,8 @@ import { routes } from "constants/routes";
 import PrivatePage from "pages/access/PrivatePage";
 import RestrictedPage from "pages/access/RestrictedPage";
 
+import { selectUserName } from "redux/user/userSelectors";
+
 import Layout from "./Layout/Layout";
 import { Loader } from "./common/Loader/Loader";
 
@@ -40,6 +42,7 @@ export const App = () => {
   const dispatch = useDispatch();
   const accessToken = useSelector(selectAccessToken);
   const isFetchingCurrentUser = useSelector(selectIsFetchingCurrentUser);
+  const username = useSelector(selectUserName);
 
   useEffect(() => {
     if (accessToken) {
@@ -108,7 +111,7 @@ export const App = () => {
           <Route index element={<PrivatePage component={<WelcomeChat />} />} />
           <Route
             path={routes.CHAT_ROOMS_PRIVATE_CHAT_PAGE}
-            element={<PrivatePage component={<Chat />} />}
+            element={<PrivatePage component={<Chat username={username} />} />}
           />
         </Route>
       </Route>

@@ -1,7 +1,7 @@
 import { status } from "constants";
 
 export const initialState = {
-  messages: [],
+  all: [],
 
   statuses: {
     fetchAll: status.IDLE,
