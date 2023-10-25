@@ -135,7 +135,7 @@ button:active {
   transform: scale(0.5);
   transition: 0.4s all;
 
-  width: 50vw;
+  /* width: 50vw; */
 }
 
 .content.active {

@@ -7,6 +7,10 @@ export const Form = styled.form`
   flex-direction: column;
 `;
 
+export const Select = styled.select`
+  margin-bottom: 20px;
+`;
+
 export const Input = styled.input`
   width: 400px;
   padding: 10px;

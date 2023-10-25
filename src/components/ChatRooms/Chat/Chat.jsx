@@ -124,7 +124,6 @@ class Chat extends React.Component {
       >
         <MessageListItemUsernameWrapper>
           <MessageListItemUsername>{message.author}:</MessageListItemUsername>
-          <MessageListItemUsername>Name:</MessageListItemUsername>
           <MessageListItemUsernameImage alt="avatar" />
         </MessageListItemUsernameWrapper>
         <MessageListItemMessage>{message.content}</MessageListItemMessage>
