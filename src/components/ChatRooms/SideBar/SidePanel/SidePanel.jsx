@@ -10,11 +10,16 @@ import {
   StyledNav,
   StyledSideBar,
 } from "./SidePanel.styled";
+
 import { StyledLink } from "../../FriendsBar/FriendsBar.styled";
 import { FriendsList } from "../../FriendsList/FriendsList";
-// import FriendsList from "../../FriendsList/FriendsList";
+import Modal from "components/common/Modal/Modal";
+import CreateChatForm from "components/ChatRooms/CreateChatForm/CreateChatForm";
+import { useState } from "react";
 
 export default function SidePanel() {
+  const [modalActive, setModalActive] = useState(false);
+
   return (
     <>
       <StyledSideBar>
@@ -22,7 +27,7 @@ export default function SidePanel() {
           <StyledChatsBtn type="button">
             <ChatsBtn />
           </StyledChatsBtn>
-          <button type="button">
+          <button type="button" onClick={() => setModalActive(true)}>
             <AddChatButton />
           </button>
         </StyledNav>
@@ -39,6 +44,9 @@ export default function SidePanel() {
           <FriendsList />
         </SearchBar>
       </StyledSideBar>
+      <Modal active={modalActive} setActive={setModalActive}>
+        <CreateChatForm />
+      </Modal>
       <Outlet />
     </>
   );

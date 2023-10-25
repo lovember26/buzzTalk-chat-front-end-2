@@ -10,14 +10,12 @@ import { selectUserName } from "redux/user/userSelectors";
 export const FriendsList = () => {
   const accessToken = useSelector(selectAccessToken);
   const username = useSelector(selectUserName);
-  const [chats, setChats] = useState([]);
+  const [activeChats, setActiveChats] = useState([]);
 
-  console.log("chats", chats);
+  console.log("activeChats", activeChats);
 
   useEffect(() => {
     if (accessToken !== null && username !== null) {
-      // Change default name to current user name after bugfix
-      // getUserChats(accessToken, "suchok_olya");
       getUserChats(accessToken, username);
     }
   }, [accessToken, username]);
@@ -30,21 +28,15 @@ export const FriendsList = () => {
           Authorization: `Bearer ${token}`,
         },
       }
-      // `https://buzz-talk-api.onrender.com/api/chat/`,
-      // {
-      //   headers: {
-      //     Authorization: `Bearer ${token}`,
-      //   },
-      // }
     );
-    setChats(data);
+    setActiveChats(data);
   };
 
   return (
     <StyledFriendsList>
-      {chats && chats.length > 0 ? (
+      {activeChats && activeChats.length > 0 ? (
         <ul>
-          {chats.map((chat) => (
+          {activeChats.map((chat) => (
             <Contact
               key={chat.id}
               chat={chat}
