@@ -1,34 +1,25 @@
 import styled from "@emotion/styled";
-import { AiFillExclamationCircle } from "react-icons/ai";
+// import { AiFillExclamationCircle } from "react-icons/ai";
 
-export const ResetPasswordForm = styled.form`
-  margin-top: 24px;
+// export const ResetPasswordForm = styled.form`
+//   margin-top: 24px;
+//   display: flex;
+//   flex-direction: column;
 
-  display: flex;
-  flex-direction: column;
-
-  label {
-    font-size: 16px;
-  }
-  input {
-    padding-left: 16px;
-    width: 343px;
-    height: 56px;
-    border: none;
-    border-radius: 15px;
-    background: #ebebeb;
-  }
-  button {
-    margin-top: 24px;
-    width: fit-content;
-    align-self: center;
-    padding: 12px 60px;
-    font-size: 14px;
-    border-radius: 24px;
-    background: ${({ theme }) => theme.colors.pink};
-    color: #fff;
-  }
-`;
+//   button {
+//     width: fit-content;
+//     align-self: center;
+//     padding: 12px 60px;
+//     font-size: 16px;
+//     border-radius: 24px;
+//     background: ${({ theme }) => theme.colors.BTN_COLOR};
+//     color: #fff;
+//     &:hover,
+//     &:focus {
+//       background: ${({ theme }) => theme.colors.BTN_COLOR_HOVER};
+//     }
+//   }
+// `;
 
 export const Form = styled.form`
   margin-top: 24px;
@@ -36,29 +27,25 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
 
-  label {
-    font-size: 16px;
-  }
-  input {
-    padding-left: 16px;
-    width: 343px;
-    height: 56px;
-    border: none;
-    border-radius: 15px;
-    background: #ebebeb;
-  }
+  // input {
+  //   padding-left: 16px;
+  //   width: 343px;
+  //   height: 56px;
+  //   border: none;
+  //   border-radius: 15px;
+  //   background: #ebebeb;
+  // }
   button {
-    margin-top: 24px;
     width: fit-content;
     align-self: center;
     padding: 12px 60px;
-    font-size: 14px;
+    font-size: 16px;
     border-radius: 24px;
-    background: ${({ theme }) => theme.colors.pink};
+    background: ${({ theme }) => theme.colors.BTN_COLOR};
     color: #fff;
     &:hover,
     &:focus {
-      background: ${({ theme }) => theme.colors.purple};
+      background: ${({ theme }) => theme.colors.BTN_COLOR_HOVER};
     }
   }
 `;
@@ -71,15 +58,6 @@ export const InputWrapper = styled.div`
   position: relative;
 `;
 
-export const Lable = styled.label`
-  color: ${({ error, theme }) =>
-    error ? theme.colors.red[100] : theme.colors.black[100]};
-
-  font-size: 18px;
-  text-decoration: none;
-  margin-bottom: 4px;
-`;
-
 export const Input = styled.input`
   display: flex;
   align-items: center;
@@ -88,17 +66,18 @@ export const Input = styled.input`
   border-width: 1px;
   border-radius: 15px;
   border-color: ${({ error, theme }) =>
-    error ? theme.colors.red[100] : "transparent"};
+    error ? theme.colors.red[200] : "transparent"};
 
   width: 343px;
   height: 56px;
   margin-bottom: 2px;
-  color: ${(props) => props.theme.colors.mainText};
+  color: ${({ error, theme }) =>
+    error ? theme.colors.red[200] : theme.colors.white[100]};
   font-size: ${(props) => props.theme.fontSizes.m};
   font-weight: ${(props) => props.theme.fontWeights.text};
 
   background-color: ${({ error, theme }) =>
-    error ? theme.colors.red[200] : theme.colors.gray[100]};
+    error ? theme.colors.ERROR_BACKGROUND : theme.colors.BTN_COLOR_HOVER};
 
   padding: 6px 10px;
 
@@ -108,23 +87,19 @@ export const Input = styled.input`
   &:focus {
     border-width: 2px;
   }
-
-  &::placeholder {
-    font-size: 18px;
-    color: gray;
-  }
-
-  &[value] {
-    font-size: 24px;
-    color: gray;
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints[1]}) {
+    background: ${({ error, theme }) =>
+      error ? theme.colors.ERROR_BACKGROUND : theme.colors.gray[100]};
+    color: ${({ error, theme }) =>
+      error ? theme.colors.red[200] : theme.colors.black[200]};
   }
 `;
 
-export const Icon = styled(AiFillExclamationCircle)`
-  position: absolute;
-  top: 13px;
-  right: 12px;
-  cursor: pointer;
+// export const Icon = styled(AiFillExclamationCircle)`
+//   position: absolute;
+//   top: 13px;
+//   right: 12px;
+//   cursor: pointer;
 
-  color: ${({ error }) => (error ? "red" : "transparent")};
-`;
+//   color: ${({ error }) => (error ? "#BD2816" : "transparent")};
+// `;

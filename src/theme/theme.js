@@ -57,13 +57,17 @@ export const theme = {
       100: "#000000",
       200: "#444444", //welcome page button background color
     },
-
+    // export const MAIN_COLOR = "#451952";
+    // export const TITLE_COLOR = "#F39F5A";
+    // export const TEXT_COLOR = "#000";
+    // export const BTN_COLOR = "#662549";
     green: {},
     pink: "#AE445A",
-    purple: "#451952",
-    lightPurple: "#7E5D88",
-    crimson: "#662549",
-    orange: "#F39F5A",
+    MAIN_COLOR: "#451952",
+    BTN_COLOR_HOVER: "#7E5D88",
+    BTN_COLOR: "#662549",
+    TITLE_COLOR: "#F39F5A",
+    ERROR_BACKGROUND: "#FFF5EC",
     gray: {
       100: "#EBEBEB", //input background color
       200: "#777777", //input notification text
@@ -74,7 +78,7 @@ export const theme = {
 
     red: {
       100: "#e74a3b", // validation error
-      200: "#FFF5EC", // validation error input background validation error
+      200: "#BD2816", // validation error input background validation error
     },
 
     blue: {

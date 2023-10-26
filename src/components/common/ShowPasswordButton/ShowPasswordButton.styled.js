@@ -29,12 +29,29 @@ export const Wrapper = styled.div`
         return theme.colors.gray[200];
       }
 
-      return theme.colors.black[100];
+      return theme.colors.white[100];
     }};
 
     transform: rotate(45deg);
     transition: 0.3s all ease;
     opacity: 1;
+    @media screen and (min-width: ${({ theme }) => theme.breakpoints[1]}) {
+      background-color: ${({ error, theme, wrong }) => {
+        if (error && wrong < 3) {
+          return theme.colors.red[200];
+        }
+
+        if (error && wrong === "undefined") {
+          return theme.colors.red[200];
+        }
+
+        if (wrong >= 3) {
+          return theme.colors.gray[200];
+        }
+
+        return theme.colors.black[100];
+      }};
+    }
   }
 `;
 
@@ -46,13 +63,26 @@ export const ShowPasswordIcon = styled(AiFillEye)`
 
   color: ${({ error, theme, wrong }) => {
     if (error && wrong < 3) {
-      return theme.colors.red[100];
+      return theme.colors.red[200];
     }
 
     if (wrong >= 3) {
       return theme.colors.gray[200];
     }
 
-    return theme.colors.black[100];
+    return theme.colors.white[100];
   }};
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints[1]}) {
+    color: ${({ error, theme, wrong }) => {
+      if (error && wrong < 3) {
+        return theme.colors.red[200];
+      }
+
+      if (wrong >= 3) {
+        return theme.colors.gray[200];
+      }
+
+      return theme.colors.black[100];
+    }};
+  }
 `;

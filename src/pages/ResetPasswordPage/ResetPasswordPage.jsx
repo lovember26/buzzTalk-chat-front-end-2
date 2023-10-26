@@ -2,18 +2,17 @@ import { Container } from "components/common/Container/Container.styled";
 import {
   Form,
   BlockInputWrapper,
-  Lable,
   InputWrapper,
   Input,
 } from "pages/ResetPasswordPage/ResetPasswordPage.styled";
 import {
   ForgotPassTitle,
   ForgotPassText,
+  SignUpLink,
 } from "pages/ForgotPasswordPage/ForgotPasswordPage.styled";
-import { VerifyWrapper } from "pages/VerifyPage/VerifyPage.styled";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
-
+import { ReactComponent as Line } from "../../images/line-black.svg";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { resetPassword } from "services/authApi";
 import { inputResetPasswordSchema } from "middlewares";
@@ -25,10 +24,11 @@ import { InputNotification } from "components/common/InputNotification/InputNoti
 import { ShowPasswordRegisterPageButton } from "components/common/ShowPasswordRegisterPageButton/ShowPasswordRegisterPageButton";
 import { selectInputNotification } from "helpers/selectWrongPasswordNotification";
 import { AppToastContainer } from "components/AppToastContainer/AppToastContainer";
+import { Label, Wrapper } from "pages/RegisterPage/RegisterPage.styled";
 
 export default function ResetPasswordPage() {
   const [searchParams] = useSearchParams();
-
+  const navigate = useNavigate();
   const email = searchParams.get("email");
   const token = searchParams.get("token");
 
@@ -56,6 +56,7 @@ export default function ResetPasswordPage() {
         token,
       });
       successNotification("You have successfully changed your password.");
+      navigate("/login", { replace: true });
       reset();
     } catch (error) {
       errorNotification(error.message);
@@ -67,15 +68,16 @@ export default function ResetPasswordPage() {
 
   return (
     <Container>
-      <VerifyWrapper>
+      <Wrapper>
         <ForgotPassTitle>Enter New Password</ForgotPassTitle>
         <ForgotPassText>
-          Your new password must be different from used password
+          Your new password must be different
+          <br /> from used password
         </ForgotPassText>
 
         <Form onSubmit={handleSubmit(onSubmit)}>
           <BlockInputWrapper>
-            <Lable error={passwordError}>Create password</Lable>
+            <Label error={passwordError}>New Password</Label>
             <InputWrapper className="password-wrapper">
               <Input
                 {...register("password")}
@@ -95,7 +97,7 @@ export default function ResetPasswordPage() {
               <InputNotification
                 text={passwordError}
                 error={passwordError}
-                color={"red"}
+                color={"#BD2816"}
               />
             ) : (
               <InputNotification text={registerPageRules.PASSWORD} />
@@ -103,7 +105,7 @@ export default function ResetPasswordPage() {
           </BlockInputWrapper>
 
           <BlockInputWrapper>
-            <Lable error={confirmPasswordError}>Confirm password</Lable>
+            <Label error={confirmPasswordError}>Confirm Password</Label>
             <InputWrapper className="confirm-password-wrapper">
               <Input
                 {...register("confirm")}
@@ -123,7 +125,7 @@ export default function ResetPasswordPage() {
               <InputNotification
                 text={confirmPasswordError}
                 error={confirmPasswordError}
-                color={"red"}
+                color={"#BD2816"}
               />
             ) : (
               <InputNotification text={registerPageRules.CONFIRM_PASSWORD} />
@@ -134,7 +136,9 @@ export default function ResetPasswordPage() {
             Save
           </button>
         </Form>
-      </VerifyWrapper>
+        <SignUpLink to="/register">Back to Sign up</SignUpLink>
+        <Line />
+      </Wrapper>
       <AppToastContainer />
     </Container>
   );

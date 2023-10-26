@@ -24,7 +24,7 @@ export const StyledChatsBtn = styled(NavLink)`
 export const SearchBar = styled.div`
   width: 256px;
   padding: 27px 16px;
-  background: ${({ theme }) => theme.colors.lightPurple};
+  background: ${({ theme }) => theme.colors.BTN_COLOR_HOVER};
   p {
     color: #fff;
     font-size: 18px;

@@ -1,30 +1,28 @@
 import styled from "@emotion/styled";
-import { TITLE_COLOR } from "constants";
-import { MAIN_COLOR } from "constants";
 
 export const Header = styled.header`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-  background-color: ${MAIN_COLOR};
-  border-bottom: 1px solid gray;
-  height: 220px;
+  padding: 30px 16px 10px 16px;
+  background-color: ${({ theme }) => theme.colors.MAIN_COLOR};
+
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints[1]}) {
+    .small-logo {
+      display: none;
+    }
+    height: 219px;
+    padding: 77px 16px;
+  }
 `;
 
 export const LogoWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  margin-right: auto;
-  margin-left: auto;
-`;
-
-export const LogoTitle = styled.p`
-  text-align: center;
-  color: ${TITLE_COLOR};
-  font-size: 50px;
-
-  font-weight: 600;
+  display: none;
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints[1]}) {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    h1 {
+      color: ${({ theme }) => theme.colors.TITLE_COLOR};
+      font-size: 50px;
+      font-weight: 600;
+    }
+  }
 `;

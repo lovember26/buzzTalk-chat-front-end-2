@@ -5,6 +5,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   margin-bottom: 20px;
   align-self: flex-start;
+  font-size: 10px;
 `;
 
 export const CheckboxWrapper = styled.div`
@@ -21,5 +22,5 @@ export const CheckboxWrapperInput = styled.input``;
 export const InputErrorText = styled.p`
   font-size: 14px;
   text-decoration: none;
-  color: red;
+  color: #bd2816;
 `;
