@@ -10,9 +10,10 @@ import { selectUserName } from "redux/user/userSelectors";
 export const FriendsList = () => {
   const accessToken = useSelector(selectAccessToken);
   const username = useSelector(selectUserName);
-  const [activeChats, setActiveChats] = useState([]);
+  // const [activeChats, setActiveChats] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
 
-  console.log("activeChats", activeChats);
+  console.log("allUsers", allUsers);
 
   useEffect(() => {
     if (accessToken !== null && username !== null) {
@@ -21,27 +22,32 @@ export const FriendsList = () => {
   }, [accessToken, username]);
 
   const getUserChats = async (token, username) => {
+    // const { data } = await axios.get(
+    //   `https://buzz-talk-api.onrender.com/api/chat/?username=${username}`,
+    //   {
+    //     headers: {
+    //       Authorization: `Bearer ${token}`,
+    //     },
+    //   }
+    // );
     const { data } = await axios.get(
-      `https://buzz-talk-api.onrender.com/api/chat/?username=${username}`,
+      "https://buzz-talk-api.onrender.com/api/accounts/users",
       {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       }
     );
-    setActiveChats(data);
+
+    setAllUsers(data);
   };
 
   return (
     <StyledFriendsList>
-      {activeChats && activeChats.length > 0 ? (
+      {allUsers && allUsers.length > 0 ? (
         <ul>
-          {activeChats.map((chat) => (
-            <Contact
-              key={chat.id}
-              chat={chat}
-              name={`Chat name with id ${chat.id}`}
-            />
+          {allUsers.map((user) => (
+            <Contact user={user} />
           ))}
         </ul>
       ) : (

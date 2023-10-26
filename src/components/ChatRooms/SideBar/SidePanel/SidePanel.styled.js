@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { NavLink } from "react-router-dom";
 
 export const StyledSideBar = styled.aside`
   display: flex;
@@ -15,7 +16,7 @@ export const StyledNav = styled.nav`
   background-color: ${({ theme }) => theme.colors.purple};
 `;
 
-export const StyledChatsBtn = styled.button`
+export const StyledChatsBtn = styled(NavLink)`
   padding-bottom: 13px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.51);
 `;
