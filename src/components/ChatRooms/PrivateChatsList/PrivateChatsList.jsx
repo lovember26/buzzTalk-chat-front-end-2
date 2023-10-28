@@ -3,51 +3,39 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectAccessToken } from "redux/auth/authSelectors";
 import NoFriends from "../SideBar/NoFriends/NoFriends";
-import { StyledFriendsList } from "./FriendsList.styled";
+import { StyledFriendsList } from "./PrivateChatsList.styled";
 import Contact from "../Contact/Contact";
 import { selectUserName } from "redux/user/userSelectors";
 
 export const FriendsList = () => {
   const accessToken = useSelector(selectAccessToken);
   const username = useSelector(selectUserName);
-  // const [activeChats, setActiveChats] = useState([]);
-  const [allUsers, setAllUsers] = useState([]);
-
-  console.log("allUsers", allUsers);
+  const [chats, setChats] = useState([]);
 
   useEffect(() => {
     if (accessToken !== null && username !== null) {
-      getUserChats(accessToken, username);
+      getUserChats(accessToken);
     }
   }, [accessToken, username]);
 
-  const getUserChats = async (token, username) => {
-    // const { data } = await axios.get(
-    //   `https://buzz-talk-api.onrender.com/api/chat/?username=${username}`,
-    //   {
-    //     headers: {
-    //       Authorization: `Bearer ${token}`,
-    //     },
-    //   }
-    // );
+  const getUserChats = async (token) => {
     const { data } = await axios.get(
-      "https://buzz-talk-api.onrender.com/api/accounts/users",
+      "https://buzz-talk-api.onrender.com/api/chat/private-chat/",
       {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       }
     );
-
-    setAllUsers(data);
+    setChats(data);
   };
 
   return (
     <StyledFriendsList>
-      {allUsers && allUsers.length > 0 ? (
+      {chats && chats.length > 0 ? (
         <ul>
-          {allUsers.map((user) => (
-            <Contact user={user} />
+          {chats.map((chat) => (
+            <Contact chat={chat} />
           ))}
         </ul>
       ) : (

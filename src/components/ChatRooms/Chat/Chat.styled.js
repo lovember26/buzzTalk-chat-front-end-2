@@ -73,7 +73,24 @@ export const MessageListItemUsername = styled.p`
   margin-right: 8px;
 `;
 
-export const MessageListItemUsernameImage = styled.img``;
+//A round picture in a block
+export const MessageListItemUsernameImageWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 30px;
+  height: 30px;
+  overflow: hidden;
+  border-radius: 50%;
+`;
+
+export const MessageListItemUsernameImage = styled.img`
+  width: auto;
+  height: 100%;
+`;
+//A round picture in a block
 
 export const MessageListItemMessage = styled.p`
   margin-bottom: 4px;

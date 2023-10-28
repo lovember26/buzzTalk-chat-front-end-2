@@ -11,6 +11,7 @@ import {
   MessageListItemUsernameImage,
   MessageListItemUsername,
   MessageListItemMessage,
+  MessageListItemUsernameImageWrapper,
   Timestamp,
 } from "./Chat.styled";
 
@@ -26,10 +27,10 @@ class Chat extends React.Component {
       );
       WebSocketInstance.fetchMessages(
         this.props.username,
-        this.props.params.chatId
+        this.props.params.chatSlug
       );
     });
-    WebSocketInstance.connect(this.props.params.chatId);
+    WebSocketInstance.connect(this.props.params.chatSlug);
   }
   //Functionality of scrolling scrolling to the latest messages
   componentDidMount() {
@@ -80,7 +81,7 @@ class Chat extends React.Component {
     const messageObject = {
       from: this.props.username,
       content: this.state.message,
-      chatId: this.props.params.chatId,
+      chatSlug: this.props.params.chatSlug,
     };
 
     WebSocketInstance.newChatMessage(messageObject);
@@ -114,17 +115,23 @@ class Chat extends React.Component {
   };
 
   renderMessages = (messages) => {
-    console.log("messages", messages);
     const currentUser = this.props.username;
 
     return messages.map((message, i, arr) => (
       <MessageListItem
         key={message.id}
-        className={message.author === currentUser ? "sent" : "replies"}
+        className={message.author.username === currentUser ? "sent" : "replies"}
       >
         <MessageListItemUsernameWrapper>
-          <MessageListItemUsername>{message.author}:</MessageListItemUsername>
-          <MessageListItemUsernameImage alt="avatar" />
+          <MessageListItemUsername>
+            {message.author.username}:
+          </MessageListItemUsername>
+          <MessageListItemUsernameImageWrapper>
+            <MessageListItemUsernameImage
+              src={message.author.image}
+              alt="avatar"
+            />
+          </MessageListItemUsernameImageWrapper>
         </MessageListItemUsernameWrapper>
         <MessageListItemMessage>{message.content}</MessageListItemMessage>
         <Timestamp>{this.renderTimestamp(message.timestamp)}</Timestamp>
@@ -134,7 +141,7 @@ class Chat extends React.Component {
 
   render() {
     const messages = this.state.messages;
-    const chat = this.props.params.chatId;
+    const chat = this.props.params.chatSlug;
 
     return (
       <Hoc>
@@ -145,7 +152,7 @@ class Chat extends React.Component {
             marginLeft: "16px",
           }}
         >
-          CHAT number <span style={{ fontWeight: 800 }}>{chat}</span>
+          CHAT slug <span style={{ fontWeight: 800 }}>{chat}</span>
         </div>
 
         <MessageList>

@@ -1,8 +1,39 @@
 import styled from "@emotion/styled";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import { RiContactsLine } from "react-icons/ri";
 
 export const StyledSideBar = styled.aside`
   display: flex;
+  background-color: #451952;
+`;
+
+export const ContactIcon = styled(RiContactsLine)`
+  fill: white;
+  margin-right: 8px;
+`;
+
+export const FriendsLinkWrapper = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  width: 224px;
+  height: 33px;
+  background-color: #451952;
+  border-radius: 24px;
+  border: none;
+  padding: 8px 16px;
+  font-size: 14px;
+  margin-bottom: 20px;
+`;
+
+export const SearchInput = styled.input`
+  background-color: #451952;
+`;
+
+export const FriendsLink = styled(Link)`
+  color: white;
+  font-size: 14px;
 `;
 
 export const StyledNav = styled.nav`

@@ -4,23 +4,15 @@ import { SelectWrapper } from "./Select.styled";
 
 const animatedComponents = makeAnimated();
 
-const options = [
-  { value: "chocolate", label: "Chocolate" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "banana", label: "Banana" },
-  { value: "cola", label: "Cola" },
-  { value: "onion", label: "Onion" },
-  { value: "garlic", label: "Garlic" },
-];
-
-export default function AnimatedSelect() {
+export default function AnimatedSelect({ users, setChoice }) {
   return (
     <SelectWrapper
       closeMenuOnSelect={false}
       components={animatedComponents}
-      defaultValue={[options[4], options[5]]}
       isMulti
-      options={options}
+      options={users}
+      onChange={(choice) => setChoice(choice[0].value)}
+      // onChange={(choice) => console.log("choice", choice)}
     />
   );
 }

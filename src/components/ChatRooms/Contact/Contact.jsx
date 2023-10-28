@@ -5,14 +5,19 @@ import {
   ActiveChatName,
 } from "./Contact.styled";
 
-const Contact = ({ user }) => (
-  <ActiveChatWrapper key={user.username}>
-    {/* <ActiveChatInfo to={`chats/${user.id}`}> */}
-    <ActiveChatInfo to={`chats/${user.id}`}>
-      {user.image ? <img src={user.image} alt="avatar" /> : <DefaultIcon />}
-      <ActiveChatName>{user.username}</ActiveChatName>
-    </ActiveChatInfo>
-  </ActiveChatWrapper>
-);
+const Contact = ({ chat }) => {
+  return (
+    <ActiveChatWrapper key={chat.id}>
+      <ActiveChatInfo to={`chats/${chat.slug}`}>
+        {chat.receiver.image ? (
+          <img src={chat.receiver.image} alt="avatar" />
+        ) : (
+          <DefaultIcon />
+        )}
+        <ActiveChatName>{chat.receiver.username}</ActiveChatName>
+      </ActiveChatInfo>
+    </ActiveChatWrapper>
+  );
+};
 
 export default Contact;

@@ -8,14 +8,16 @@ import CreateChatForm from "components/ChatRooms/CreateChatForm/CreateChatForm";
 import { PublicChatsList } from "components/ChatRooms/PublicChatsList/PublicChatsList";
 
 import {
-  NavButtons,
   SearchBar,
   StyledChatsBtn,
   StyledNav,
   StyledSideBar,
+  SearchInput,
+  FriendsLink,
+  ContactIcon,
+  FriendsLinkWrapper,
 } from "./SidePanel.styled";
-import { StyledLink } from "../../FriendsBar/FriendsBar.styled";
-import { FriendsList } from "../../FriendsList/FriendsList";
+import { FriendsList } from "../../PrivateChatsList/PrivateChatsList";
 
 export default function SidePanel() {
   const [modalActive, setModalActive] = useState(false);
@@ -24,7 +26,7 @@ export default function SidePanel() {
     <>
       <StyledSideBar>
         <StyledNav>
-          <StyledChatsBtn type="button">
+          <StyledChatsBtn type="button" to={"chats"}>
             <ChatsBtn />
           </StyledChatsBtn>
 
@@ -36,15 +38,19 @@ export default function SidePanel() {
 
         <SearchBar>
           <p>Private messages</p>
-          <NavButtons>
-            <StyledLink to="friends">FriendsBar</StyledLink>
-            <StyledLink to="chats">Chats</StyledLink>
-            {/* <StyledLink to="chat-rooms/public">Chats</StyledLink> */}
-          </NavButtons>
+
           <form>
             <SearchIcon />
-            <input type="text" placeholder="Find or start a conversation" />
+            <SearchInput
+              type="text"
+              placeholder="Find or start a conversation"
+            />
           </form>
+          <FriendsLinkWrapper>
+            <ContactIcon />
+            <FriendsLink to={"friends"}>Friends</FriendsLink>
+          </FriendsLinkWrapper>
+
           <FriendsList />
         </SearchBar>
       </StyledSideBar>

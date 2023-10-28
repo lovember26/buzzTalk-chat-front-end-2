@@ -18,7 +18,9 @@ class WebSocketService {
   }
 
   connect(chatSlug) {
+    // const path = `wss://buzz-talk-api.onrender.com/ws/chat/${chatSlug}/`;
     const path = `wss://buzz-talk-api.onrender.com/ws/chat/${chatSlug}/`;
+
     this.socketRef = new WebSocket(path);
 
     this.socketRef.onopen = () => {
@@ -56,12 +58,12 @@ class WebSocketService {
       this.callbacks[command](parsedData.message);
     }
   }
-  fetchMessages(username, chatId) {
+  fetchMessages(username, chatSlug) {
     this.sendMessage({
       command: "fetch_messages",
       username: username,
       // chat_id: chatId,
-      chat_slug: chatId,
+      chat_slug: chatSlug,
     });
   }
 
@@ -72,7 +74,7 @@ class WebSocketService {
       from: message.from,
       message: message.content,
       // chat_id: message.chatId,
-      chat_slug: message.chatId,
+      chat_slug: message.chatSlug,
     });
   }
 
