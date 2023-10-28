@@ -5,6 +5,20 @@ export const ChatContainer = styled.div`
   flex-direction: column;
 `;
 
+export const WrapperUsername = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+`;
+
+export const Wrp = styled.div`
+  display: flex;
+  flex-direction: row;
+  /* justify-content: flex-end;
+  align-items: flex-start; */
+`;
+
 export const StyledHeader = styled.div`
   width: 1104px;
   height: 80px;
@@ -42,6 +56,7 @@ export const ActionBar = styled.ul`
 export const MessageList = styled.ul`
   display: flex;
   flex-direction: column;
+
   margin-bottom: 20px;
   padding: 10px 20px;
   flex: 1 1 auto;
@@ -52,25 +67,27 @@ export const MessageList = styled.ul`
 
 export const MessageListItem = styled.li`
   display: flex;
-  flex-direction: column;
-  border: 1px solid gray;
-  border-radius: 15px;
+  flex-direction: row;
+  justify-content: space-between;
+
   margin-bottom: 8px;
   padding: 8px 10px;
-  width: fit-content;
+  /* To expand a block by its contents */
+  /* width: fit-content; */
+  width: 100%;
 `;
 
 export const MessageListItemUsernameWrapper = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
+  align-items: flex-start;
 `;
 
 export const MessageListItemUsername = styled.p`
   font-weight: 700;
   font-size: 18px;
-  margin-bottom: 8px;
-  margin-right: 8px;
+  margin-bottom: 6px;
 `;
 
 //A round picture in a block
@@ -80,10 +97,12 @@ export const MessageListItemUsernameImageWrapper = styled.div`
   justify-content: center;
   align-items: center;
 
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
   overflow: hidden;
   border-radius: 50%;
+
+  margin-right: 8px;
 `;
 
 export const MessageListItemUsernameImage = styled.img`
@@ -104,5 +123,5 @@ export const Wrapper = styled.div`
 `;
 
 export const Timestamp = styled.p`
-  margin-left: auto;
+  align-self: flex-end;
 `;

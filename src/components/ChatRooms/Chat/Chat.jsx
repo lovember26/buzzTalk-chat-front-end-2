@@ -12,7 +12,9 @@ import {
   MessageListItemUsername,
   MessageListItemMessage,
   MessageListItemUsernameImageWrapper,
+  WrapperUsername,
   Timestamp,
+  Wrp,
 } from "./Chat.styled";
 
 class Chat extends React.Component {
@@ -115,25 +117,30 @@ class Chat extends React.Component {
   };
 
   renderMessages = (messages) => {
-    const currentUser = this.props.username;
+    // const currentUser = this.props.username;
 
     return messages.map((message, i, arr) => (
       <MessageListItem
         key={message.id}
-        className={message.author.username === currentUser ? "sent" : "replies"}
+        // To stylize received and sent messages
+        // className={message.author.username === currentUser ? "sent" : "replies"}
       >
         <MessageListItemUsernameWrapper>
-          <MessageListItemUsername>
-            {message.author.username}:
-          </MessageListItemUsername>
-          <MessageListItemUsernameImageWrapper>
-            <MessageListItemUsernameImage
-              src={message.author.image}
-              alt="avatar"
-            />
-          </MessageListItemUsernameImageWrapper>
+          <Wrp>
+            <MessageListItemUsernameImageWrapper>
+              <MessageListItemUsernameImage
+                src={message.author.image}
+                alt="avatar"
+              />
+            </MessageListItemUsernameImageWrapper>
+            <WrapperUsername>
+              <MessageListItemUsername>
+                {message.author.username}
+              </MessageListItemUsername>
+              <MessageListItemMessage>{message.content}</MessageListItemMessage>
+            </WrapperUsername>
+          </Wrp>
         </MessageListItemUsernameWrapper>
-        <MessageListItemMessage>{message.content}</MessageListItemMessage>
         <Timestamp>{this.renderTimestamp(message.timestamp)}</Timestamp>
       </MessageListItem>
     ));
@@ -141,20 +148,9 @@ class Chat extends React.Component {
 
   render() {
     const messages = this.state.messages;
-    const chat = this.props.params.chatSlug;
 
     return (
       <Hoc>
-        <div
-          style={{
-            marginBottom: "20px",
-            marginTop: "20px",
-            marginLeft: "16px",
-          }}
-        >
-          CHAT slug <span style={{ fontWeight: 800 }}>{chat}</span>
-        </div>
-
         <MessageList>
           {messages && this.renderMessages(messages)}
           {/* Functionality of scrolling scrolling to the latest messages */}

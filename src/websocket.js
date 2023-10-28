@@ -24,7 +24,7 @@ class WebSocketService {
     this.socketRef = new WebSocket(path);
 
     this.socketRef.onopen = () => {
-      console.log("WebSocket open");
+      // console.log("WebSocket open");
     };
     this.socketNewMessage(
       JSON.stringify({
@@ -35,17 +35,17 @@ class WebSocketService {
       this.socketNewMessage(e.data);
     };
     this.socketRef.onerror = (e) => {
-      console.log(e.message);
+      // console.log(e.message);
     };
     this.socketRef.onclose = () => {
-      console.log("WebSocket closed let's reopen");
+      // console.log("WebSocket closed let's reopen");
       this.connect();
     };
   }
   //Only to read the data as JSON
   socketNewMessage(data) {
     const parsedData = JSON.parse(data);
-    console.log("parsedData", parsedData);
+    // console.log("parsedData", parsedData);
 
     const command = parsedData.command;
     if (Object.keys(this.callbacks).length === 0) {
