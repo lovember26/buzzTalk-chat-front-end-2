@@ -109,7 +109,7 @@ export const App = () => {
           path={routes.CHAT_ROOMS_CHAT_PAGE}
           element={<PrivatePage component={<ChatRoom />} />}
         >
-          <Route index element={<PrivatePage component={<WelcomeChat />} />} />
+          {/* <Route index element={<PrivatePage component={<WelcomeChat />} />} /> */}
           <Route
             path={routes.CHAT_ROOMS_PRIVATE_CHAT_PAGE}
             element={<PrivatePage component={<Chat username={username} />} />}

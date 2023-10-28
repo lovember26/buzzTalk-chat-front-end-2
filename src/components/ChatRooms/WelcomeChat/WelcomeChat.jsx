@@ -1,3 +1,7 @@
 export default function WelcomeChat() {
-  return <div>You can choose some chat to start messaging.</div>;
+  return (
+    <h3 style={{ margin: "auto" }}>
+      You can choose some chat to start messaging.
+    </h3>
+  );
 }

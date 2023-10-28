@@ -1,5 +1,5 @@
-import Profile from "../Profile/Profile";
 import { Outlet } from "react-router-dom";
+import Profile from "../Profile/Profile";
 
 export default function ChatRoom() {
   return (
