@@ -3,11 +3,18 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectAccessToken } from "redux/auth/authSelectors";
 import NoFriends from "../SideBar/NoFriends/NoFriends";
-import { StyledFriendsList } from "./PrivateChatsList.styled";
-import Contact from "../Contact/Contact";
+import {
+  ChatList,
+  ChatItem,
+  ChatItemImageWrapper,
+  ChatItemImage,
+  ChatItemInfo,
+  ChatItemText,
+} from "./PrivateChatsList.styled";
+import { ReactComponent as DefaultIcon } from "../../../images/default.svg";
 import { selectUserName } from "redux/user/userSelectors";
 
-export const FriendsList = () => {
+export const PrivateChatList = () => {
   const accessToken = useSelector(selectAccessToken);
   const username = useSelector(selectUserName);
   const [chats, setChats] = useState([]);
@@ -31,98 +38,27 @@ export const FriendsList = () => {
   };
 
   return (
-    <StyledFriendsList>
+    <>
       {chats && chats.length > 0 ? (
-        <ul>
+        <ChatList>
           {chats.map((chat) => (
-            <Contact chat={chat} />
+            <ChatItem key={chat.id}>
+              <ChatItemInfo to={`chats/${chat.slug}`}>
+                {chat.receiver.image ? (
+                  <ChatItemImageWrapper>
+                    <ChatItemImage src={chat.receiver.image} alt="avatar" />
+                  </ChatItemImageWrapper>
+                ) : (
+                  <DefaultIcon />
+                )}
+                <ChatItemText>{chat.receiver.username}</ChatItemText>
+              </ChatItemInfo>
+            </ChatItem>
           ))}
-        </ul>
+        </ChatList>
       ) : (
         <NoFriends />
       )}
-    </StyledFriendsList>
+    </>
   );
 };
-
-// Old code which works with redux state
-// import { useEffect } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import { fetchAllUsersThunk } from "redux/user/userThunk";
-// import { selectAllUsers } from "redux/user/userSelectors";
-// import Contact from "../Contact/Contact";
-// import NoFriends from "../SideBar/NoFriends/NoFriends";
-// import { StyledFriendsList } from "./FriendsList.styled";
-
-// export const FriendsList = () => {
-//   const users = useSelector(selectAllUsers);
-//   const dispatch = useDispatch();
-
-//   useEffect(() => {
-//     const getUsers = () => {
-//       try {
-//         dispatch(fetchAllUsersThunk());
-//       } catch (error) {
-//         console.log(error);
-//       }
-//     };
-//     getUsers();
-//   }, [dispatch]);
-
-//   return (
-//     <StyledFriendsList>
-//       {users && users.length > 0 ? (
-//         <ul>
-//           {users.map((user) => (
-//             <Contact key={user.username} user={user} />
-//           ))}
-//         </ul>
-//       ) : (
-//         <NoFriends />
-//       )}
-//     </StyledFriendsList>
-//   );
-// };
-
-// Old code without redux state
-// import { useEffect, useState } from "react";
-// import { useSelector } from "react-redux";
-// import { selectAccessToken } from "redux/auth/authSelectors";
-// import { fetchUsers } from "services/itemsApi";
-// import { FriendItem } from "./FriendItem";
-// import NoFriends from "../SideBar/NoFriends/NoFriends";
-// import { StyledFriendsList } from "./FriendsList.styled";
-
-// export const FriendsList = () => {
-// const accessToken = useSelector(selectAccessToken);
-// const [usersList, setUsersList] = useState(null);
-
-// useEffect(() => {
-//   const getUsers = async () => {
-//     try {
-//       const data = await fetchUsers(accessToken);
-//       console.log(data);
-//       if (data) {
-//         setUsersList(data);
-//       }
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-//   getUsers();
-// }, [accessToken]);
-
-//   return (
-//     <StyledFriendsList>
-//       {usersList && usersList.length > 0 ? (
-//         <ul>
-//           {usersList.map((user) => (
-//             <FriendItem key={user.username} user={user} />
-//           ))}
-//         </ul>
-//       ) : (
-//         <NoFriends />
-//       )}
-//     </StyledFriendsList>
-//   );
-// };

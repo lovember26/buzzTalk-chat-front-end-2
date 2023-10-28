@@ -1,18 +1,6 @@
 import styled from "@emotion/styled";
 import { NavLink } from "react-router-dom";
 
-export const StyledFriendsList = styled.div`
-  li {
-    padding: 0 5px;
-    display: flex;
-    gap: 7px;
-  }
-  img {
-    border-radius: 50%;
-    width: 28px;
-  }
-`;
-
 export const PublicChatItem = styled(NavLink)`
   display: flex;
   justify-content: center;

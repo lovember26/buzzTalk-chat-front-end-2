@@ -2,51 +2,8 @@
 // import { useEffect, useState } from "react";
 // import { useSelector } from "react-redux";
 // import { selectAccessToken } from "redux/auth/authSelectors";
-import NoFriends from "../SideBar/NoFriends/NoFriends";
+// import NoFriends from "../SideBar/NoFriends/NoFriends";
 import { PublicChatItem } from "./PublicChatsList.styled";
-
-const data = [
-  // {
-  //   id: 1,
-  //   slug: "slug1",
-  //   receiver: {
-  //     username: "Ivan",
-  //     image: "image",
-  //   },
-  // },
-  // {
-  //   id: 2,
-  //   slug: "slug2",
-  //   receiver: {
-  //     username: "Tanya",
-  //     image: "image",
-  //   },
-  // },
-  // {
-  //   id: 3,
-  //   slug: "slug3",
-  //   receiver: {
-  //     username: "Olga",
-  //     image: "image",
-  //   },
-  // },
-  // {
-  //   id: 4,
-  //   slug: "slug4",
-  //   receiver: {
-  //     username: "Roma",
-  //     image: "image",
-  //   },
-  // },
-  // {
-  //   id: 5,
-  //   slug: "slug5",
-  //   receiver: {
-  //     username: "Kola",
-  //     image: "image",
-  //   },
-  // },
-];
 
 export const PublicChatsList = () => {
   // const accessToken = useSelector(selectAccessToken);
@@ -75,18 +32,22 @@ export const PublicChatsList = () => {
 
   return (
     <>
-      {data && data.length > 0 ? (
+      {/* {activeChats && activeChats.length > 0 ? (
         <ul>
-          {data?.map((chat) => (
+          {activeChats?.map((chat) => (
             <PublicChatItem to={`chats/${chat?.id}`} key={chat?.id}>
-              {/* <p>{chat.receiver.username}</p> */}
-              <p>{chat?.id}</p>
+              {chat?.id}
             </PublicChatItem>
           ))}
         </ul>
       ) : (
         <NoFriends />
-      )}
+      )} */}
+      <ul>
+        <PublicChatItem>1</PublicChatItem>
+        <PublicChatItem>2</PublicChatItem>
+        <PublicChatItem>3</PublicChatItem>
+      </ul>
     </>
   );
 };

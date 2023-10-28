@@ -15,9 +15,11 @@ import {
   SearchInput,
   FriendsLink,
   ContactIcon,
+  Title,
+  Form,
   FriendsLinkWrapper,
 } from "./SidePanel.styled";
-import { FriendsList } from "../../PrivateChatsList/PrivateChatsList";
+import { PrivateChatList } from "../../PrivateChatsList/PrivateChatsList";
 
 export default function SidePanel() {
   const [modalActive, setModalActive] = useState(false);
@@ -37,21 +39,21 @@ export default function SidePanel() {
         </StyledNav>
 
         <SearchBar>
-          <p>Private messages</p>
+          <Title>Private messages</Title>
 
-          <form>
+          <Form>
             <SearchIcon />
             <SearchInput
               type="text"
               placeholder="Find or start a conversation"
             />
-          </form>
+          </Form>
           <FriendsLinkWrapper>
             <ContactIcon />
             <FriendsLink to={"friends"}>Friends</FriendsLink>
           </FriendsLinkWrapper>
 
-          <FriendsList />
+          <PrivateChatList />
         </SearchBar>
       </StyledSideBar>
 

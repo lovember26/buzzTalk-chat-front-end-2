@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { logOutThunk } from "redux/auth/authThunk";
 import {
   selectUserName,
-  selectImage,
-  selectDescription,
+  selectUserImage,
+  selectUserDescription,
 } from "redux/user/userSelectors";
 
 import {
@@ -36,8 +36,8 @@ export default function ProfilePage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const username = useSelector(selectUserName);
-  const description = useSelector(selectDescription);
-  const image = useSelector(selectImage);
+  const description = useSelector(selectUserDescription);
+  const image = useSelector(selectUserImage);
 
   const goBack = () => navigate(-1);
 

@@ -7,35 +7,6 @@ export const StyledSideBar = styled.aside`
   background-color: #451952;
 `;
 
-export const ContactIcon = styled(RiContactsLine)`
-  fill: white;
-  margin-right: 8px;
-`;
-
-export const FriendsLinkWrapper = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-
-  width: 224px;
-  height: 33px;
-  background-color: #451952;
-  border-radius: 24px;
-  border: none;
-  padding: 8px 16px;
-  font-size: 14px;
-  margin-bottom: 20px;
-`;
-
-export const SearchInput = styled.input`
-  background-color: #451952;
-`;
-
-export const FriendsLink = styled(Link)`
-  color: white;
-  font-size: 14px;
-`;
-
 export const StyledNav = styled.nav`
   width: 80px;
   height: 100vh;
@@ -56,38 +27,62 @@ export const SearchBar = styled.div`
   width: 256px;
   padding: 27px 16px;
   background: ${({ theme }) => theme.colors.BTN_COLOR_HOVER};
-  p {
-    color: #fff;
-    font-size: 18px;
-    margin-bottom: 8px;
-  }
-  form {
-    position: relative;
-    svg {
-      position: absolute;
-      left: 12px;
-      top: 8px;
-    }
-  }
-  input {
-    width: 224px;
-    height: 33px;
-    padding: 12px 12px 12px 31px;
-    margin-bottom: 11px;
-    border-radius: 24px;
-    background: ${({ theme }) => theme.colors.crimson};
-    border: none;
-    color: #fff;
-    font-size: 10px;
-    &::placeholder {
-      color: #fff;
-      font-size: 10px;
-    }
+`;
+
+export const Title = styled.p`
+  color: #fff;
+  font-size: 18px;
+  margin-bottom: 10px;
+`;
+
+export const Form = styled.form`
+  position: relative;
+  svg {
+    position: absolute;
+    left: 12px;
+    top: 8px;
   }
 `;
 
-export const NavButtons = styled.nav`
+export const SearchInput = styled.input`
+  background-color: #451952;
+
+  width: 224px;
+  height: 33px;
+  padding: 12px 12px 12px 31px;
+  margin-bottom: 11px;
+  border-radius: 24px;
+  background: ${({ theme }) => theme.colors.crimson};
+  border: none;
+  color: #fff;
+  font-size: 10px;
+  &::placeholder {
+    color: #fff;
+    font-size: 10px;
+  }
+`;
+
+export const FriendsLinkWrapper = styled.div`
   display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
+  justify-content: flex-start;
+  align-items: center;
+
+  width: 224px;
+  height: 33px;
+  background-color: #451952;
+  border-radius: 24px;
+  border: none;
+  padding: 8px 16px;
+  font-size: 14px;
+  margin-bottom: 20px;
+`;
+
+export const ContactIcon = styled(RiContactsLine)`
+  fill: white;
+  margin-right: 8px;
+`;
+
+export const FriendsLink = styled(Link)`
+  color: white;
+  font-size: 14px;
 `;

@@ -10,26 +10,43 @@ export const StyledHeader = styled.div`
   height: 80px;
   display: flex;
   justify-content: space-between;
-  align-item: center;
+  align-items: center;
   background: #d9d9d9;
 `;
-export const UserBar = styled.div`
+export const UserBarWrapper = styled.div`
   padding-left: 30px;
   display: flex;
   align-items: center;
   gap: 10px;
-  .user {
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-    color: #444;
-    .username {
-      font-size: 14px;
-    }
-    .user-status {
-      font-size: 12px;
-    }
-  }
+`;
+
+export const UserBarImageWrapper = styled.div`
+  width: 40px;
+  height: 40px;
+
+  border-radius: 50%;
+  overflow: hidden;
+`;
+
+export const UserBarImage = styled.img`
+  width: auto;
+  height: 100%;
+`;
+
+export const UserBarInfoWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  color: #444;
+`;
+
+export const UserBarUserName = styled.p`
+  font-size: 16px;
+  font-weight: 900px;
+  color: black;
+`;
+
+export const UserBarUserStatus = styled.p`
+  font-size: 12px;
 `;
 
 export const ActionBar = styled.ul`
