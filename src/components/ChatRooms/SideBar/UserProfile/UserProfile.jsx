@@ -1,9 +1,5 @@
 import { useSelector } from "react-redux";
-import {
-  selectDescription,
-  selectImage,
-  selectUserName,
-} from "redux/user/userSelectors";
+import { selectImage, selectUserName } from "redux/user/userSelectors";
 import { UserCard, UserProfileWrapper } from "./UserProfile.styled";
 import { ReactComponent as Status } from "../../../../images/status.svg";
 import { ReactComponent as EditProfile } from "../../../../images/edit-profile.svg";
@@ -20,7 +16,7 @@ export default function UserProfile() {
   return (
     <UserProfileWrapper>
       <button className="showUserCard">
-        <img className="smallAvatar" src={image} />
+        <img className="smallAvatar" src={image} alt="avatar" />
       </button>
       <UserCard>
         <button className="hideUser">
@@ -28,7 +24,7 @@ export default function UserProfile() {
         </button>
         <div className="userInfo">
           <button className="userAvatar">
-            <img src={image} />
+            <img src={image} alt="avatar" />
           </button>
 
           <div className="container">
@@ -37,7 +33,7 @@ export default function UserProfile() {
               <Status />
             </div>
             <p className="text">Link to your profile to chat with you</p>
-            <a href="#">https://bz.me/mari@gmail.com</a>
+            <p>https://bz.me/mari@gmail.com</p>
           </div>
           <button className="editBtn">
             <EditProfile />
