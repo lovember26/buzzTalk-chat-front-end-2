@@ -12,7 +12,7 @@ export const StyledNav = styled.nav`
   flex-direction: column;
   gap: 16px;
 
-  background-color: ${({ theme }) => theme.colors.purple};
+  background-color: ${({ theme }) => theme.colors.MAIN_COLOR};
 `;
 
 export const StyledChatsBtn = styled.button`
@@ -43,7 +43,7 @@ export const SearchBar = styled.div`
     padding: 12px 12px 12px 31px;
     margin-bottom: 11px;
     border-radius: 24px;
-    background: ${({ theme }) => theme.colors.crimson};
+    background: ${({ theme }) => theme.colors.BTN_COLOR};
     border: none;
     color: #fff;
     font-size: 10px;
