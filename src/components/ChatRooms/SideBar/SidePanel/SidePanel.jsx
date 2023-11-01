@@ -12,6 +12,8 @@ import {
 } from "./SidePanel.styled";
 import { StyledLink } from "../../FriendsBar/FriendsBar.styled";
 import { FriendsList } from "../../FriendsList/FriendsList";
+import UserProfile from "../UserProfile/UserProfile";
+
 // import FriendsList from "../../FriendsList/FriendsList";
 
 export default function SidePanel() {
@@ -25,6 +27,7 @@ export default function SidePanel() {
           <button type="button">
             <AddChatButton />
           </button>
+          <UserProfile />
         </StyledNav>
         <SearchBar>
           <p>Private messages</p>

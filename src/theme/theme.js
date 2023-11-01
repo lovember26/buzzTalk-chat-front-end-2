@@ -74,6 +74,7 @@ export const theme = {
       300: "#B5B5B5", //button disabled color
       400: "#B5B5B5", //button hover/focus
       500: "#F4F4F4", //button edit background color
+      600: "#696969",
     },
 
     red: {
