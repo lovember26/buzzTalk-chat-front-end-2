@@ -4,6 +4,7 @@
 // import { selectAccessToken } from "redux/auth/authSelectors";
 // import NoFriends from "../SideBar/NoFriends/NoFriends";
 import { PublicChatItem } from "./PublicChatsList.styled";
+import { ReactComponent as DefaultIcon } from "../../../images/default.svg";
 
 export const PublicChatsList = () => {
   // const accessToken = useSelector(selectAccessToken);
@@ -44,9 +45,21 @@ export const PublicChatsList = () => {
         <NoFriends />
       )} */}
       <ul>
-        <PublicChatItem>1</PublicChatItem>
-        <PublicChatItem>2</PublicChatItem>
-        <PublicChatItem>3</PublicChatItem>
+        <li>
+          <PublicChatItem>
+            <DefaultIcon />
+          </PublicChatItem>
+        </li>
+        <li>
+          <PublicChatItem>
+            <DefaultIcon />
+          </PublicChatItem>
+        </li>
+        <li>
+          <PublicChatItem>
+            <DefaultIcon />
+          </PublicChatItem>
+        </li>
       </ul>
     </>
   );

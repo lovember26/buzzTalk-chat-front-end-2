@@ -17,6 +17,7 @@ import {
   SearchInput,
   FriendsLink,
   ContactIcon,
+  AddChatButtonWrapper,
   Title,
   Form,
   FriendsLinkWrapper,
@@ -39,9 +40,13 @@ export default function SidePanel() {
             <ChatsBtn />
           </StyledChatsBtn>
 
-          <button type="button" onClick={() => setModalActive(true)}>
+          <AddChatButtonWrapper
+            type="button"
+            onClick={() => setModalActive(true)}
+          >
             <AddChatButton />
-          </button>
+          </AddChatButtonWrapper>
+
           <PublicChatsList />
         </StyledNav>
 

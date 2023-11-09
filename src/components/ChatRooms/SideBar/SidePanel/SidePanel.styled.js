@@ -13,6 +13,7 @@ export const StyledNav = styled.nav`
   padding: 22px 21px 0 22px;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 16px;
 
   background-color: ${({ theme }) => theme.colors.purple};
@@ -50,7 +51,7 @@ export const SearchInput = styled.input`
   width: 224px;
   height: 33px;
   padding: 12px 12px 12px 31px;
-  margin-bottom: 11px;
+  margin-bottom: 8px;
   border-radius: 24px;
   background: ${({ theme }) => theme.colors.crimson};
   border: none;
@@ -58,7 +59,7 @@ export const SearchInput = styled.input`
   font-size: 10px;
   &::placeholder {
     color: #fff;
-    font-size: 10px;
+    font-size: 12px;
   }
 `;
 
@@ -70,9 +71,9 @@ export const FriendsLinkWrapper = styled.div`
   width: 224px;
   height: 33px;
   background-color: #451952;
-  border-radius: 24px;
+  border-radius: 10px;
   border: none;
-  padding: 8px 16px;
+  padding: 8px 12px;
   font-size: 14px;
   margin-bottom: 20px;
 `;
@@ -84,5 +85,15 @@ export const ContactIcon = styled(RiContactsLine)`
 
 export const FriendsLink = styled(Link)`
   color: white;
-  font-size: 14px;
+  font-size: 12px;
+`;
+
+export const AddChatButtonWrapper = styled.button`
+  border-radius: 50%;
+  /* width: 37px;
+  height: 37px; */
+  overflow: hidden;
+
+  width: 34px;
+  height: 34px;
 `;

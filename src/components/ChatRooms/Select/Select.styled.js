@@ -20,4 +20,11 @@ export const ActiveChatWrapper = styled.li`
 export const SelectWrapper = styled(Select)`
   width: 400px;
   margin-bottom: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:placeholder {
+    font-size: 10px;
+  }
 `;

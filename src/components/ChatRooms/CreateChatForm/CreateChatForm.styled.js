@@ -1,5 +1,19 @@
 import styled from "@emotion/styled";
 
+export const FormWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+
+  padding-top: 46px;
+  padding-left: 28px;
+  padding-right: 28px;
+
+  width: 525px;
+  /* height: 373px; */
+`;
+
 export const Form = styled.form`
   display: flex;
   justify-content: center;
@@ -21,10 +35,38 @@ export const Input = styled.input`
 `;
 
 export const Button = styled.button`
-  padding: 8px 20px;
-
+  /* position: absolute;
+  right: 0;
+  bottom: 0; */
+  padding: 15px 26px;
   border-radius: 12px;
-  border: 1px solid gray;
+  color: white;
+  font-size: 14px;
+  background-color: #451952;
 
-  background-color: whitesmoke;
+  cursor: pointer;
+`;
+
+export const ButtonBack = styled.button`
+  /* position: absolute;
+  left: 0;
+  bottom: 0; */
+  color: #d9d9d9;
+  font-size: 14px;
+
+  margin-right: 290px;
+
+  cursor: pointer;
+`;
+
+export const ButtonsWrapper = styled.div`
+  /* position: relative; */
+  display: flex;
+  /* flex-direction: row; */
+  /* justify-content: space-between; */
+  /* align-items: center; */
+`;
+
+export const Text = styled.p`
+  margin-bottom: 10px;
 `;

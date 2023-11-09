@@ -6,7 +6,9 @@ export const ChatList = styled.ul`
   flex-direction: column;
 `;
 
-export const ChatItem = styled.li``;
+export const ChatItem = styled.li`
+  margin-bottom: 8px;
+`;
 
 export const ChatItemInfo = styled(NavLink)`
   display: flex;
@@ -15,11 +17,11 @@ export const ChatItemInfo = styled(NavLink)`
 
 export const ChatItemImageWrapper = styled.div`
   border-radius: 50%;
-  width: 28px;
-  height: 28px;
+  width: 37px;
+  height: 37px;
   overflow: hidden;
 
-  margin-right: 8px;
+  margin-right: 10px;
 `;
 
 export const ChatItemImage = styled.img`
@@ -29,4 +31,5 @@ export const ChatItemImage = styled.img`
 
 export const ChatItemText = styled.p`
   color: white;
+  font-size: 12px;
 `;

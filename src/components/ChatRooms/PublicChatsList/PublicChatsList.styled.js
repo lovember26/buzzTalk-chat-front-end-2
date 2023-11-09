@@ -5,11 +5,12 @@ export const PublicChatItem = styled(NavLink)`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 37px;
-  height: 37px;
+  width: 30px;
+  height: 30px;
   border: 2px solid white;
   border-radius: 50%;
   color: white;
+  overflow: hidden;
 
   margin-bottom: 6px;
 `;

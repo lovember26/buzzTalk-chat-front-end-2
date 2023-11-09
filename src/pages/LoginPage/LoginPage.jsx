@@ -227,9 +227,9 @@ export default function LoginPage() {
           </LoginPageLinkForgotPassword>
           <Line />
           <LoginPageRedirectLinkWrapper>
-            <LoginPageRedirectText>Back to</LoginPageRedirectText>
+            {/* <LoginPageRedirectText>Back to</LoginPageRedirectText> */}
             <LoginPageRedirectLink onClick={navigateToRegister}>
-              Sign up
+              Back to Sign up
             </LoginPageRedirectLink>
           </LoginPageRedirectLinkWrapper>
         </LoginPageLinksWrapper>
