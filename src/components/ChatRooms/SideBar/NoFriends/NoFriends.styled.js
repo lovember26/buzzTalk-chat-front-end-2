@@ -7,14 +7,14 @@ export const NoFriendsWrap = styled.div`
   align-items: center;
   gap: 8px;
   border-radius: 10px;
-  background: ${({ theme }) => theme.colors.crimson};
+  background: ${({ theme }) => theme.colors.BTN_COLOR};
   p {
     margin: 0;
     font-size: 10px;
   }
   button {
     border-radius: 24px;
-    background: ${({ theme }) => theme.colors.orange};
+    background: ${({ theme }) => theme.colors.TITLE_COLOR};
     padding: 5px 45px;
     font-size: 10px;
     font-weight: 600;

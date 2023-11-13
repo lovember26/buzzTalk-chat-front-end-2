@@ -14,7 +14,7 @@ export const StyledFriendsNav = styled.nav`
   display: flex;
   align-items: center;
   gap: 68px;
-  background: ${({ theme }) => theme.colors.purple};
+  background: ${({ theme }) => theme.colors.MAIN_COLOR};
   color: #696969;
   font-size: 14px;
   font-weight: 700;

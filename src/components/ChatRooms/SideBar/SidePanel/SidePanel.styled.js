@@ -16,7 +16,7 @@ export const StyledNav = styled.nav`
   align-items: center;
   gap: 16px;
 
-  background-color: ${({ theme }) => theme.colors.purple};
+  background-color: ${({ theme }) => theme.colors.MAIN_COLOR};
 `;
 
 export const StyledChatsBtn = styled(NavLink)`
@@ -53,7 +53,7 @@ export const SearchInput = styled.input`
   padding: 12px 12px 12px 31px;
   margin-bottom: 8px;
   border-radius: 24px;
-  background: ${({ theme }) => theme.colors.crimson};
+  background: ${({ theme }) => theme.colors.BTN_COLOR};
   border: none;
   color: #fff;
   font-size: 10px;

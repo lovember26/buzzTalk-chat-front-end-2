@@ -1,11 +1,11 @@
 import React from "react";
 import makeAnimated from "react-select/animated";
-import chroma from "chroma-js";
-import { SelectWrapper } from "./SelectPiblicChat.styled";
+// import chroma from "chroma-js";
+import { SelectWrapper } from "./SelectPublicChat.styled";
 
 const animatedComponents = makeAnimated();
 
-const colourStyles = {
+const colorStyles = {
   control: (styles) => ({
     ...styles,
     backgroundColor: "#662549",
@@ -37,7 +37,7 @@ export default function AnimatedSelectPublicChat({ users, setChoice }) {
       // onChange={(choice) => console.log("choice", choice)}
       onChange={(choice) => setChoice(choice.map((item) => item.value))}
       placeholder="Write username of the friend you want to invite to this room"
-      styles={colourStyles}
+      styles={colorStyles}
       // onChange={(choice) => console.log("choice", choice)}
     />
   );

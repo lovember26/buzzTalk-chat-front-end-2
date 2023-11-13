@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { selectAccessToken } from "redux/auth/authSelectors";
 import NoFriends from "../SideBar/NoFriends/NoFriends";
 import { PublicChatItem } from "./PublicChatsList.styled";
-import { ReactComponent as DefaultIcon } from "../../../images/default.svg";
+// import { ReactComponent as DefaultIcon } from "../../../images/default.svg";
 import { selectUserName } from "redux/user/userSelectors";
 
 export const PublicChatsList = () => {

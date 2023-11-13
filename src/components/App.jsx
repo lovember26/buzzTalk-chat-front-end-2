@@ -37,7 +37,7 @@ const OnlineFriends = lazy(() =>
 
 const ChatRoom = lazy(() => import("./ChatRooms/ChatRoom/ChatRoom"));
 const Chat = lazy(() => import("./ChatRooms/Chat/Chat"));
-const WelcomeChat = lazy(() => import("./ChatRooms/WelcomeChat/WelcomeChat"));
+// const WelcomeChat = lazy(() => import("./ChatRooms/WelcomeChat/WelcomeChat"));
 
 export const App = () => {
   const dispatch = useDispatch();

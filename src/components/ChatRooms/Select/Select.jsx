@@ -1,11 +1,11 @@
 import React from "react";
 import makeAnimated from "react-select/animated";
-import chroma from "chroma-js";
+// import chroma from "chroma-js";
 import { SelectWrapper } from "./Select.styled";
 
 const animatedComponents = makeAnimated();
 
-const colourStyles = {
+const colorStyles = {
   control: (styles) => ({
     ...styles,
     backgroundColor: "#662549",
@@ -35,7 +35,7 @@ export default function AnimatedSelect({ users, setChoice }) {
       options={users}
       onChange={(choice) => setChoice(choice[0]?.value)}
       placeholder="Write username of the friend you want to invite to this room"
-      styles={colourStyles}
+      styles={colorStyles}
       // onChange={(choice) => console.log("choice", choice)}
     />
   );

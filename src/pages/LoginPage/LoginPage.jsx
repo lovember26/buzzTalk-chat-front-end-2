@@ -22,7 +22,7 @@ import {
   LoginPageLinksWrapper,
   LoginPageLinkForgotPassword,
   LoginPageRedirectLinkWrapper,
-  LoginPageRedirectText,
+  // LoginPageRedirectText,
   LoginPageRedirectLink,
   LoginPageForm,
   BlockInputWrapper,

@@ -22,6 +22,11 @@ import {
   Form,
   FriendsLinkWrapper,
 } from "./SidePanel.styled";
+// import { StyledLink } from "../../FriendsBar/FriendsBar.styled";
+// import { FriendsList } from "../../FriendsList/FriendsList";
+import UserProfile from "../UserProfile/UserProfile";
+
+// import FriendsList from "../../FriendsList/FriendsList";
 import { PrivateChatList } from "../../PrivateChatsList/PrivateChatsList";
 import { useSelector } from "react-redux";
 
@@ -48,6 +53,7 @@ export default function SidePanel() {
           </AddChatButtonWrapper>
 
           <PublicChatsList />
+          <UserProfile />
         </StyledNav>
 
         <SearchBar>

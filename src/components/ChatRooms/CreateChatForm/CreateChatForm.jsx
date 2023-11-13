@@ -19,7 +19,7 @@ import {
 import { selectAccessToken } from "redux/auth/authSelectors";
 import { selectUserName } from "redux/user/userSelectors";
 import AnimatedSelect from "../Select/Select";
-import AnimatedSelectPublicChat from "../SelectPiblicChat/SelectPiblicChat";
+import AnimatedSelectPublicChat from "../SelectPublicChat/SelectPublicChat";
 
 const CreateChatForm = () => {
   const accessToken = useSelector(selectAccessToken);
@@ -39,7 +39,7 @@ const CreateChatForm = () => {
   useEffect(() => {
     if (accessToken !== null && username !== null) {
       getUserChats(accessToken);
-    }
+    } /* eslint-disable */
   }, [accessToken, username]);
 
   const getUserChats = async (token) => {
@@ -171,28 +171,6 @@ const CreateChatForm = () => {
 };
 
 export default CreateChatForm;
-
-{
-  /* <FormWrapper>
-      <Text>What kind of chat you’d like to create?</Text>
-      <ButtonWrapper>
-        <ButtonForPublic
-          onClick={() => {
-            setKindChatChoice("public");
-          }}
-        >
-          For public discussion
-        </ButtonForPublic>
-        <ButtonForPrivate
-          onClick={() => {
-            setKindChatChoice("private");
-          }}
-        >
-          For private discussion
-        </ButtonForPrivate>
-      </ButtonWrapper>
-    </FormWrapper> */
-}
 
 // <FormWrapper>
 //   <Text>Invite friends to Chat room name</Text>
