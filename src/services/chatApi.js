@@ -4,6 +4,15 @@ axios.defaults.baseURL = "https://buzz-talk-api.onrender.com/api";
 
 // Parameters -
 // Response - array with objects id participants and messages values
+export const getPrivateChatsService = async () => {
+  const { data } = await axios.get("/chat/private-chat/");
+  console.log("getPrivateChatsService data", data);
+  return data;
+};
+
+// Not Used =======================================================
+// Parameters -
+// Response - array with objects id participants and messages values
 export const getAllChatsService = async () => {
   const { data } = await axios.get("/chat/");
   console.log("getMessagesService data", data);

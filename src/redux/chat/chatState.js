@@ -1,23 +1,38 @@
 import { status } from "constants";
 
 export const initialState = {
-  all: [],
+  privateChats: [],
+  publicChats: [],
 
   statuses: {
-    fetchAll: status.IDLE,
-    fetchById: status.IDLE,
-    create: status.IDLE,
-    delete: status.IDLE,
-    update: status.IDLE,
-    change: status.IDLE,
+    fetchAllPrivateChat: status.IDLE,
+    fetchByIdPrivateChat: status.IDLE,
+    createPrivateChat: status.IDLE,
+    deletePrivateChat: status.IDLE,
+    updatePrivateChat: status.IDLE,
+    changePrivateChat: status.IDLE,
+
+    fetchAllPublicChat: status.IDLE,
+    fetchByIdPublicChat: status.IDLE,
+    createPublicChat: status.IDLE,
+    deletePublicChat: status.IDLE,
+    updatePublicChat: status.IDLE,
+    changePublicChat: status.IDLE,
   },
 
   errors: {
-    fetchAll: null,
-    fetchById: null,
-    create: null,
-    delete: null,
-    update: null,
-    change: null,
+    fetchAllPrivateChat: null,
+    fetchByIdPrivateChat: null,
+    createPrivateChat: null,
+    deletePrivateChat: null,
+    updatePrivateChat: null,
+    changePrivateChat: null,
+
+    fetchAllPublicChat: null,
+    fetchByIdPublicChat: null,
+    createPublicChat: null,
+    deletePublicChat: null,
+    updatePublicChat: null,
+    changePublicChat: null,
   },
 };

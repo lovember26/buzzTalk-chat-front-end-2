@@ -37,7 +37,7 @@ const OnlineFriends = lazy(() =>
 
 const ChatRoom = lazy(() => import("./ChatRooms/ChatRoom/ChatRoom"));
 const Chat = lazy(() => import("./ChatRooms/Chat/Chat"));
-const WelcomeChat = lazy(() => import("./ChatRooms/WelcomeChat/WelcomeChat"));
+// const WelcomeChat = lazy(() => import("./ChatRooms/WelcomeChat/WelcomeChat"));
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -109,7 +109,7 @@ export const App = () => {
           path={routes.CHAT_ROOMS_CHAT_PAGE}
           element={<PrivatePage component={<ChatRoom />} />}
         >
-          <Route index element={<PrivatePage component={<WelcomeChat />} />} />
+          {/* <Route index element={<PrivatePage component={<WelcomeChat />} />} /> */}
           <Route
             path={routes.CHAT_ROOMS_PRIVATE_CHAT_PAGE}
             element={<PrivatePage component={<Chat username={username} />} />}

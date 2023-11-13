@@ -9,11 +9,11 @@ export const LoginPageLinksWrapper = styled.div`
   align-items: center;
   flex-direction: column;
   gap: 12px;
+
   & svg {
     stroke: rgba(255, 255, 255, 0.5);
   }
   @media screen and (min-width: ${({ theme }) => theme.breakpoints[1]}) {
-    gap: 24px;
     & svg {
       stroke: ${({ theme }) => theme.colors.black[100]};
     }

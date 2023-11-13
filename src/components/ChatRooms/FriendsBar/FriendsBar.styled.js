@@ -6,6 +6,8 @@ export const FriendsContainer = styled.div`
 `;
 
 export const StyledFriendsNav = styled.nav`
+  background-color: #451952;
+
   height: 80px;
   padding-left: 26px;
 

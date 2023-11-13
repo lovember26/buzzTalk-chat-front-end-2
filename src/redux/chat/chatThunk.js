@@ -1,6 +1,20 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { chatAPI } from "services";
 
+export const fetchAllPrivateChatsThunk = createAsyncThunk(
+  "chat/fetchAllPrivate",
+  async (_, { rejectWithValue }) => {
+    try {
+      const chats = await chatAPI.getPrivateChatsService();
+      return chats;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+// Not used =====================================
+
 export const fetchAllChatsThunk = createAsyncThunk(
   "chat/fetchAll",
   async (_, { rejectWithValue }) => {

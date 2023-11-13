@@ -12,8 +12,8 @@ import {
 } from "redux/user/userThunk";
 import {
   selectUserName,
-  selectImage,
-  selectDescription,
+  selectUserImage,
+  selectUserDescription,
 } from "redux/user/userSelectors";
 
 import { InputNotification } from "components/common/InputNotification/InputNotification";
@@ -42,8 +42,8 @@ import { useNavigate } from "react-router";
 export default function EditProfilePage() {
   const [file, setFile] = useState("");
   const username = useSelector(selectUserName);
-  const description = useSelector(selectDescription);
-  const image = useSelector(selectImage);
+  const description = useSelector(selectUserDescription);
+  const image = useSelector(selectUserImage);
 
   const filePicker = useRef(null);
   const dispatch = useDispatch();

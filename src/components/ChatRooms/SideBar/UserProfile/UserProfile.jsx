@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
-import { selectImage, selectUserName } from "redux/user/userSelectors";
+import { selectUserImage, selectUserName } from "redux/user/userSelectors";
+
 import { UserCard, UserProfileWrapper } from "./UserProfile.styled";
 import { ReactComponent as Status } from "../../../../images/status.svg";
 import { ReactComponent as EditProfile } from "../../../../images/edit-profile.svg";
@@ -12,7 +13,7 @@ import { ReactComponent as LanguageIcon } from "../../../../images/user-language
 export default function UserProfile() {
   const username = useSelector(selectUserName);
   //   const description = useSelector(selectDescription);
-  const image = useSelector(selectImage);
+  const image = useSelector(selectUserImage);
   return (
     <UserProfileWrapper>
       <button className="showUserCard">
@@ -28,7 +29,7 @@ export default function UserProfile() {
           </button>
 
           <div className="container">
-            <div className="nameAndStatusWrapp">
+            <div className="nameAndStatusWrapper">
               <p className="userName">{username}</p>
               <Status />
             </div>

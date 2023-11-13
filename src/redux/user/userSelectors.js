@@ -2,9 +2,9 @@ export const selectAllUsers = (state) => state.user.all;
 
 export const selectUserId = (state) => state.user.id;
 export const selectUserName = (state) => state.user.username;
-export const selectEmail = (state) => state.user.email;
-export const selectImage = (state) => state.user.image;
-export const selectDescription = (state) => state.user.description;
+export const selectUserEmail = (state) => state.user.email;
+export const selectUserImage = (state) => state.user.image;
+export const selectUserDescription = (state) => state.user.description;
 
 export const selectUserIsLoggedIn = (state) => state.user.isLoggedIn;
 export const selectIsFetchingCurrentUser = (state) =>

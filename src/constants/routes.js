@@ -15,7 +15,7 @@ export const routes = {
 
   CHAT_ROOMS_CHAT_PAGE: "/chat-rooms/chats",
   // CHAT_ROOMS_PRIVATE_CHAT_PAGE: "/chat-rooms/chats/:username",
-  CHAT_ROOMS_PRIVATE_CHAT_PAGE: "/chat-rooms/chats/:chatId",
+  CHAT_ROOMS_PRIVATE_CHAT_PAGE: "/chat-rooms/chats/:chatSlug",
 
   PROFILE_PAGE: "/profile",
   EDIT_PROFILE_PAGE: "/profile/edit",

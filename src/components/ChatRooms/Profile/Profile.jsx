@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { selectUserName } from "redux/user/userSelectors";
+import { selectUserImage } from "redux/user/userSelectors";
 
 import { ReactComponent as SearchIcon } from "../../../images/search-chat.svg";
 import { ReactComponent as PhoneIcon } from "../../../images/phone-call.svg";
@@ -9,22 +10,32 @@ import {
   ActionBar,
   ChatContainer,
   StyledHeader,
-  UserBar,
+  UserBarWrapper,
+  UserBarImage,
+  UserBarInfoWrapper,
+  UserBarUserName,
+  UserBarUserStatus,
+  UserBarImageWrapper,
 } from "./Profile.styled";
 
 export default function Profile() {
   const username = useSelector(selectUserName);
+  const image = useSelector(selectUserImage);
 
   return (
     <ChatContainer>
       <StyledHeader>
-        <UserBar>
-          <img src="#" width="50" alt="avatar" />
-          <div className="user">
-            <p className="username">{username}</p>
-            <p className="user-status">online</p>
-          </div>
-        </UserBar>
+        <UserBarWrapper>
+          <UserBarImageWrapper>
+            <UserBarImage src={image} width="50" alt="avatar" />
+          </UserBarImageWrapper>
+          <UserBarInfoWrapper className="user">
+            <UserBarUserName className="username">{username}</UserBarUserName>
+            <UserBarUserStatus className="user-status">
+              online
+            </UserBarUserStatus>
+          </UserBarInfoWrapper>
+        </UserBarWrapper>
         <ActionBar>
           <li>
             <SearchIcon />

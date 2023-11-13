@@ -52,7 +52,7 @@ export const UserCard = styled.div`
     border-radius: 50%;
     margin-top: 16px;
   }
-  .nameAndStatusWrapp {
+  .nameAndStatusWrapper {
     display: flex;
     gap: 10px;
     align-items: center;
