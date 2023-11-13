@@ -11,6 +11,7 @@ export const PublicChatItem = styled(NavLink)`
   border-radius: 50%;
   color: white;
   overflow: hidden;
+  font-size: 12px;
 
   margin-bottom: 6px;
 `;

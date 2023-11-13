@@ -62,6 +62,7 @@ export const MessageList = styled.ul`
   flex: 1 1 auto;
 
   max-height: 630px;
+  /* max-height: 100%; */
   overflow-y: scroll;
 `;
 

@@ -35,18 +35,18 @@ class Chat extends React.Component {
     WebSocketInstance.connect(this.props.params.chatSlug);
   }
   //Functionality of scrolling scrolling to the latest messages
-  componentDidMount() {
-    WebSocketInstance.connect();
-    this.scrollToBottom();
-  }
+  // componentDidMount() {
+  //   WebSocketInstance.connect();
+  //   this.scrollToBottom();
+  // }
 
-  scrollToBottom = () => {
-    this.messagesEnd.scrollIntoView({ behavior: "smooth" });
-  };
+  // scrollToBottom = () => {
+  //   this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+  // };
 
-  componentDidUpdate() {
-    this.scrollToBottom();
-  }
+  // componentDidUpdate() {
+  //   this.scrollToBottom();
+  // }
 
   waitForSocketConnection(callback) {
     const component = this;
@@ -154,12 +154,12 @@ class Chat extends React.Component {
         <MessageList>
           {messages && this.renderMessages(messages)}
           {/* Functionality of scrolling scrolling to the latest messages */}
-          <div
+          {/* <div
             style={{ float: "left", clear: "both" }}
             ref={(el) => {
               this.messagesEnd = el;
             }}
-          ></div>
+          ></div> */}
         </MessageList>
         <MessageInput
           onSubmit={this.sendMessageHandler}
