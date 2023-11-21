@@ -36,57 +36,57 @@ const CreateChatForm = () => {
 
   console.log("publicChatName", publicChatName);
 
-  useEffect(() => {
-    if (accessToken !== null && username !== null) {
-      getUserChats(accessToken);
-    } /* eslint-disable */
-  }, [accessToken, username]);
+  // useEffect(() => {
+  //   if (accessToken !== null && username !== null) {
+  //     getUserChats(accessToken);
+  //   } /* eslint-disable */
+  // }, [accessToken, username]);
 
-  const getUserChats = async (token) => {
-    const { data } = await axios.get(
-      "https://buzz-talk-api.onrender.com/api/accounts/users",
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    optionedUsers(data);
-  };
+  // const getUserChats = async (token) => {
+  //   const { data } = await axios.get(
+  //     "https://buzz-talk-api.onrender.com/api/accounts/users",
+  //     {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     }
+  //   );
+  //   optionedUsers(data);
+  // };
 
-  const optionedUsers = (data) => {
-    data.map((item) => {
-      const optionedUser = { value: item.username, label: item.username };
-      return setUsers((prevState) => [...prevState, optionedUser]);
-    });
-  };
+  // const optionedUsers = (data) => {
+  //   data.map((item) => {
+  //     const optionedUser = { value: item.username, label: item.username };
+  //     return setUsers((prevState) => [...prevState, optionedUser]);
+  //   });
+  // };
 
   const handlerSubmit = async (event) => {
     event.preventDefault();
     console.log("handlerSubmit");
 
-    if (kindChatChoice === "private" && userPrivateChatChoice) {
-      const { data } = await axios.post(
-        "https://buzz-talk-api.onrender.com/chat/private-chat/",
-        {
-          receiver: userPrivateChatChoice,
-        }
-      );
-      console.log("data create private chat", data);
-    }
+    // if (kindChatChoice === "private" && userPrivateChatChoice) {
+    //   const { data } = await axios.post(
+    //     "https://buzz-talk-api.onrender.com/chat/private-chat/",
+    //     {
+    //       receiver: userPrivateChatChoice,
+    //     }
+    //   );
+    //   console.log("data create private chat", data);
+    // }
 
-    if (kindChatChoice === "public" && userPublicChatChoice) {
-      const newPublicChat = {
-        title: publicChatName,
-        participants: userPublicChatChoice,
-      };
+    // if (kindChatChoice === "public" && userPublicChatChoice) {
+    //   const newPublicChat = {
+    //     title: publicChatName,
+    //     participants: userPublicChatChoice,
+    //   };
 
-      const { data } = await axios.post(
-        "https://buzz-talk-api.onrender.com/chat/public-chat/",
-        newPublicChat
-      );
-      console.log("data create public chat", data);
-    }
+    //   const { data } = await axios.post(
+    //     "https://buzz-talk-api.onrender.com/chat/public-chat/",
+    //     newPublicChat
+    //   );
+    //   console.log("data create public chat", data);
+    // }
   };
 
   return (

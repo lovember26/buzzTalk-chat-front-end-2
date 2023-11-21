@@ -14,6 +14,14 @@ export const getPublicChatsService = async () => {
   return data;
 };
 
+export const createPrivateChatService = async (participants, messages) => {
+  const { data } = await axios.post("/chat/create/", {
+    participants,
+    messages,
+  });
+  return data;
+};
+
 // Not Used =======================================================
 // Parameters -
 // Response - array with objects id participants and messages values
@@ -33,13 +41,13 @@ export const getChatByIdService = async (id) => {
 
 // Parameters - object with participants and messages values
 // Response - object with id participants and messages values
-export const createChatService = async (participants, messages) => {
-  const { data } = await axios.post("/chat/create/", {
-    participants,
-    messages,
-  });
-  return data;
-};
+// export const createChatService = async (participants, messages) => {
+//   const { data } = await axios.post("/chat/create/", {
+//     participants,
+//     messages,
+//   });
+//   return data;
+// };
 
 // Parameters - id
 // Response - code 204

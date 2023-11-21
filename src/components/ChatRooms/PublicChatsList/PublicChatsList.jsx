@@ -1,19 +1,11 @@
-import axios from "axios";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectAccessToken } from "redux/auth/authSelectors";
 import NoFriends from "../SideBar/NoFriends/NoFriends";
 import { PublicChatItem } from "./PublicChatsList.styled";
-// import { ReactComponent as DefaultIcon } from "../../../images/default.svg";
-import { selectUserName } from "redux/user/userSelectors";
 import { fetchAllPublicChatsThunk } from "redux/chat/chatThunk";
 import { selectFetchAllPublicChats } from "redux/chat/chatSelectors";
 
 export const PublicChatsList = () => {
-  const accessToken = useSelector(selectAccessToken);
-  const username = useSelector(selectUserName);
-  // const [activeChats, setActiveChats] = useState([]);
-
   const chats = useSelector(selectFetchAllPublicChats);
 
   const dispatch = useDispatch();
