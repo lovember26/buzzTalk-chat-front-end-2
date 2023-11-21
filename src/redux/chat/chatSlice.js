@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { initialState } from "./chatState";
 import {
   fetchAllPrivateChatsThunk,
+  fetchAllPublicChatsThunk,
   // fetchAllChatsThunk,
   // fetchChatByIdThunk,
   // createChatThunk,
@@ -17,7 +18,7 @@ export const chatSlice = createSlice({
   initialState,
   extraReducers: (builder) => {
     builder
-      // fetch all messages
+      // fetch all private chats
       .addCase(fetchAllPrivateChatsThunk.pending, (state) => {
         state.statuses.fetchAllPrivateChat = status.PENDING;
         state.errors.fetchAllPrivateChat = null;
@@ -30,8 +31,23 @@ export const chatSlice = createSlice({
       .addCase(fetchAllPrivateChatsThunk.rejected, (state, action) => {
         state.statuses.fetchAllPrivateChat = status.REJECTED;
         state.errors.fetchAllPrivateChat = action.payload;
+      })
+
+      // fetch all public chats
+      .addCase(fetchAllPublicChatsThunk.pending, (state) => {
+        state.statuses.fetchAllPublicChat = status.PENDING;
+        state.errors.fetchAllPublicChat = null;
+      })
+      .addCase(fetchAllPublicChatsThunk.fulfilled, (state, action) => {
+        state.statuses.fetchAllPublicChat = status.FULFILLED;
+        state.publicChats = action.payload;
+        state.errors.fetchAllPublicChat = null;
+      })
+      .addCase(fetchAllPublicChatsThunk.rejected, (state, action) => {
+        state.statuses.fetchAllPublicChat = status.REJECTED;
+        state.errors.fetchAllPublicChat = action.payload;
       });
-    
+
     // Not used ==================================
     // fetch all messages
     // .addCase(fetchAllChatsThunk.pending, (state) => {

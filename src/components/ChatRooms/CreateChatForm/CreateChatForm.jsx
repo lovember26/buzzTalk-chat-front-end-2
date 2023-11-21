@@ -67,7 +67,7 @@ const CreateChatForm = () => {
 
     if (kindChatChoice === "private" && userPrivateChatChoice) {
       const { data } = await axios.post(
-        "https://buzz-talk-api.onrender.com/api/chat/private-chat/",
+        "https://buzz-talk-api.onrender.com/chat/private-chat/",
         {
           receiver: userPrivateChatChoice,
         }
@@ -82,7 +82,7 @@ const CreateChatForm = () => {
       };
 
       const { data } = await axios.post(
-        "https://buzz-talk-api.onrender.com/api/chat/public-chat/",
+        "https://buzz-talk-api.onrender.com/chat/public-chat/",
         newPublicChat
       );
       console.log("data create public chat", data);

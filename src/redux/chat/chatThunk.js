@@ -13,6 +13,18 @@ export const fetchAllPrivateChatsThunk = createAsyncThunk(
   }
 );
 
+export const fetchAllPublicChatsThunk = createAsyncThunk(
+  "chat/fetchAllPublic",
+  async (_, { rejectWithValue }) => {
+    try {
+      const chats = await chatAPI.getPublicChatsService();
+      return chats;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 // Not used =====================================
 
 export const fetchAllChatsThunk = createAsyncThunk(

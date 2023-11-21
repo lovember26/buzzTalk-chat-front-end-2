@@ -24,7 +24,7 @@ import {
 } from "./SidePanel.styled";
 // import { StyledLink } from "../../FriendsBar/FriendsBar.styled";
 // import { FriendsList } from "../../FriendsList/FriendsList";
-import UserProfile from "../UserProfile/UserProfile";
+// import UserProfile from "../UserProfile/UserProfile";
 
 // import FriendsList from "../../FriendsList/FriendsList";
 import { PrivateChatList } from "../../PrivateChatsList/PrivateChatsList";
@@ -53,7 +53,7 @@ export default function SidePanel() {
           </AddChatButtonWrapper>
 
           <PublicChatsList />
-          <UserProfile />
+          {/* <UserProfile /> */}
         </StyledNav>
 
         <SearchBar>
@@ -68,7 +68,7 @@ export default function SidePanel() {
           </Form>
           <FriendsLinkWrapper>
             <ContactIcon />
-            <FriendsLink to={"friends"}>Friends</FriendsLink>
+            <FriendsLink to={"friends/all"}>Friends</FriendsLink>
           </FriendsLinkWrapper>
 
           <PrivateChatList />
