@@ -1,7 +1,5 @@
 import React from "react";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import axios from "axios";
+import { useState } from "react";
 import {
   FormWrapper,
   Form,
@@ -16,50 +14,18 @@ import {
   ButtonForPublic,
   ButtonForPrivate,
 } from "./CreateChatForm.styled";
-import { selectAccessToken } from "redux/auth/authSelectors";
-import { selectUserName } from "redux/user/userSelectors";
 import AnimatedSelect from "../Select/Select";
 import AnimatedSelectPublicChat from "../SelectPublicChat/SelectPublicChat";
 
-const CreateChatForm = () => {
-  const accessToken = useSelector(selectAccessToken);
-  const username = useSelector(selectUserName);
+const CreateChatForm = ({ users }) => {
   const [userPrivateChatChoice, setUserPrivateChatChoice] = useState(null);
   const [userPublicChatChoice, setUserPublicChatChoice] = useState(null);
 
+  console.log("userPrivateChatChoice", userPrivateChatChoice);
   console.log("userPublicChatChoice", userPublicChatChoice);
-
-  const [users, setUsers] = useState([]);
 
   const [kindChatChoice, setKindChatChoice] = useState(null);
   const [publicChatName, setPublicChatName] = useState("");
-
-  console.log("publicChatName", publicChatName);
-
-  // useEffect(() => {
-  //   if (accessToken !== null && username !== null) {
-  //     getUserChats(accessToken);
-  //   } /* eslint-disable */
-  // }, [accessToken, username]);
-
-  // const getUserChats = async (token) => {
-  //   const { data } = await axios.get(
-  //     "https://buzz-talk-api.onrender.com/api/accounts/users",
-  //     {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     }
-  //   );
-  //   optionedUsers(data);
-  // };
-
-  // const optionedUsers = (data) => {
-  //   data.map((item) => {
-  //     const optionedUser = { value: item.username, label: item.username };
-  //     return setUsers((prevState) => [...prevState, optionedUser]);
-  //   });
-  // };
 
   const handlerSubmit = async (event) => {
     event.preventDefault();
@@ -171,81 +137,3 @@ const CreateChatForm = () => {
 };
 
 export default CreateChatForm;
-
-// <FormWrapper>
-//   <Text>Invite friends to Chat room name</Text>
-//   <Form onSubmit={handlerSubmit}>
-//     <AnimatedSelect users={users} setChoice={setUserChoice} />
-//     {/* <Input type="text" placeholder="Enter name of created chat"></Input> */}
-//     <ButtonsWrapper>
-//       <ButtonBack>Back</ButtonBack>
-//       <Button>Create chat</Button>
-//     </ButtonsWrapper>
-//   </Form>
-// </FormWrapper>
-
-// import React from "react";
-// import { useEffect, useState } from "react";
-// import { useSelector } from "react-redux";
-// import axios from "axios";
-// import { Form, Input, Button } from "./CreateChatForm.styled";
-// import { selectAccessToken } from "redux/auth/authSelectors";
-// import { selectUserName } from "redux/user/userSelectors";
-// import AnimatedSelect from "../Select/Select";
-
-// const CreateChatForm = () => {
-//   const accessToken = useSelector(selectAccessToken);
-//   const username = useSelector(selectUserName);
-//   const [userChoice, setUserChoice] = useState(null);
-
-//   const [users, setUsers] = useState([]);
-
-//   useEffect(() => {
-//     if (accessToken !== null && username !== null) {
-//       getUserChats(accessToken);
-//     }
-//   }, [accessToken, username]);
-
-//   const getUserChats = async (token) => {
-//     // const { data } = await axios.get(
-//     //   "https://buzz-talk-api.onrender.com/api/accounts/users",
-//     //   {
-//     //     headers: {
-//     //       Authorization: `Bearer ${token}`,
-//     //     },
-//     //   }
-//     // );
-//     // optionedUsers(data);
-//   };
-
-//   const optionedUsers = (data) => {
-//     data.map((item) => {
-//       const optionedUser = { value: item.username, label: item.username };
-//       return setUsers((prevState) => [...prevState, optionedUser]);
-//     });
-//   };
-
-//   const handlerSubmit = async (event) => {
-//     event.preventDefault();
-
-//     // if (userChoice) {
-//     //   const { data } = await axios.post(
-//     //     "https://buzz-talk-api.onrender.com/private-chat/",
-//     //     {
-//     //       receiver: userChoice,
-//     //     }
-//     //   );
-//     //   console.log("data create private chat", data);
-//     // }
-//   };
-
-//   return (
-//     <Form onSubmit={handlerSubmit}>
-//       <AnimatedSelect users={users} setChoice={setUserChoice} />
-//       {/* <Input type="text" placeholder="Enter name of created chat"></Input> */}
-//       <Button>Create private chat</Button>
-//     </Form>
-//   );
-// };
-
-// export default CreateChatForm;

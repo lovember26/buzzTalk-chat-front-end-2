@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import { ReactComponent as AddChatButton } from "../../../../images/addChatBtn.svg";
 import { ReactComponent as ChatsBtn } from "../../../../images/chatsBtn.svg";
@@ -22,9 +22,26 @@ import {
 } from "./SidePanel.styled";
 
 import { PrivateChatList } from "../../PrivateChatsList/PrivateChatsList";
+import { useDispatch, useSelector } from "react-redux";
+
+import { selectAllUsers } from "redux/user/userSelectors";
+import { fetchAllUsersThunk } from "redux/user/userThunk";
 
 export default function SidePanel() {
   const [modalActive, setModalActive] = useState(false);
+
+  const users = useSelector(selectAllUsers);
+  // console.log("users", users);
+
+  const dispatch = useDispatch();
+
+  // const getUserChats = useCallback(async () => {
+  //   await dispatch(fetchAllPublicChatsThunk());
+  // }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchAllUsersThunk());
+  }, [dispatch]);
 
   return (
     <>
@@ -41,7 +58,7 @@ export default function SidePanel() {
             <AddChatButton />
           </AddChatButtonWrapper>
 
-          <PublicChatsList />
+          {/* <PublicChatsList /> */}
           {/* <UserProfile /> */}
         </StyledNav>
 
@@ -60,12 +77,12 @@ export default function SidePanel() {
             <FriendsLink to={"friends/all"}>Friends</FriendsLink>
           </FriendsLinkWrapper>
 
-          <PrivateChatList />
+          {/* <PrivateChatList /> */}
         </SearchBar>
       </StyledSideBar>
 
       <Modal active={modalActive} setActive={setModalActive}>
-        <CreateChatForm />
+        <CreateChatForm users={users} />
       </Modal>
       <Outlet />
     </>
