@@ -62,8 +62,29 @@ export const MessageList = styled.ul`
   flex: 1 1 auto;
 
   max-height: 630px;
-  /* max-height: 100%; */
-  overflow-y: scroll;
+  overflow-y: auto;
+
+  ::-webkit-scrollbar {
+    /* If scrolling is not visible */
+    /* width: 0; */
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: whitesmoke;
+    border-radius: 8px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: gray;
+    border: 3px solid transparent;
+    border-radius: 8px;
+    background-clip: content-box;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: purple;
+  }
 `;
 
 export const MessageListItem = styled.li`

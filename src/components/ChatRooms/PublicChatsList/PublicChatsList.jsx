@@ -1,7 +1,7 @@
 import { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import NoFriends from "../SideBar/NoFriends/NoFriends";
-import { PublicChatItem } from "./PublicChatsList.styled";
+import { ChatList, PublicChatItem } from "./PublicChatsList.styled";
 import { fetchAllPublicChatsThunk } from "redux/chat/chatThunk";
 import { selectFetchAllPublicChats } from "redux/chat/chatSelectors";
 
@@ -41,13 +41,13 @@ export const PublicChatsList = () => {
   return (
     <>
       {chats && chats.length > 0 ? (
-        <ul>
+        <ChatList>
           {chats?.map((chat) => (
             <PublicChatItem to={`chats/${chat?.slug}`} key={chat?.id}>
               {chat?.id}
             </PublicChatItem>
           ))}
-        </ul>
+        </ChatList>
       ) : (
         <NoFriends />
       )}

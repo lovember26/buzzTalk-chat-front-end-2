@@ -33,9 +33,9 @@ export default function SidePanel() {
   const users = useSelector(selectAllUsers);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchAllUsersThunk());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchAllUsersThunk());
+  // }, [dispatch]);
 
   return (
     <>
@@ -52,7 +52,7 @@ export default function SidePanel() {
             <AddChatButton />
           </AddChatButtonWrapper>
 
-          {/* <PublicChatsList /> */}
+          <PublicChatsList />
           {/* <UserProfile /> */}
         </StyledNav>
 
@@ -71,7 +71,7 @@ export default function SidePanel() {
             <FriendsLink to={"friends/all"}>Friends</FriendsLink>
           </FriendsLinkWrapper>
 
-          {/* <PrivateChatList /> */}
+          <PrivateChatList />
         </SearchBar>
       </StyledSideBar>
 
