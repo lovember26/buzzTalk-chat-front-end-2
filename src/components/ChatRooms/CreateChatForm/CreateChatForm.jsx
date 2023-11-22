@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import {
   FormWrapper,
   Form,
@@ -18,42 +19,34 @@ import {
 import SelectPrivateChat from "../SelectPrivateChat/SelectPrivateChat";
 import SelectPublicChat from "../SelectPublicChat/SelectPublicChat";
 
+import { createPrivateChatThunk } from "redux/chat/chatThunk";
+import { createPublicChatThunk } from "redux/chat/chatThunk";
+
 const CreateChatForm = ({ users }) => {
   const [userPrivateChatChoice, setUserPrivateChatChoice] = useState(null);
   const [userPublicChatChoice, setUserPublicChatChoice] = useState(null);
 
-  console.log("userPrivateChatChoice", userPrivateChatChoice);
-  console.log("userPublicChatChoice", userPublicChatChoice);
-
   const [kindChatChoice, setKindChatChoice] = useState(null);
   const [publicChatName, setPublicChatName] = useState("");
+
+  const dispatch = useDispatch();
 
   const handlerSubmit = async (event) => {
     event.preventDefault();
     console.log("handlerSubmit");
 
-    // if (kindChatChoice === "private" && userPrivateChatChoice) {
-    //   const { data } = await axios.post(
-    //     "https://buzz-talk-api.onrender.com/chat/private-chat/",
-    //     {
-    //       receiver: userPrivateChatChoice,
-    //     }
-    //   );
-    //   console.log("data create private chat", data);
-    // }
+    if (kindChatChoice === "private" && userPrivateChatChoice) {
+      await dispatch(createPrivateChatThunk(userPrivateChatChoice));
+    }
 
-    // if (kindChatChoice === "public" && userPublicChatChoice) {
-    //   const newPublicChat = {
-    //     title: publicChatName,
-    //     participants: userPublicChatChoice,
-    //   };
+    if (kindChatChoice === "public" && userPublicChatChoice) {
+      const newPublicChat = {
+        title: publicChatName,
+        participants: userPublicChatChoice,
+      };
 
-    //   const { data } = await axios.post(
-    //     "https://buzz-talk-api.onrender.com/chat/public-chat/",
-    //     newPublicChat
-    //   );
-    //   console.log("data create public chat", data);
-    // }
+      await dispatch(createPublicChatThunk(newPublicChat));
+    }
   };
 
   return (

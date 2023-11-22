@@ -31,13 +31,7 @@ export default function SidePanel() {
   const [modalActive, setModalActive] = useState(false);
 
   const users = useSelector(selectAllUsers);
-  // console.log("users", users);
-
   const dispatch = useDispatch();
-
-  // const getUserChats = useCallback(async () => {
-  //   await dispatch(fetchAllPublicChatsThunk());
-  // }, [dispatch]);
 
   useEffect(() => {
     dispatch(fetchAllUsersThunk());
