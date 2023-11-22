@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import makeAnimated from "react-select/animated";
 // import chroma from "chroma-js";
 import { SelectWrapper } from "./SelectPublicChat.styled";
@@ -26,15 +27,20 @@ const colorStyles = {
   placeholder: (styles) => ({ ...styles, color: "white", fontSize: "10px" }),
 };
 
-export default function AnimatedSelectPublicChat({ users, setChoice }) {
+export default function SelectPublicChat({ users, setChoice }) {
+  const [newArray, setNewArray] = useState(
+    users?.map((item) => ({
+      value: item.username,
+      label: item.username,
+    }))
+  );
+
   return (
     <SelectWrapper
       closeMenuOnSelect={false}
       components={animatedComponents}
       isMulti
-      options={users}
-      // onChange={(choice) => setChoice(choice[0]?.value)}
-      // onChange={(choice) => console.log("choice", choice)}
+      options={newArray}
       onChange={(choice) => setChoice(choice.map((item) => item.value))}
       placeholder="Write username of the friend you want to invite to this room"
       styles={colorStyles}

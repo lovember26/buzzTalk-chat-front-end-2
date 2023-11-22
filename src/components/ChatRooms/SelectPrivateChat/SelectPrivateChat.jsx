@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import makeAnimated from "react-select/animated";
-import { SelectWrapper } from "./Select.styled";
+import { SelectWrapper } from "./SelectPrivateChat.styled";
 
 const animatedComponents = makeAnimated();
 
@@ -16,17 +16,18 @@ const colorStyles = {
     paddingRight: "4px",
     width: "363px",
   }),
-  // option: (styles, { data, isDisabled, isFocused, isSelected }) => {
-  //   const color = chroma(data.color);
-  //   return {
-  //     ...styles,
-  //     color: "#FFF",
-  //   };
-  // },
+  // option: (styles) => ({
+  //   ...styles,
+  //   color: "white",
+  // }),
+  singleValue: (styles) => ({
+    ...styles,
+    color: "white",
+  }),
   placeholder: (styles) => ({ ...styles, color: "white", fontSize: "10px" }),
 };
 
-export default function AnimatedSelect({ users, setChoice }) {
+export default function SelectPrivateChat({ users, setChoice }) {
   const [newArray, setNewArray] = useState(
     users?.map((item) => ({
       value: item.username,
@@ -34,15 +35,13 @@ export default function AnimatedSelect({ users, setChoice }) {
     }))
   );
 
-  console.log("newArray", newArray);
-
   return (
     <SelectWrapper
       closeMenuOnSelect={false}
       components={animatedComponents}
-      isMulti
+      // isMulti
       options={newArray}
-      onChange={(choice) => setChoice(choice[0]?.value)}
+      onChange={(choice) => setChoice(choice?.value)}
       placeholder="Write username of the friend you want to invite to this room"
       styles={colorStyles}
       // onChange={(choice) => console.log("choice", choice)}

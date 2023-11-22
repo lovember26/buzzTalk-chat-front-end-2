@@ -14,8 +14,9 @@ import {
   ButtonForPublic,
   ButtonForPrivate,
 } from "./CreateChatForm.styled";
-import AnimatedSelect from "../Select/Select";
-import AnimatedSelectPublicChat from "../SelectPublicChat/SelectPublicChat";
+
+import SelectPrivateChat from "../SelectPrivateChat/SelectPrivateChat";
+import SelectPublicChat from "../SelectPublicChat/SelectPublicChat";
 
 const CreateChatForm = ({ users }) => {
   const [userPrivateChatChoice, setUserPrivateChatChoice] = useState(null);
@@ -92,7 +93,7 @@ const CreateChatForm = ({ users }) => {
                 onChange={(event) => setPublicChatName(event.target.value)}
               ></Input>
             </InputWrapper>
-            <AnimatedSelectPublicChat
+            <SelectPublicChat
               users={users}
               setChoice={setUserPublicChatChoice}
             />
@@ -114,7 +115,7 @@ const CreateChatForm = ({ users }) => {
         <FormWrapper>
           <Text>Choose a friend for private communication</Text>
           <Form onSubmit={handlerSubmit}>
-            <AnimatedSelect
+            <SelectPrivateChat
               users={users}
               setChoice={setUserPrivateChatChoice}
             />
