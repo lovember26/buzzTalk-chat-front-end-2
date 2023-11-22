@@ -11,6 +11,7 @@ import { store, persistedStore } from "redux/store";
 import reportWebVitals from "reportWebVitals";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
 root.render(
   <React.StrictMode>
     <BrowserRouter>

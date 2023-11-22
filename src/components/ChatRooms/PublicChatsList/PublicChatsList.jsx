@@ -18,26 +18,6 @@ export const PublicChatsList = () => {
     getUserChats();
   }, [getUserChats]);
 
-  // useEffect(() => {
-  //   if (accessToken !== null && username !== null) {
-  //     getUserChats(accessToken, username);
-  //   }
-  // }, [accessToken, username]);
-
-  // const getUserChats = async (token, username) => {
-  //   const { data } = await axios.get(
-  //     `https://buzz-talk-api.onrender.com/chat/public-chat/`,
-  //     {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //       username,
-  //     }
-  //   );
-  //   console.log("Active public Chats", data);
-  //   setActiveChats(data);
-  // };
-
   return (
     <>
       {chats && chats.length > 0 ? (
