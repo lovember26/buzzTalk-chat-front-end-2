@@ -71,7 +71,7 @@ export default function SidePanel() {
             <FriendsLink to={"friends/all"}>Friends</FriendsLink>
           </FriendsLinkWrapper>
 
-          {/* <PrivateChatList /> */}
+          <PrivateChatList />
         </SearchBar>
       </StyledSideBar>
 

@@ -2,8 +2,11 @@ import React, { useEffect, useState, useCallback } from "react";
 import withRouter from "helpers/withRouter";
 import WebSocketInstance from "websocket";
 import { MessageInput } from "components/MessageInput/MessageInput";
+import NoMessagesSvg from "images/svg/NoMessages/NoMessages";
 
 import {
+  DateNowText,
+  ChatBlockWrapper,
   MessageList,
   MessageListItem,
   MessageListItemUsernameWrapper,
@@ -114,15 +117,23 @@ const Chat = (props) => {
       </MessageListItem>
     ));
   };
+
   return (
-    <>
-      <MessageList>{messages && renderMessages(messages)}</MessageList>
+    <ChatBlockWrapper>
+      {!messages.length ? (
+        <NoMessagesSvg />
+      ) : (
+        <>
+          <DateNowText>Today</DateNowText>
+          <MessageList>{messages && renderMessages(messages)}</MessageList>
+        </>
+      )}
       <MessageInput
         onSubmit={sendMessageHandler}
         onChange={messageChangeHandler}
         value={message}
       />
-    </>
+    </ChatBlockWrapper>
   );
 };
 

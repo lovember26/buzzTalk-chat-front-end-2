@@ -11,7 +11,7 @@ export const MessageInput = ({ onSubmit, onChange, value }) => {
   return (
     <StyledForm onSubmit={onSubmit}>
       <PinIcon className="pin" />
-      <input onChange={onChange} value={value} />
+      <input onChange={onChange} value={value} placeholder="Message"></input>
       <EmojiIcon className="emoji" />
 
       <MicIcon className="mic" />

@@ -8,13 +8,15 @@ export const ChatContainer = styled.div`
 export const StyledHeader = styled.div`
   width: 1104px;
   height: 80px;
+
+  padding-left: 26px;
+  padding-right: 26px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #d9d9d9;
+  background: #451952;
 `;
 export const UserBarWrapper = styled.div`
-  padding-left: 30px;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -42,15 +44,39 @@ export const UserBarInfoWrapper = styled.div`
 export const UserBarUserName = styled.p`
   font-size: 16px;
   font-weight: 900px;
-  color: black;
+  color: #d9d9d9;
 `;
 
 export const UserBarUserStatus = styled.p`
   font-size: 12px;
+  color: #d9d9d9;
+`;
+
+export const Indicator = styled.div`
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+
+  background-color: green;
+  margin-left: 6px;
+`;
+
+export const UserStatusWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const ActionBar = styled.ul`
   display: flex;
-  gap: 12px;
-  padding: 29px 30px 29px 0;
+  flex-direction: row;
+  justify-content: center;
+  align-items: inherit;
+`;
+
+export const ActionBarItem = styled.li`
+  &:not(:last-child) {
+    margin-right: 20px;
+  }
 `;
