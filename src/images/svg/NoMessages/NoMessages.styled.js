@@ -1,5 +1,11 @@
 import styled from "@emotion/styled";
 
 export const Svg = styled.svg`
-  margin-bottom: 190px;
+  /* margin-top: auto;
+  margin-bottom: auto; */
+
+  margin-top: 100px;
+
+  margin-left: auto;
+  margin-right: auto;
 `;

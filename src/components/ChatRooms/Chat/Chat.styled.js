@@ -40,8 +40,6 @@ export const WrapperUsername = styled.div`
 export const Wrp = styled.div`
   display: flex;
   flex-direction: row;
-  /* justify-content: flex-end;
-  align-items: flex-start; */
 `;
 
 export const StyledHeader = styled.div`
@@ -67,6 +65,7 @@ export const UserBar = styled.div`
     .username {
       font-size: 14px;
     }
+
     .user-status {
       font-size: 12px;
     }
@@ -82,12 +81,6 @@ export const ActionBar = styled.ul`
 export const MessageList = styled.ul`
   display: flex;
   flex-direction: column;
-
-  /* padding-top: 28px;
-  margin-bottom: 16px;
-  padding-left: 26px;
-  padding-right: 26px; */
-  flex: 1 1 auto;
 
   max-height: 550px;
   overflow-y: auto;

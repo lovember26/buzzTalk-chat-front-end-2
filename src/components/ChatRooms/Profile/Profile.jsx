@@ -1,4 +1,6 @@
 import { useSelector } from "react-redux";
+// import { useSearchParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import { selectUserName } from "redux/user/userSelectors";
 import { selectUserImage } from "redux/user/userSelectors";
 
@@ -24,6 +26,9 @@ import {
 export default function Profile() {
   const username = useSelector(selectUserName);
   const image = useSelector(selectUserImage);
+
+  // const { chatSlug } = useParams();
+  // console.log("chatSlug Profile", chatSlug);
 
   return (
     <ChatContainer>

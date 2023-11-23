@@ -31,23 +31,6 @@ export const PublicChatsList = () => {
       ) : (
         <NoFriends />
       )}
-      {/* <ul>
-        <li>
-          <PublicChatItem>
-            <DefaultIcon />
-          </PublicChatItem>
-        </li>
-        <li>
-          <PublicChatItem>
-            <DefaultIcon />
-          </PublicChatItem>
-        </li>
-        <li>
-          <PublicChatItem>
-            <DefaultIcon />
-          </PublicChatItem>
-        </li>
-      </ul> */}
     </>
   );
 };
