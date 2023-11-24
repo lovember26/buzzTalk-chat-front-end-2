@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+
 import {
   FormWrapper,
   Form,
@@ -24,11 +25,17 @@ import SelectPublicChat from "../SelectPublicChat/SelectPublicChat";
 import { createPrivateChatThunk } from "redux/chat/chatThunk";
 import { createPublicChatThunk } from "redux/chat/chatThunk";
 
-const TypeCreateChatForm = ({ users, setCreateOwnChat }) => {
+const TypeCreateChatForm = ({
+  users,
+  createOwnChat,
+  setCreateOwnChat,
+  joinChat,
+  setJoinChat,
+  kindChatChoice,
+  setKindChatChoice,
+}) => {
   const [userPrivateChatChoice, setUserPrivateChatChoice] = useState(null);
   const [userPublicChatChoice, setUserPublicChatChoice] = useState(null);
-
-  const [kindChatChoice, setKindChatChoice] = useState(null);
   const [publicChatName, setPublicChatName] = useState("");
 
   const dispatch = useDispatch();
@@ -130,7 +137,6 @@ const TypeCreateChatForm = ({ users, setCreateOwnChat }) => {
               users={users}
               setChoice={setUserPrivateChatChoice}
             />
-            {/* <Input type="text" placeholder="Enter name of created chat"></Input> */}
             <ButtonsWrapper>
               <ButtonBack
                 onClick={() => {

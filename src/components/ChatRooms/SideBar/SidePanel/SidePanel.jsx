@@ -78,7 +78,7 @@ export default function SidePanel() {
 
       <Modal active={modalActive} setActive={setModalActive}>
         {/* <TypeCreateChatForm users={users} /> */}
-        <CreateChatForm />
+        <CreateChatForm users={users} />
       </Modal>
       <Outlet />
     </>

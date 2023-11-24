@@ -15,7 +15,7 @@ export const FormWrapper = styled.div`
 `;
 
 export const Text = styled.p`
-  margin-bottom: 36px;
+  margin-bottom: 20px;
   color: #696969;
   font-size: 18px;
   font-weight: 700;
@@ -25,6 +25,8 @@ export const ButtonWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  margin-bottom: 20px;
 
   width: 343px;
 `;
@@ -102,6 +104,5 @@ export const TextInfo = styled.p`
   font-size: 10px;
   font-weight: 500px;
 
-  margin-top: 26px;
   margin-bottom: 20px;
 `;
