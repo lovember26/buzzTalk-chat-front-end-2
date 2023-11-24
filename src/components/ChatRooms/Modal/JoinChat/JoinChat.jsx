@@ -1,27 +1,25 @@
 import React from "react";
-import {
-  ButtonsWrapper,
-  Button,
-  ButtonBack,
-  Text,
-  TextInfo,
-} from "./JoinChat.styled";
+
+import { ModalButtonBack } from "components/common/ModalButtonBack/ModalButtonBack";
+import { ModalButtonSendForm } from "components/common/ModalButtonSendForm/ModalButtonSendForm";
+
+import { Title, TextDescription, ButtonsWrapper } from "./JoinChat.styled";
 
 const JoinChat = ({ handleNavigate }) => {
   return (
     <>
-      <Text>Join a chat room</Text>
-      <TextInfo>Enter an invite link to join an existing chat room</TextInfo>
+      <Title>Join a chat room</Title>
+      <TextDescription>
+        Enter an invite link to join an existing chat room
+      </TextDescription>
 
       <ButtonsWrapper>
-        <ButtonBack
-          onClick={() => {
-            handleNavigate("initial");
-          }}
-        >
-          Back
-        </ButtonBack>
-        <Button>Join the chat room</Button>
+        <ModalButtonBack
+          text={"Back"}
+          navigate={handleNavigate}
+          to={"initial"}
+        />
+        <ModalButtonSendForm text={"Join the chat room"} />
       </ButtonsWrapper>
     </>
   );

@@ -1,17 +1,25 @@
 import styled from "@emotion/styled";
 
-export const FormWrapper = styled.div`
-  position: relative;
+export const Title = styled.p`
+  margin-bottom: 22px;
+  color: #696969;
+  font-size: 18px;
+  font-weight: 700;
+`;
+
+export const TextDescription = styled.p`
+  color: #696969;
+  font-size: 10px;
+  font-weight: 500px;
+  margin-bottom: 22px;
+`;
+
+export const ModalMainButtonsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  padding-top: 46px;
-  padding-left: 80px;
-  padding-right: 80px;
-  padding-bottom: 55px;
-
-  width: 525px;
+  width: 343px;
 `;
 
 export const JoinChatText = styled.p`
@@ -22,27 +30,6 @@ export const JoinChatText = styled.p`
   margin-bottom: 15px;
 `;
 
-export const Text = styled.p`
-  margin-bottom: 36px;
-  color: #696969;
-  font-size: 18px;
-  font-weight: 700;
-`;
-
-export const ButtonWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  width: 343px;
-`;
-
-export const ButtonsWrapper = styled.div`
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-`;
-
 export const Line = styled.div`
   width: 350px;
   height: 1px;
@@ -50,66 +37,4 @@ export const Line = styled.div`
 
   margin-top: 28px;
   margin-bottom: 28px;
-`;
-
-export const Form = styled.form`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-`;
-
-export const Select = styled.select`
-  margin-bottom: 20px;
-`;
-
-export const Input = styled.input`
-  width: 343px;
-  padding: 10px;
-  border-radius: 10px;
-  border: 1px solid #f39f5a;
-
-  margin-bottom: 16px;
-  background-color: #ececec;
-`;
-
-export const Button = styled.button`
-  padding: 15px 26px;
-  border-radius: 12px;
-  color: white;
-  font-size: 14px;
-  background-color: #451952;
-
-  cursor: pointer;
-`;
-
-export const ButtonBack = styled.button`
-  position: absolute;
-  left: 47px;
-  bottom: 47px;
-  /* align-self: flex-start; */
-  color: #d9d9d9;
-  font-size: 14px;
-
-  cursor: pointer;
-`;
-
-export const Lable = styled.label`
-  color: #696969;
-  font-size: 14px;
-  margin-bottom: 4px;
-`;
-
-export const InputWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-export const TextInfo = styled.p`
-  color: #696969;
-  font-size: 10px;
-  font-weight: 500px;
-
-  margin-top: 26px;
-  margin-bottom: 20px;
 `;

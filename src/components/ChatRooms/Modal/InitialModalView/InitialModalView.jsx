@@ -1,25 +1,25 @@
 import React from "react";
 
-import {
-  ButtonWrapper,
-  Line,
-  Text,
-  JoinChatText,
-  TextInfo,
-} from "./InitialModalView.styled";
+import { ModalMainButton } from "components/common/ModalMainButton/ModalMainButton";
 
-import { ButtonCreate } from "components/common/ButtonCreate/ButtonCreate";
+import {
+  Title,
+  TextDescription,
+  ModalMainButtonsWrapper,
+  Line,
+  JoinChatText,
+} from "./InitialModalView.styled";
 
 const InitialModalView = ({ handleNavigate }) => {
   return (
     <>
-      <Text>Create a chat room</Text>
-      <TextInfo>
+      <Title>Create a chat room</Title>
+      <TextDescription>
         Chat rooms is the place where you can discuss different topics with
         people with the same interests!
-      </TextInfo>
-      <ButtonWrapper>
-        <ButtonCreate
+      </TextDescription>
+      <ModalMainButtonsWrapper>
+        <ModalMainButton
           onClick={() => {
             handleNavigate("create");
           }}
@@ -30,7 +30,7 @@ const InitialModalView = ({ handleNavigate }) => {
         />
         <Line></Line>
         <JoinChatText>Already have an invite?</JoinChatText>
-        <ButtonCreate
+        <ModalMainButton
           onClick={() => {
             handleNavigate("join");
           }}
@@ -39,7 +39,7 @@ const InitialModalView = ({ handleNavigate }) => {
           fill={"#ffffff"}
           text="Join the chat room"
         />
-      </ButtonWrapper>
+      </ModalMainButtonsWrapper>
     </>
   );
 };

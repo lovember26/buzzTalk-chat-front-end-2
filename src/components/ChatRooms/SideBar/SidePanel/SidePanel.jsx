@@ -1,11 +1,20 @@
-import { useState, useEffect } from "react";
+// import { useEffect } from "react";
+import { useState } from "react";
+// import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
+
+import { selectAllUsers } from "redux/user/userSelectors";
+// import { fetchAllUsersThunk } from "redux/user/userThunk";
+
+import Modal from "components/common/Modal/Modal";
+import ChatModal from "components/ChatRooms/Modal/ChatModal/ChatModal";
+// import { PublicChatsList } from "components/ChatRooms/PublicChatsList/PublicChatsList";
+import { PrivateChatList } from "components/ChatRooms/PrivateChatsList/PrivateChatsList";
+
 import { ReactComponent as AddChatButton } from "../../../../images/addChatBtn.svg";
 import { ReactComponent as ChatsBtn } from "../../../../images/chatsBtn.svg";
 import { ReactComponent as SearchIcon } from "../../../../images/search.svg";
-import Modal from "components/common/Modal/Modal";
-import ChatModal from "components/ChatRooms/Modal/ChatModal/ChatModal";
-import { PublicChatsList } from "components/ChatRooms/PublicChatsList/PublicChatsList";
 
 import {
   SearchBar,
@@ -21,17 +30,11 @@ import {
   FriendsLinkWrapper,
 } from "./SidePanel.styled";
 
-import { PrivateChatList } from "../../PrivateChatsList/PrivateChatsList";
-import { useDispatch, useSelector } from "react-redux";
-
-import { selectAllUsers } from "redux/user/userSelectors";
-import { fetchAllUsersThunk } from "redux/user/userThunk";
-
 export default function SidePanel() {
   const [modalActive, setModalActive] = useState(false);
 
   const users = useSelector(selectAllUsers);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   // useEffect(() => {
   //   dispatch(fetchAllUsersThunk());

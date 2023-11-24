@@ -1,48 +1,60 @@
 import React from "react";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+
+import { createPublicChatThunk } from "redux/chat/chatThunk";
+
+import { ModalButtonBack } from "components/common/ModalButtonBack/ModalButtonBack";
+import { ModalButtonSendForm } from "components/common/ModalButtonSendForm/ModalButtonSendForm";
+import SelectPublicChat from "components/ChatRooms/SelectPublicChat/SelectPublicChat";
+
 import {
-  ButtonsWrapper,
-  Button,
-  ButtonBack,
-  Text,
+  Title,
+  Form,
   InputWrapper,
   Lable,
   Input,
-  Form,
+  ButtonsWrapper,
 } from "./CreatePublicChat.styled";
 
-import SelectPublicChat from "../../SelectPublicChat/SelectPublicChat";
+const CreatePublicChat = ({ users, handleNavigate }) => {
+  const [userPublicChatChoice, setUserPublicChatChoice] = useState(null);
 
-const CreatePublicChat = ({
-  users,
-  handleNavigate,
-  handlerSubmit,
-  setUserPublicChatChoice,
-  publicChatName,
-  setPublicChatName,
-}) => {
+  const [chatName, setChatName] = useState("");
+  const dispatch = useDispatch();
+
+  const handlerSubmit = async (event) => {
+    event.preventDefault();
+
+    const newPublicChat = {
+      title: chatName,
+      participants: userPublicChatChoice,
+    };
+
+    await dispatch(createPublicChatThunk(newPublicChat));
+  };
+
   return (
     <>
-      <Text>Choose friends for public communication</Text>
+      <Title>Choose friends for public communication</Title>
       <Form onSubmit={handlerSubmit}>
         <InputWrapper>
           <Lable>CHAT ROOM NAME</Lable>
           <Input
             type="text"
             placeholder="Enter name of created chat"
-            value={publicChatName}
-            onChange={(event) => setPublicChatName(event.target.value)}
+            value={chatName}
+            onChange={(event) => setChatName(event.target.value)}
           ></Input>
         </InputWrapper>
         <SelectPublicChat users={users} setChoice={setUserPublicChatChoice} />
         <ButtonsWrapper>
-          <ButtonBack
-            onClick={() => {
-              handleNavigate("create");
-            }}
-          >
-            Back
-          </ButtonBack>
-          <Button>Create chat</Button>
+          <ModalButtonBack
+            text={"Back"}
+            navigate={handleNavigate}
+            to={"create"}
+          />
+          <ModalButtonSendForm text={"Create chat"} />
         </ButtonsWrapper>
       </Form>
     </>
