@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 
 export const FormWrapper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,27 +15,10 @@ export const FormWrapper = styled.div`
 `;
 
 export const Text = styled.p`
-  margin-bottom: 22px;
+  margin-bottom: 36px;
   color: #696969;
   font-size: 18px;
   font-weight: 700;
-`;
-
-export const TextInfo = styled.p`
-  color: #696969;
-  font-size: 10px;
-  font-weight: 500px;
-
-  width: 343px;
-  margin-bottom: 23px;
-`;
-
-export const JoinChatText = styled.p`
-  color: #696969;
-  font-size: 14px;
-  font-weight: 600px;
-
-  margin-bottom: 15px;
 `;
 
 export const ButtonWrapper = styled.div`
@@ -92,6 +76,10 @@ export const Button = styled.button`
 `;
 
 export const ButtonBack = styled.button`
+  position: absolute;
+  left: 47px;
+  bottom: 47px;
+  /* align-self: flex-start; */
   color: #d9d9d9;
   font-size: 14px;
 
@@ -107,4 +95,13 @@ export const Lable = styled.label`
 export const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+export const TextInfo = styled.p`
+  color: #696969;
+  font-size: 10px;
+  font-weight: 500px;
+
+  margin-top: 26px;
+  margin-bottom: 20px;
 `;

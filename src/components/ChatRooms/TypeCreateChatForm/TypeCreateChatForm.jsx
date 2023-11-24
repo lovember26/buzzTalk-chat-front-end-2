@@ -6,7 +6,6 @@ import {
   Form,
   Input,
   ButtonsWrapper,
-  JoinChatText,
   ButtonWrapper,
   Line,
   ButtonBack,
@@ -15,20 +14,17 @@ import {
   InputWrapper,
   Text,
   TextInfo,
-} from "./CreateChatForm.styled";
+} from "./TypeCreateChatForm.styled";
 
 import { ButtonCreate } from "components/common/ButtonCreate/ButtonCreate";
 
 import SelectPrivateChat from "../SelectPrivateChat/SelectPrivateChat";
 import SelectPublicChat from "../SelectPublicChat/SelectPublicChat";
 
-import TypeCreateChatForm from "components/ChatRooms/TypeCreateChatForm/TypeCreateChatForm";
-import JoinChatForm from "components/ChatRooms/JoinChatForm/JoinChatForm";
-
 import { createPrivateChatThunk } from "redux/chat/chatThunk";
 import { createPublicChatThunk } from "redux/chat/chatThunk";
 
-const CreateChatForm = ({ users }) => {
+const TypeCreateChatForm = ({ users, setCreateOwnChat }) => {
   const [userPrivateChatChoice, setUserPrivateChatChoice] = useState(null);
   const [userPublicChatChoice, setUserPublicChatChoice] = useState(null);
 
@@ -36,9 +32,6 @@ const CreateChatForm = ({ users }) => {
   const [publicChatName, setPublicChatName] = useState("");
 
   const dispatch = useDispatch();
-
-  const [createOwnChat, setCreateOwnChat] = useState(null);
-  const [joinChat, setJoinChat] = useState(null);
 
   const handlerSubmit = async (event) => {
     event.preventDefault();
@@ -60,47 +53,45 @@ const CreateChatForm = ({ users }) => {
 
   return (
     <>
-      {!createOwnChat && (
+      {!kindChatChoice && (
         <FormWrapper>
-          <Text>Create a chat room</Text>
-          <TextInfo>
-            Chat rooms is the place where you can discuss different topics with
-            people with the same interests!
-          </TextInfo>
+          <Text>What kind of chat you’d like to create?</Text>
           <ButtonWrapper>
             <ButtonCreate
               onClick={() => {
-                setCreateOwnChat(true);
+                setKindChatChoice("private");
               }}
               color={"#451952"}
               background={"#7e5d88"}
               fill={"#451952"}
-              text="Create your own"
+              text="For me and my friends"
             />
             <Line></Line>
-            <JoinChatText>Already have an invite?</JoinChatText>
             <ButtonCreate
               onClick={() => {
-                setJoinChat(true);
+                setKindChatChoice("public");
               }}
               color={"#ffffff"}
               background={"#F39F5A"}
               fill={"#ffffff"}
-              text="Join the chat room"
+              text="For Public Discussion"
             />
+            <TextInfo>
+              Public Chat rooms is the place where you can discuss different
+              topics with people with the same interests!
+            </TextInfo>
           </ButtonWrapper>
+          <ButtonBack
+            onClick={() => {
+              setCreateOwnChat(null);
+            }}
+          >
+            Back
+          </ButtonBack>
         </FormWrapper>
       )}
 
-      {createOwnChat && (
-        <TypeCreateChatForm setCreateOwnChat={setCreateOwnChat} />
-      )}
-
-      {joinChat && (
-        <JoinChatForm joinChat={joinChat} setCreateOwnChat={setCreateOwnChat} />
-      )}
-
-      {/* {kindChatChoice === "public" && (
+      {kindChatChoice === "public" && (
         <FormWrapper>
           <Text>Choose friends for public communication</Text>
           <Form onSubmit={handlerSubmit}>
@@ -129,9 +120,32 @@ const CreateChatForm = ({ users }) => {
             </ButtonsWrapper>
           </Form>
         </FormWrapper>
-      )} */}
+      )}
+
+      {kindChatChoice === "private" && (
+        <FormWrapper>
+          <Text>Choose a friend for private communication</Text>
+          <Form onSubmit={handlerSubmit}>
+            <SelectPrivateChat
+              users={users}
+              setChoice={setUserPrivateChatChoice}
+            />
+            {/* <Input type="text" placeholder="Enter name of created chat"></Input> */}
+            <ButtonsWrapper>
+              <ButtonBack
+                onClick={() => {
+                  setKindChatChoice(null);
+                }}
+              >
+                Back
+              </ButtonBack>
+              <Button>Create chat</Button>
+            </ButtonsWrapper>
+          </Form>
+        </FormWrapper>
+      )}
     </>
   );
 };
 
-export default CreateChatForm;
+export default TypeCreateChatForm;
