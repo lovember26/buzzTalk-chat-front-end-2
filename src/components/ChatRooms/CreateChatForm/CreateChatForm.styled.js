@@ -13,59 +13,19 @@ export const FormWrapper = styled.div`
   width: 525px;
 `;
 
+export const Text = styled.p`
+  margin-bottom: 36px;
+  color: #696969;
+  font-size: 18px;
+  font-weight: 700;
+`;
+
 export const ButtonWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
 
   width: 343px;
-`;
-
-export const ButtonForPrivate = styled.button`
-  position: relative;
-
-  display: flex;
-  align-items: center;
-  padding: 11px 25px;
-  border-radius: 12px;
-  color: #451952;
-  font-size: 16px;
-  font-weight: 600px;
-  line-height: 19.5px;
-  background-color: #7e5d88;
-
-  width: 343px;
-  height: 62px;
-
-  cursor: pointer;
-`;
-
-export const ButtonForPublic = styled.button`
-  position: relative;
-
-  display: flex;
-  align-items: center;
-
-  padding: 11px 25px;
-  margin-bottom: 26px;
-  border-radius: 12px;
-  color: #ffffff;
-  font-size: 16px;
-  font-weight: 600px;
-  line-height: 19.5px;
-  background-color: #f39f5a;
-
-  width: 343px;
-  height: 62px;
-
-  cursor: pointer;
-`;
-
-export const ArrowRightButton = styled.button`
-  position: absolute;
-  right: 34px;
-
-  cursor: pointer;
 `;
 
 export const ButtonsWrapper = styled.div`
@@ -104,9 +64,6 @@ export const Input = styled.input`
 `;
 
 export const Button = styled.button`
-  /* position: absolute;
-  right: 0;
-  bottom: 0; */
   padding: 15px 26px;
   border-radius: 12px;
   color: white;
@@ -117,22 +74,12 @@ export const Button = styled.button`
 `;
 
 export const ButtonBack = styled.button`
-  /* position: absolute;
-  left: 0;
-  bottom: 0; */
   color: #d9d9d9;
   font-size: 14px;
 
   margin-right: 290px;
 
   cursor: pointer;
-`;
-
-export const Text = styled.p`
-  margin-bottom: 20px;
-  color: #696969;
-  font-size: 18px;
-  font-weight: 700;
 `;
 
 export const Lable = styled.label`
@@ -143,8 +90,6 @@ export const Lable = styled.label`
 
 export const InputWrapper = styled.div`
   display: flex;
-  /* justify-content: center;
-  align-items: center; */
   flex-direction: column;
 `;
 
@@ -152,4 +97,6 @@ export const TextInfo = styled.p`
   color: #696969;
   font-size: 10px;
   font-weight: 500px;
+
+  margin-top: 26px;
 `;

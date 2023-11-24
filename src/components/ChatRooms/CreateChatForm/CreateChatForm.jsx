@@ -13,15 +13,10 @@ import {
   Button,
   InputWrapper,
   Text,
-  ButtonForPublic,
-  ArrowRightButton,
-  PicturesIcon,
   TextInfo,
-  ButtonForPrivate,
 } from "./CreateChatForm.styled";
 
-import Picture from "images/svg/Picture/Picture";
-import ArrowRight from "images/svg/ArrowRight/ArrowRight";
+import { ButtonCreate } from "components/common/ButtonCreate/ButtonCreate";
 
 import SelectPrivateChat from "../SelectPrivateChat/SelectPrivateChat";
 import SelectPublicChat from "../SelectPublicChat/SelectPublicChat";
@@ -62,29 +57,25 @@ const CreateChatForm = ({ users }) => {
         <FormWrapper>
           <Text>What kind of chat you’d like to create?</Text>
           <ButtonWrapper>
-            <ButtonForPrivate
+            <ButtonCreate
               onClick={() => {
                 setKindChatChoice("private");
               }}
-            >
-              <Picture fill={"#451952"} />
-              For me and my friends
-              <ArrowRightButton>
-                <ArrowRight fill={"#451952"} />
-              </ArrowRightButton>
-            </ButtonForPrivate>
+              color={"#451952"}
+              background={"#7e5d88"}
+              fill={"#451952"}
+              text="For me and my friends"
+            />
             <Line></Line>
-            <ButtonForPublic
+            <ButtonCreate
               onClick={() => {
                 setKindChatChoice("public");
               }}
-            >
-              <Picture fill={"#ffffff"} />
-              For Public Discussion
-              <ArrowRightButton>
-                <ArrowRight fill={"#ffffff"} />
-              </ArrowRightButton>
-            </ButtonForPublic>
+              color={"#ffffff"}
+              background={"#F39F5A"}
+              fill={"#ffffff"}
+              text="For Public Discussion"
+            />
             <TextInfo>
               Public Chat rooms is the place where you can discuss different
               topics with people with the same interests!
