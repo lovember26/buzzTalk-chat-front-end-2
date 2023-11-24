@@ -2,6 +2,8 @@ import React from "react";
 import {
   FormWrapper,
   ButtonWrapper,
+  ButtonsWrapper,
+  Button,
   Line,
   ButtonBack,
   Text,
@@ -26,34 +28,17 @@ const JoinChatForm = ({
           <TextInfo>
             Enter an invite link to join an existing chat room
           </TextInfo>
-          <ButtonWrapper>
-            <ButtonCreate
+
+          <ButtonsWrapper>
+            <ButtonBack
               onClick={() => {
-                setKindChatChoice("private");
+                setJoinChat(null);
               }}
-              color={"#451952"}
-              background={"#7e5d88"}
-              fill={"#451952"}
-              text="For me and my friends"
-            />
-            <Line></Line>
-            <ButtonCreate
-              onClick={() => {
-                setKindChatChoice("public");
-              }}
-              color={"#ffffff"}
-              background={"#F39F5A"}
-              fill={"#ffffff"}
-              text="For Public Discussion"
-            />
-          </ButtonWrapper>
-          <ButtonBack
-            onClick={() => {
-              setJoinChat(null);
-            }}
-          >
-            Back
-          </ButtonBack>
+            >
+              Back
+            </ButtonBack>
+            <Button>Join the chat room</Button>
+          </ButtonsWrapper>
         </FormWrapper>
       )}
     </>

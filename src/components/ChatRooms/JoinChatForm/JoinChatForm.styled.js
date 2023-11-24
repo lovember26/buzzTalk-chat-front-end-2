@@ -33,6 +33,7 @@ export const ButtonWrapper = styled.div`
 
 export const ButtonsWrapper = styled.div`
   display: flex;
+  flex-direction: row;
   justify-content: space-around;
   align-items: center;
 `;
