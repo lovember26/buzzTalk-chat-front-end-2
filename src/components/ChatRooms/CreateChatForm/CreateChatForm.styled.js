@@ -3,16 +3,83 @@ import styled from "@emotion/styled";
 export const FormWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
 
-  /* padding-top: 46px; */
-  padding-top: 20px;
-  padding-left: 28px;
-  padding-right: 28px;
-  padding-bottom: 20px;
+  padding-top: 46px;
+  padding-left: 80px;
+  padding-right: 80px;
+  padding-bottom: 55px;
+
   width: 525px;
-  /* height: 373px; */
+`;
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 343px;
+`;
+
+export const ButtonForPrivate = styled.button`
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  padding: 11px 25px;
+  border-radius: 12px;
+  color: #451952;
+  font-size: 16px;
+  font-weight: 600px;
+  line-height: 19.5px;
+  background-color: #7e5d88;
+
+  width: 343px;
+  height: 62px;
+
+  cursor: pointer;
+`;
+
+export const ButtonForPublic = styled.button`
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  padding: 11px 25px;
+  margin-bottom: 26px;
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600px;
+  line-height: 19.5px;
+  background-color: #f39f5a;
+
+  width: 343px;
+  height: 62px;
+
+  cursor: pointer;
+`;
+
+export const ArrowRightButton = styled.button`
+  position: absolute;
+  right: 34px;
+
+  cursor: pointer;
+`;
+
+export const ButtonsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const Line = styled.div`
+  width: 350px;
+  height: 1px;
+  background-color: #696969;
+
+  margin-top: 28px;
+  margin-bottom: 28px;
 `;
 
 export const Form = styled.form`
@@ -49,27 +116,6 @@ export const Button = styled.button`
   cursor: pointer;
 `;
 
-export const ButtonForPublic = styled.button`
-  padding: 15px 26px;
-  border-radius: 12px;
-  color: white;
-  font-size: 14px;
-  background-color: #451952;
-  margin-right: 10px;
-
-  cursor: pointer;
-`;
-
-export const ButtonForPrivate = styled.button`
-  padding: 15px 26px;
-  border-radius: 12px;
-  color: white;
-  font-size: 14px;
-  background-color: #f39f5a;
-
-  cursor: pointer;
-`;
-
 export const ButtonBack = styled.button`
   /* position: absolute;
   left: 0;
@@ -80,20 +126,6 @@ export const ButtonBack = styled.button`
   margin-right: 290px;
 
   cursor: pointer;
-`;
-
-export const ButtonsWrapper = styled.div`
-  /* position: relative; */
-  display: flex;
-  /* flex-direction: row; */
-  /* justify-content: space-between; */
-  /* align-items: center; */
-`;
-
-export const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
 
 export const Text = styled.p`
@@ -114,4 +146,10 @@ export const InputWrapper = styled.div`
   /* justify-content: center;
   align-items: center; */
   flex-direction: column;
+`;
+
+export const TextInfo = styled.p`
+  color: #696969;
+  font-size: 10px;
+  font-weight: 500px;
 `;

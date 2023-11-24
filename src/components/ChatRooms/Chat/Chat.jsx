@@ -1,8 +1,12 @@
 import React, { useEffect, useState, useCallback } from "react";
+import axios from "axios";
 import withRouter from "helpers/withRouter";
 import WebSocketInstance from "websocket";
 import { MessageInput } from "components/MessageInput/MessageInput";
 import NoMessagesSvg from "images/svg/NoMessages/NoMessages";
+
+import { useSelector } from "react-redux";
+import { selectAccessToken } from "redux/auth/authSelectors";
 
 import {
   DateNowText,
@@ -43,6 +47,65 @@ const Chat = (props) => {
       WebSocketInstance.fetchMessages(props.username, props.params.chatSlug);
     });
   }, [waitForSocketConnection, props.username, props.params.chatSlug]);
+
+  // Scrolling and fetching messages
+  const [currentPage, setCurrentPage] = useState(1);
+  const accessToken = useSelector(selectAccessToken);
+
+  const handleScroll = (event) => {
+    console.log("handleScroll");
+  };
+
+  useEffect(() => {}, []);
+
+  const getMessages = async (token) => {
+    const chat_id = 22;
+
+    // const options = {
+    //   headers: {
+    //     Authorization: `Bearer ${token}`,
+    //   },
+    //   chat_id,
+    // };
+
+    // const { data } = await axios.get(
+    //   "http://buzz-talk-api.onrender.com/chat/scrole-page?page=1",
+    //   {
+    //     headers: {
+    //       Authorization: `Bearer ${token}`,
+    //     },
+    //     // data: {
+    //     //   chat_id,
+    //     // },
+    //     chat_id,
+    //   }
+    // );
+
+    // console.log("data getMessages pagination", data);
+    // setMessages(data);
+  };
+
+  useEffect(() => {
+    getMessages(accessToken);
+  }, [accessToken]);
+
+  // const messageList = document.querySelector(".messages");
+  // console.log("messageList", messageList);
+
+  // const [scroll, setScroll] = React.useState(0);
+
+  // useEffect(() => {
+  //   const scrollContainer = document.getElementById("messages");
+
+  //   if (scrollContainer) {
+  //     scrollContainer.addEventListener("scroll", handleScroll);
+
+  //     return () => {
+  //       // Clean up by removing the event listener when the component unmounts
+  //       scrollContainer.removeEventListener("scroll", handleScroll);
+  //     };
+  //   }
+  // }, []);
 
   const addMessage = (message) => {
     setMessages((prevMessages) => [...prevMessages, message]);
@@ -89,7 +152,7 @@ const Chat = (props) => {
   };
 
   const renderMessages = (messages) => {
-    console.log("messages", messages);
+    // console.log("messages", messages);
 
     return messages.map((message, i, arr) => (
       <MessageListItem
@@ -119,13 +182,15 @@ const Chat = (props) => {
   };
 
   return (
-    <ChatBlockWrapper>
+    <ChatBlockWrapper className="messages-wrapper">
       {!messages.length ? (
         <NoMessagesSvg />
       ) : (
         <>
           <DateNowText>Today</DateNowText>
-          <MessageList>{messages && renderMessages(messages)}</MessageList>
+          <MessageList className="messages" onScroll={handleScroll}>
+            {messages && renderMessages(messages)}
+          </MessageList>
         </>
       )}
       <MessageInput

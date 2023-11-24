@@ -52,7 +52,7 @@ export default function SidePanel() {
             <AddChatButton />
           </AddChatButtonWrapper>
 
-          <PublicChatsList />
+          {/* <PublicChatsList /> */}
           {/* <UserProfile /> */}
         </StyledNav>
 
