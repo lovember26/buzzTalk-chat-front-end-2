@@ -4,8 +4,7 @@ import { ReactComponent as AddChatButton } from "../../../../images/addChatBtn.s
 import { ReactComponent as ChatsBtn } from "../../../../images/chatsBtn.svg";
 import { ReactComponent as SearchIcon } from "../../../../images/search.svg";
 import Modal from "components/common/Modal/Modal";
-import TypeCreateChatForm from "components/ChatRooms/TypeCreateChatForm/TypeCreateChatForm";
-import CreateChatForm from "components/ChatRooms/CreateChatForm/CreateChatForm";
+import ChatModal from "components/ChatRooms/Modal/ChatModal/ChatModal";
 import { PublicChatsList } from "components/ChatRooms/PublicChatsList/PublicChatsList";
 
 import {
@@ -77,8 +76,7 @@ export default function SidePanel() {
       </StyledSideBar>
 
       <Modal active={modalActive} setActive={setModalActive}>
-        {/* <TypeCreateChatForm users={users} /> */}
-        <CreateChatForm users={users} />
+        <ChatModal users={users} />
       </Modal>
       <Outlet />
     </>
