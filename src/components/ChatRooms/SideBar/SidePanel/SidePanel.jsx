@@ -1,19 +1,19 @@
 // eslint-disable-next-line
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { useState } from "react";
 // eslint-disable-next-line
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 
 import { selectAllUsers } from "redux/user/userSelectors";
 // eslint-disable-next-line
-import { fetchAllUsersThunk } from "redux/user/userThunk";
+// import { fetchAllUsersThunk } from "redux/user/userThunk";
 
 import Modal from "components/common/Modal/Modal";
 import ChatModal from "components/ChatRooms/Modal/ChatModal/ChatModal";
 // eslint-disable-next-line
-import { PublicChatsList } from "components/ChatRooms/PublicChatsList/PublicChatsList";
+// import { PublicChatsList } from "components/ChatRooms/PublicChatsList/PublicChatsList";
 import { PrivateChatList } from "components/ChatRooms/PrivateChatsList/PrivateChatsList";
 
 import UserProfile from "../UserProfile/UserProfile";

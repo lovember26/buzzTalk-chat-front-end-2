@@ -50,27 +50,25 @@ const Chat = (props) => {
 
   // Scrolling and fetching messages
   // eslint-disable-next-line
-  const [currentPage, setCurrentPage] = useState(1);
+  // const [currentPage, setCurrentPage] = useState(1);
   const accessToken = useSelector(selectAccessToken);
 
-  const handleScroll = (event) => {
+  const handleScroll = () => {
     console.log("handleScroll");
   };
 
   useEffect(() => {}, []);
 
   // eslint-disable-next-line
-  const getMessages = async (token) => {
+  const getMessages = async () => {
     // eslint-disable-next-line
-    const chat_id = 22;
-
+    // const chat_id = 22;
     // const options = {
     //   headers: {
     //     Authorization: `Bearer ${token}`,
     //   },
     //   chat_id,
     // };
-
     // const { data } = await axios.get(
     //   "http://buzz-talk-api.onrender.com/chat/scrole-page?page=1",
     //   {
@@ -83,7 +81,6 @@ const Chat = (props) => {
     //     chat_id,
     //   }
     // );
-
     // console.log("data getMessages pagination", data);
     // setMessages(data);
   };
