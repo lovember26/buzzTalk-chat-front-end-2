@@ -1,6 +1,6 @@
 import { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import NoFriends from "../SideBar/NoFriends/NoFriends";
+// import NoFriends from "../SideBar/NoFriends/NoFriends";
 import { ChatList, PublicChatItem } from "./PublicChatsList.styled";
 import { fetchAllPublicChatsThunk } from "redux/chat/chatThunk";
 import { selectFetchAllPublicChats } from "redux/chat/chatSelectors";
@@ -20,7 +20,7 @@ export const PublicChatsList = () => {
 
   return (
     <>
-      {chats && chats.length > 0 ? (
+      {/* {chats && chats.length > 0 ? (
         <ChatList>
           {chats?.map((chat) => (
             <PublicChatItem to={`chats/${chat?.slug}`} key={chat?.id}>
@@ -30,6 +30,16 @@ export const PublicChatsList = () => {
         </ChatList>
       ) : (
         <NoFriends />
+      )} */}
+      {/* Without NoChatBlock*/}
+      {chats && chats.length > 0 && (
+        <ChatList>
+          {chats?.map((chat) => (
+            <PublicChatItem to={`chats/${chat?.slug}`} key={chat?.id}>
+              {chat?.id}
+            </PublicChatItem>
+          ))}
+        </ChatList>
       )}
     </>
   );
