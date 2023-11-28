@@ -2,7 +2,7 @@ import { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllPrivateChatsThunk } from "redux/chat/chatThunk";
 import { selectFetchAllPrivateChats } from "redux/chat/chatSelectors";
-import NoFriends from "../SideBar/NoFriends/NoFriends";
+import NoPrivateChats from "../NoPrivateChats/NoPrivateChats";
 
 import {
   ChatList,
@@ -47,7 +47,7 @@ export const PrivateChatList = () => {
           ))}
         </ChatList>
       ) : (
-        <NoFriends />
+        <NoPrivateChats />
       )}
     </>
   );
