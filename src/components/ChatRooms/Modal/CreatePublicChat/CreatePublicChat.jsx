@@ -17,7 +17,7 @@ import {
   ButtonsWrapper,
 } from "./CreatePublicChat.styled";
 
-const CreatePublicChat = ({ users, handleNavigate }) => {
+const CreatePublicChat = ({ users, handleNavigate, setActive }) => {
   const [userPublicChatChoice, setUserPublicChatChoice] = useState(null);
 
   const [chatName, setChatName] = useState("");
@@ -32,6 +32,7 @@ const CreatePublicChat = ({ users, handleNavigate }) => {
     };
 
     await dispatch(createPublicChatThunk(newPublicChat));
+    setActive(false);
   };
 
   return (

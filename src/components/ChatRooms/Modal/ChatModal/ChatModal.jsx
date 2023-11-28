@@ -9,7 +9,7 @@ import JoinChat from "components/ChatRooms/Modal/JoinChat/JoinChat";
 
 import { FormWrapper } from "./ChatModal.styled";
 
-const ChatModal = ({ users }) => {
+const ChatModal = ({ users, setActive }) => {
   const [currentView, setCurrentView] = useState("initial");
 
   const handleNavigate = (view) => {
@@ -29,11 +29,19 @@ const ChatModal = ({ users }) => {
         );
       case "private":
         return (
-          <CreatePrivateChat users={users} handleNavigate={handleNavigate} />
+          <CreatePrivateChat
+            users={users}
+            handleNavigate={handleNavigate}
+            setActive={setActive}
+          />
         );
       case "public":
         return (
-          <CreatePublicChat users={users} handleNavigate={handleNavigate} />
+          <CreatePublicChat
+            users={users}
+            handleNavigate={handleNavigate}
+            setActive={setActive}
+          />
         );
       case "join":
         return (

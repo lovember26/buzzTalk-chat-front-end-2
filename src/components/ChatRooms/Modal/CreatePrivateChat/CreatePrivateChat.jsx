@@ -10,13 +10,14 @@ import SelectPrivateChat from "components/ChatRooms/SelectPrivateChat/SelectPriv
 
 import { Title, Form, ButtonsWrapper } from "./CreatePrivateChat.styled";
 
-const CreatePrivateChat = ({ users, handleNavigate }) => {
+const CreatePrivateChat = ({ users, handleNavigate, setActive }) => {
   const [receiver, setReceiver] = useState(null);
   const dispatch = useDispatch();
 
   const handlerSubmit = async (event) => {
     event.preventDefault();
     await dispatch(createPrivateChatThunk(receiver));
+    setActive(false);
   };
 
   return (
