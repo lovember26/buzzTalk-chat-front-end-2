@@ -9,8 +9,8 @@ import { fetchAllUsersThunk } from "redux/user/userThunk";
 
 import Modal from "components/common/Modal/Modal";
 import ChatModal from "components/ChatRooms/Modal/ChatModal/ChatModal";
-import { PublicChatsList } from "components/ChatRooms/PublicChatsList/PublicChatsList";
 // eslint-disable-next-line
+import { PublicChatsList } from "components/ChatRooms/PublicChatsList/PublicChatsList";
 import { PrivateChatList } from "components/ChatRooms/PrivateChatsList/PrivateChatsList";
 
 import { ReactComponent as AddChatButton } from "../../../../images/addChatBtn.svg";
@@ -57,7 +57,7 @@ export default function SidePanel() {
             <AddChatButton />
           </AddChatButtonWrapper>
 
-          <PublicChatsList />
+          {/* <PublicChatsList /> */}
           {/* <UserProfile /> */}
         </StyledNav>
 
@@ -76,12 +76,13 @@ export default function SidePanel() {
             <FriendsLink to={"friends/all"}>Friends</FriendsLink>
           </FriendsLinkWrapper>
 
-          {/* <PrivateChatList /> */}
+          <PrivateChatList />
         </SearchBar>
       </StyledSideBar>
 
       <Modal active={modalActive} setActive={setModalActive}>
         <ChatModal users={results} setActive={setModalActive} />
+        {/* <ChatModal setActive={setModalActive} /> */}
       </Modal>
       <Outlet />
     </>

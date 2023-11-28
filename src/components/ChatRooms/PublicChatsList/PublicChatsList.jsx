@@ -16,7 +16,7 @@ export const PublicChatsList = () => {
 
   useEffect(() => {
     getUserChats();
-  }, [getUserChats, chats]);
+  }, [getUserChats]);
 
   return (
     <>
