@@ -17,7 +17,7 @@ export default function FriendsBar() {
         </div>
         <ul>
           <li>
-            <StyledLink to="all">All</StyledLink>
+            <StyledLink to="/chat-rooms/friends" end>All</StyledLink>
           </li>
           <li>
             <StyledLink to="online">Online</StyledLink>
