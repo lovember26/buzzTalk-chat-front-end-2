@@ -1,8 +1,9 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { selectAccessToken } from "redux/auth/authSelectors";
+import { useEffect, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllPrivateChatsThunk } from "redux/chat/chatThunk";
+import { selectFetchAllPrivateChats } from "redux/chat/chatSelectors";
 import NoFriends from "../SideBar/NoFriends/NoFriends";
+
 import {
   ChatList,
   ChatItem,
@@ -12,30 +13,19 @@ import {
   ChatItemText,
 } from "./PrivateChatsList.styled";
 import { ReactComponent as DefaultIcon } from "../../../images/default.svg";
-import { selectUserName } from "redux/user/userSelectors";
 
 export const PrivateChatList = () => {
-  const accessToken = useSelector(selectAccessToken);
-  const username = useSelector(selectUserName);
-  const [chats, setChats] = useState([]);
+  const dispatch = useDispatch();
+
+  const chats = useSelector(selectFetchAllPrivateChats);
+
+  const getUserChats = useCallback(async () => {
+    await dispatch(fetchAllPrivateChatsThunk());
+  }, [dispatch]);
 
   useEffect(() => {
-    if (accessToken !== null && username !== null) {
-      getUserChats(accessToken);
-    }
-  }, [accessToken, username]);
-
-  const getUserChats = async (token) => {
-    const { data } = await axios.get(
-      "https://buzz-talk-api.onrender.com/api/chat/private-chat/",
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    setChats(data);
-  };
+    getUserChats();
+  }, [getUserChats]);
 
   return (
     <>

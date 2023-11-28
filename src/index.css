@@ -107,6 +107,8 @@ button:active {
   top: 0;
   left: 0;
 
+  z-index: 1;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -128,7 +130,7 @@ button:active {
 }
 
 .content {
-  padding: 20px;
+  /* padding: 20px; */
   border-radius: 12px;
   background-color: white;
 

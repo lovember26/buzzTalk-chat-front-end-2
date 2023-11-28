@@ -1,75 +1,36 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { selectAccessToken } from "redux/auth/authSelectors";
+import { useEffect, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import NoFriends from "../SideBar/NoFriends/NoFriends";
-import { PublicChatItem } from "./PublicChatsList.styled";
-// import { ReactComponent as DefaultIcon } from "../../../images/default.svg";
-import { selectUserName } from "redux/user/userSelectors";
+import { ChatList, PublicChatItem } from "./PublicChatsList.styled";
+import { fetchAllPublicChatsThunk } from "redux/chat/chatThunk";
+import { selectFetchAllPublicChats } from "redux/chat/chatSelectors";
 
 export const PublicChatsList = () => {
-  const accessToken = useSelector(selectAccessToken);
-  const username = useSelector(selectUserName);
-  const [activeChats, setActiveChats] = useState([]);
+  const chats = useSelector(selectFetchAllPublicChats);
+
+  const dispatch = useDispatch();
+
+  const getUserChats = useCallback(async () => {
+    await dispatch(fetchAllPublicChatsThunk());
+  }, [dispatch]);
 
   useEffect(() => {
-    if (accessToken !== null && username !== null) {
-      getUserChats(accessToken, username);
-    }
-  }, [accessToken, username]);
-
-  const getUserChats = async (token, username) => {
-    // const { data } = await axios.get(
-    //  `https://buzz-talk-api.onrender.com/api/chat/?username=${username}`,
-    //   {
-    //     headers: {
-    //       Authorization: `Bearer ${token}`,
-    //     },
-    //   }
-    // );
-    const { data } = await axios.get(
-      `https://buzz-talk-api.onrender.com/api/chat/public-chat/`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        username,
-      }
-    );
-    console.log("Active public Chats", data);
-    setActiveChats(data);
-  };
+    getUserChats();
+  }, [getUserChats]);
 
   return (
     <>
-      {activeChats && activeChats.length > 0 ? (
-        <ul>
-          {activeChats?.map((chat) => (
+      {chats && chats.length > 0 ? (
+        <ChatList>
+          {chats?.map((chat) => (
             <PublicChatItem to={`chats/${chat?.slug}`} key={chat?.id}>
               {chat?.id}
             </PublicChatItem>
           ))}
-        </ul>
+        </ChatList>
       ) : (
         <NoFriends />
       )}
-      {/* <ul>
-        <li>
-          <PublicChatItem>
-            <DefaultIcon />
-          </PublicChatItem>
-        </li>
-        <li>
-          <PublicChatItem>
-            <DefaultIcon />
-          </PublicChatItem>
-        </li>
-        <li>
-          <PublicChatItem>
-            <DefaultIcon />
-          </PublicChatItem>
-        </li>
-      </ul> */}
     </>
   );
 };

@@ -1,4 +1,6 @@
 import { useSelector } from "react-redux";
+// import { useSearchParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import { selectUserName } from "redux/user/userSelectors";
 import { selectUserImage } from "redux/user/userSelectors";
 
@@ -7,7 +9,10 @@ import { ReactComponent as PhoneIcon } from "../../../images/phone-call.svg";
 import { ReactComponent as VideoIcon } from "../../../images/video.svg";
 import { ReactComponent as AddFriendIcon } from "../../../images/add-friend.svg";
 import {
+  UserStatusWrapper,
+  Indicator,
   ActionBar,
+  ActionBarItem,
   ChatContainer,
   StyledHeader,
   UserBarWrapper,
@@ -22,6 +27,9 @@ export default function Profile() {
   const username = useSelector(selectUserName);
   const image = useSelector(selectUserImage);
 
+  // const { chatSlug } = useParams();
+  // console.log("chatSlug Profile", chatSlug);
+
   return (
     <ChatContainer>
       <StyledHeader>
@@ -31,24 +39,27 @@ export default function Profile() {
           </UserBarImageWrapper>
           <UserBarInfoWrapper className="user">
             <UserBarUserName className="username">{username}</UserBarUserName>
-            <UserBarUserStatus className="user-status">
-              online
-            </UserBarUserStatus>
+            <UserStatusWrapper>
+              <UserBarUserStatus className="user-status">
+                online
+              </UserBarUserStatus>
+              <Indicator></Indicator>
+            </UserStatusWrapper>
           </UserBarInfoWrapper>
         </UserBarWrapper>
         <ActionBar>
-          <li>
+          <ActionBarItem>
             <SearchIcon />
-          </li>
-          <li>
+          </ActionBarItem>
+          <ActionBarItem>
             <PhoneIcon />
-          </li>
-          <li>
+          </ActionBarItem>
+          <ActionBarItem>
             <VideoIcon />
-          </li>
-          <li>
+          </ActionBarItem>
+          <ActionBarItem>
             <AddFriendIcon />
-          </li>
+          </ActionBarItem>
         </ActionBar>
       </StyledHeader>
     </ChatContainer>

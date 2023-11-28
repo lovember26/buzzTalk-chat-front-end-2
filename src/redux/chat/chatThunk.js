@@ -13,6 +13,42 @@ export const fetchAllPrivateChatsThunk = createAsyncThunk(
   }
 );
 
+export const fetchAllPublicChatsThunk = createAsyncThunk(
+  "chat/fetchAllPublic",
+  async (_, { rejectWithValue }) => {
+    try {
+      const chats = await chatAPI.getPublicChatsService();
+      return chats;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const createPrivateChatThunk = createAsyncThunk(
+  "chat/createPrivateChat",
+  async (credentials, { rejectWithValue }) => {
+    try {
+      const data = await chatAPI.createPrivateChatService(credentials);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const createPublicChatThunk = createAsyncThunk(
+  "chat/createPublicChat",
+  async (credentials, { rejectWithValue }) => {
+    try {
+      const data = await chatAPI.createPublicChatService(credentials);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 // Not used =====================================
 
 export const fetchAllChatsThunk = createAsyncThunk(
@@ -33,18 +69,6 @@ export const fetchChatByIdThunk = createAsyncThunk(
     try {
       const chat = await chatAPI.getChatByIdService(credentials);
       return chat;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
-
-export const createChatThunk = createAsyncThunk(
-  "chat/createChat",
-  async (credentials, { rejectWithValue }) => {
-    try {
-      const data = await chatAPI.createChatService(credentials);
-      return data;
     } catch (error) {
       return rejectWithValue(error.message);
     }

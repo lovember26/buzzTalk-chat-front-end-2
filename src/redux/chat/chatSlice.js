@@ -2,9 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 import { initialState } from "./chatState";
 import {
   fetchAllPrivateChatsThunk,
+  fetchAllPublicChatsThunk,
+  createPrivateChatThunk,
+  createPublicChatThunk,
   // fetchAllChatsThunk,
   // fetchChatByIdThunk,
-  // createChatThunk,
   // deleteChatByIdThunk,
   // updateChatByIdThunk,
   // changeChatByIdThunk,
@@ -17,7 +19,7 @@ export const chatSlice = createSlice({
   initialState,
   extraReducers: (builder) => {
     builder
-      // fetch all messages
+      // fetch all private chats
       .addCase(fetchAllPrivateChatsThunk.pending, (state) => {
         state.statuses.fetchAllPrivateChat = status.PENDING;
         state.errors.fetchAllPrivateChat = null;
@@ -30,8 +32,51 @@ export const chatSlice = createSlice({
       .addCase(fetchAllPrivateChatsThunk.rejected, (state, action) => {
         state.statuses.fetchAllPrivateChat = status.REJECTED;
         state.errors.fetchAllPrivateChat = action.payload;
+      })
+
+      // fetch all public chats
+      .addCase(fetchAllPublicChatsThunk.pending, (state) => {
+        state.statuses.fetchAllPublicChat = status.PENDING;
+        state.errors.fetchAllPublicChat = null;
+      })
+      .addCase(fetchAllPublicChatsThunk.fulfilled, (state, action) => {
+        state.statuses.fetchAllPublicChat = status.FULFILLED;
+        state.publicChats = action.payload;
+        state.errors.fetchAllPublicChat = null;
+      })
+      .addCase(fetchAllPublicChatsThunk.rejected, (state, action) => {
+        state.statuses.fetchAllPublicChat = status.REJECTED;
+        state.errors.fetchAllPublicChat = action.payload;
+      })
+
+      // create private chat
+      .addCase(createPrivateChatThunk.pending, (state) => {
+        state.statuses.createPrivateChat = status.PENDING;
+        state.errors.createPrivateChat = null;
+      })
+      .addCase(createPrivateChatThunk.fulfilled, (state, action) => {
+        state.statuses.createPrivateChat = status.FULFILLED;
+        state.errors.createPrivateChat = null;
+      })
+      .addCase(createPrivateChatThunk.rejected, (state, action) => {
+        state.statuses.createPrivateChat = status.REJECTED;
+        state.errors.createPrivateChat = action.payload;
+      })
+
+      // create public chat
+      .addCase(createPublicChatThunk.pending, (state) => {
+        state.statuses.createPublicChat = status.PENDING;
+        state.errors.createPublicChat = null;
+      })
+      .addCase(createPublicChatThunk.fulfilled, (state, action) => {
+        state.statuses.createPublicChat = status.FULFILLED;
+        state.errors.createPublicChat = null;
+      })
+      .addCase(createPublicChatThunk.rejected, (state, action) => {
+        state.statuses.createPublicChat = status.REJECTED;
+        state.errors.createPublicChat = action.payload;
       });
-    
+
     // Not used ==================================
     // fetch all messages
     // .addCase(fetchAllChatsThunk.pending, (state) => {
@@ -60,20 +105,6 @@ export const chatSlice = createSlice({
     // .addCase(fetchChatByIdThunk.rejected, (state, action) => {
     //   state.statuses.fetchById = status.REJECTED;
     //   state.errors.fetchById = action.payload;
-    // })
-
-    // create message
-    // .addCase(createChatThunk.pending, (state) => {
-    //   state.statuses.create = status.PENDING;
-    //   state.errors.create = null;
-    // })
-    // .addCase(createChatThunk.fulfilled, (state, action) => {
-    //   state.statuses.create = status.FULFILLED;
-    //   state.errors.create = null;
-    // })
-    // .addCase(createChatThunk.rejected, (state, action) => {
-    //   state.statuses.create = status.REJECTED;
-    //   state.errors.create = action.payload;
     // })
 
     // delete message

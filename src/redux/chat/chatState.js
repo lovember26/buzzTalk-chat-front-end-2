@@ -1,8 +1,8 @@
 import { status } from "constants";
 
 export const initialState = {
-  privateChats: [],
-  publicChats: [],
+  privateChats: null,
+  publicChats: null,
 
   statuses: {
     fetchAllPrivateChat: status.IDLE,

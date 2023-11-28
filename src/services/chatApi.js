@@ -1,12 +1,28 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "https://buzz-talk-api.onrender.com/api";
+axios.defaults.baseURL = "https://buzz-talk-api.onrender.com";
 
 // Parameters -
 // Response - array with objects id participants and messages values
 export const getPrivateChatsService = async () => {
   const { data } = await axios.get("/chat/private-chat/");
-  console.log("getPrivateChatsService data", data);
+  return data;
+};
+
+export const getPublicChatsService = async () => {
+  const { data } = await axios.get("/chat/public-chat/");
+  return data;
+};
+
+export const createPrivateChatService = async (receiver) => {
+  const { data } = await axios.post("/chat/private-chat/", {
+    receiver,
+  });
+  return data;
+};
+
+export const createPublicChatService = async (object) => {
+  const { data } = await axios.post("/chat/public-chat/", object);
   return data;
 };
 
@@ -24,16 +40,6 @@ export const getAllChatsService = async () => {
 export const getChatByIdService = async (id) => {
   const { data } = await axios.get(`/chat/${id}`);
   console.log("getChatByIdService", data);
-  return data;
-};
-
-// Parameters - object with participants and messages values
-// Response - object with id participants and messages values
-export const createChatService = async (participants, messages) => {
-  const { data } = await axios.post("/chat/create/", {
-    participants,
-    messages,
-  });
   return data;
 };
 

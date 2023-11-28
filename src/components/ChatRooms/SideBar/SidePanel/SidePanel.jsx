@@ -1,13 +1,26 @@
+// eslint-disable-next-line
+// import { useEffect } from "react";
 import { useState } from "react";
+// eslint-disable-next-line
+// import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
+
+import { selectAllUsers } from "redux/user/userSelectors";
+// eslint-disable-next-line
+// import { fetchAllUsersThunk } from "redux/user/userThunk";
+
+import Modal from "components/common/Modal/Modal";
+import ChatModal from "components/ChatRooms/Modal/ChatModal/ChatModal";
+// eslint-disable-next-line
+// import { PublicChatsList } from "components/ChatRooms/PublicChatsList/PublicChatsList";
+import { PrivateChatList } from "components/ChatRooms/PrivateChatsList/PrivateChatsList";
+
+import UserProfile from "../UserProfile/UserProfile";
+
 import { ReactComponent as AddChatButton } from "../../../../images/addChatBtn.svg";
 import { ReactComponent as ChatsBtn } from "../../../../images/chatsBtn.svg";
 import { ReactComponent as SearchIcon } from "../../../../images/search.svg";
-import Modal from "components/common/Modal/Modal";
-import CreateChatForm from "components/ChatRooms/CreateChatForm/CreateChatForm";
-import { PublicChatsList } from "components/ChatRooms/PublicChatsList/PublicChatsList";
-
-import { selectFetchAllPrivateChats } from "redux/chat/chatSelectors";
 
 import {
   SearchBar,
@@ -22,21 +35,18 @@ import {
   Form,
   FriendsLinkWrapper,
 } from "./SidePanel.styled";
-// import { StyledLink } from "../../FriendsBar/FriendsBar.styled";
-// import { FriendsList } from "../../FriendsList/FriendsList";
-import UserProfile from "../UserProfile/UserProfile";
-
-// import FriendsList from "../../FriendsList/FriendsList";
-import { PrivateChatList } from "../../PrivateChatsList/PrivateChatsList";
-import { useSelector } from "react-redux";
 
 export default function SidePanel() {
   const [modalActive, setModalActive] = useState(false);
-  const chats = useSelector(selectFetchAllPrivateChats);
-  // const firstChat = chats[0].slug;
 
-  console.log("chats", chats);
-  // console.log("firstChat", firstChat);
+  const { results } = useSelector(selectAllUsers);
+
+  // const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(fetchAllUsersThunk());
+  // }, [dispatch]);
+
   return (
     <>
       <StyledSideBar>
@@ -52,7 +62,7 @@ export default function SidePanel() {
             <AddChatButton />
           </AddChatButtonWrapper>
 
-          <PublicChatsList />
+          {/* <PublicChatsList /> */}
           <UserProfile />
         </StyledNav>
 
@@ -68,7 +78,7 @@ export default function SidePanel() {
           </Form>
           <FriendsLinkWrapper>
             <ContactIcon />
-            <FriendsLink to={"friends"}>Friends</FriendsLink>
+            <FriendsLink to={"friends/all"}>Friends</FriendsLink>
           </FriendsLinkWrapper>
 
           <PrivateChatList />
@@ -76,7 +86,8 @@ export default function SidePanel() {
       </StyledSideBar>
 
       <Modal active={modalActive} setActive={setModalActive}>
-        <CreateChatForm />
+        <ChatModal users={results} setActive={setModalActive} />
+        {/* <ChatModal setActive={setModalActive} /> */}
       </Modal>
       <Outlet />
     </>

@@ -4,7 +4,7 @@ import { authAPI } from "services";
 import { selectAccessToken } from "./authSelectors";
 import { successNotification, errorNotification } from "helpers/notification";
 
-axios.defaults.baseURL = "https://buzz-talk-api.onrender.com/api";
+axios.defaults.baseURL = "https://buzz-talk-api.onrender.com";
 
 const token = {
   set(token) {

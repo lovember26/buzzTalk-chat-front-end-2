@@ -1,41 +1,65 @@
 import styled from "@emotion/styled";
 import { BsSend } from "react-icons/bs";
 
+// import { TiMicrophoneOutline } from "react-icons/ti";
+// import { CiFaceSmile } from "react-icons/ci";
+
 export const StyledForm = styled.form`
-  position: relative;
+  position: absolute;
+  bottom: 20px;
+
+  width: 1072px;
+
   height: 60px;
-  margin: 0 16px 0 16px;
+  padding: 0 16px 0 16px;
   border-radius: 24px;
-  background: #d9d9d9;
+  background: #7e5d88;
   padding: 13px 90px 13px 60px;
+
   input {
     width: 100%;
     height: 100%;
-    padding-left: 10px;
+    padding: 10px 12px;
     border-radius: 24px;
-    background: #7d7d7d;
+    background: #f39f5a;
     border: none;
+
+    &::placeholder {
+      color: white;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    &[value] {
+      color: white;
+      font-size: 14px;
+      font-weight: 500;
+    }
   }
   .pin {
     position: absolute;
-    top: 20px;
+    top: 17px;
     left: 20px;
+    fill: white;
   }
   .mic {
     position: absolute;
-    top: 20px;
+    top: 17px;
     right: 50px;
   }
   .emoji {
     position: absolute;
-    top: 19px;
-    right: 68px;
+    top: 20px;
+    right: 100px;
+    fill: #f39f5a;
   }
 `;
 export const SendMessageButton = styled.button`
   position: absolute;
-  top: 20px;
+  top: 18px;
   right: 20px;
 `;
 
-export const SendMessageButtonIcon = styled(BsSend)``;
+export const SendMessageButtonIcon = styled(BsSend)`
+  fill: #451952;
+`;

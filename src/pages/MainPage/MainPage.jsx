@@ -6,12 +6,12 @@ export default function MainPage() {
   return (
     <Container>
       <Wrapper>
-      <TeamDisc/>
+        <TeamDisc />
         <p>
           <div>Hi! You are at BuzzTalk messenger!</div>
           <div>Sign Up or Log In to start messaging.</div>
         </p>
-      
+
         <SignUpBtn to="register">sign up</SignUpBtn>
         <AuthButton page="login" text="Log in" btnWidth={"165px"} />
         <ForgotPasswordLink to="/forgot-password">

@@ -1,5 +1,30 @@
 import styled from "@emotion/styled";
 
+export const ChatBlockWrapper = styled.div`
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  padding-top: 0;
+  padding-bottom: 28px;
+  padding-left: 16px;
+  padding-right: 16px;
+
+  flex: 1;
+`;
+
+export const DateNowText = styled.p`
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 8px;
+  margin-bottom: 8px;
+
+  color: #696969;
+  font-size: 14px;
+  font-weight: 700;
+`;
+
 export const ChatContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -15,8 +40,6 @@ export const WrapperUsername = styled.div`
 export const Wrp = styled.div`
   display: flex;
   flex-direction: row;
-  /* justify-content: flex-end;
-  align-items: flex-start; */
 `;
 
 export const StyledHeader = styled.div`
@@ -27,6 +50,7 @@ export const StyledHeader = styled.div`
   align-items: center;
   background: ${({ theme }) => theme.colors.purple};
 `;
+
 export const UserBar = styled.div`
   padding-left: 30px;
   display: flex;
@@ -41,6 +65,7 @@ export const UserBar = styled.div`
     .username {
       font-size: 14px;
     }
+
     .user-status {
       font-size: 12px;
     }
@@ -57,13 +82,30 @@ export const MessageList = styled.ul`
   display: flex;
   flex-direction: column;
 
-  margin-bottom: 20px;
-  padding: 10px 20px;
-  flex: 1 1 auto;
+  max-height: 550px;
+  overflow-y: auto;
 
-  max-height: 630px;
-  /* max-height: 100%; */
-  overflow-y: scroll;
+  ::-webkit-scrollbar {
+    /* If scrolling is not visible */
+    /* width: 0; */
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: whitesmoke;
+    border-radius: 8px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: gray;
+    border: 3px solid transparent;
+    border-radius: 8px;
+    background-clip: content-box;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: purple;
+  }
 `;
 
 export const MessageListItem = styled.li`

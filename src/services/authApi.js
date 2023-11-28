@@ -1,19 +1,19 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "https://buzz-talk-api.onrender.com/api";
+axios.defaults.baseURL = "https://buzz-talk-api.onrender.com";
 
 export const registerUserService = async (credentials) => {
-  const { data } = await axios.post("/accounts/register/", credentials);
+  const { data } = await axios.post("/api/accounts/register/", credentials);
   return data;
 };
 
 export const loginUserService = async (credentials) => {
-  const { data } = await axios.post("/accounts/token/", credentials);
+  const { data } = await axios.post("/api/accounts/token/", credentials);
   return data;
 };
 
 export const currentUserService = async (accessToken) => {
-  const { data } = await axios.get("/accounts/me/", {
+  const { data } = await axios.get("/api/accounts/me/", {
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
@@ -22,26 +22,29 @@ export const currentUserService = async (accessToken) => {
 };
 
 export const verifyUserService = async (credentials) => {
-  const { data } = await axios.post("/accounts/activate/", credentials);
+  const { data } = await axios.post("/api/accounts/activate/", credentials);
   return data;
 };
 
 export const resetPasswordToken = async (credentials) => {
   const { data } = await axios.post(
-    "/accounts/reset-password-token/",
+    "/api/accounts/reset-password-token/",
     credentials
   );
   return data;
 };
 
 export const resetPassword = async (credentials) => {
-  const { data } = await axios.post("/accounts/reset-password/", credentials);
+  const { data } = await axios.post(
+    "/api/accounts/reset-password/",
+    credentials
+  );
   return data;
 };
 
 export const resendEmail = async (credentials) => {
   const { data } = await axios.post(
-    "accounts/refresh-activation-token/",
+    "/api/accounts/refresh-activation-token/",
     credentials
   );
   return data;

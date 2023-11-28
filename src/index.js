@@ -10,10 +10,8 @@ import { App } from "components/App.jsx";
 import { store, persistedStore } from "redux/store";
 import reportWebVitals from "reportWebVitals";
 
-const listWithClass = document.querySelector("p > div");
-console.log("p div", listWithClass);
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
 root.render(
   <React.StrictMode>
     <BrowserRouter>
