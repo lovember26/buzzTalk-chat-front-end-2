@@ -48,7 +48,11 @@ const CreatePublicChat = ({ users, handleNavigate, setActive }) => {
             onChange={(event) => setChatName(event.target.value)}
           ></Input>
         </InputWrapper>
-        <SelectPublicChat users={users} setChoice={setUserPublicChatChoice} />
+        <SelectPublicChat
+          users={users}
+          choice={userPublicChatChoice}
+          setChoice={setUserPublicChatChoice}
+        />
         <ButtonsWrapper>
           <ModalButtonBack
             text={"Back"}

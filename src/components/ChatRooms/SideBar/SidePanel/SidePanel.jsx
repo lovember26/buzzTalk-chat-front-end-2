@@ -10,6 +10,7 @@ import { fetchAllUsersThunk } from "redux/user/userThunk";
 import Modal from "components/common/Modal/Modal";
 import ChatModal from "components/ChatRooms/Modal/ChatModal/ChatModal";
 import { PublicChatsList } from "components/ChatRooms/PublicChatsList/PublicChatsList";
+// eslint-disable-next-line
 import { PrivateChatList } from "components/ChatRooms/PrivateChatsList/PrivateChatsList";
 
 import { ReactComponent as AddChatButton } from "../../../../images/addChatBtn.svg";
