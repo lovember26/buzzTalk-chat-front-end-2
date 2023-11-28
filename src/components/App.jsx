@@ -88,7 +88,7 @@ export const App = () => {
           element={<PrivatePage component={<FriendsBar />} />}
         >
           <Route
-            path={routes.FRIENDS_ALL_PAGE}
+            index
             element={<PrivatePage component={<AllFriends />} />}
           />
           <Route
