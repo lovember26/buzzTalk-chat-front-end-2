@@ -181,7 +181,7 @@ font-weight:500;
   .edit-container{
     display:flex;
     flex-direction:column;
-    margin:0 -16px -56px -16px;
+    margin:0 -16px 0 -16px;
     height:100vh;
     padding:46px 16px;
     background: #EAE8EB;
