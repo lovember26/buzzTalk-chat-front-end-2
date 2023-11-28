@@ -17,7 +17,9 @@ export default function FriendsBar() {
         </div>
         <ul>
           <li>
-            <StyledLink to="all">All</StyledLink>
+            <StyledLink to="/chat-rooms/friends/all" end>
+              All
+            </StyledLink>
           </li>
           <li>
             <StyledLink to="online">Online</StyledLink>
@@ -29,7 +31,7 @@ export default function FriendsBar() {
             <StyledLink to="add-friend">Add friend</StyledLink>
           </li>
         </ul>
-        <StyledLink to="/profile">Profile</StyledLink>
+        {/* <StyledLink to="/profile">Profile</StyledLink> */}
       </StyledFriendsNav>
       <Outlet />
     </FriendsContainer>

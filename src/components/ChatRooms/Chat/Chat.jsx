@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import axios from "axios";
+// import axios from "axios";
 import withRouter from "helpers/withRouter";
 import WebSocketInstance from "websocket";
 import { MessageInput } from "components/MessageInput/MessageInput";
@@ -49,6 +49,7 @@ const Chat = (props) => {
   }, [waitForSocketConnection, props.username, props.params.chatSlug]);
 
   // Scrolling and fetching messages
+  // eslint-disable-next-line
   const [currentPage, setCurrentPage] = useState(1);
   const accessToken = useSelector(selectAccessToken);
 
@@ -58,7 +59,9 @@ const Chat = (props) => {
 
   useEffect(() => {}, []);
 
+  // eslint-disable-next-line
   const getMessages = async (token) => {
+    // eslint-disable-next-line
     const chat_id = 22;
 
     // const options = {

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAllPrivateChatsThunk } from "redux/chat/chatThunk";
 import { selectFetchAllPrivateChats } from "redux/chat/chatSelectors";
 import NoFriends from "../SideBar/NoFriends/NoFriends";
+
 import {
   ChatList,
   ChatItem,

@@ -80,6 +80,7 @@ export const theme = {
     red: {
       100: "#e74a3b", // validation error
       200: "#BD2816", // validation error input background validation error
+      300:"#FF3D3D",
     },
 
     blue: {
