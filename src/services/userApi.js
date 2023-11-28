@@ -2,8 +2,8 @@ import axios from "axios";
 
 axios.defaults.baseURL = "https://buzz-talk-api.onrender.com/api";
 
-export const fetchAllUsersService = async () => {
-  const { data } = await axios.get("/accounts/users/");
+export const fetchAllUsersService = async (page) => {
+  const { data } = await axios.get(`/accounts/users/?page=${page}`);
   return data;
 };
 

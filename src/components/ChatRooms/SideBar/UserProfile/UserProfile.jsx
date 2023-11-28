@@ -51,6 +51,7 @@ const {
   },
 });
 const onSubmit = async ({ name, aboutMe }) => {
+  console.log("hello");
   try {
     const formData = new FormData();
 
