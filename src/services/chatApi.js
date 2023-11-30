@@ -26,6 +26,11 @@ export const createPublicChatService = async (object) => {
   return data;
 };
 
+export const replyMessageService = async (object) => {
+  const { data } = await axios.post("/chat/reply/", object);
+  return data;
+};
+
 // Not Used =======================================================
 // Parameters -
 // Response - array with objects id participants and messages values

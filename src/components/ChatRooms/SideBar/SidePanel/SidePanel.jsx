@@ -34,6 +34,8 @@ import {
   FriendsLinkWrapper,
 } from "./SidePanel.styled";
 
+import { ChatProvider } from "contexts/ChatContext";
+
 export default function SidePanel() {
   const [modalActive, setModalActive] = useState(false);
 
@@ -41,12 +43,12 @@ export default function SidePanel() {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchAllUsersThunk());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchAllUsersThunk());
+  // }, [dispatch]);
 
   return (
-    <>
+    <ChatProvider>
       <StyledSideBar>
         <StyledNav>
           <StyledChatsBtn type="button" to={"chats"}>
@@ -88,6 +90,6 @@ export default function SidePanel() {
         {/* <ChatModal setActive={setModalActive} /> */}
       </Modal>
       <Outlet />
-    </>
+    </ChatProvider>
   );
 }

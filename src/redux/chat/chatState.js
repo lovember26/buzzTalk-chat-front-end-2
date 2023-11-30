@@ -3,6 +3,7 @@ import { status } from "constants";
 export const initialState = {
   privateChats: null,
   publicChats: null,
+  replyMessage: null,
 
   statuses: {
     fetchAllPrivateChat: status.IDLE,
@@ -18,6 +19,8 @@ export const initialState = {
     deletePublicChat: status.IDLE,
     updatePublicChat: status.IDLE,
     changePublicChat: status.IDLE,
+
+    replyMessage: status.IDLE,
   },
 
   errors: {
@@ -34,5 +37,7 @@ export const initialState = {
     deletePublicChat: null,
     updatePublicChat: null,
     changePublicChat: null,
+
+    replyMessage: null,
   },
 };

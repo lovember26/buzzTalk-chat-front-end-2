@@ -49,6 +49,18 @@ export const createPublicChatThunk = createAsyncThunk(
   }
 );
 
+export const replyMessageThunk = createAsyncThunk(
+  "chat/replyMessageChat",
+  async (credentials, { rejectWithValue }) => {
+    try {
+      const data = await chatAPI.replyMessageService(credentials);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 // Not used =====================================
 
 export const fetchAllChatsThunk = createAsyncThunk(

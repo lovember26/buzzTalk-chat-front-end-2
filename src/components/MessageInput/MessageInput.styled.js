@@ -1,65 +1,69 @@
 import styled from "@emotion/styled";
 import { BsSend } from "react-icons/bs";
 
-// import { TiMicrophoneOutline } from "react-icons/ti";
-// import { CiFaceSmile } from "react-icons/ci";
+import { ReactComponent as PinIcon } from "../../images/pin.svg";
+import { ReactComponent as MicIcon } from "../../images/mic.svg";
+import { ReactComponent as EmojiIcon } from "../../images/emoji.svg";
 
 export const StyledForm = styled.form`
-  position: absolute;
-  bottom: 20px;
-
   width: 1072px;
-
+  padding: 12px 34px;
   height: 60px;
-  padding: 0 16px 0 16px;
   border-radius: 24px;
   background: #7e5d88;
-  padding: 13px 90px 13px 60px;
+`;
 
-  input {
-    width: 100%;
-    height: 100%;
-    padding: 10px 12px;
-    border-radius: 24px;
-    background: #f39f5a;
-    border: none;
+export const Input = styled.input`
+  width: 100%;
+  height: 100%;
+  padding: 10px 12px;
+  border-radius: 24px;
+  background: #f39f5a;
+  border: none;
 
-    &::placeholder {
-      color: white;
-      font-size: 14px;
-      font-weight: 500;
-    }
+  margin-left: 20px;
+  margin-right: 20px;
 
-    &[value] {
-      color: white;
-      font-size: 14px;
-      font-weight: 500;
-    }
+  &::placeholder {
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
   }
-  .pin {
-    position: absolute;
-    top: 17px;
-    left: 20px;
-    fill: white;
-  }
-  .mic {
-    position: absolute;
-    top: 17px;
-    right: 50px;
-  }
-  .emoji {
-    position: absolute;
-    top: 20px;
-    right: 100px;
-    fill: #f39f5a;
+
+  &[value] {
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
   }
 `;
-export const SendMessageButton = styled.button`
+
+export const Pin = styled(PinIcon)`
+  fill: white;
+  width: 24px;
+`;
+export const Mic = styled(MicIcon)`
+  width: 24px;
+  margin-right: 10px;
+`;
+export const Emoji = styled(EmojiIcon)`
   position: absolute;
-  top: 18px;
-  right: 20px;
+  right: 85px;
+  fill: #f39f5a;
+  width: 24px;
+`;
+
+export const SendMessageButton = styled.button`
+  height: 22px;
 `;
 
 export const SendMessageButtonIcon = styled(BsSend)`
   fill: #451952;
+`;
+
+export const InputWrapper = styled.div`
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

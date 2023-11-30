@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { BsReply } from "react-icons/bs";
 
 export const ChatBlockWrapper = styled.div`
   position: relative;
@@ -167,4 +168,45 @@ export const Wrapper = styled.div`
 
 export const Timestamp = styled.p`
   align-self: flex-end;
+  margin-right: 8px;
+`;
+
+export const ReplyButton = styled.button`
+  align-self: flex-end;
+  cursor: pointer;
+`;
+
+export const ReplyIcons = styled(BsReply)`
+  width: 24px;
+`;
+
+export const TimestampWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+export const MessageInputWrapper = styled.div`
+  position: absolute;
+  bottom: 20px;
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: lightgray;
+
+  border-radius: 24px;
+`;
+
+export const ReplyToText = styled.p``;
+
+export const ReplyInputWrapper = styled.div`
+  padding-top: 12px;
+  padding-left: 34px;
+  padding-right: 34px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  margin-bottom: 12px;
 `;

@@ -5,6 +5,7 @@ import {
   fetchAllPublicChatsThunk,
   createPrivateChatThunk,
   createPublicChatThunk,
+  replyMessageThunk,
   // fetchAllChatsThunk,
   // fetchChatByIdThunk,
   // deleteChatByIdThunk,
@@ -75,6 +76,21 @@ export const chatSlice = createSlice({
       .addCase(createPublicChatThunk.rejected, (state, action) => {
         state.statuses.createPublicChat = status.REJECTED;
         state.errors.createPublicChat = action.payload;
+      })
+
+      // reply message
+      .addCase(replyMessageThunk.pending, (state) => {
+        state.statuses.replyMessage = status.PENDING;
+        state.errors.replyMessage = null;
+      })
+      .addCase(replyMessageThunk.fulfilled, (state, action) => {
+        state.statuses.replyMessage = status.FULFILLED;
+        state.publicChats = action.payload;
+        state.errors.replyMessage = null;
+      })
+      .addCase(replyMessageThunk.rejected, (state, action) => {
+        state.statuses.replyMessage = status.REJECTED;
+        state.errors.replyMessage = action.payload;
       });
 
     // Not used ==================================

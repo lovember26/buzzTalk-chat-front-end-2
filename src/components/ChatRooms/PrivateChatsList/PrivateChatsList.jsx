@@ -14,8 +14,12 @@ import {
 } from "./PrivateChatsList.styled";
 import { ReactComponent as DefaultIcon } from "../../../images/default.svg";
 
+import { useChat } from "contexts/ChatContext";
+
 export const PrivateChatList = () => {
   const dispatch = useDispatch();
+
+  const { setChatId } = useChat();
 
   const chats = useSelector(selectFetchAllPrivateChats);
 
@@ -33,7 +37,10 @@ export const PrivateChatList = () => {
         <ChatList>
           {chats.map((chat) => (
             <ChatItem key={chat.id}>
-              <ChatItemInfo to={`chats/${chat.slug}`}>
+              <ChatItemInfo
+                onClick={() => setChatId(chat.id)}
+                to={`chats/${chat.slug}`}
+              >
                 {chat.receiver.image ? (
                   <ChatItemImageWrapper>
                     <ChatItemImage src={chat.receiver.image} alt="avatar" />
