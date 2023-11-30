@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 // import axios from "axios";
 import withRouter from "helpers/withRouter";
 import WebSocketInstance from "websocket";
 import { MessageInput } from "components/MessageInput/MessageInput";
 import NoMessagesSvg from "images/svg/NoMessages/NoMessages";
 
-import { replyMessageThunk } from "redux/chat/chatThunk";
+// import { replyMessageThunk } from "redux/chat/chatThunk";
 
 import { useSelector } from "react-redux";
 import { selectAccessToken } from "redux/auth/authSelectors";
@@ -30,41 +30,41 @@ import {
   TimestampWrapper,
   ReplyButton,
   ReplyIcons,
-  MessageListItemReply,
-  TimestampReply,
-  WrpReply,
-  MessageListItemMessageReply,
-  MessageListItemUsernameImageReply,
-  MessageListItemUsernameImageWrapperReply,
-  MessageListItemUsernameWrapperReply,
-  WrapperUsernameReply,
-  MessageListItemUsernameReply,
-  TimestampWrapperReply,
-  ReplyIconsReply,
-  WrapperSecond,
-  LineReply,
-  WhoReply,
-  TextReply,
+  // MessageListItemReply,
+  // TimestampReply,
+  // WrpReply,
+  // MessageListItemMessageReply,
+  // MessageListItemUsernameImageReply,
+  // MessageListItemUsernameImageWrapperReply,
+  // MessageListItemUsernameWrapperReply,
+  // WrapperUsernameReply,
+  // MessageListItemUsernameReply,
+  // TimestampWrapperReply,
+  // ReplyIconsReply,
+  // WrapperSecond,
+  // LineReply,
+  // WhoReply,
+  // TextReply,
 } from "./Chat.styled";
 
-import { useChat } from "contexts/ChatContext";
+// import { useChat } from "contexts/ChatContext";
 
 const Chat = (props) => {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
 
   const [isReply, setIsReply] = useState(false);
-  const [replyTo, setReplyTo] = useState(null);
+  // const [replyTo, setReplyTo] = useState(null);
 
-  const [replyMessage, setReplyMessage] = useState(null);
-  const [replyContent, setReplyContent] = useState("");
-  const [selectedMessageId, setSelectedMessageId] = useState(null);
+  // const [replyMessage, setReplyMessage] = useState(null);
+  // const [replyContent, setReplyContent] = useState("");
+  // const [selectedMessageId, setSelectedMessageId] = useState(null);
 
-  const { chatId } = useChat();
+  // const { chatId } = useChat();
+  // const dispatch = useDispatch();
 
-  const dispatch = useDispatch();
-
-  console.log("all messages", messages);
+  // console.log("all messages", messages);
+  // console.log("isReply", isReply);
 
   const waitForSocketConnection = useCallback((callback) => {
     setTimeout(function () {
@@ -105,6 +105,9 @@ const Chat = (props) => {
   }, [accessToken]);
 
   const addMessage = (message) => {
+    // console.log("ONE message", message);
+    // message.selected = false;
+    // console.log(message);
     setMessages((prevMessages) => [...prevMessages, message]);
   };
 
@@ -114,6 +117,10 @@ const Chat = (props) => {
 
   const sendMessageHandler = (event) => {
     event.preventDefault();
+
+    if (isReply) {
+      console.log("isReply!");
+    }
 
     const messageObject = {
       from: props.username,
@@ -149,92 +156,44 @@ const Chat = (props) => {
   };
 
   const onReplyHandler = async (messageId, messageAuthorName) => {
-    setIsReply(true);
-    setReplyTo(messageAuthorName);
-
-    const body = {
-      chat_id: chatId,
-      message_id: messageId,
-      content: "I reply!!!",
-    };
-
+    // setIsReply(true);
+    // setReplyTo(messageAuthorName);
+    // const body = {
+    //   chat_id: chatId,
+    //   message_id: messageId,
+    //   content: "I reply!!!",
+    // };
     // const { payload } = await dispatch(replyMessageThunk(body));
   };
 
   const renderMessages = (messages) => {
     return messages.map((message, i, arr) => (
-      <>
-        {!isReply ? (
-          <MessageListItem key={`${message.id}_${i}`}>
-            <MessageListItemUsernameWrapper>
-              <Wrp>
-                <MessageListItemUsernameImageWrapper>
-                  <MessageListItemUsernameImage
-                    src={message.author.image}
-                    alt="avatar"
-                  />
-                </MessageListItemUsernameImageWrapper>
-                <WrapperUsername>
-                  <MessageListItemUsername>
-                    {message.author.username}
-                  </MessageListItemUsername>
-                  <MessageListItemMessage>
-                    {message.content}
-                  </MessageListItemMessage>
-                </WrapperUsername>
-              </Wrp>
-            </MessageListItemUsernameWrapper>
-            <TimestampWrapper>
-              <Timestamp>{renderTimestamp(message.timestamp)}</Timestamp>
-              <ReplyButton
-                onClick={() =>
-                  onReplyHandler(message.id, message.author.username)
-                }
-              >
-                <ReplyIcons />
-              </ReplyButton>
-            </TimestampWrapper>
-          </MessageListItem>
-        ) : (
-          <MessageListItemReply key={`${message.id}_${i}`}>
-            <WrapperSecond>
-              <MessageListItemUsernameImageWrapperReply>
-                <MessageListItemUsernameImageReply
-                  src={message.author.image}
-                  alt="avatar"
-                />
-              </MessageListItemUsernameImageWrapperReply>
-              <MessageListItemUsernameWrapperReply>
-                <WhoReply>Name who reply</WhoReply>
-                <WrpReply>
-                  <LineReply></LineReply>
-                  <WrapperUsernameReply>
-                    <MessageListItemUsernameReply>
-                      {message.author.username}
-                    </MessageListItemUsernameReply>
-                    <MessageListItemMessageReply>
-                      {message.content}
-                    </MessageListItemMessageReply>
-                  </WrapperUsernameReply>
-                </WrpReply>
-                <TextReply>Text reply</TextReply>
-              </MessageListItemUsernameWrapperReply>
-            </WrapperSecond>
-            <TimestampWrapperReply>
-              <TimestampReply>
-                {renderTimestamp(message.timestamp)}
-              </TimestampReply>
-              <ReplyButton
-                onClick={() =>
-                  onReplyHandler(message.id, message.author.username)
-                }
-              >
-                <ReplyIconsReply />
-              </ReplyButton>
-            </TimestampWrapperReply>
-          </MessageListItemReply>
-        )}
-      </>
+      <MessageListItem key={`${message.id}_${i}`}>
+        <MessageListItemUsernameWrapper>
+          <Wrp>
+            <MessageListItemUsernameImageWrapper>
+              <MessageListItemUsernameImage
+                src={message.author.image}
+                alt="avatar"
+              />
+            </MessageListItemUsernameImageWrapper>
+            <WrapperUsername>
+              <MessageListItemUsername>
+                {message.author.username}
+              </MessageListItemUsername>
+              <MessageListItemMessage>{message.content}</MessageListItemMessage>
+            </WrapperUsername>
+          </Wrp>
+        </MessageListItemUsernameWrapper>
+        <TimestampWrapper>
+          <Timestamp>{renderTimestamp(message.timestamp)}</Timestamp>
+          <ReplyButton
+            onClick={() => onReplyHandler(message.id, message.author.username)}
+          >
+            <ReplyIcons />
+          </ReplyButton>
+        </TimestampWrapper>
+      </MessageListItem>
     ));
   };
 
@@ -253,7 +212,8 @@ const Chat = (props) => {
       <MessageInputWrapper>
         {isReply && (
           <ReplyInputWrapper>
-            <ReplyToText>I am replying to {replyTo}</ReplyToText>
+            {/* <ReplyToText>I am replying to {replyTo}</ReplyToText> */}
+            <ReplyToText>I am replying to ...</ReplyToText>
             <button onClick={() => setIsReply(false)}>Close</button>
           </ReplyInputWrapper>
         )}
@@ -268,6 +228,80 @@ const Chat = (props) => {
 };
 
 export default withRouter(Chat);
+
+// For reply messages
+//  {
+//    !isReply ? (
+//      <MessageListItem key={`${message.id}_${i}`}>
+//        <MessageListItemUsernameWrapper>
+//          <Wrp>
+//            <MessageListItemUsernameImageWrapper>
+//              <MessageListItemUsernameImage
+//                src={message.author.image}
+//                alt="avatar"
+//              />
+//            </MessageListItemUsernameImageWrapper>
+//            <WrapperUsername>
+//              <MessageListItemUsername>
+//                {message.author.username}
+//              </MessageListItemUsername>
+//              <MessageListItemMessage>
+//                {message.content}
+//              </MessageListItemMessage>
+//            </WrapperUsername>
+//          </Wrp>
+//        </MessageListItemUsernameWrapper>
+//        <TimestampWrapper>
+//          <Timestamp>{renderTimestamp(message.timestamp)}</Timestamp>
+//          <ReplyButton
+//            onClick={() =>
+//              onReplyHandler(message.id, message.author.username)
+//            }
+//          >
+//            <ReplyIcons />
+//          </ReplyButton>
+//        </TimestampWrapper>
+//      </MessageListItem>
+//    ) : (
+//      <MessageListItemReply key={`${message.id}_${i}`}>
+//        <WrapperSecond>
+//          <MessageListItemUsernameImageWrapperReply>
+//            <MessageListItemUsernameImageReply
+//              src={message.author.image}
+//              alt="avatar"
+//            />
+//          </MessageListItemUsernameImageWrapperReply>
+//          <MessageListItemUsernameWrapperReply>
+//            <WhoReply>Name who reply</WhoReply>
+//            <WrpReply>
+//              <LineReply></LineReply>
+//              <WrapperUsernameReply>
+//                <MessageListItemUsernameReply>
+//                  {message.author.username}
+//                </MessageListItemUsernameReply>
+//                <MessageListItemMessageReply>
+//                  {message.content}
+//                </MessageListItemMessageReply>
+//              </WrapperUsernameReply>
+//            </WrpReply>
+//            <TextReply>Text reply</TextReply>
+//          </MessageListItemUsernameWrapperReply>
+//        </WrapperSecond>
+//        <TimestampWrapperReply>
+//          <TimestampReply>
+//            {renderTimestamp(message.timestamp)}
+//          </TimestampReply>
+//          <ReplyButton
+//            onClick={() =>
+//              onReplyHandler(message.id, message.author.username)
+//            }
+//          >
+//            <ReplyIconsReply />
+//          </ReplyButton>
+//        </TimestampWrapperReply>
+//      </MessageListItemReply>
+//    );
+//  }
 
 // import React, { useEffect, useState, useCallback } from "react";
 // import { useDispatch } from "react-redux";

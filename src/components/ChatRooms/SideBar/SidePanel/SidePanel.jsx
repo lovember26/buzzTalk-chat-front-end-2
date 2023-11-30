@@ -1,12 +1,12 @@
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { useState } from "react";
 
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 
 import { selectAllUsers } from "redux/user/userSelectors";
-import { fetchAllUsersThunk } from "redux/user/userThunk";
+// import { fetchAllUsersThunk } from "redux/user/userThunk";
 
 import Modal from "components/common/Modal/Modal";
 import ChatModal from "components/ChatRooms/Modal/ChatModal/ChatModal";
@@ -41,7 +41,7 @@ export default function SidePanel() {
 
   const { results } = useSelector(selectAllUsers);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   // useEffect(() => {
   //   dispatch(fetchAllUsersThunk());
