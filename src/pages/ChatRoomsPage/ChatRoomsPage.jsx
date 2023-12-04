@@ -7,6 +7,8 @@
 import SidePanel from "components/ChatRooms/SideBar/SidePanel/SidePanel";
 import { RoomsWrapper } from "./ChatRooms.styled";
 
+import { ChatProvider } from "contexts/ChatContext";
+
 export default function ChatRoomsPage() {
   // const token = useSelector(selectAccessToken);
   // const username = useSelector(selectUserName);
@@ -28,7 +30,9 @@ export default function ChatRoomsPage() {
 
   return (
     <RoomsWrapper>
-      <SidePanel />
+      <ChatProvider>
+        <SidePanel />
+      </ChatProvider>
     </RoomsWrapper>
   );
 }

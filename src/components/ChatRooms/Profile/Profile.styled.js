@@ -38,6 +38,7 @@ export const UserBarImage = styled.img`
 export const UserBarInfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   color: #444;
 `;
 

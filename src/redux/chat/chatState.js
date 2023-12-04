@@ -7,14 +7,13 @@ export const initialState = {
 
   statuses: {
     fetchAllPrivateChat: status.IDLE,
-    fetchByIdPrivateChat: status.IDLE,
+    fetchChatBySlug: status.IDLE,
     createPrivateChat: status.IDLE,
     deletePrivateChat: status.IDLE,
     updatePrivateChat: status.IDLE,
     changePrivateChat: status.IDLE,
 
     fetchAllPublicChat: status.IDLE,
-    fetchByIdPublicChat: status.IDLE,
     createPublicChat: status.IDLE,
     deletePublicChat: status.IDLE,
     updatePublicChat: status.IDLE,
@@ -25,14 +24,13 @@ export const initialState = {
 
   errors: {
     fetchAllPrivateChat: null,
-    fetchByIdPrivateChat: null,
+    fetchChatBySlug: null,
     createPrivateChat: null,
     deletePrivateChat: null,
     updatePrivateChat: null,
     changePrivateChat: null,
 
     fetchAllPublicChat: null,
-    fetchByIdPublicChat: null,
     createPublicChat: null,
     deletePublicChat: null,
     updatePublicChat: null,

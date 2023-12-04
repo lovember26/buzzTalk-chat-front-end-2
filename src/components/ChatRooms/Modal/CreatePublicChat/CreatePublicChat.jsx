@@ -47,6 +47,8 @@ const CreatePublicChat = ({ users, handleNavigate, setActive }) => {
             value={chatName}
             onChange={(event) => setChatName(event.target.value)}
           ></Input>
+          <button>Set gravatar</button>
+          <button>Upload image</button>
         </InputWrapper>
         <SelectPublicChat
           users={users}

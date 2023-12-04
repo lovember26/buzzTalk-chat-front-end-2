@@ -8,8 +8,8 @@ import NoMessagesSvg from "images/svg/NoMessages/NoMessages";
 
 // import { replyMessageThunk } from "redux/chat/chatThunk";
 
-import { useSelector } from "react-redux";
-import { selectAccessToken } from "redux/auth/authSelectors";
+// import { useSelector } from "react-redux";
+// import { selectAccessToken } from "redux/auth/authSelectors";
 
 import {
   DateNowText,
@@ -53,6 +53,10 @@ const Chat = (props) => {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
 
+  console.log("all messages", messages);
+
+  // const [value, setValue] = useState("");
+
   const [isReply, setIsReply] = useState(false);
   // const [replyTo, setReplyTo] = useState(null);
 
@@ -90,19 +94,19 @@ const Chat = (props) => {
   // Scrolling and fetching messages
   // eslint-disable-next-line
   // const [currentPage, setCurrentPage] = useState(1);
-  const accessToken = useSelector(selectAccessToken);
+  // const accessToken = useSelector(selectAccessToken);
 
   const handleScroll = () => {
     console.log("handleScroll");
   };
 
-  useEffect(() => {}, []);
+  // useEffect(() => {}, []);
 
-  const getMessages = async () => {};
+  // const getMessages = async () => {};
 
-  useEffect(() => {
-    getMessages(accessToken);
-  }, [accessToken]);
+  // useEffect(() => {
+  //   getMessages(accessToken);
+  // }, [accessToken]);
 
   const addMessage = (message) => {
     // console.log("ONE message", message);
@@ -167,7 +171,9 @@ const Chat = (props) => {
   };
 
   const renderMessages = (messages) => {
-    return messages.map((message, i, arr) => (
+    const reversedMessages = [...messages].reverse();
+
+    return reversedMessages.map((message, i, arr) => (
       <MessageListItem key={`${message.id}_${i}`}>
         <MessageListItemUsernameWrapper>
           <Wrp>

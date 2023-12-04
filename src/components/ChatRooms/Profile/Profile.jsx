@@ -1,7 +1,4 @@
 import { useSelector } from "react-redux";
-// import { useSearchParams } from "react-router-dom";
-// import { useParams } from "react-router-dom";
-import { selectUserName } from "redux/user/userSelectors";
 import { selectUserImage } from "redux/user/userSelectors";
 
 import { ReactComponent as SearchIcon } from "../../../images/search-chat.svg";
@@ -23,12 +20,11 @@ import {
   UserBarImageWrapper,
 } from "./Profile.styled";
 
-export default function Profile() {
-  const username = useSelector(selectUserName);
-  const image = useSelector(selectUserImage);
+import { useChat } from "contexts/ChatContext";
 
-  // const { chatSlug } = useParams();
-  // console.log("chatSlug Profile", chatSlug);
+export default function Profile() {
+  const image = useSelector(selectUserImage);
+  const { chatName } = useChat();
 
   return (
     <ChatContainer>
@@ -38,7 +34,7 @@ export default function Profile() {
             <UserBarImage src={image} width="50" alt="avatar" />
           </UserBarImageWrapper>
           <UserBarInfoWrapper className="user">
-            <UserBarUserName className="username">{username}</UserBarUserName>
+            <UserBarUserName className="username">{chatName}</UserBarUserName>
             <UserStatusWrapper>
               <UserBarUserStatus className="user-status">
                 online

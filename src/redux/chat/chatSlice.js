@@ -3,6 +3,7 @@ import { initialState } from "./chatState";
 import {
   fetchAllPrivateChatsThunk,
   fetchAllPublicChatsThunk,
+  getChatBySlugThunk,
   createPrivateChatThunk,
   createPublicChatThunk,
   replyMessageThunk,
@@ -48,6 +49,20 @@ export const chatSlice = createSlice({
       .addCase(fetchAllPublicChatsThunk.rejected, (state, action) => {
         state.statuses.fetchAllPublicChat = status.REJECTED;
         state.errors.fetchAllPublicChat = action.payload;
+      })
+
+      // fetch chats by slug
+      .addCase(getChatBySlugThunk.pending, (state) => {
+        state.statuses.fetchChatBySlug = status.PENDING;
+        state.errors.fetchChatBySlug = null;
+      })
+      .addCase(getChatBySlugThunk.fulfilled, (state, action) => {
+        state.statuses.fetchChatBySlug = status.FULFILLED;
+        state.errors.fetchChatBySlug = null;
+      })
+      .addCase(getChatBySlugThunk.rejected, (state, action) => {
+        state.statuses.fetchChatBySlug = status.REJECTED;
+        state.errors.fetchChatBySlug = action.payload;
       })
 
       // create private chat

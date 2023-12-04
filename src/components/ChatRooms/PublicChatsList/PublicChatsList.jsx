@@ -5,14 +5,24 @@ import { ChatList, PublicChatItem } from "./PublicChatsList.styled";
 import { fetchAllPublicChatsThunk } from "redux/chat/chatThunk";
 import { selectFetchAllPublicChats } from "redux/chat/chatSelectors";
 
+import { useChat } from "contexts/ChatContext";
+import { selectUserName } from "redux/user/userSelectors";
+
 export const PublicChatsList = () => {
   const chats = useSelector(selectFetchAllPublicChats);
+  const username = useSelector(selectUserName);
+
+  const { setChatSlug } = useChat();
 
   const dispatch = useDispatch();
 
+  // const getUserChats = useCallback(async () => {
+  //   await dispatch(fetchAllPublicChatsThunk());
+  // }, [dispatch]);
+
   const getUserChats = useCallback(async () => {
-    await dispatch(fetchAllPublicChatsThunk());
-  }, [dispatch]);
+    await dispatch(fetchAllPublicChatsThunk(username));
+  }, [dispatch, username]);
 
   useEffect(() => {
     getUserChats();
@@ -35,7 +45,11 @@ export const PublicChatsList = () => {
       {chats && chats.length > 0 && (
         <ChatList>
           {chats?.map((chat) => (
-            <PublicChatItem to={`chats/${chat?.slug}`} key={chat?.id}>
+            <PublicChatItem
+              onClick={() => setChatSlug(chat.slug)}
+              to={`chats/${chat?.slug}`}
+              key={chat?.id}
+            >
               {chat?.id}
             </PublicChatItem>
           ))}

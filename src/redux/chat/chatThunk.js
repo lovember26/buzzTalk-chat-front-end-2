@@ -13,12 +13,36 @@ export const fetchAllPrivateChatsThunk = createAsyncThunk(
   }
 );
 
+// export const fetchAllPublicChatsThunk = createAsyncThunk(
+//   "chat/fetchAllPublic",
+//   async (_, { rejectWithValue }) => {
+//     try {
+//       const chats = await chatAPI.getPublicChatsService();
+//       return chats;
+//     } catch (error) {
+//       return rejectWithValue(error.message);
+//     }
+//   }
+// );
+
 export const fetchAllPublicChatsThunk = createAsyncThunk(
   "chat/fetchAllPublic",
-  async (_, { rejectWithValue }) => {
+  async (credentials, { rejectWithValue }) => {
     try {
-      const chats = await chatAPI.getPublicChatsService();
+      const chats = await chatAPI.getPublicChatsService(credentials);
       return chats;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const getChatBySlugThunk = createAsyncThunk(
+  "chat/getChatBySlug",
+  async (credentials, { rejectWithValue }) => {
+    try {
+      const data = await chatAPI.getChatBySlugService(credentials);
+      return data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -61,31 +85,47 @@ export const replyMessageThunk = createAsyncThunk(
   }
 );
 
-// Not used =====================================
-
-export const fetchAllChatsThunk = createAsyncThunk(
-  "chat/fetchAll",
-  async (_, { rejectWithValue }) => {
-    try {
-      const chats = await chatAPI.getAllChatsService();
-      return chats;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
-
-export const fetchChatByIdThunk = createAsyncThunk(
-  "chat/fetchChatById",
+export const updatePublicChatThunk = createAsyncThunk(
+  "chat/updatePublicChat",
   async (credentials, { rejectWithValue }) => {
     try {
-      const chat = await chatAPI.getChatByIdService(credentials);
-      return chat;
+      const data = await chatAPI.updatePublicChatService(credentials);
+
+      return data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
   }
 );
+
+export const generatePublicChatTGravatarThunk = createAsyncThunk(
+  "chat/generatePublicChatGravatar",
+  async (credentials, { rejectWithValue }) => {
+    try {
+      const data = await chatAPI.generatePublicChatGravatarService(credentials);
+
+      return data;
+    } catch (error) {
+      console.log("error generateGravatarUserInfoThunk", error);
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const removePublicChatImageThunk = createAsyncThunk(
+  "chat/removePublicChatImage",
+  async (credentials, { rejectWithValue }) => {
+    try {
+      const data = await chatAPI.removePublicChatImageService(credentials);
+
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+// Not used =====================================
 
 export const deleteChatByIdThunk = createAsyncThunk(
   "chat/deleteChat",

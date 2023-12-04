@@ -34,12 +34,15 @@ import {
   FriendsLinkWrapper,
 } from "./SidePanel.styled";
 
-import { ChatProvider } from "contexts/ChatContext";
+// import { ChatProvider } from "contexts/ChatContext";
+import { useChat } from "contexts/ChatContext";
 
 export default function SidePanel() {
   const [modalActive, setModalActive] = useState(false);
 
   const { results } = useSelector(selectAllUsers);
+
+  const { isPrivateChat } = useChat();
 
   // const dispatch = useDispatch();
 
@@ -47,8 +50,11 @@ export default function SidePanel() {
   //   dispatch(fetchAllUsersThunk());
   // }, [dispatch]);
 
+  const { chatType } = useChat();
+  console.log("chatType", chatType);
+
   return (
-    <ChatProvider>
+    <>
       <StyledSideBar>
         <StyledNav>
           <StyledChatsBtn type="button" to={"chats"}>
@@ -67,7 +73,9 @@ export default function SidePanel() {
         </StyledNav>
 
         <SearchBar>
-          <Title>Private messages</Title>
+          <Title>
+            {isPrivateChat ? "Private messages" : "Public messages"}
+          </Title>
 
           <Form>
             <SearchIcon />
@@ -90,6 +98,6 @@ export default function SidePanel() {
         {/* <ChatModal setActive={setModalActive} /> */}
       </Modal>
       <Outlet />
-    </ChatProvider>
+    </>
   );
 }

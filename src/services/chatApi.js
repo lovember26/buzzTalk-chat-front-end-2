@@ -2,15 +2,21 @@ import axios from "axios";
 
 axios.defaults.baseURL = "https://buzz-talk-api.onrender.com";
 
-// Parameters -
-// Response - array with objects id participants and messages values
 export const getPrivateChatsService = async () => {
   const { data } = await axios.get("/chat/private-chat/");
   return data;
 };
 
-export const getPublicChatsService = async () => {
-  const { data } = await axios.get("/chat/public-chat/");
+// export const getPublicChatsService = async () => {
+//   const { data } = await axios.get("/chat/public-chat/");
+//   return data;
+// };
+
+export const getPublicChatsService = async (username) => {
+  console.log("getPublicChatsService", username);
+  const { data } = await axios.get(
+    `/chat/public-chat/?username=${username}&page=1`
+  );
   return data;
 };
 
@@ -31,23 +37,30 @@ export const replyMessageService = async (object) => {
   return data;
 };
 
+export const getChatBySlugService = async (slug) => {
+  const { data } = await axios.get(`chat/detail/?slug=${slug}&page=1`);
+  return data;
+};
+
+export const updatePublicChatService = async (credentials) => {
+  const { data } = await axios.patch(
+    "/chat/public-chat/update-inform/",
+    credentials
+  );
+  return data;
+};
+
+export const generatePublicChatGravatarService = async (id) => {
+  const { data } = await axios.put("/chat/public-chat/generate-gravatar/", id);
+  return data;
+};
+
+export const removePublicChatImageService = async (id) => {
+  const { data } = await axios.delete("/chat/public-chat/delete-image/", id);
+  return data;
+};
+
 // Not Used =======================================================
-// Parameters -
-// Response - array with objects id participants and messages values
-export const getAllChatsService = async () => {
-  const { data } = await axios.get("/chat/");
-  console.log("getMessagesService data", data);
-  return data;
-};
-
-// Parameters - id
-// Response - object with id participants and messages values
-export const getChatByIdService = async (id) => {
-  const { data } = await axios.get(`/chat/${id}`);
-  console.log("getChatByIdService", data);
-  return data;
-};
-
 // Parameters - id
 // Response - code 204
 export const deleteChatByIdService = async (id) => {
