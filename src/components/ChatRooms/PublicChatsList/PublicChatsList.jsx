@@ -11,22 +11,28 @@ import { selectUserName } from "redux/user/userSelectors";
 export const PublicChatsList = () => {
   const chats = useSelector(selectFetchAllPublicChats);
   const username = useSelector(selectUserName);
-
-  const { setChatSlug } = useChat();
+  const { setChatSlug, setPublicChatName, setIsPrivateChat } = useChat();
 
   const dispatch = useDispatch();
 
-  // const getUserChats = useCallback(async () => {
-  //   await dispatch(fetchAllPublicChatsThunk());
-  // }, [dispatch]);
-
   const getUserChats = useCallback(async () => {
-    await dispatch(fetchAllPublicChatsThunk(username));
-  }, [dispatch, username]);
+    await dispatch(fetchAllPublicChatsThunk());
+  }, [dispatch]);
 
   useEffect(() => {
     getUserChats();
   }, [getUserChats]);
+
+  // const getUserChats = useCallback(async () => {
+  //   await dispatch(fetchAllPublicChatsThunk(username));
+  // }, [dispatch, username]);
+
+  const onClickChatHandler = (slug, isPrivateChat, title) => {
+    console.log(title);
+    setChatSlug(slug);
+    setIsPrivateChat(isPrivateChat);
+    setPublicChatName(title);
+  };
 
   return (
     <>
@@ -46,7 +52,10 @@ export const PublicChatsList = () => {
         <ChatList>
           {chats?.map((chat) => (
             <PublicChatItem
-              onClick={() => setChatSlug(chat.slug)}
+              // onClick={() => setChatSlug(chat.slug)}
+              onClick={() =>
+                onClickChatHandler(chat.slug, chat.is_private, chat.title)
+              }
               to={`chats/${chat?.slug}`}
               key={chat?.id}
             >

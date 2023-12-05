@@ -11,7 +11,7 @@ import { selectAllUsers } from "redux/user/userSelectors";
 import Modal from "components/common/Modal/Modal";
 import ChatModal from "components/ChatRooms/Modal/ChatModal/ChatModal";
 
-// import { PublicChatsList } from "components/ChatRooms/PublicChatsList/PublicChatsList";
+import { PublicChatsList } from "components/ChatRooms/PublicChatsList/PublicChatsList";
 import { PrivateChatList } from "components/ChatRooms/PrivateChatsList/PrivateChatsList";
 
 import UserProfile from "../UserProfile/UserProfile";
@@ -68,7 +68,7 @@ export default function SidePanel() {
             <AddChatButton />
           </AddChatButtonWrapper>
 
-          {/* <PublicChatsList /> */}
+          <PublicChatsList />
           <UserProfile />
         </StyledNav>
 

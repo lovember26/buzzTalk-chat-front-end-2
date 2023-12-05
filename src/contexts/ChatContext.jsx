@@ -9,8 +9,11 @@ export const useChat = () => useContext(ChatContext);
 export const ChatProvider = ({ children }) => {
   const [chatId, setChatId] = useState(null);
   const [chatSlug, setChatSlug] = useState(null);
-  const [chatName, setChatName] = useState(null);
+  const [privateChatName, setPrivateChatName] = useState(null);
+  const [publicChatName, setPublicChatName] = useState(null);
   const [isPrivateChat, setIsPrivateChat] = useState(null);
+
+  console.log("publicChatName", publicChatName);
 
   return (
     <ChatContext.Provider
@@ -18,8 +21,10 @@ export const ChatProvider = ({ children }) => {
         chatId,
         setChatId,
         chatSlug,
-        chatName,
-        setChatName,
+        privateChatName,
+        setPrivateChatName,
+        publicChatName,
+        setPublicChatName,
         setChatSlug,
         isPrivateChat,
         setIsPrivateChat,

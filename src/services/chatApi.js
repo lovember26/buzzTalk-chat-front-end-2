@@ -7,18 +7,18 @@ export const getPrivateChatsService = async () => {
   return data;
 };
 
-// export const getPublicChatsService = async () => {
-//   const { data } = await axios.get("/chat/public-chat/");
-//   return data;
-// };
-
-export const getPublicChatsService = async (username) => {
-  console.log("getPublicChatsService", username);
-  const { data } = await axios.get(
-    `/chat/public-chat/?username=${username}&page=1`
-  );
+export const getPublicChatsService = async () => {
+  const { data } = await axios.get("/chat/public-chat/");
   return data;
 };
+
+// export const getPublicChatsService = async (username) => {
+//   console.log("getPublicChatsService", username);
+//   const { data } = await axios.get(
+//     `/chat/public-chat/?username=${username}&page=1`
+//   );
+//   return data;
+// };
 
 export const createPrivateChatService = async (receiver) => {
   const { data } = await axios.post("/chat/private-chat/", {

@@ -20,14 +20,14 @@ import {
 const CreatePublicChat = ({ users, handleNavigate, setActive }) => {
   const [userPublicChatChoice, setUserPublicChatChoice] = useState(null);
 
-  const [chatName, setChatName] = useState("");
+  const [privateChatName, setPrivateChatName] = useState("");
   const dispatch = useDispatch();
 
   const handlerSubmit = async (event) => {
     event.preventDefault();
 
     const newPublicChat = {
-      title: chatName,
+      title: privateChatName,
       participants: userPublicChatChoice,
     };
 
@@ -44,8 +44,8 @@ const CreatePublicChat = ({ users, handleNavigate, setActive }) => {
           <Input
             type="text"
             placeholder="Enter name of created chat"
-            value={chatName}
-            onChange={(event) => setChatName(event.target.value)}
+            value={privateChatName}
+            onChange={(event) => setPrivateChatName(event.target.value)}
           ></Input>
           <button>Set gravatar</button>
           <button>Upload image</button>

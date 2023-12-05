@@ -24,7 +24,7 @@ import { useChat } from "contexts/ChatContext";
 
 export default function Profile() {
   const image = useSelector(selectUserImage);
-  const { chatName } = useChat();
+  const { isPrivateChat, privateChatName, publicChatName } = useChat();
 
   return (
     <ChatContainer>
@@ -34,7 +34,9 @@ export default function Profile() {
             <UserBarImage src={image} width="50" alt="avatar" />
           </UserBarImageWrapper>
           <UserBarInfoWrapper className="user">
-            <UserBarUserName className="username">{chatName}</UserBarUserName>
+            <UserBarUserName className="username">
+              {isPrivateChat ? privateChatName : publicChatName}
+            </UserBarUserName>
             <UserStatusWrapper>
               <UserBarUserStatus className="user-status">
                 online
