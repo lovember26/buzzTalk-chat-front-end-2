@@ -10,4 +10,8 @@ export const Button = styled.button`
   background-color: #451952;
 
   cursor: pointer;
+
+  &:disabled {
+    background-color: ${({ theme }) => theme.colors.gray[300]};
+  }
 `;

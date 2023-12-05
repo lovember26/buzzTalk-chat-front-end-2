@@ -11,7 +11,7 @@ export default function SelectPublicChat({ users, setChoice }) {
     }))
   );
 
-  console.log("users select", users);
+  // console.log("users select", users);
 
   const colorStyles = {
     control: (styles) => ({

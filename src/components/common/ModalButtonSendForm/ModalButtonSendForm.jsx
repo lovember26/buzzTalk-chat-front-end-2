@@ -1,6 +1,10 @@
 import * as React from "react";
 import { Button } from "./ModalButtonSendForm.styled";
 
-export const ModalButtonSendForm = ({ text, onClick }) => {
-  return <Button onClick={onClick}>{text}</Button>;
+export const ModalButtonSendForm = ({ text, onClick, disabled }) => {
+  return (
+    <Button disabled={disabled} onClick={onClick}>
+      {text}
+    </Button>
+  );
 };

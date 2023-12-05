@@ -53,7 +53,7 @@ const Chat = (props) => {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
 
-  console.log("all messages", messages);
+  // console.log("all messages", messages);
 
   // const [value, setValue] = useState("");
 
@@ -123,7 +123,7 @@ const Chat = (props) => {
     event.preventDefault();
 
     if (isReply) {
-      console.log("isReply!");
+      // console.log("isReply!");
     }
 
     const messageObject = {

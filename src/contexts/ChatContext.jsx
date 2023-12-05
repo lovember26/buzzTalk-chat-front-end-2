@@ -17,10 +17,6 @@ export const ChatProvider = ({ children }) => {
 
   const [isPrivateChat, setIsPrivateChat] = useState(null);
 
-  console.log("publicChatName", publicChatName);
-
-  console.log("publicChatImage", publicChatImage);
-
   return (
     <ChatContext.Provider
       value={{

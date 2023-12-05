@@ -27,7 +27,7 @@ export const PrivateChatList = () => {
 
   const dispatch = useDispatch();
 
-  console.log("chats PrivateChatList", chats);
+  // console.log("chats PrivateChatList", chats);
 
   const getUserChats = useCallback(async () => {
     await dispatch(fetchAllPrivateChatsThunk());
