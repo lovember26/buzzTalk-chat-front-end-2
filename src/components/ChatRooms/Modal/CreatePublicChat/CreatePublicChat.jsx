@@ -8,6 +8,8 @@ import { ModalButtonBack } from "components/common/ModalButtonBack/ModalButtonBa
 import { ModalButtonSendForm } from "components/common/ModalButtonSendForm/ModalButtonSendForm";
 import SelectPublicChat from "components/ChatRooms/SelectPublicChat/SelectPublicChat";
 
+import { generatePublicChatTGravatarThunk } from "redux/chat/chatThunk";
+
 import {
   Title,
   Form,
@@ -35,6 +37,10 @@ const CreatePublicChat = ({ users, handleNavigate, setActive }) => {
     setActive(false);
   };
 
+  const handleSetGravatar = async () => {
+    await dispatch(generatePublicChatTGravatarThunk(45));
+  };
+
   return (
     <>
       <Title>Choose friends for public communication</Title>
@@ -47,7 +53,9 @@ const CreatePublicChat = ({ users, handleNavigate, setActive }) => {
             value={privateChatName}
             onChange={(event) => setPrivateChatName(event.target.value)}
           ></Input>
-          <button>Set gravatar</button>
+          <button type="button" onClick={handleSetGravatar}>
+            Set gravatar
+          </button>
           <button>Upload image</button>
         </InputWrapper>
         <SelectPublicChat

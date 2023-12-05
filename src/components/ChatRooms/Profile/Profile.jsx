@@ -1,10 +1,8 @@
-import { useSelector } from "react-redux";
-import { selectUserImage } from "redux/user/userSelectors";
-
 import { ReactComponent as SearchIcon } from "../../../images/search-chat.svg";
 import { ReactComponent as PhoneIcon } from "../../../images/phone-call.svg";
 import { ReactComponent as VideoIcon } from "../../../images/video.svg";
 import { ReactComponent as AddFriendIcon } from "../../../images/add-friend.svg";
+import { ReactComponent as DefaultIcon } from "../../../images/default.svg";
 import {
   UserStatusWrapper,
   Indicator,
@@ -23,15 +21,28 @@ import {
 import { useChat } from "contexts/ChatContext";
 
 export default function Profile() {
-  const image = useSelector(selectUserImage);
-  const { isPrivateChat, privateChatName, publicChatName } = useChat();
+  const {
+    isPrivateChat,
+    privateChatName,
+    publicChatName,
+    privateChatImage,
+    publicChatImage,
+  } = useChat();
 
   return (
     <ChatContainer>
       <StyledHeader>
         <UserBarWrapper>
           <UserBarImageWrapper>
-            <UserBarImage src={image} width="50" alt="avatar" />
+            {privateChatImage || publicChatImage ? (
+              <UserBarImage
+                src={isPrivateChat ? privateChatImage : publicChatImage}
+                width="50"
+                alt="avatar"
+              />
+            ) : (
+              <DefaultIcon />
+            )}
           </UserBarImageWrapper>
           <UserBarInfoWrapper className="user">
             <UserBarUserName className="username">

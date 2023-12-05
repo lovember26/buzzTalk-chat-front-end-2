@@ -17,7 +17,12 @@ import { ReactComponent as DefaultIcon } from "../../../images/default.svg";
 import { useChat } from "contexts/ChatContext";
 
 export const PrivateChatList = () => {
-  const { setChatSlug, setIsPrivateChat, setPrivateChatName } = useChat();
+  const {
+    setChatSlug,
+    setIsPrivateChat,
+    setPrivateChatName,
+    setPrivateChatImage,
+  } = useChat();
   const chats = useSelector(selectFetchAllPrivateChats);
 
   const dispatch = useDispatch();
@@ -32,10 +37,11 @@ export const PrivateChatList = () => {
     getUserChats();
   }, [getUserChats]);
 
-  const onClickChatHandler = (slug, isPrivateChat, receiver) => {
+  const onClickChatHandler = (slug, isPrivateChat, receiver, image) => {
     setChatSlug(slug);
     setIsPrivateChat(isPrivateChat);
     setPrivateChatName(receiver);
+    setPrivateChatImage(image);
   };
 
   return (
@@ -49,7 +55,8 @@ export const PrivateChatList = () => {
                   onClickChatHandler(
                     chat.slug,
                     chat.is_private,
-                    chat.receiver.username
+                    chat.receiver.username,
+                    chat.receiver.image
                   )
                 }
                 to={`chats/${chat.slug}`}

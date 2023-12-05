@@ -41,3 +41,17 @@ export const PublicChatItem = styled(NavLink)`
 
   margin-bottom: 6px;
 `;
+
+export const ChatItemImageWrapper = styled.div`
+  border-radius: 50%;
+  width: 37px;
+  height: 37px;
+  overflow: hidden;
+
+  margin-right: 10px;
+`;
+
+export const ChatItemImage = styled.img`
+  width: auto;
+  height: 100%;
+`;
