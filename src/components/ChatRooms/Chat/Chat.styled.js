@@ -7,7 +7,7 @@ export const ChatBlockWrapper = styled.div`
   flex-direction: column;
 
   padding-top: 0;
-  padding-bottom: 28px;
+  padding-bottom: 30px;
   padding-left: 16px;
   padding-right: 16px;
 
@@ -19,7 +19,7 @@ export const DateNowText = styled.p`
   margin-right: auto;
   padding-top: 8px;
   margin-bottom: 8px;
-
+  height: 30px;
   color: #696969;
   font-size: 14px;
   font-weight: 700;
@@ -82,7 +82,7 @@ export const MessageList = styled.ul`
   display: flex;
   flex-direction: column;
 
-  max-height: 550px;
+  height: calc(100vh - 220px);
   overflow-y: auto;
 
   ::-webkit-scrollbar {
@@ -162,7 +162,6 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0 20px;
-  min-height: 100%;
 `;
 
 export const Timestamp = styled.p`

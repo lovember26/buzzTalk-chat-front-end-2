@@ -23,6 +23,8 @@ import {
   Wrp,
 } from "./Chat.styled";
 
+import FriendInfo from "../FriendInfo/FriendInfo";
+
 const Chat = (props) => {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
@@ -182,23 +184,38 @@ const Chat = (props) => {
   };
 
   return (
-    <ChatBlockWrapper className="messages-wrapper">
-      {!messages.length ? (
-        <NoMessagesSvg />
-      ) : (
-        <>
-          <DateNowText>Today</DateNowText>
-          <MessageList className="messages" onScroll={handleScroll}>
-            {messages && renderMessages(messages)}
-          </MessageList>
-        </>
-      )}
-      <MessageInput
-        onSubmit={sendMessageHandler}
-        onChange={messageChangeHandler}
-        value={message}
-      />
-    </ChatBlockWrapper>
+    <div
+      style={{
+        display: "flex",
+        height: "calc(100% - 80px)",
+      }}
+    >
+      <ChatBlockWrapper className="messages-wrapper">
+        {!messages.length ? (
+          <div
+            style={{
+              display: "flex",
+              marginBottom: "190px",
+            }}
+          >
+            <NoMessagesSvg />
+          </div>
+        ) : (
+          <>
+            <DateNowText>Today</DateNowText>
+            <MessageList className="messages" onScroll={handleScroll}>
+              {messages && renderMessages(messages)}
+            </MessageList>
+          </>
+        )}
+        <MessageInput
+          onSubmit={sendMessageHandler}
+          onChange={messageChangeHandler}
+          value={message}
+        />
+      </ChatBlockWrapper>
+      <FriendInfo />
+    </div>
   );
 };
 

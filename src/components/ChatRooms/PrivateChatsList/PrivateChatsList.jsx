@@ -14,7 +14,7 @@ import {
 } from "./PrivateChatsList.styled";
 import { ReactComponent as DefaultIcon } from "../../../images/default.svg";
 
-export const PrivateChatList = () => {
+export const PrivateChatList = ({ searchValue }) => {
   const dispatch = useDispatch();
 
   const chats = useSelector(selectFetchAllPrivateChats);
@@ -31,20 +31,29 @@ export const PrivateChatList = () => {
     <>
       {chats && chats.length > 0 ? (
         <ChatList>
-          {chats.map((chat) => (
-            <ChatItem key={chat.id}>
-              <ChatItemInfo to={`chats/${chat.slug}`}>
-                {chat.receiver.image ? (
-                  <ChatItemImageWrapper>
-                    <ChatItemImage src={chat.receiver.image} alt="avatar" />
-                  </ChatItemImageWrapper>
-                ) : (
-                  <DefaultIcon />
-                )}
-                <ChatItemText>{chat.receiver.username}</ChatItemText>
-              </ChatItemInfo>
-            </ChatItem>
-          ))}
+          {chats
+            .filter((chat) => {
+              return (
+                searchValue === "" ||
+                chat.receiver.username.toLowerCase().startsWith(searchValue)
+              );
+            })
+            .map((chat) => (
+              <ChatItem key={chat.id}>
+                <ChatItemInfo
+                  to={`chats/${chat.slug}?username=${chat.receiver.username}`}
+                >
+                  {chat.receiver.image ? (
+                    <ChatItemImageWrapper>
+                      <ChatItemImage src={chat.receiver.image} alt="avatar" />
+                    </ChatItemImageWrapper>
+                  ) : (
+                    <DefaultIcon />
+                  )}
+                  <ChatItemText>{chat.receiver.username}</ChatItemText>
+                </ChatItemInfo>
+              </ChatItem>
+            ))}
         </ChatList>
       ) : (
         <NoPrivateChats />

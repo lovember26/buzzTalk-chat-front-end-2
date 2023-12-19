@@ -4,6 +4,7 @@ axios.defaults.baseURL = "https://buzz-talk-api.onrender.com";
 
 export const fetchAllUsersService = async () => {
   const { data } = await axios.get("/api/accounts/users/");
+
   return data;
 };
 
@@ -28,5 +29,10 @@ export const removeUserAvatarService = async (credentials) => {
     "/api/accounts/users/delete-profile-image/",
     credentials
   );
+  return data;
+};
+
+export const fetchUserByUsername = async (username) => {
+  const { data } = await axios.get(`/api/accounts/users/${username}/`);
   return data;
 };

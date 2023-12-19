@@ -3,17 +3,22 @@ import { ReactComponent as Search } from "../../../../images/search-friend.svg";
 import NoFriends from "components/ChatRooms/NoFriends/NoFriends";
 import { useEffect, useState } from "react";
 
-import { fetchAllUsersService } from "services/userApi";
+import axios from "axios";
 export default function AddFriend() {
   const [query, setQuery] = useState("");
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState(null);
   useEffect(() => {
     const getUsers = async () => {
-      const page = 1;
-      const data = await fetchAllUsersService(page);
-      console.log(Math.ceil(data.count / 10));
+      const { data } = await axios.get(
+        "https://buzz-talk-api.onrender.com/api/accounts/users/"
+      );
       setUsers(data.results);
+      if (data.next) {
+        const extraUsers = await axios.get(data.next);
+        users.push(extraUsers.data.results);
+        console.log(users);
+      }
     };
     getUsers();
     const filteredNames = users.filter((user) =>

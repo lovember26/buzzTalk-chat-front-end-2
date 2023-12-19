@@ -5,8 +5,6 @@ import { RiContactsLine } from "react-icons/ri";
 export const StyledSideBar = styled.aside`
   display: flex;
   background-color: #451952;
-
-
 `;
 
 export const StyledNav = styled.nav`
@@ -19,7 +17,6 @@ export const StyledNav = styled.nav`
   gap: 16px;
 
   background-color: ${({ theme }) => theme.colors.MAIN_COLOR};
-  
 `;
 
 export const StyledChatsBtn = styled(NavLink)`
