@@ -11,7 +11,15 @@ export default function FriendsBar() {
   return (
     <FriendsContainer>
       <StyledFriendsNav>
-        <div>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            height: "45px",
+            paddingRight: "25px",
+            borderRight: "1px solid rgba(105, 105, 105, 0.51)",
+          }}
+        >
           <PersonIcon />
           <p>Friends</p>
         </div>

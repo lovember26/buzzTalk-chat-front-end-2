@@ -5,13 +5,10 @@ import { BsSend } from "react-icons/bs";
 // import { CiFaceSmile } from "react-icons/ci";
 
 export const StyledForm = styled.form`
-  position: absolute;
-  bottom: 20px;
-
-  width: 1072px;
-
+  position: relative;
+  margin-top: auto;
   height: 60px;
-  padding: 0 16px 0 16px;
+
   border-radius: 24px;
   background: #7e5d88;
   padding: 13px 90px 13px 60px;

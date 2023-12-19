@@ -6,7 +6,7 @@ export const ChatContainer = styled.div`
 `;
 
 export const StyledHeader = styled.div`
-  width: 1104px;
+  width: 100%;
   height: 80px;
 
   padding-left: 26px;
@@ -38,6 +38,7 @@ export const UserBarImage = styled.img`
 export const UserBarInfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 7px;
   color: #444;
 `;
 
@@ -49,7 +50,7 @@ export const UserBarUserName = styled.p`
 
 export const UserBarUserStatus = styled.p`
   font-size: 12px;
-  color: #d9d9d9;
+  rgba(255, 255, 255, 0.30);
 `;
 
 export const Indicator = styled.div`
