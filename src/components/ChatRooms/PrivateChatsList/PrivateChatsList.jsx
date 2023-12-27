@@ -13,7 +13,6 @@ import {
   ChatItemText,
 } from "./PrivateChatsList.styled";
 import { ReactComponent as DefaultIcon } from "../../../images/default.svg";
-
 import { useChat } from "contexts/ChatContext";
 
 export const PrivateChatList = () => {
@@ -24,7 +23,6 @@ export const PrivateChatList = () => {
     setPrivateChatImage,
   } = useChat();
   const chats = useSelector(selectFetchAllPrivateChats);
-
   const dispatch = useDispatch();
 
   // console.log("chats PrivateChatList", chats);

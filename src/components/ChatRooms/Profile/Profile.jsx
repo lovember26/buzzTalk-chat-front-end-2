@@ -17,6 +17,9 @@ import {
   UserBarUserStatus,
   UserBarImageWrapper,
 } from "./Profile.styled";
+// import { useLocation } from "react-router";
+// import { useEffect, useState } from "react";
+// import { fetchUserByUsername } from "services/userApi";
 
 import { useChat } from "contexts/ChatContext";
 

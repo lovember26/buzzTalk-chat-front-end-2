@@ -9,6 +9,7 @@ export const StyledForm = styled.form`
   width: 1072px;
   padding: 12px 34px;
   height: 60px;
+
   border-radius: 24px;
   background: #7e5d88;
 `;

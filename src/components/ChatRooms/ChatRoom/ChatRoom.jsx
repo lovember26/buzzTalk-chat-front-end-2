@@ -8,6 +8,7 @@ export default function ChatRoom() {
         display: "flex",
         flexDirection: "column",
         minHeight: "100%",
+        width: "calc(100% - 336px)",
       }}
     >
       <Profile />

@@ -39,7 +39,7 @@ import { useChat } from "contexts/ChatContext";
 
 export default function SidePanel() {
   const [modalActive, setModalActive] = useState(false);
-
+  const [value, setValue] = useState("");
   const { results } = useSelector(selectAllUsers);
 
   const { isPrivateChat } = useChat();
@@ -49,9 +49,14 @@ export default function SidePanel() {
   useEffect(() => {
     dispatch(fetchAllUsersThunk());
   }, [dispatch]);
-
+  
   const { chatType } = useChat();
   console.log("chatType", chatType);
+  
+  const handleSearchValue = ({ target }) => {
+    setValue(target.value);
+  };
+
 
   return (
     <>
@@ -82,6 +87,8 @@ export default function SidePanel() {
             <SearchInput
               type="text"
               placeholder="Find or start a conversation"
+              value={value}
+              onChange={handleSearchValue}
             />
           </Form>
           <FriendsLinkWrapper>
@@ -89,7 +96,7 @@ export default function SidePanel() {
             <FriendsLink to={"friends/all"}>Friends</FriendsLink>
           </FriendsLinkWrapper>
 
-          <PrivateChatList />
+          <PrivateChatList searchValue={value} />
         </SearchBar>
       </StyledSideBar>
 
