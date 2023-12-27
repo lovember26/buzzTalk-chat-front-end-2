@@ -3,8 +3,10 @@ import { initialState } from "./chatState";
 import {
   fetchAllPrivateChatsThunk,
   fetchAllPublicChatsThunk,
+  getChatBySlugThunk,
   createPrivateChatThunk,
   createPublicChatThunk,
+  replyMessageThunk,
   // fetchAllChatsThunk,
   // fetchChatByIdThunk,
   // deleteChatByIdThunk,
@@ -49,6 +51,20 @@ export const chatSlice = createSlice({
         state.errors.fetchAllPublicChat = action.payload;
       })
 
+      // fetch chats by slug
+      .addCase(getChatBySlugThunk.pending, (state) => {
+        state.statuses.fetchChatBySlug = status.PENDING;
+        state.errors.fetchChatBySlug = null;
+      })
+      .addCase(getChatBySlugThunk.fulfilled, (state, action) => {
+        state.statuses.fetchChatBySlug = status.FULFILLED;
+        state.errors.fetchChatBySlug = null;
+      })
+      .addCase(getChatBySlugThunk.rejected, (state, action) => {
+        state.statuses.fetchChatBySlug = status.REJECTED;
+        state.errors.fetchChatBySlug = action.payload;
+      })
+
       // create private chat
       .addCase(createPrivateChatThunk.pending, (state) => {
         state.statuses.createPrivateChat = status.PENDING;
@@ -75,6 +91,21 @@ export const chatSlice = createSlice({
       .addCase(createPublicChatThunk.rejected, (state, action) => {
         state.statuses.createPublicChat = status.REJECTED;
         state.errors.createPublicChat = action.payload;
+      })
+
+      // reply message
+      .addCase(replyMessageThunk.pending, (state) => {
+        state.statuses.replyMessage = status.PENDING;
+        state.errors.replyMessage = null;
+      })
+      .addCase(replyMessageThunk.fulfilled, (state, action) => {
+        state.statuses.replyMessage = status.FULFILLED;
+        state.publicChats = action.payload;
+        state.errors.replyMessage = null;
+      })
+      .addCase(replyMessageThunk.rejected, (state, action) => {
+        state.statuses.replyMessage = status.REJECTED;
+        state.errors.replyMessage = action.payload;
       });
 
     // Not used ==================================

@@ -7,10 +7,10 @@ export default function MainPage() {
     <Container>
       <Wrapper>
         <TeamDisc />
-        <p>
-          <div>Hi! You are at BuzzTalk messenger!</div>
-          <div>Sign Up or Log In to start messaging.</div>
-        </p>
+        <div>
+          <p>Hi! You are at BuzzTalk messenger!</p>
+          <p>Sign Up or Log In to start messaging.</p>
+        </div>
 
         <SignUpBtn to="register">sign up</SignUpBtn>
         <AuthButton page="login" text="Log in" btnWidth={"165px"} />

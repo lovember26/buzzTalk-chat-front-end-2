@@ -15,3 +15,7 @@ export const editPageRules = {
   ABOUT: "",
   USERNAME: "",
 };
+
+export const createPublicChatPageRules = {
+  PUBLIC_CHAT_TITLE: "",
+};

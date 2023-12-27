@@ -11,7 +11,7 @@ import { fetchAllUsersThunk } from "redux/user/userThunk";
 import Modal from "components/common/Modal/Modal";
 import ChatModal from "components/ChatRooms/Modal/ChatModal/ChatModal";
 
-// import { PublicChatsList } from "components/ChatRooms/PublicChatsList/PublicChatsList";
+import { PublicChatsList } from "components/ChatRooms/PublicChatsList/PublicChatsList";
 import { PrivateChatList } from "components/ChatRooms/PrivateChatsList/PrivateChatsList";
 
 import UserProfile from "../UserProfile/UserProfile";
@@ -34,20 +34,29 @@ import {
   FriendsLinkWrapper,
 } from "./SidePanel.styled";
 
+// import { ChatProvider } from "contexts/ChatContext";
+import { useChat } from "contexts/ChatContext";
+
 export default function SidePanel() {
   const [modalActive, setModalActive] = useState(false);
   const [value, setValue] = useState("");
   const { results } = useSelector(selectAllUsers);
+
+  const { isPrivateChat } = useChat();
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchAllUsersThunk());
   }, [dispatch]);
-
+  
+  const { chatType } = useChat();
+  console.log("chatType", chatType);
+  
   const handleSearchValue = ({ target }) => {
     setValue(target.value);
   };
+
 
   return (
     <>
@@ -64,12 +73,14 @@ export default function SidePanel() {
             <AddChatButton />
           </AddChatButtonWrapper>
 
-          {/* <PublicChatsList /> */}
+          <PublicChatsList />
           <UserProfile />
         </StyledNav>
 
         <SearchBar>
-          <Title>Private messages</Title>
+          <Title>
+            {isPrivateChat ? "Private messages" : "Public messages"}
+          </Title>
 
           <Form>
             <SearchIcon />

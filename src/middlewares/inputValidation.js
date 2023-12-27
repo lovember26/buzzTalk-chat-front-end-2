@@ -108,3 +108,12 @@ export const inputEditUserSchema = yup.object({
     .string()
     .max(60, "*The about me field exceeds the maximum 60 length"),
 });
+
+export const inputCreatePublicChatSchema = yup.object({
+  title: yup
+    .string()
+    .min(1, "*Title must contain at least one letter")
+    .max(10, "*The title exceeds the maximum 150 length")
+    .required("*This field is required"),
+  // participants: yup.array().required("*This field is required"),
+});

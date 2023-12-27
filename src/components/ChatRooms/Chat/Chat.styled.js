@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { BsReply } from "react-icons/bs";
 
 export const ChatBlockWrapper = styled.div`
   position: relative;
@@ -125,12 +126,14 @@ export const MessageListItemUsernameWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+
+  margin-bottom: 2px;
 `;
 
 export const MessageListItemUsername = styled.p`
-  font-weight: 700;
-  font-size: 18px;
-  margin-bottom: 6px;
+  font-weight: 600;
+  font-size: 16px;
+  color: #696969;
 `;
 
 //A round picture in a block
@@ -145,7 +148,7 @@ export const MessageListItemUsernameImageWrapper = styled.div`
   overflow: hidden;
   border-radius: 50%;
 
-  margin-right: 8px;
+  margin-right: 10px;
 `;
 
 export const MessageListItemUsernameImage = styled.img`
@@ -156,6 +159,8 @@ export const MessageListItemUsernameImage = styled.img`
 
 export const MessageListItemMessage = styled.p`
   margin-bottom: 4px;
+  font-size: 16px;
+  color: #696969;
 `;
 
 export const Wrapper = styled.div`
@@ -166,4 +171,157 @@ export const Wrapper = styled.div`
 
 export const Timestamp = styled.p`
   align-self: flex-end;
+  margin-right: 8px;
+`;
+
+export const ReplyButton = styled.button`
+  align-self: flex-end;
+  cursor: pointer;
+`;
+
+export const ReplyIcons = styled(BsReply)`
+  width: 24px;
+`;
+
+export const TimestampWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+export const MessageInputWrapper = styled.div`
+  position: absolute;
+  bottom: 20px;
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: lightgray;
+
+  border-radius: 24px;
+`;
+
+export const ReplyToText = styled.p``;
+
+export const ReplyInputWrapper = styled.div`
+  padding-top: 12px;
+  padding-left: 34px;
+  padding-right: 34px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  margin-bottom: 12px;
+`;
+
+// Reply
+
+export const MessageListItemReply = styled.li`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  margin-bottom: 8px;
+  padding: 8px 10px;
+  /* To expand a block by its contents */
+  /* width: fit-content; */
+  width: 100%;
+`;
+
+export const MessageListItemUsernameImageReply = styled.img`
+  width: auto;
+  height: 100%;
+`;
+
+export const MessageListItemMessageReply = styled.p`
+  margin-bottom: 4px;
+
+  font-size: 16px;
+  color: #696969;
+`;
+
+export const WrpReply = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 2px;
+`;
+
+export const TimestampReply = styled.p`
+  align-self: flex-end;
+  margin-right: 8px;
+`;
+
+export const MessageListItemUsernameImageWrapperReply = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+  border-radius: 50%;
+
+  margin-right: 10px;
+`;
+
+export const MessageListItemUsernameWrapperReply = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+`;
+
+export const WrapperUsernameReply = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+
+  /* margin-left: 10px; */
+`;
+
+export const MessageListItemUsernameReply = styled.p`
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 6px;
+  color: #696969;
+`;
+
+export const TimestampWrapperReply = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+export const ReplyIconsReply = styled(BsReply)`
+  width: 24px;
+`;
+
+export const WrapperSecond = styled.div`
+  display: flex;
+`;
+
+export const LineReply = styled.div`
+  width: 4px;
+  height: 33px;
+  border-radius: 3px;
+
+  background-color: #696969;
+
+  margin-right: 10px;
+`;
+
+export const WhoReply = styled.p`
+  font-weight: 600;
+  font-size: 16px;
+  color: #696969;
+
+  margin-bottom: 6px;
+`;
+
+export const TextReply = styled.p`
+  font-size: 16px;
+  color: #696969;
+
+  margin-bottom: 6px;
 `;
