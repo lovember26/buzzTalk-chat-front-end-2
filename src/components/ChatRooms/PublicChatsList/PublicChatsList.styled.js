@@ -48,7 +48,9 @@ export const ChatItemImageWrapper = styled.div`
   height: 37px;
   overflow: hidden;
 
-  margin-right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const ChatItemImage = styled.img`

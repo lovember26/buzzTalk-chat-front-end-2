@@ -44,11 +44,11 @@ export default function SidePanel() {
 
   const { isPrivateChat } = useChat();
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(fetchAllUsersThunk());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchAllUsersThunk());
+  }, [dispatch]);
 
   const { chatType } = useChat();
   console.log("chatType", chatType);

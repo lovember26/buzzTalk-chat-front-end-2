@@ -97,3 +97,36 @@ export const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+export const ImageWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 50%;
+
+  overflow: hidden;
+
+  width: 62px;
+  height: 62px;
+`;
+
+export const Image = styled.img`
+  width: auto;
+  height: 100%;
+`;
+
+export const UploadPhotoWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 343px;
+`;
+
+export const UploadPhotoLable = styled.label`
+  color: #696969;
+  font-size: 14px;
+  margin-bottom: 4px;
+  align-self: flex-start;
+`;

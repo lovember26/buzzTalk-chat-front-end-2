@@ -13,11 +13,11 @@ import { selectFetchAllPublicChats } from "redux/chat/chatSelectors";
 import { ReactComponent as DefaultIcon } from "../../../images/default.svg";
 
 import { useChat } from "contexts/ChatContext";
-import { selectUserName } from "redux/user/userSelectors";
+// import { selectUserName } from "redux/user/userSelectors";
 
 export const PublicChatsList = () => {
   const chats = useSelector(selectFetchAllPublicChats);
-  const username = useSelector(selectUserName);
+  // const username = useSelector(selectUserName);
   const {
     setChatSlug,
     setPublicChatName,

@@ -17,8 +17,6 @@ import SelectPublicChat from "components/ChatRooms/SelectPublicChat/SelectPublic
 
 import { InputNotification } from "components/common/InputNotification/InputNotification";
 
-import { generatePublicChatTGravatarThunk } from "redux/chat/chatThunk";
-
 import UploadPicture from "images/svg/UploadPicture/UploadPicture";
 
 import {
@@ -31,13 +29,18 @@ import {
   UploadPictureButton,
   EditProfilePageFormInputAbout,
   Wrapper,
-  InputAndErrorWrapper,
+  // InputAndErrorWrapper,
+  Image,
+  ImageWrapper,
+  UploadPhotoWrapper,
+  UploadPhotoLable,
 } from "./CreatePublicChat.styled";
 
 const CreatePublicChat = ({ users, handleNavigate, setActive }) => {
   const [userPublicChatChoice, setUserPublicChatChoice] = useState(null);
-  const [privateChatName, setPrivateChatName] = useState("");
+  const [privateChatName, ,] = useState("");
   const [file, setFile] = useState("");
+  console.log("file", file);
 
   const dispatch = useDispatch();
   const filePicker = useRef(null);
@@ -52,25 +55,28 @@ const CreatePublicChat = ({ users, handleNavigate, setActive }) => {
     resolver: yupResolver(inputCreatePublicChatSchema),
     defaultValues: {
       title: privateChatName,
-      // members: description,
+      // participants: userPublicChatChoice,
     },
   });
 
-  const onSubmit = async (event) => {
-    event.preventDefault();
+  console.log("errors", errors);
+  console.log("isValid", isValid);
 
-    const newPublicChat = {
-      title: privateChatName,
-      participants: userPublicChatChoice,
-    };
+  const onSubmit = async ({ title, participants }) => {
+    console.log("participants", participants);
+    try {
+      const newPublicChat = {
+        title: title,
+        participants: userPublicChatChoice,
+      };
 
-    await dispatch(createPublicChatThunk(newPublicChat));
-    setActive(false);
+      await dispatch(createPublicChatThunk(newPublicChat));
+
+      setActive(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
-
-  // const handleSetGravatar = async () => {
-  //   await dispatch(generatePublicChatTGravatarThunk(45));
-  // };
 
   const handleUploadImage = () => {
     filePicker.current.click();
@@ -81,7 +87,7 @@ const CreatePublicChat = ({ users, handleNavigate, setActive }) => {
   };
 
   const titleError = selectInputNotification(errors["title"]);
-
+  // const participantsError = selectInputNotification(errors["participants"]);
   console.log("titleError", titleError);
 
   return (
@@ -112,28 +118,55 @@ const CreatePublicChat = ({ users, handleNavigate, setActive }) => {
           )}
         </InputWrapper>
 
-        <EditProfilePageFormInputAbout
-          className="hide"
-          type="file"
-          {...register("avatar")}
-          ref={filePicker}
-          accept="image/*,.png,.jpg,.gif,.web,.webp"
-          onChange={handleChangeAvatar}
-        />
+        <UploadPhotoWrapper>
+          <EditProfilePageFormInputAbout
+            className="hide"
+            type="file"
+            // {...register("avatar")}
+            ref={filePicker}
+            accept="image/*,.png,.jpg,.gif,.web,.webp"
+            onChange={handleChangeAvatar}
+          />
+          <UploadPhotoLable>CHAT ROOM IMAGE</UploadPhotoLable>
+          <UploadPictureButton type="button" onClick={handleUploadImage}>
+            {file ? (
+              <ImageWrapper>
+                <Image
+                  src={file ? URL.createObjectURL(file) : ""}
+                  alt="image1"
+                ></Image>
+              </ImageWrapper>
+            ) : (
+              <UploadPicture />
+            )}
+          </UploadPictureButton>
+        </UploadPhotoWrapper>
 
-        <UploadPictureButton type="button" onClick={handleUploadImage}>
-          <UploadPicture />
-        </UploadPictureButton>
+        <>
+          <SelectPublicChat
+            // register={{ ...register("participants") }}
+            // value={watch("participants")}
+            // error={participantsError}
+            users={users}
+            choice={userPublicChatChoice}
+            setChoice={setUserPublicChatChoice}
+          />
 
-        {/* <button type="button" onClick={handleSetGravatar}>
-            Set gravatar
-          </button> */}
-
-        <SelectPublicChat
-          users={users}
-          choice={userPublicChatChoice}
-          setChoice={setUserPublicChatChoice}
-        />
+          {/* {!userPublicChatChoice && (
+            <InputNotification text={"Choose friends to create a chat!"} />
+          )} */}
+          {/* {participantsError ? (
+            <InputNotification
+              text={participantsError}
+              error={participantsError}
+              color={"red"}
+            />
+          ) : (
+            <InputNotification
+              text={createPublicChatPageRules.PUBLIC_CHAT_TITLE}
+            />
+          )} */}
+        </>
 
         <ButtonsWrapper>
           <ModalButtonBack
