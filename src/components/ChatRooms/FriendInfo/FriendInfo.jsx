@@ -18,23 +18,28 @@ import { ReactComponent as ShareIcon } from "../../../images/friend-info-share.s
 import { ReactComponent as ClearIcon } from "../../../images/friend-info-clear.svg";
 import { ReactComponent as BlockIcon } from "../../../images/friend-info-block.svg";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router";
+// import { useLocation } from "react-router";
 import { fetchUserByUsername } from "services/userApi";
+
+import { useChat } from "contexts/ChatContext";
 
 export default function FriendInfo() {
   const [showInfo, setShowInfo] = useState(false);
-  const { search } = useLocation();
-  const params = new URLSearchParams(search);
-  const username = params.get("username");
+  // const { search } = useLocation();
+  // const params = new URLSearchParams(search);
+  // const username = params.get("username");
   const [userInfo, setUserInfo] = useState(null);
+
+  const { privateChatName } = useChat();
+
   useEffect(() => {
     const getUser = async () => {
-      const data = await fetchUserByUsername(username);
+      const data = await fetchUserByUsername(privateChatName);
       setUserInfo(data);
       setShowInfo(false);
     };
     getUser();
-  }, [username]);
+  }, [privateChatName]);
 
   return !showInfo ? (
     <div
