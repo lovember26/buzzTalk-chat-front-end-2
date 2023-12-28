@@ -68,7 +68,7 @@ class WebSocketService {
   }
 
   newChatMessage(message) {
-    console.log("message in the newChatMessage websocket.js", message);
+    // console.log("message in the newChatMessage websocket.js", message);
     this.sendMessage({
       command: "new_message",
       from: message.from,

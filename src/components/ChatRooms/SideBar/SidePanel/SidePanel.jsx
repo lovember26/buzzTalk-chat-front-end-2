@@ -50,9 +50,6 @@ export default function SidePanel() {
   //   dispatch(fetchAllUsersThunk());
   // }, [dispatch]);
 
-  const { chatType } = useChat();
-  console.log("chatType", chatType);
-
   const handleSearchValue = ({ target }) => {
     setValue(target.value);
   };
