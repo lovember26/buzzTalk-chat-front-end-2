@@ -13,8 +13,8 @@ import NoMessagesSvg from "images/svg/NoMessages/NoMessages";
 
 import {
   DateNowText,
-  ReplyToText,
-  MessageInputWrapper,
+  // ReplyToText,
+  // MessageInputWrapper,
   ChatBlockWrapper,
   MessageList,
   MessageListItem,
@@ -26,7 +26,7 @@ import {
   WrapperUsername,
   Timestamp,
   Wrp,
-  ReplyInputWrapper,
+  // ReplyInputWrapper,
   TimestampWrapper,
   ReplyButton,
   ReplyIcons,
@@ -48,7 +48,7 @@ import {
 } from "./Chat.styled";
 
 // import { useChat } from "contexts/ChatContext";
-import FriendInfo from "../FriendInfo/FriendInfo";
+// import FriendInfo from "../FriendInfo/FriendInfo";
 
 const Chat = (props) => {
   const [messages, setMessages] = useState([]);
@@ -58,7 +58,7 @@ const Chat = (props) => {
 
   // const [value, setValue] = useState("");
 
-  const [isReply, setIsReply] = useState(false);
+  const [isReply, ,] = useState(false);
   // const [replyTo, setReplyTo] = useState(null);
 
   // const [replyMessage, setReplyMessage] = useState(null);
@@ -223,7 +223,7 @@ const Chat = (props) => {
           value={message}
         />
       </ChatBlockWrapper>
-      <FriendInfo />
+      {/* <FriendInfo /> */}
     </div>
   );
 };
