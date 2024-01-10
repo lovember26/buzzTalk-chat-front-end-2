@@ -1,8 +1,14 @@
 import React, { useEffect, useState, useCallback } from "react";
+import { useSelector } from "react-redux";
 import withRouter from "helpers/withRouter";
 import WebSocketInstance from "websocket";
 import { MessageInput } from "components/MessageInput/MessageInput";
 import NoMessagesSvg from "images/svg/NoMessages/NoMessages";
+
+import NoFriends from "components/ChatRooms/NoFriends/NoFriends";
+
+import { selectFetchAllPrivateChats } from "redux/chat/chatSelectors";
+import { selectFetchAllPublicChats } from "redux/chat/chatSelectors";
 
 import {
   DateNowText,
@@ -49,6 +55,9 @@ const Chat = (props) => {
   const [isReply, setIsReply] = useState(false);
   const [replyMessageId, setReplyMessageId] = useState(null);
   const [replyTo, setReplyTo] = useState(null);
+
+  const privateChats = useSelector(selectFetchAllPrivateChats);
+  const publicChats = useSelector(selectFetchAllPublicChats);
 
   const waitForSocketConnection = useCallback((callback) => {
     setTimeout(function () {
@@ -236,34 +245,41 @@ const Chat = (props) => {
   };
 
   return (
-    <div>
-      <ChatBlockWrapper className="messages-wrapper">
-        {!messages.length ? (
-          <NoMessagesSvg />
-        ) : (
-          <>
-            <DateNowText>Today</DateNowText>
-            <MessageList className="messages" onScroll={handleScroll}>
-              {messages && renderMessages(messages)}
-            </MessageList>
-          </>
-        )}
-        <MessageInputWrapper>
-          {isReply && (
-            <ReplyInputWrapper>
-              <ReplyToText>I am replying to {replyTo}</ReplyToText>
-              <button onClick={() => setIsReply(false)}>Close</button>
-            </ReplyInputWrapper>
-          )}
-          <MessageInput
-            onSubmit={sendMessageHandler}
-            onChange={messageChangeHandler}
-            value={message}
-          />
-        </MessageInputWrapper>
-      </ChatBlockWrapper>
-      {/* <FriendInfo /> */}
-    </div>
+    <>
+      {!privateChats.length && !publicChats.length ? (
+        // <div>You haven't any chats yet</div>
+        <NoFriends text={"You haven't any chats yet :("} />
+      ) : (
+        <div>
+          <ChatBlockWrapper className="messages-wrapper">
+            {!messages.length ? (
+              <NoMessagesSvg />
+            ) : (
+              <>
+                <DateNowText>Today</DateNowText>
+                <MessageList className="messages" onScroll={handleScroll}>
+                  {messages && renderMessages(messages)}
+                </MessageList>
+              </>
+            )}
+            <MessageInputWrapper>
+              {isReply && (
+                <ReplyInputWrapper>
+                  <ReplyToText>I am replying to {replyTo}</ReplyToText>
+                  <button onClick={() => setIsReply(false)}>Close</button>
+                </ReplyInputWrapper>
+              )}
+              <MessageInput
+                onSubmit={sendMessageHandler}
+                onChange={messageChangeHandler}
+                value={message}
+              />
+            </MessageInputWrapper>
+          </ChatBlockWrapper>
+          {/* <FriendInfo /> */}
+        </div>
+      )}
+    </>
   );
 };
 

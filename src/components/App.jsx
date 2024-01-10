@@ -3,6 +3,10 @@ import { Route, Routes } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { currentUserThunk } from "redux/auth/authThunk";
 import { selectAccessToken } from "redux/auth/authSelectors";
+
+// import { selectFetchAllPrivateChats } from "redux/chat/chatSelectors";
+// import { selectFetchAllPublicChats } from "redux/chat/chatSelectors";
+
 import {
   selectIsFetchingCurrentUser,
   selectUserName,
@@ -11,6 +15,8 @@ import { routes } from "constants/routes";
 
 import PrivatePage from "pages/access/PrivatePage";
 import RestrictedPage from "pages/access/RestrictedPage";
+
+// import { useChat } from "contexts/ChatContext";
 
 import Layout from "./Layout/Layout";
 import { Loader } from "./common/Loader/Loader";
@@ -45,11 +51,65 @@ export const App = () => {
   const isFetchingCurrentUser = useSelector(selectIsFetchingCurrentUser);
   const username = useSelector(selectUserName);
 
+  // const privateChats = useSelector(selectFetchAllPrivateChats);
+  // const publicChats = useSelector(selectFetchAllPublicChats);
+
+  // const {
+  //   setChatSlug,
+  //   setIsPrivateChat,
+  //   setPrivateChatName,
+  //   setPrivateChatImage,
+  //   setPublicChatName,
+  //   setPublicChatImage,
+  // } = useChat();
+
   useEffect(() => {
     if (accessToken) {
       dispatch(currentUserThunk());
+      // onClickChatHandler();
     }
   }, [dispatch, accessToken]);
+
+  // const handleChatNavigate = () => {
+  //   if (privateChats?.length) {
+  //     return `/chat-rooms/chats/${privateChats[0].slug}`;
+  //   }
+
+  //   if (publicChats?.length) {
+  //     return `/chat-rooms/chats/${publicChats[0].slug}`;
+  //   }
+
+  //   if (!publicChats?.length && !publicChats?.length) {
+  //     return `chats`;
+  //   }
+  // };
+
+  // const onClickChatHandler = () => {
+  //   if (privateChats?.length) {
+  //     const slug = privateChats[0].slug;
+  //     const isPrivateChat = privateChats[0].is_private;
+  //     const receiver = privateChats[0].receiver.username;
+  //     const image = privateChats[0].receiver.image;
+
+  //     setChatSlug(slug);
+  //     setIsPrivateChat(isPrivateChat);
+  //     setPrivateChatName(receiver);
+  //     setPrivateChatImage(image);
+  //     return;
+  //   }
+
+  //   if (publicChats?.length) {
+  //     const slug = publicChats[0].slug;
+  //     const isPrivateChat = publicChats[0].is_private;
+  //     const title = publicChats[0].title;
+  //     const image = publicChats[0].receiver.image;
+
+  //     setChatSlug(slug);
+  //     setIsPrivateChat(isPrivateChat);
+  //     setPublicChatName(title);
+  //     setPublicChatImage(image);
+  //   }
+  // };
 
   return isFetchingCurrentUser ? (
     <Loader />
@@ -111,6 +171,7 @@ export const App = () => {
 
         <Route
           path={routes.CHAT_ROOMS_CHAT_PAGE}
+          // path={handleChatNavigate()}
           element={<PrivatePage component={<ChatRoom />} />}
         >
           {/* <Route index element={<PrivatePage component={<WelcomeChat />} />} /> */}
