@@ -4,6 +4,7 @@ import withRouter from "helpers/withRouter";
 import WebSocketInstance from "websocket";
 import { MessageInput } from "components/MessageInput/MessageInput";
 import NoMessagesSvg from "images/svg/NoMessages/NoMessages";
+import ReadMark from "images/svg/ReadMark/ReadMark";
 
 import NoFriends from "components/ChatRooms/NoFriends/NoFriends";
 
@@ -45,6 +46,7 @@ import {
   WhoReply,
   TextReply,
   DownloadMoreButton,
+  ReadMarkWrapper,
 } from "./Chat.styled";
 
 const Chat = (props) => {
@@ -209,6 +211,9 @@ const Chat = (props) => {
             </Wrp>
           </MessageListItemUsernameWrapper>
           <TimestampWrapper>
+            <ReadMarkWrapper>
+              <ReadMark />
+            </ReadMarkWrapper>
             <Timestamp>{renderTimestamp(message.timestamp)}</Timestamp>
             <ReplyButton
               onClick={() =>
@@ -246,6 +251,9 @@ const Chat = (props) => {
             </MessageListItemUsernameWrapperReply>
           </WrapperSecond>
           <TimestampWrapperReply>
+            <ReadMarkWrapper>
+              <ReadMark />
+            </ReadMarkWrapper>
             <TimestampReply>
               {renderTimestamp(message.reply_to.timestamp)}
             </TimestampReply>

@@ -185,7 +185,12 @@ export const ReplyIcons = styled(BsReply)`
 
 export const TimestampWrapper = styled.div`
   display: flex;
-  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+`;
+
+export const ReadMarkWrapper = styled.div`
+  padding: 0;
 `;
 
 export const MessageInputWrapper = styled.div`
@@ -290,7 +295,8 @@ export const MessageListItemUsernameReply = styled.p`
 
 export const TimestampWrapperReply = styled.div`
   display: flex;
-  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
 `;
 
 export const ReplyIconsReply = styled(BsReply)`
