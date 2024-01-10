@@ -44,12 +44,16 @@ import {
   LineReply,
   WhoReply,
   TextReply,
+  DownloadMoreButton,
 } from "./Chat.styled";
 
 const Chat = (props) => {
   // State for usual messages
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
+
+  const [page, setPage] = useState(1);
+  console.log("page:", page);
 
   // State for reply messages
   const [isReply, setIsReply] = useState(false);
@@ -81,6 +85,21 @@ const Chat = (props) => {
   }, [waitForSocketConnection, props.params.chatSlug, props.accessToken]);
 
   const handleScroll = () => {};
+
+  //   In order to avoid replaying messages, but it needs to be fixed
+  // const setMessagesNew = (messages) => {
+  //   setMessages((prevMessages) => {
+  //     const uniqueMessages = messages.filter(
+  //       (message) =>
+  //         !prevMessages.some((prevMessage) => prevMessage.id === message.id)
+  //     );
+  //     return [...prevMessages, ...uniqueMessages];
+  //   });
+  // };
+  // Instead
+  // const setMessagesNew = (messages) => {
+  //   setMessages((prevMessages) => [...prevMessages, ...messages]);
+  // };
 
   // The new message object returned from the backend is written into the message variable
   const addMessage = (message) => {
@@ -244,15 +263,22 @@ const Chat = (props) => {
     });
   };
 
+  const onLoadMore = () => {
+    setPage((prevState) => prevState + 1);
+  };
+
+  // const onResetPage = () => {
+  //   setPage(1);
+  // };
+
   return (
     <>
-      {!privateChats.length && !publicChats.length ? (
-        // <div>You haven't any chats yet</div>
+      {!privateChats?.length && !publicChats?.length ? (
         <NoFriends text={"You haven't any chats yet :("} />
       ) : (
         <div>
           <ChatBlockWrapper className="messages-wrapper">
-            {!messages.length ? (
+            {!messages?.length ? (
               <NoMessagesSvg />
             ) : (
               <>
@@ -260,6 +286,9 @@ const Chat = (props) => {
                 <MessageList className="messages" onScroll={handleScroll}>
                   {messages && renderMessages(messages)}
                 </MessageList>
+                <DownloadMoreButton onClick={onLoadMore}>
+                  Download more messages
+                </DownloadMoreButton>
               </>
             )}
             <MessageInputWrapper>
