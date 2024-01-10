@@ -171,7 +171,7 @@ export const Wrapper = styled.div`
 
 export const Timestamp = styled.p`
   align-self: flex-end;
-  margin-right: 8px;
+  /* margin-right: 8px; */
 `;
 
 export const ReplyButton = styled.button`
@@ -185,8 +185,10 @@ export const ReplyIcons = styled(BsReply)`
 
 export const TimestampWrapper = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: flex-end;
+
+  width: 190px;
 `;
 
 export const ReadMarkWrapper = styled.div`
@@ -253,7 +255,7 @@ export const WrpReply = styled.div`
 
 export const TimestampReply = styled.p`
   align-self: flex-end;
-  margin-right: 8px;
+  /* margin-right: 8px; */
 `;
 
 export const MessageListItemUsernameImageWrapperReply = styled.div`
@@ -295,8 +297,10 @@ export const MessageListItemUsernameReply = styled.p`
 
 export const TimestampWrapperReply = styled.div`
   display: flex;
-  justify-content: center;
   align-items: flex-end;
+  justify-content: space-between;
+
+  width: 190px;
 `;
 
 export const ReplyIconsReply = styled(BsReply)`

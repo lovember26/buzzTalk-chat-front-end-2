@@ -212,7 +212,7 @@ const Chat = (props) => {
           </MessageListItemUsernameWrapper>
           <TimestampWrapper>
             <ReadMarkWrapper>
-              <ReadMark />
+              <ReadMark read={message.read} />
             </ReadMarkWrapper>
             <Timestamp>{renderTimestamp(message.timestamp)}</Timestamp>
             <ReplyButton
