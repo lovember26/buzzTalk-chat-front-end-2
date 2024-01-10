@@ -214,7 +214,6 @@ const Chat = (props) => {
                   </MessageListItemMessageReply>
                 </WrapperUsernameReply>
               </WrpReply>
-              {/* <TextReply>Text reply</TextReply> */}
               <TextReply>{message.content}</TextReply>
             </MessageListItemUsernameWrapperReply>
           </WrapperSecond>
