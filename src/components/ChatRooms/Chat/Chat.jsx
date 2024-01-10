@@ -1,20 +1,13 @@
 import React, { useEffect, useState, useCallback } from "react";
-// import { useDispatch } from "react-redux";
-// import axios from "axios";
 import withRouter from "helpers/withRouter";
 import WebSocketInstance from "websocket";
 import { MessageInput } from "components/MessageInput/MessageInput";
 import NoMessagesSvg from "images/svg/NoMessages/NoMessages";
 
-// import { replyMessageThunk } from "redux/chat/chatThunk";
-
-// import { useSelector } from "react-redux";
-// import { selectAccessToken } from "redux/auth/authSelectors";
-
 import {
   DateNowText,
-  // ReplyToText,
-  // MessageInputWrapper,
+  ReplyToText,
+  MessageInputWrapper,
   ChatBlockWrapper,
   MessageList,
   MessageListItem,
@@ -26,50 +19,36 @@ import {
   WrapperUsername,
   Timestamp,
   Wrp,
-  // ReplyInputWrapper,
+  ReplyInputWrapper,
   TimestampWrapper,
   ReplyButton,
   ReplyIcons,
-  // MessageListItemReply,
-  // TimestampReply,
-  // WrpReply,
-  // MessageListItemMessageReply,
-  // MessageListItemUsernameImageReply,
-  // MessageListItemUsernameImageWrapperReply,
-  // MessageListItemUsernameWrapperReply,
-  // WrapperUsernameReply,
-  // MessageListItemUsernameReply,
-  // TimestampWrapperReply,
-  // ReplyIconsReply,
-  // WrapperSecond,
-  // LineReply,
-  // WhoReply,
-  // TextReply,
+  MessageListItemReply,
+  TimestampReply,
+  WrpReply,
+  MessageListItemMessageReply,
+  MessageListItemUsernameImageReply,
+  MessageListItemUsernameImageWrapperReply,
+  MessageListItemUsernameWrapperReply,
+  WrapperUsernameReply,
+  MessageListItemUsernameReply,
+  TimestampWrapperReply,
+  ReplyIconsReply,
+  WrapperSecond,
+  LineReply,
+  WhoReply,
+  TextReply,
 } from "./Chat.styled";
 
-// import { useChat } from "contexts/ChatContext";
-// import FriendInfo from "../FriendInfo/FriendInfo";
-
 const Chat = (props) => {
+  // State for usual messages
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
 
-  // console.log("all messages", messages);
-
-  // const [value, setValue] = useState("");
-
-  const [isReply, ,] = useState(false);
-  // const [replyTo, setReplyTo] = useState(null);
-
-  // const [replyMessage, setReplyMessage] = useState(null);
-  // const [replyContent, setReplyContent] = useState("");
-  // const [selectedMessageId, setSelectedMessageId] = useState(null);
-
-  // const { chatId } = useChat();
-  // const dispatch = useDispatch();
-
-  // console.log("all messages", messages);
-  // console.log("isReply", isReply);
+  // State for reply messages
+  const [isReply, setIsReply] = useState(false);
+  const [replyMessageId, setReplyMessageId] = useState(null);
+  const [replyTo, setReplyTo] = useState(null);
 
   const waitForSocketConnection = useCallback((callback) => {
     setTimeout(function () {
@@ -84,36 +63,19 @@ const Chat = (props) => {
   }, []);
 
   useEffect(() => {
-    WebSocketInstance.connect(props.params.chatSlug);
+    WebSocketInstance.connect(props.params.chatSlug, props.accessToken);
 
     waitForSocketConnection(() => {
       WebSocketInstance.addCallbacks(setMessages, addMessage);
-      WebSocketInstance.fetchMessages(props.username, props.params.chatSlug);
+      WebSocketInstance.fetchMessages();
     });
-  }, [waitForSocketConnection, props.username, props.params.chatSlug]);
+  }, [waitForSocketConnection, props.params.chatSlug, props.accessToken]);
 
-  // Scrolling and fetching messages
-  // eslint-disable-next-line
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const accessToken = useSelector(selectAccessToken);
+  const handleScroll = () => {};
 
-  const handleScroll = () => {
-    console.log("handleScroll");
-  };
-
-  // useEffect(() => {}, []);
-
-  // const getMessages = async () => {};
-
-  // useEffect(() => {
-  //   getMessages(accessToken);
-  // }, [accessToken]);
-
+  // The new message object returned from the backend is written into the message variable
   const addMessage = (message) => {
-    // console.log("ONE message", message);
-    // message.selected = false;
-    // console.log(message);
-    setMessages((prevMessages) => [...prevMessages, message]);
+    setMessages((prevMessages) => [message, ...prevMessages]);
   };
 
   const messageChangeHandler = (event) => {
@@ -123,17 +85,7 @@ const Chat = (props) => {
   const sendMessageHandler = (event) => {
     event.preventDefault();
 
-    if (isReply) {
-      // console.log("isReply!");
-    }
-
-    const messageObject = {
-      from: props.username,
-      content: message,
-      chatSlug: props.params.chatSlug,
-    };
-
-    WebSocketInstance.newChatMessage(messageObject);
+    WebSocketInstance.newChatMessage(message, isReply, replyMessageId);
     setMessage("");
   };
 
@@ -142,6 +94,7 @@ const Chat = (props) => {
     const timeDiff = Math.round(
       (new Date().getTime() - new Date(timestamp).getTime()) / 60000
     );
+
     if (timeDiff < 1) {
       // less than one minute ago
       prefix = "just now...";
@@ -161,47 +114,125 @@ const Chat = (props) => {
   };
 
   const onReplyHandler = async (messageId, messageAuthorName) => {
-    // setIsReply(true);
-    // setReplyTo(messageAuthorName);
-    // const body = {
-    //   chat_id: chatId,
-    //   message_id: messageId,
-    //   content: "I reply!!!",
-    // };
-    // const { payload } = await dispatch(replyMessageThunk(body));
+    setIsReply(true);
+    setReplyMessageId(messageId);
+    setReplyTo(messageAuthorName);
   };
 
+  // Without reply
+  // const renderMessages = (messages) => {
+  //   const reversedMessages = [...messages].reverse();
+
+  //   return reversedMessages.map((message, i, arr) => (
+  //     <MessageListItem key={`${message.id}_${i}`}>
+  //       <MessageListItemUsernameWrapper>
+  //         <Wrp>
+  //           <MessageListItemUsernameImageWrapper>
+  //             <MessageListItemUsernameImage
+  //               src={message.author[0].image}
+  //               alt="avatar"
+  //             />
+  //           </MessageListItemUsernameImageWrapper>
+  //           <WrapperUsername>
+  //             <MessageListItemUsername>
+  //               {message.author[0].username}
+  //             </MessageListItemUsername>
+  //             <MessageListItemMessage>{message.content}</MessageListItemMessage>
+  //           </WrapperUsername>
+  //         </Wrp>
+  //       </MessageListItemUsernameWrapper>
+  //       <TimestampWrapper>
+  //         <Timestamp>{renderTimestamp(message.timestamp)}</Timestamp>
+  //         <ReplyButton
+  //           onClick={() =>
+  //             onReplyHandler(message.id, message.author[0].username)
+  //           }
+  //         >
+  //           <ReplyIcons />
+  //         </ReplyButton>
+  //       </TimestampWrapper>
+  //     </MessageListItem>
+  //   ));
+  // };
+
+  // With reply
   const renderMessages = (messages) => {
     const reversedMessages = [...messages].reverse();
 
-    return reversedMessages.map((message, i, arr) => (
-      <MessageListItem key={`${message.id}_${i}`}>
-        <MessageListItemUsernameWrapper>
-          <Wrp>
-            <MessageListItemUsernameImageWrapper>
-              <MessageListItemUsernameImage
-                src={message.author.image}
+    return reversedMessages.map((message, i, arr) => {
+      return !message.reply_to ? (
+        <MessageListItem key={`${message.id}_${i}`}>
+          <MessageListItemUsernameWrapper>
+            <Wrp>
+              <MessageListItemUsernameImageWrapper>
+                <MessageListItemUsernameImage
+                  src={message.author[0].image}
+                  alt="avatar"
+                />
+              </MessageListItemUsernameImageWrapper>
+              <WrapperUsername>
+                <MessageListItemUsername>
+                  {message.author[0].username}
+                </MessageListItemUsername>
+                <MessageListItemMessage>
+                  {message.content}
+                </MessageListItemMessage>
+              </WrapperUsername>
+            </Wrp>
+          </MessageListItemUsernameWrapper>
+          <TimestampWrapper>
+            <Timestamp>{renderTimestamp(message.timestamp)}</Timestamp>
+            <ReplyButton
+              onClick={() =>
+                onReplyHandler(message.id, message.author[0].username)
+              }
+            >
+              <ReplyIcons />
+            </ReplyButton>
+          </TimestampWrapper>
+        </MessageListItem>
+      ) : (
+        // When reply
+        <MessageListItemReply key={`${message.id}_${i}`}>
+          <WrapperSecond>
+            <MessageListItemUsernameImageWrapperReply>
+              <MessageListItemUsernameImageReply
+                src={message.reply_to.author[0].image}
                 alt="avatar"
               />
-            </MessageListItemUsernameImageWrapper>
-            <WrapperUsername>
-              <MessageListItemUsername>
-                {message.author.username}
-              </MessageListItemUsername>
-              <MessageListItemMessage>{message.content}</MessageListItemMessage>
-            </WrapperUsername>
-          </Wrp>
-        </MessageListItemUsernameWrapper>
-        <TimestampWrapper>
-          <Timestamp>{renderTimestamp(message.timestamp)}</Timestamp>
-          <ReplyButton
-            onClick={() => onReplyHandler(message.id, message.author.username)}
-          >
-            <ReplyIcons />
-          </ReplyButton>
-        </TimestampWrapper>
-      </MessageListItem>
-    ));
+            </MessageListItemUsernameImageWrapperReply>
+            <MessageListItemUsernameWrapperReply>
+              <WhoReply>{message.author[0].username}</WhoReply>
+              <WrpReply>
+                <LineReply></LineReply>
+                <WrapperUsernameReply>
+                  <MessageListItemUsernameReply>
+                    {message.reply_to.author[0].username}
+                  </MessageListItemUsernameReply>
+                  <MessageListItemMessageReply>
+                    {message.reply_to.content}
+                  </MessageListItemMessageReply>
+                </WrapperUsernameReply>
+              </WrpReply>
+              <TextReply>{message.content}</TextReply>
+            </MessageListItemUsernameWrapperReply>
+          </WrapperSecond>
+          <TimestampWrapperReply>
+            <TimestampReply>
+              {renderTimestamp(message.reply_to.timestamp)}
+            </TimestampReply>
+            {/* ?????????????????????????? */}
+            <ReplyButton
+              onClick={() =>
+                onReplyHandler(message.id, message.author[0].username)
+              }
+            >
+              <ReplyIconsReply />
+            </ReplyButton>
+          </TimestampWrapperReply>
+        </MessageListItemReply>
+      );
+    });
   };
 
   return (
@@ -217,11 +248,19 @@ const Chat = (props) => {
             </MessageList>
           </>
         )}
-        <MessageInput
-          onSubmit={sendMessageHandler}
-          onChange={messageChangeHandler}
-          value={message}
-        />
+        <MessageInputWrapper>
+          {isReply && (
+            <ReplyInputWrapper>
+              <ReplyToText>I am replying to {replyTo}</ReplyToText>
+              <button onClick={() => setIsReply(false)}>Close</button>
+            </ReplyInputWrapper>
+          )}
+          <MessageInput
+            onSubmit={sendMessageHandler}
+            onChange={messageChangeHandler}
+            value={message}
+          />
+        </MessageInputWrapper>
       </ChatBlockWrapper>
       {/* <FriendInfo /> */}
     </div>
@@ -229,6 +268,269 @@ const Chat = (props) => {
 };
 
 export default withRouter(Chat);
+
+// Old code before configurations new websocket
+// import React, { useEffect, useState, useCallback } from "react";
+// // import _debounce from "lodash/debounce";
+// // import { useDispatch } from "react-redux";
+// // import axios from "axios";
+// import withRouter from "helpers/withRouter";
+// import WebSocketInstance from "websocket";
+// import { MessageInput } from "components/MessageInput/MessageInput";
+// import NoMessagesSvg from "images/svg/NoMessages/NoMessages";
+
+// import { useSelector } from "react-redux";
+// import { selectAccessToken } from "redux/auth/authSelectors";
+
+// // import { replyMessageThunk } from "redux/chat/chatThunk";
+
+// // import { useSelector } from "react-redux";
+// // import { selectAccessToken } from "redux/auth/authSelectors";
+
+// import {
+//   DateNowText,
+//   // ReplyToText,
+//   // MessageInputWrapper,
+//   ChatBlockWrapper,
+//   MessageList,
+//   MessageListItem,
+//   MessageListItemUsernameWrapper,
+//   MessageListItemUsernameImage,
+//   MessageListItemUsername,
+//   MessageListItemMessage,
+//   MessageListItemUsernameImageWrapper,
+//   WrapperUsername,
+//   Timestamp,
+//   Wrp,
+//   // ReplyInputWrapper,
+//   TimestampWrapper,
+//   ReplyButton,
+//   ReplyIcons,
+//   // MessageListItemReply,
+//   // TimestampReply,
+//   // WrpReply,
+//   // MessageListItemMessageReply,
+//   // MessageListItemUsernameImageReply,
+//   // MessageListItemUsernameImageWrapperReply,
+//   // MessageListItemUsernameWrapperReply,
+//   // WrapperUsernameReply,
+//   // MessageListItemUsernameReply,
+//   // TimestampWrapperReply,
+//   // ReplyIconsReply,
+//   // WrapperSecond,
+//   // LineReply,
+//   // WhoReply,
+//   // TextReply,
+// } from "./Chat.styled";
+
+// // import { useChat } from "contexts/ChatContext";
+// // import FriendInfo from "../FriendInfo/FriendInfo";
+
+// const Chat1 = (props) => {
+//   const [messages, setMessages] = useState([]);
+//   const [message, setMessage] = useState("");
+//   // const token = useSelector(selectAccessToken);
+
+//   console.log("messages state", messages);
+//   // console.log("props.accessToken", props.accessToken);
+
+//   // console.log("all messages", messages);
+
+//   // const [value, setValue] = useState("");
+
+//   // const [isReply, ,] = useState(false);
+//   // const [replyTo, setReplyTo] = useState(null);
+
+//   // const [replyMessage, setReplyMessage] = useState(null);
+//   // const [replyContent, setReplyContent] = useState("");
+//   // const [selectedMessageId, setSelectedMessageId] = useState(null);
+
+//   // const { chatId } = useChat();
+//   // const dispatch = useDispatch();
+
+//   // console.log("all messages", messages);
+//   // console.log("isReply", isReply);
+
+//   const waitForSocketConnection = useCallback((callback) => {
+//     setTimeout(function () {
+//       if (WebSocketInstance.state() === 1) {
+//         console.log("Connection is secure");
+//         callback();
+//       } else {
+//         console.log("Waiting for connection...");
+//         waitForSocketConnection(callback);
+//       }
+//     }, 100);
+//   }, []);
+
+//   useEffect(() => {
+//     WebSocketInstance.connect(props.params.chatSlug, props.accessToken);
+
+//     waitForSocketConnection(() => {
+//       WebSocketInstance.addCallbacks(setMessages, addMessage);
+//       WebSocketInstance.fetchMessages();
+//     });
+//   }, [
+//     waitForSocketConnection,
+//     props.params.chatSlug,
+//     props.accessToken,
+//     // ================== Is it right?
+//     // messages,
+//     // message,
+//   ]);
+
+//   // Scrolling and fetching messages
+//   // eslint-disable-next-line
+//   // const [currentPage, setCurrentPage] = useState(1);
+//   // const accessToken = useSelector(selectAccessToken);
+
+//   const handleScroll = () => {
+//     // console.log("handleScroll");
+//   };
+
+//   // useEffect(() => {}, []);
+//   // const getMessages = async () => {};
+
+//   // useEffect(() => {
+//   //   getMessages(accessToken);
+//   // }, [accessToken]);
+
+//   const addMessage = (message) => {
+//     console.log("addMessage message", message);
+//     // message.selected = false;
+//     // console.log(message);
+//     // ============================================
+//     // setMessages((prevMessages) => [...prevMessages, message]);
+//   };
+
+//   const messageChangeHandler = (event) => {
+//     setMessage(event.target.value);
+//   };
+
+//   const sendMessageHandler = (event) => {
+//     event.preventDefault();
+
+//     // if (isReply) {
+//     //   console.log("isReply!");
+//     // }
+
+//     WebSocketInstance.newChatMessage(message);
+//     WebSocketInstance.fetchMessages();
+//     setMessage("");
+//   };
+
+//   const renderTimestamp = (timestamp) => {
+//     let prefix = "";
+//     const timeDiff = Math.round(
+//       (new Date().getTime() - new Date(timestamp).getTime()) / 60000
+//     );
+//     if (timeDiff < 1) {
+//       // less than one minute ago
+//       prefix = "just now...";
+//     } else if (timeDiff < 60 && timeDiff > 1) {
+//       // less than sixty minutes ago
+//       prefix = `${timeDiff} minutes ago`;
+//     } else if (timeDiff < 24 * 60 && timeDiff > 60) {
+//       // less than 24 hours ago
+//       prefix = `${Math.round(timeDiff / 60)} hours ago`;
+//     } else if (timeDiff < 31 * 24 * 60 && timeDiff > 24 * 60) {
+//       // less than 7 days ago
+//       prefix = `${Math.round(timeDiff / (60 * 24))} days ago`;
+//     } else {
+//       prefix = `${new Date(timestamp)}`;
+//     }
+//     return prefix;
+//   };
+
+//   const onReplyHandler = async (messageId, messageAuthorName) => {
+//     // setIsReply(true);
+//     // setReplyTo(messageAuthorName);
+//     // const body = {
+//     //   chat_id: chatId,
+//     //   message_id: messageId,
+//     //   content: "I reply!!!",
+//     // };
+//     // const { payload } = await dispatch(replyMessageThunk(body));
+//   };
+
+//   // {
+//   //     "command": "new_message",
+//   //     "message": {
+//   //         "id": 275,
+//   //         "author": [
+//   //             {
+//   //                 "username": "admin",
+//   //                 "image": ""
+//   //             }
+//   //         ],
+//   //         "content": "new consumer 5",
+//   //         "timestamp": "2024-01-04 10:48:48.619302+00:00",
+//   //         "reply_to": null
+//   //     }
+//   // }
+
+//   const renderMessages = (messages) => {
+//     console.log("renderMessages messages", messages);
+
+//     const reversedMessages = [...messages].reverse();
+
+//     return reversedMessages.map((message, i, arr) => (
+//       <MessageListItem key={`${message.id}_${i}`}>
+//         <MessageListItemUsernameWrapper>
+//           <Wrp>
+//             <MessageListItemUsernameImageWrapper>
+//               <MessageListItemUsernameImage
+//                 src={message.author[0].image}
+//                 alt="avatar"
+//               />
+//             </MessageListItemUsernameImageWrapper>
+//             <WrapperUsername>
+//               <MessageListItemUsername>
+//                 {message.author[0].username}
+//               </MessageListItemUsername>
+//               <MessageListItemMessage>{message.content}</MessageListItemMessage>
+//             </WrapperUsername>
+//           </Wrp>
+//         </MessageListItemUsernameWrapper>
+//         <TimestampWrapper>
+//           <Timestamp>{renderTimestamp(message.timestamp)}</Timestamp>
+//           <ReplyButton
+//             onClick={() =>
+//               onReplyHandler(message.id, message.author[0].username)
+//             }
+//           >
+//             <ReplyIcons />
+//           </ReplyButton>
+//         </TimestampWrapper>
+//       </MessageListItem>
+//     ));
+//   };
+
+//   return (
+//     <div>
+//       <ChatBlockWrapper className="messages-wrapper">
+//         {!messages ? (
+//           <NoMessagesSvg />
+//         ) : (
+//           <>
+//             <DateNowText>Today</DateNowText>
+//             <MessageList className="messages" onScroll={handleScroll}>
+//               {messages && renderMessages(messages)}
+//             </MessageList>
+//           </>
+//         )}
+//         <MessageInput
+//           onSubmit={sendMessageHandler}
+//           onChange={messageChangeHandler}
+//           value={message}
+//         />
+//       </ChatBlockWrapper>
+//       {/* <FriendInfo /> */}
+//     </div>
+//   );
+// };
+
+// export default withRouter(Chat);
 
 // For reply messages
 //  {

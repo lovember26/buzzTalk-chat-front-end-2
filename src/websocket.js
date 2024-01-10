@@ -17,65 +17,89 @@ class WebSocketService {
     this.socketRef = null;
   }
 
-  connect(chatSlug) {
-    // const path = `wss://buzz-talk-api.onrender.com/ws/chat/${chatSlug}/`;
-    const path = `wss://buzz-talk-api.onrender.com/ws/chat/${chatSlug}/`;
+  connect(chatSlug, accessToken) {
+    // const path = `wss://buzz-talk-api.onrender.com/ws/chat/${chatSlug}/?token=${accessToken}`;
+    const path = `ws://127.0.0.1:8000/ws/chat/${chatSlug}/?token=${accessToken}`;
 
     this.socketRef = new WebSocket(path);
 
     this.socketRef.onopen = () => {
-      // console.log("WebSocket open");
+      console.log("WebSocket open");
     };
     this.socketNewMessage(
       JSON.stringify({
         command: "fetch_messages",
       })
     );
+
+    // sending new message
     this.socketRef.onmessage = (e) => {
       this.socketNewMessage(e.data);
+      console.log("WebSocket onmessage");
     };
     this.socketRef.onerror = (e) => {
-      // console.log(e.message);
+      console.log("WebSocket with error (onerror):", e.message);
     };
     this.socketRef.onclose = () => {
-      // console.log("WebSocket closed let's reopen");
+      console.log("WebSocket closed let's reopen");
       this.connect();
     };
   }
+
+  // {"send_unread_count": send_unread_count,
+  //                 "new_message": new_message,
+  //                 "fetch_messages": fetch_messages}
+
   //Only to read the data as JSON
   socketNewMessage(data) {
     const parsedData = JSON.parse(data);
-    // console.log("parsedData", parsedData);
-
+    console.log("parsedData socketNewMessage", parsedData);
+    console.log("parsedData.command", parsedData.command);
     const command = parsedData.command;
+
     if (Object.keys(this.callbacks).length === 0) {
       return;
     }
+
+    // Here, the array with the all messages is passed to the setMessages function
     if (command === "messages") {
+      console.log("parsedData.messages", parsedData.messages);
       this.callbacks[command](parsedData.messages);
     }
+
+    // Here, the object with the new message is passed to the addMessage function and calls it
     if (command === "new_message") {
+      console.log("parsedData.new_message", parsedData.message);
       this.callbacks[command](parsedData.message);
     }
   }
-  fetchMessages(username, chatSlug) {
+  fetchMessages() {
     this.sendMessage({
       command: "fetch_messages",
-      username: username,
-      // chat_id: chatId,
-      chat_slug: chatSlug,
+      page: 1,
+      page_size: 30,
     });
   }
 
-  newChatMessage(message) {
-    console.log("message in the newChatMessage websocket.js", message);
-    this.sendMessage({
-      command: "new_message",
-      from: message.from,
-      message: message.content,
-      // chat_id: message.chatId,
-      chat_slug: message.chatSlug,
-    });
+  newChatMessage(message, isReply, replyMessageId) {
+    console.log("newChatMessage:", message);
+    console.log("newChatMessage isReply:", isReply);
+    console.log("newChatMessage replyMessageId:", replyMessageId);
+
+    if (!isReply) {
+      console.log("not isReply message");
+      this.sendMessage({
+        command: "new_message",
+        text: message,
+      });
+    } else {
+      console.log("isReply message");
+      this.sendMessage({
+        command: "new_message",
+        text: message,
+        parent: replyMessageId,
+      });
+    }
   }
 
   addCallbacks(messagesCallback, newMessageCallback) {

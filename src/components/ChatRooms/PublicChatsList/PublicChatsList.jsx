@@ -40,7 +40,6 @@ export const PublicChatsList = () => {
   // }, [dispatch, username]);
 
   const onClickChatHandler = (slug, isPrivateChat, title, image) => {
-    console.log(title);
     setChatSlug(slug);
     setIsPrivateChat(isPrivateChat);
     setPublicChatName(title);

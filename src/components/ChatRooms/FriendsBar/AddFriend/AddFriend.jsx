@@ -10,8 +10,12 @@ export default function AddFriend() {
   const [filteredUsers, setFilteredUsers] = useState(null);
   useEffect(() => {
     const getUsers = async () => {
+      // const { data } = await axios.get(
+      //   "https://buzz-talk-api.onrender.com/api/accounts/users/"
+
+      // );
       const { data } = await axios.get(
-        "https://buzz-talk-api.onrender.com/api/accounts/users/"
+        "http://127.0.0.1:8000/api/accounts/users/"
       );
       setUsers(data.results);
       if (data.next) {
