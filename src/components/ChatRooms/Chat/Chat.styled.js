@@ -171,7 +171,7 @@ export const Wrapper = styled.div`
 
 export const Timestamp = styled.p`
   align-self: flex-end;
-  margin-right: 8px;
+  /* margin-right: 8px; */
 `;
 
 export const ReplyButton = styled.button`
@@ -185,7 +185,14 @@ export const ReplyIcons = styled(BsReply)`
 
 export const TimestampWrapper = styled.div`
   display: flex;
-  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  width: 190px;
+`;
+
+export const ReadMarkWrapper = styled.div`
+  padding: 0;
 `;
 
 export const MessageInputWrapper = styled.div`
@@ -248,7 +255,7 @@ export const WrpReply = styled.div`
 
 export const TimestampReply = styled.p`
   align-self: flex-end;
-  margin-right: 8px;
+  /* margin-right: 8px; */
 `;
 
 export const MessageListItemUsernameImageWrapperReply = styled.div`
@@ -290,7 +297,10 @@ export const MessageListItemUsernameReply = styled.p`
 
 export const TimestampWrapperReply = styled.div`
   display: flex;
-  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  width: 190px;
 `;
 
 export const ReplyIconsReply = styled(BsReply)`
@@ -324,4 +334,34 @@ export const TextReply = styled.p`
   color: #696969;
 
   margin-bottom: 6px;
+`;
+
+export const DownloadMoreButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+  /* height: 48px;
+  width: 150px; */
+  font-size: 16px;
+  color: ${({ theme }) => theme.colors.white[100]};
+  background-color: ${({ theme }) => theme.colors.BTN_COLOR};
+
+  padding: 16px 24px;
+
+  /* margin-top: 20px; */
+  margin-bottom: 60px;
+
+  border: 1px solid ${({ theme }) => theme.colors.BTN_COLOR};
+  border-radius: 30px;
+
+  &:hover,
+  &:focus {
+    background-color: ${({ theme }) => theme.colors.BTN_COLOR_HOVER};
+  }
+
+  &:disabled {
+    background-color: ${({ theme }) => theme.colors.gray[300]};
+    border-color: grey;
+  }
 `;

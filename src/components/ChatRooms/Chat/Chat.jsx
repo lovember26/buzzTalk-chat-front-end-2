@@ -1,8 +1,15 @@
 import React, { useEffect, useState, useCallback } from "react";
+import { useSelector } from "react-redux";
 import withRouter from "helpers/withRouter";
 import WebSocketInstance from "websocket";
 import { MessageInput } from "components/MessageInput/MessageInput";
 import NoMessagesSvg from "images/svg/NoMessages/NoMessages";
+import ReadMark from "images/svg/ReadMark/ReadMark";
+
+import NoFriends from "components/ChatRooms/NoFriends/NoFriends";
+
+import { selectFetchAllPrivateChats } from "redux/chat/chatSelectors";
+import { selectFetchAllPublicChats } from "redux/chat/chatSelectors";
 
 import {
   DateNowText,
@@ -38,6 +45,8 @@ import {
   LineReply,
   WhoReply,
   TextReply,
+  DownloadMoreButton,
+  ReadMarkWrapper,
 } from "./Chat.styled";
 
 const Chat = (props) => {
@@ -45,10 +54,16 @@ const Chat = (props) => {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
 
+  const [page, setPage] = useState(1);
+  console.log("page:", page);
+
   // State for reply messages
   const [isReply, setIsReply] = useState(false);
   const [replyMessageId, setReplyMessageId] = useState(null);
   const [replyTo, setReplyTo] = useState(null);
+
+  const privateChats = useSelector(selectFetchAllPrivateChats);
+  const publicChats = useSelector(selectFetchAllPublicChats);
 
   const waitForSocketConnection = useCallback((callback) => {
     setTimeout(function () {
@@ -72,6 +87,21 @@ const Chat = (props) => {
   }, [waitForSocketConnection, props.params.chatSlug, props.accessToken]);
 
   const handleScroll = () => {};
+
+  //   In order to avoid replaying messages, but it needs to be fixed
+  // const setMessagesNew = (messages) => {
+  //   setMessages((prevMessages) => {
+  //     const uniqueMessages = messages.filter(
+  //       (message) =>
+  //         !prevMessages.some((prevMessage) => prevMessage.id === message.id)
+  //     );
+  //     return [...prevMessages, ...uniqueMessages];
+  //   });
+  // };
+  // Instead
+  // const setMessagesNew = (messages) => {
+  //   setMessages((prevMessages) => [...prevMessages, ...messages]);
+  // };
 
   // The new message object returned from the backend is written into the message variable
   const addMessage = (message) => {
@@ -181,6 +211,9 @@ const Chat = (props) => {
             </Wrp>
           </MessageListItemUsernameWrapper>
           <TimestampWrapper>
+            <ReadMarkWrapper>
+              <ReadMark read={message.read} />
+            </ReadMarkWrapper>
             <Timestamp>{renderTimestamp(message.timestamp)}</Timestamp>
             <ReplyButton
               onClick={() =>
@@ -218,6 +251,9 @@ const Chat = (props) => {
             </MessageListItemUsernameWrapperReply>
           </WrapperSecond>
           <TimestampWrapperReply>
+            <ReadMarkWrapper>
+              <ReadMark />
+            </ReadMarkWrapper>
             <TimestampReply>
               {renderTimestamp(message.reply_to.timestamp)}
             </TimestampReply>
@@ -235,35 +271,52 @@ const Chat = (props) => {
     });
   };
 
+  const onLoadMore = () => {
+    setPage((prevState) => prevState + 1);
+  };
+
+  // const onResetPage = () => {
+  //   setPage(1);
+  // };
+
   return (
-    <div>
-      <ChatBlockWrapper className="messages-wrapper">
-        {!messages.length ? (
-          <NoMessagesSvg />
-        ) : (
-          <>
-            <DateNowText>Today</DateNowText>
-            <MessageList className="messages" onScroll={handleScroll}>
-              {messages && renderMessages(messages)}
-            </MessageList>
-          </>
-        )}
-        <MessageInputWrapper>
-          {isReply && (
-            <ReplyInputWrapper>
-              <ReplyToText>I am replying to {replyTo}</ReplyToText>
-              <button onClick={() => setIsReply(false)}>Close</button>
-            </ReplyInputWrapper>
-          )}
-          <MessageInput
-            onSubmit={sendMessageHandler}
-            onChange={messageChangeHandler}
-            value={message}
-          />
-        </MessageInputWrapper>
-      </ChatBlockWrapper>
-      {/* <FriendInfo /> */}
-    </div>
+    <>
+      {!privateChats?.length && !publicChats?.length ? (
+        <NoFriends text={"You haven't any chats yet :("} />
+      ) : (
+        <div>
+          <ChatBlockWrapper className="messages-wrapper">
+            {!messages?.length ? (
+              <NoMessagesSvg />
+            ) : (
+              <>
+                <DateNowText>Today</DateNowText>
+                <MessageList className="messages" onScroll={handleScroll}>
+                  {messages && renderMessages(messages)}
+                </MessageList>
+                <DownloadMoreButton onClick={onLoadMore}>
+                  Download more messages
+                </DownloadMoreButton>
+              </>
+            )}
+            <MessageInputWrapper>
+              {isReply && (
+                <ReplyInputWrapper>
+                  <ReplyToText>I am replying to {replyTo}</ReplyToText>
+                  <button onClick={() => setIsReply(false)}>Close</button>
+                </ReplyInputWrapper>
+              )}
+              <MessageInput
+                onSubmit={sendMessageHandler}
+                onChange={messageChangeHandler}
+                value={message}
+              />
+            </MessageInputWrapper>
+          </ChatBlockWrapper>
+          {/* <FriendInfo /> */}
+        </div>
+      )}
+    </>
   );
 };
 

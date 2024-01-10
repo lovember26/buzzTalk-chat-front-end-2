@@ -54,7 +54,7 @@ class WebSocketService {
   socketNewMessage(data) {
     const parsedData = JSON.parse(data);
     console.log("parsedData socketNewMessage", parsedData);
-    console.log("parsedData.command", parsedData.command);
+    // console.log("parsedData.command", parsedData.command);
     const command = parsedData.command;
 
     if (Object.keys(this.callbacks).length === 0) {
@@ -69,15 +69,15 @@ class WebSocketService {
 
     // Here, the object with the new message is passed to the addMessage function and calls it
     if (command === "new_message") {
-      console.log("parsedData.new_message", parsedData.message);
+      // console.log("parsedData.new_message", parsedData.message);
       this.callbacks[command](parsedData.message);
     }
   }
-  fetchMessages() {
+  fetchMessages(page) {
     this.sendMessage({
       command: "fetch_messages",
-      page: 1,
-      page_size: 30,
+      page: page,
+      page_size: 10,
     });
   }
 
