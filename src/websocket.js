@@ -81,12 +81,25 @@ class WebSocketService {
     });
   }
 
-  newChatMessage(message) {
-    console.log("newChatMessage sendMessage", message);
-    this.sendMessage({
-      command: "new_message",
-      text: message,
-    });
+  newChatMessage(message, isReply, replyMessageId) {
+    console.log("newChatMessage:", message);
+    console.log("newChatMessage isReply:", isReply);
+    console.log("newChatMessage replyMessageId:", replyMessageId);
+
+    if (!isReply) {
+      console.log("not isReply message");
+      this.sendMessage({
+        command: "new_message",
+        text: message,
+      });
+    } else {
+      console.log("isReply message");
+      this.sendMessage({
+        command: "new_message",
+        text: message,
+        parent: replyMessageId,
+      });
+    }
   }
 
   addCallbacks(messagesCallback, newMessageCallback) {
