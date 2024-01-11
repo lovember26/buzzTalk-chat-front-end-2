@@ -31,7 +31,6 @@ class WebSocketService {
         command: "fetch_messages",
       })
     );
-
     // sending new message
     this.socketRef.onmessage = (e) => {
       this.socketNewMessage(e.data);
@@ -46,15 +45,11 @@ class WebSocketService {
     };
   }
 
-  // {"send_unread_count": send_unread_count,
-  //                 "new_message": new_message,
-  //                 "fetch_messages": fetch_messages}
-
   //Only to read the data as JSON
   socketNewMessage(data) {
     const parsedData = JSON.parse(data);
     console.log("parsedData socketNewMessage", parsedData);
-    // console.log("parsedData.command", parsedData.command);
+    console.log("parsedData.command", parsedData.command);
     const command = parsedData.command;
 
     if (Object.keys(this.callbacks).length === 0) {
@@ -73,18 +68,19 @@ class WebSocketService {
       this.callbacks[command](parsedData.message);
     }
   }
-  fetchMessages(page) {
+
+  fetchMessages(page, pageSize) {
     this.sendMessage({
       command: "fetch_messages",
-      page: page,
-      page_size: 10,
+      page,
+      page_size: pageSize,
     });
   }
 
   newChatMessage(message, isReply, replyMessageId) {
-    console.log("newChatMessage:", message);
-    console.log("newChatMessage isReply:", isReply);
-    console.log("newChatMessage replyMessageId:", replyMessageId);
+    // console.log("newChatMessage:", message);
+    // console.log("newChatMessage isReply:", isReply);
+    // console.log("newChatMessage replyMessageId:", replyMessageId);
 
     if (!isReply) {
       console.log("not isReply message");
@@ -141,3 +137,9 @@ class WebSocketService {
 const WebSocketInstance = WebSocketService.getInstance();
 
 export default WebSocketInstance;
+
+// {
+//   "send_unread_count": send_unread_count,
+//    "new_message": new_message,
+//     "fetch_messages": fetch_messages
+// }
