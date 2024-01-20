@@ -4,8 +4,8 @@ import { authAPI } from "services";
 import { selectAccessToken } from "./authSelectors";
 import { successNotification, errorNotification } from "helpers/notification";
 
-// axios.defaults.baseURL = "https://buzz-talk-api.onrender.com";
-axios.defaults.baseURL = "http://127.0.0.1:8000";
+axios.defaults.baseURL = "https://buzz-talk-api.onrender.com";
+// axios.defaults.baseURL = "http://127.0.0.1:8000";
 
 const token = {
   set(token) {
