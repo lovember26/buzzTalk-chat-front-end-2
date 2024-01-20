@@ -1,7 +1,7 @@
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { useState } from "react";
 
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 
@@ -9,12 +9,12 @@ import { selectFetchAllPrivateChats } from "redux/chat/chatSelectors";
 import { selectFetchAllPublicChats } from "redux/chat/chatSelectors";
 
 import { selectAllUsers } from "redux/user/userSelectors";
-import { fetchAllUsersThunk } from "redux/user/userThunk";
+// import { fetchAllUsersThunk } from "redux/user/userThunk";
 
 import Modal from "components/common/Modal/Modal";
 import ChatModal from "components/ChatRooms/Modal/ChatModal/ChatModal";
 
-import { PublicChatsList } from "components/ChatRooms/PublicChatsList/PublicChatsList";
+// import { PublicChatsList } from "components/ChatRooms/PublicChatsList/PublicChatsList";
 import { PrivateChatList } from "components/ChatRooms/PrivateChatsList/PrivateChatsList";
 
 import UserProfile from "../UserProfile/UserProfile";
@@ -59,11 +59,11 @@ export default function SidePanel() {
     setPublicChatImage,
   } = useChat();
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchAllUsersThunk());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchAllUsersThunk());
+  // }, [dispatch]);
 
   const handleSearchValue = ({ target }) => {
     setValue(target.value);
@@ -130,7 +130,7 @@ export default function SidePanel() {
             <AddChatButton />
           </AddChatButtonWrapper>
 
-          <PublicChatsList />
+          {/* <PublicChatsList /> */}
           <UserProfile />
         </StyledNav>
 
