@@ -188,7 +188,7 @@ export const TimestampWrapper = styled.div`
   justify-content: space-between;
   align-items: flex-end;
 
-  width: 190px;
+  width: 120px;
 `;
 
 export const ReadMarkWrapper = styled.div`
@@ -300,7 +300,7 @@ export const TimestampWrapperReply = styled.div`
   align-items: flex-end;
   justify-content: space-between;
 
-  width: 190px;
+  width: 120px;
 `;
 
 export const ReplyIconsReply = styled(BsReply)`
@@ -345,9 +345,10 @@ export const DownloadMoreButton = styled.button`
   width: 150px; */
   font-size: 16px;
   color: ${({ theme }) => theme.colors.white[100]};
-  background-color: ${({ theme }) => theme.colors.BTN_COLOR};
+  /* background-color: ${({ theme }) => theme.colors.BTN_COLOR}; */
+  background-color: #7e5d88;
 
-  padding: 16px 24px;
+  padding: 14px 22px;
 
   /* margin-top: 20px; */
   margin-bottom: 60px;
