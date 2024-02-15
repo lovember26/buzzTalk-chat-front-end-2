@@ -3,15 +3,16 @@ import { BsReply } from "react-icons/bs";
 
 export const ChatBlockWrapper = styled.div`
   position: relative;
-
+  left:auto;
+  width:100%;
   display: flex;
   flex-direction: column;
-
+  justify-content:space-between;
   padding-top: 0;
   padding-bottom: 30px;
   padding-left: 16px;
   padding-right: 16px;
-
+  
   flex: 1;
 `;
 
@@ -83,7 +84,7 @@ export const MessageList = styled.ul`
   display: flex;
   flex-direction: column;
 
-  height: calc(100vh - 220px);
+  height: calc(100vh - 320px);
   overflow-y: auto;
 
   ::-webkit-scrollbar {
@@ -196,7 +197,8 @@ export const ReadMarkWrapper = styled.div`
 `;
 
 export const MessageInputWrapper = styled.div`
-  position: absolute;
+  // position: absolute;
+  width:100%;
   bottom: 20px;
 
   display: flex;
@@ -350,7 +352,7 @@ export const DownloadMoreButton = styled.button`
   padding: 16px 24px;
 
   /* margin-top: 20px; */
-  margin-bottom: 60px;
+  margin-bottom: 5px;
 
   border: 1px solid ${({ theme }) => theme.colors.BTN_COLOR};
   border-radius: 30px;

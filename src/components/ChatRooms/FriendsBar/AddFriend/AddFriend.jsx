@@ -2,40 +2,38 @@ import { AddFriendForm, AddFriendWrapper } from "./AddFriend.styled";
 import { ReactComponent as Search } from "../../../../images/search-friend.svg";
 import NoFriends from "components/ChatRooms/NoFriends/NoFriends";
 import { useEffect, useState } from "react";
+import { ReactComponent as MoreIcon } from "../../../../images/more-gray.svg";
 
+import { ReactComponent as MessageIcon } from "../../../../images/message-gray.svg";
 import axios from "axios";
+import { FriendsList, ItemWrapper } from "../AllFriends/AllFriends.styled";
+import { addFriend } from "services/friendsApi";
 export default function AddFriend() {
   const [query, setQuery] = useState("");
   const [users, setUsers] = useState([]);
-  const [filteredUsers, setFilteredUsers] = useState(null);
+ 
   useEffect(() => {
     const getUsers = async () => {
       const { data } = await axios.get(
-        "https://buzz-talk-api.onrender.com/api/accounts/users/"
+        `https://buzz-talk-api.onrender.com/api/accounts/users/?search=${query}`
 
       );
       // const { data } = await axios.get(
       //   "http://127.0.0.1:8000/api/accounts/users/"
       // );
-      setUsers(data.results);
-      if (data.next) {
-        const extraUsers = await axios.get(data.next);
-        users.push(extraUsers.data.results);
-        console.log(users);
-      }
+      setUsers(data);
+     
+    
     };
     getUsers();
-    const filteredNames = users.filter((user) =>
-      user.username.toLowerCase().startsWith(query)
-    );
 
-    setFilteredUsers(filteredNames);
+   
 
     // eslint-disable-next-line
   }, [query]);
 
   const handleQuery = ({ target }) => {
-    setQuery(target.value);
+    setQuery(target.value.trim());
   };
   return (
     <AddFriendWrapper>
@@ -50,18 +48,23 @@ export default function AddFriend() {
       </AddFriendForm>
       {query && (
         <div>
-          <ul>
-            {filteredUsers && filteredUsers.length > 0 ? (
-              filteredUsers.map((user, index) => (
-                <li key={index}>{user.username}</li>
+           <FriendsList>
+            {users && users.length > 0 ? (
+              users.map((user, index) => (
+              
+    <ItemWrapper key={index}><div style={{display:"flex", gap:"13px", alignItems:"center"}}><img src={user.image} alt="avatar"></img><div><p>{user.username}</p><p style={{color:"#D9D9D9",fontSize: "10px",}}>offline</p></div></div>
+    <div><MessageIcon style={{marginRight:"8px"}}/><MoreIcon/></div>
+    </ItemWrapper>
+
+  
               ))
             ) : (
               <p>No results</p>
             )}
-          </ul>
+          </FriendsList>
         </div>
       )}
-      <NoFriends text={"Hello! Let’s find friends to talk!"} />
+    {!query && <NoFriends text={"Hello! Let’s find friends to talk!"} />}
     </AddFriendWrapper>
   );
 }

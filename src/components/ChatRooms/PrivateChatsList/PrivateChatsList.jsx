@@ -21,6 +21,7 @@ export const PrivateChatList = () => {
     setIsPrivateChat,
     setPrivateChatName,
     setPrivateChatImage,
+    setIsFriend
   } = useChat();
   const chats = useSelector(selectFetchAllPrivateChats);
   const dispatch = useDispatch();
@@ -33,13 +34,15 @@ export const PrivateChatList = () => {
 
   useEffect(() => {
     getUserChats();
+  
   }, [getUserChats]);
 
-  const onClickChatHandler = (slug, isPrivateChat, receiver, image) => {
+  const onClickChatHandler = (slug, isPrivateChat, receiver, image,is_friend) => {
     setChatSlug(slug);
     setIsPrivateChat(isPrivateChat);
     setPrivateChatName(receiver);
     setPrivateChatImage(image);
+    setIsFriend(is_friend);
   };
 
   return (
@@ -54,7 +57,8 @@ export const PrivateChatList = () => {
                     chat.slug,
                     chat.is_private,
                     chat.receiver.username,
-                    chat.receiver.image
+                    chat.receiver.image,
+                    chat.receiver.is_friend,
                   )
                 }
                 to={`chats/${chat.slug}`}

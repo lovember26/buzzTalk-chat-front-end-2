@@ -20,6 +20,7 @@ import { ReactComponent as BlockIcon } from "../../../images/friend-info-block.s
 import { useEffect, useState } from "react";
 // import { useLocation } from "react-router";
 import { fetchUserByUsername } from "services/userApi";
+import GroupChatInfo from "../GroupChatInfo/GroupChatInfo";
 
 import { useChat } from "contexts/ChatContext";
 
@@ -30,7 +31,7 @@ export default function FriendInfo() {
   // const username = params.get("username");
   const [userInfo, setUserInfo] = useState(null);
 
-  const { privateChatName } = useChat();
+  const { privateChatName, isPrivateChat } = useChat();
 
   useEffect(() => {
     const getUser = async () => {
@@ -68,10 +69,10 @@ export default function FriendInfo() {
       >
         <HideUserInfoIcon />
       </ActionButton>
-      <ItemsWrapper>
+      {isPrivateChat ? <ItemsWrapper>
         <AvatarBlock>
           <img src={userInfo.image} alt="avatar"></img>
-          <p>@{userInfo.username}</p>
+          <p>@{privateChatName}</p>
         </AvatarBlock>
         <ActionList>
           <li className="list-item">
@@ -141,7 +142,7 @@ export default function FriendInfo() {
             </button>
           </li>
         </ActionList>
-      </ItemsWrapper>
+        </ItemsWrapper> : <GroupChatInfo/>}
     </Wrapper>
   );
 }

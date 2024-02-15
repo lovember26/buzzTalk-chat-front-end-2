@@ -48,6 +48,7 @@ import {
   DownloadMoreButton,
   ReadMarkWrapper,
 } from "./Chat.styled";
+import FriendInfo from "../FriendInfo/FriendInfo";
 
 const Chat = (props) => {
   // State for usual messages
@@ -284,7 +285,12 @@ const Chat = (props) => {
       {!privateChats?.length && !publicChats?.length ? (
         <NoFriends text={"You haven't any chats yet :("} />
       ) : (
-        <div>
+        <div style={{
+          display: "flex",
+        
+          height: "calc(100% - 80px)",
+         
+        }}>
           <ChatBlockWrapper className="messages-wrapper">
             {!messages?.length ? (
               <NoMessagesSvg />
@@ -313,7 +319,7 @@ const Chat = (props) => {
               />
             </MessageInputWrapper>
           </ChatBlockWrapper>
-          {/* <FriendInfo /> */}
+          <FriendInfo />
         </div>
       )}
     </>
