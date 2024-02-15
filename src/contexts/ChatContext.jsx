@@ -16,6 +16,8 @@ export const ChatProvider = ({ children }) => {
   const [publicChatImage, setPublicChatImage] = useState(null);
 
   const [isPrivateChat, setIsPrivateChat] = useState(null);
+  const [publicChatParticipants, setPublicChatParticipants]=useState(null);
+  const [isFriend,setIsFriend]=useState(null);
 
   return (
     <ChatContext.Provider
@@ -34,9 +36,12 @@ export const ChatProvider = ({ children }) => {
         setPrivateChatImage,
         publicChatImage,
         setPublicChatImage,
+        publicChatParticipants, setPublicChatParticipants,
+        isFriend, setIsFriend,
       }}
     >
       {children}
     </ChatContext.Provider>
   );
 };
+

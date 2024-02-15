@@ -3,6 +3,7 @@ import { ReactComponent as PhoneIcon } from "../../../images/phone-call.svg";
 import { ReactComponent as VideoIcon } from "../../../images/video.svg";
 import { ReactComponent as AddFriendIcon } from "../../../images/add-friend.svg";
 import { ReactComponent as DefaultIcon } from "../../../images/default.svg";
+import { ReactComponent as AddedFriendIcon } from "../../../images/added-friend.svg";
 import {
   UserStatusWrapper,
   Indicator,
@@ -22,6 +23,7 @@ import {
 // import { fetchUserByUsername } from "services/userApi";
 
 import { useChat } from "contexts/ChatContext";
+import { addFriend } from "services/friendsApi";
 
 export default function Profile() {
   const {
@@ -30,8 +32,13 @@ export default function Profile() {
     publicChatName,
     privateChatImage,
     publicChatImage,
+    isFriend
   } = useChat();
-
+  
+const handleAddFriend=()=>{
+  if(isPrivateChat){
+    addFriend(privateChatName);}
+}
   return (
     <ChatContainer>
       <StyledHeader>
@@ -70,7 +77,7 @@ export default function Profile() {
             <VideoIcon />
           </ActionBarItem>
           <ActionBarItem>
-            <AddFriendIcon />
+           <button type="button" onClick={handleAddFriend}>{isFriend ? <AddedFriendIcon/> : <AddFriendIcon />}</button>
           </ActionBarItem>
         </ActionBar>
       </StyledHeader>

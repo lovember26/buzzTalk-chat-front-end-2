@@ -50,7 +50,7 @@ export const UserBarUserName = styled.p`
 
 export const UserBarUserStatus = styled.p`
   font-size: 12px;
-  rgba(255, 255, 255, 0.30);
+  color:rgba(255, 255, 255, 0.30);
 `;
 
 export const Indicator = styled.div`

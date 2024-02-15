@@ -6,10 +6,10 @@ import { ReactComponent as MicIcon } from "../../images/mic.svg";
 import { ReactComponent as EmojiIcon } from "../../images/emoji.svg";
 
 export const StyledForm = styled.form`
-  width: 1072px;
+width:100%;
   padding: 12px 34px;
   height: 60px;
-
+  position:relative;
   border-radius: 24px;
   background: #7e5d88;
 `;
