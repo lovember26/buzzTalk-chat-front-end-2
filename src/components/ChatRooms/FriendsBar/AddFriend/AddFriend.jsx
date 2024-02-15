@@ -7,7 +7,7 @@ import { ReactComponent as MoreIcon } from "../../../../images/more-gray.svg";
 import { ReactComponent as MessageIcon } from "../../../../images/message-gray.svg";
 import axios from "axios";
 import { FriendsList, ItemWrapper } from "../AllFriends/AllFriends.styled";
-import { addFriend } from "services/friendsApi";
+// import { addFriend } from "services/friendsApi";
 export default function AddFriend() {
   const [query, setQuery] = useState("");
   const [users, setUsers] = useState([]);
