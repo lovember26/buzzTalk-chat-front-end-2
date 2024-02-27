@@ -50,6 +50,10 @@ import {
   ReadMarkWrapper,
 } from "./Chat.styled";
 import FriendInfo from "../FriendInfo/FriendInfo";
+import AddFriendRequest from "../AddFriendRequest/AddFriendRequest";
+import { connectWebSocketChat, disconnectWebSocketChat } from "websocketChat";
+import { selectAccessToken } from "redux/auth/authSelectors";
+import { useParams } from "react-router";
 
 const Chat = (props) => {
   // State for usual messages
@@ -70,27 +74,45 @@ const Chat = (props) => {
 
   const privateChats = useSelector(selectFetchAllPrivateChats);
   const publicChats = useSelector(selectFetchAllPublicChats);
+  const accessToken=useSelector(selectAccessToken);
+const chatSlug=props.params.chatSlug;
 
-  const waitForSocketConnection = useCallback((callback) => {
-    setTimeout(function () {
-      if (WebSocketInstance.state() === 1) {
-        console.log("Connection is secure");
-        callback();
-      } else {
-        console.log("Waiting for connection...");
-        waitForSocketConnection(callback);
-      }
-    }, 100);
-  }, []);
+  const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    WebSocketInstance.connect(props.params.chatSlug, props.accessToken);
+    
+      const socket = connectWebSocketChat(chatSlug, accessToken);
 
-    waitForSocketConnection(() => {
-      WebSocketInstance.addCallbacks(setMessages, addMessage);
-      WebSocketInstance.fetchMessages();
-    });
-  }, [waitForSocketConnection, props.params.chatSlug, props.accessToken]);
+      setSocket(socket);
+
+      return () => {
+          disconnectWebSocketChat(socket);
+      };
+  }, [chatSlug]);
+//це старі вебсокети
+  // const waitForSocketConnection = useCallback((callback) => {
+  //   setTimeout(function () {
+  //     if (WebSocketInstance.state() === 1) {
+  //       console.log("Connection is secure");
+  //       callback();
+  //     } else {
+  //       console.log("Waiting for connection...");
+  //       waitForSocketConnection(callback);
+  //     }
+  //   }, 100);
+  // }, []);
+
+  // useEffect(() => {
+    
+  //   WebSocketInstance.connect(props.params.chatSlug, props.accessToken);
+
+  //   waitForSocketConnection(() => {
+  //     WebSocketInstance.addCallbacks(setMessages, addMessage);
+  //     WebSocketInstance.fetchMessages();
+      
+  //   });
+  // }, [waitForSocketConnection, props.params.chatSlug, props.accessToken]);
+  //тут кінець старих вебсокетів
 
   useEffect(() => {
     onResetPage();
@@ -286,7 +308,7 @@ const Chat = (props) => {
             {!messages?.length ? (
               <NoMessagesSvg />
             ) : (
-              <>
+              <><AddFriendRequest/>
                 <DateNowText>Today</DateNowText>
                 {/* <MessageList className="messages" onScroll={handleScroll}> */}
                 <MessageList className="messages">

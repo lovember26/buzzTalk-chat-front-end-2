@@ -3,8 +3,9 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { authAPI } from "services";
 import { selectAccessToken } from "./authSelectors";
 import { successNotification, errorNotification } from "helpers/notification";
+import { BASE_URL } from "constants";
 
-axios.defaults.baseURL = "https://buzz-talk-api.onrender.com";
+axios.defaults.baseURL = BASE_URL;
 // axios.defaults.baseURL = "http://127.0.0.1:8000";
 
 const token = {
