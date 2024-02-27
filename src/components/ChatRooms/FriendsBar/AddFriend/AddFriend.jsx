@@ -7,6 +7,7 @@ import { ReactComponent as MoreIcon } from "../../../../images/more-gray.svg";
 import { ReactComponent as MessageIcon } from "../../../../images/message-gray.svg";
 import axios from "axios";
 import { FriendsList, ItemWrapper } from "../AllFriends/AllFriends.styled";
+import { BASE_URL } from "constants";
 // import { addFriend } from "services/friendsApi";
 export default function AddFriend() {
   const [query, setQuery] = useState("");
@@ -15,7 +16,7 @@ export default function AddFriend() {
   useEffect(() => {
     const getUsers = async () => {
       const { data } = await axios.get(
-        `https://buzz-talk-api.onrender.com/api/accounts/users/?search=${query}`
+        `${BASE_URL}/api/accounts/users/?search=${query}`
 
       );
       // const { data } = await axios.get(

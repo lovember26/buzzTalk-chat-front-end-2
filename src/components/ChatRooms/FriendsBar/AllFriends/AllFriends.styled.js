@@ -11,9 +11,9 @@ opacity:0.5;
 margin-bottom:16px;
 `
 export const FriendsList=styled.ul`
-max-height: calc(100vh - 200px);
+height: calc(100vh - 200px);
   overflow-y: auto;
-
+ 
   ::-webkit-scrollbar {
     width: 10px;
   }
@@ -35,6 +35,8 @@ max-height: calc(100vh - 200px);
     background-color: purple;
   }`
 export const ItemWrapper=styled.li`
+position:relative;
+overflow-y: visible;
 display:flex;
 justify-content:space-between;
 align-items:center;

@@ -23,7 +23,10 @@ import {
 // import { fetchUserByUsername } from "services/userApi";
 
 import { useChat } from "contexts/ChatContext";
-import { addFriend } from "services/friendsApi";
+
+import {  useState } from "react";
+import AddFriendPopUp from "../AddFriendPopUp/AddFriendPopUp";
+
 
 export default function Profile() {
   const {
@@ -32,13 +35,17 @@ export default function Profile() {
     publicChatName,
     privateChatImage,
     publicChatImage,
-    isFriend
+    isFriend,
+   
   } = useChat();
-  
-const handleAddFriend=()=>{
-  if(isPrivateChat){
-    addFriend(privateChatName);}
-}
+
+  const [isOpen,setIsOpen]=useState(false);
+  const handleAddFriend=()=>{
+    setIsOpen(prevState => !prevState)
+  }
+
+
+
   return (
     <ChatContainer>
       <StyledHeader>
@@ -76,11 +83,14 @@ const handleAddFriend=()=>{
           <ActionBarItem>
             <VideoIcon />
           </ActionBarItem>
-          <ActionBarItem>
-           <button type="button" onClick={handleAddFriend}>{isFriend ? <AddedFriendIcon/> : <AddFriendIcon />}</button>
+          <ActionBarItem >
+           <button className="ignore-click" type="button" onClick={handleAddFriend}>{isFriend ? <AddedFriendIcon pointerEvents="none" /> : <AddFriendIcon pointerEvents="none" />}</button>
+          
           </ActionBarItem>
+          
         </ActionBar>
+        <AddFriendPopUp isOpen={isOpen} setIsOpen={setIsOpen} />
       </StyledHeader>
-    </ChatContainer>
-  );
+</ChatContainer>
+);
 }

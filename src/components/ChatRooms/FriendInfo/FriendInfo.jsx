@@ -35,9 +35,10 @@ export default function FriendInfo() {
 
   useEffect(() => {
     const getUser = async () => {
+      if(privateChatName){
       const data = await fetchUserByUsername(privateChatName);
       setUserInfo(data);
-      setShowInfo(false);
+      setShowInfo(false);}
     };
     getUser();
   }, [privateChatName]);

@@ -1,14 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SelectWrapper } from "./SelectPrivateChat.styled";
+import { useSelector } from "react-redux";
+import { selectAllUsers } from "redux/user/userSelectors";
 
 export default function SelectPrivateChat({ users, setChoice }) {
   // eslint-disable-next-line
-  const [newArray, setNewArray] = useState(
-    users?.map((item) => ({
+  const allUsers=useSelector(selectAllUsers);
+  const [newArray, setNewArray] = useState(null);
+  useEffect(()=>{
+  
+    const usernames=allUsers?.map((item) => ({
       value: item.username,
       label: item.username,
-    }))
-  );
+    }));
+    setNewArray(usernames);
+    // console.log(newArray);
+  },[])
 
   const colorStyles = {
     control: (styles) => ({

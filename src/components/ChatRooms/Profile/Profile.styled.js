@@ -8,7 +8,7 @@ export const ChatContainer = styled.div`
 export const StyledHeader = styled.div`
   width: 100%;
   height: 80px;
-
+  position:relative;
   padding-left: 26px;
   padding-right: 26px;
   display: flex;
@@ -74,10 +74,12 @@ export const ActionBar = styled.ul`
   flex-direction: row;
   justify-content: center;
   align-items: inherit;
+ 
 `;
 
 export const ActionBarItem = styled.li`
   &:not(:last-child) {
     margin-right: 20px;
   }
+ 
 `;

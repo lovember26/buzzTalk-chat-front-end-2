@@ -1,7 +1,8 @@
 import axios from "axios";
+import { BASE_URL } from "constants";
 // import { selectAccessToken } from "redux/auth/authSelectors";
 
-axios.defaults.baseURL = "https://buzz-talk-api.onrender.com";
+axios.defaults.baseURL = BASE_URL;
 
 
 
@@ -17,6 +18,14 @@ export const addFriend = async ( username) => {
     );
    
     return data;}
+
+    
+export const removeFriend = async ( username) => {
+  const { data } = await axios.delete(
+    `/chat/friends/${username}`,
+  );
+ 
+  return data;}
 
     
 
