@@ -4,53 +4,47 @@ import {ReactComponent as RemoveFriendIcon} from '../../../../../images/remove-f
 
 
 import { removeFriend } from "services/friendsApi";
-import { useEffect } from "react";
+
 import { PopUpWrapper } from './RemoveFrienfPopUp.styled';
 
 
 
-export default function RemoveFriendPopUp({isOpen, setIsOpen,username}) {
+export default function RemoveFriendPopUp({setSelectedFriend, username}) {
 
- 
-
- 
-
-  const handleRemoveFriend=()=>{
-   
-     
-      removeFriend(username);
-  setIsOpen(false);
+const handleRemoveFriend=()=>{
+    removeFriend(username);
+    setSelectedFriend(null);
   }
 const handleCancel=()=>{
-  
-setIsOpen(false);
+
+
 }
 
-useEffect(()=>{
+// useEffect(()=>{
 
-  const handleEscKey = event => {
-    if (event.key === 'Escape') {
-      setIsOpen(false);
-    }
-  }
-  const handleClickOutside=(event)=>{
+  // const handleEscKey = event => {
+  //   if (event.key === 'Escape') {
+  //     setIsOpen(false);
+  //   }
+  // }
+  // const handleClickOutside=(event)=>{
   
-    if (isOpen && !event.target.classList.contains('ignore-click')) {
-      setIsOpen(false);
-    }
-  }
-  if( isOpen) {
-    window.addEventListener('click', handleClickOutside);
-    window.addEventListener('keydown', handleEscKey);
-  }
+  //   if (isOpen && !event.target.classList.contains('ignore-click')) {
+  //     setIsOpen(false);
+  //   }
+  // }
+  // if( isOpen) {
+    // window.addEventListener('click', handleClickOutside);
+  //   window.addEventListener('keydown', handleEscKey);
+  // }
  
-  return () => {
-    window.removeEventListener('click', handleClickOutside);
-    window.removeEventListener('keydown', handleEscKey);
-  };
-},[isOpen, setIsOpen])
+  // return () => {
+    // window.removeEventListener('click', handleClickOutside);
+  //   window.removeEventListener('keydown', handleEscKey);
+  // };
+// },[isOpen, setIsOpen])
     return (
-      isOpen && <PopUpWrapper >
+      <PopUpWrapper >
       <ul>
         <li>
           

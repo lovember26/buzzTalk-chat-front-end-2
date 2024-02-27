@@ -12,30 +12,31 @@ import { fetchFriends } from "services/friendsApi";
 import RemoveFriendPopUp from "./RemoveFriendPopUp/RemoveFriendPopUp";
 
 export default function AllFriends() {
-const [isOpen, setIsOpen]=useState(false);
+const [selectedFriend, setSelectedFriend]=useState(null);
+
 const [userFriends, setUserFriends]=useState(null)
-  useEffect(()=>{
-    const getFriends = async () => {
-      const data = await fetchFriends();
-      console.log(data);
-      setUserFriends(data);
+useEffect(() => {
+  const getFriends = async () => {
+    const data = await fetchFriends();
     
-    };
-    getFriends();
+    setUserFriends(data); 
+   
+  };
+
+  getFriends();
+}, []);
+
+  const handleMoreIcon=(friend)=>{
     
-  },[])
-  const handleMoreIcon=()=>{
-    console.log("hello");
-    setIsOpen(prevState => !prevState)
-    console.log(isOpen);
+    setSelectedFriend(friend);
   }
   return (
   <>
   {(userFriends && userFriends.length>0) ? <AddFriendWrapper>
     <AllFriendsListTitle>All friends</AllFriendsListTitle>
   <FriendsList>
-    {userFriends.map(friend=>{
-      console.log(friend);
+    {userFriends.map((friend,index)=>{
+      
       return <ItemWrapper key={friend.username}>
         <div style={{display:"flex", gap:"13px", alignItems:"center"}}>
           <img src={friend.image} alt="avatar"></img>
@@ -46,8 +47,8 @@ const [userFriends, setUserFriends]=useState(null)
             </div>
       <div>
         <MessageIcon style={{marginRight:"8px"}}/>
-        <button type="button" onClick={handleMoreIcon} className="ignore-click"><MoreIcon pointerEvents="none"/></button>
-      <RemoveFriendPopUp isOpen={isOpen} setIsOpen={setIsOpen} username={friend.usename}/>
+        <button type="button" onClick={() => handleMoreIcon(friend)} className="ignore-click"><MoreIcon pointerEvents="none"/></button>
+      {friend===selectedFriend && <RemoveFriendPopUp setSelectedFriend={setSelectedFriend} username={friend.username} />}
        
         </div>
      
