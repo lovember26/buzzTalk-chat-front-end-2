@@ -15,7 +15,7 @@ export default function SelectPrivateChat({ users, setChoice }) {
     }));
     setNewArray(usernames);
     // console.log(newArray);
-  },[])
+  },[allUsers])
 
   const colorStyles = {
     control: (styles) => ({
