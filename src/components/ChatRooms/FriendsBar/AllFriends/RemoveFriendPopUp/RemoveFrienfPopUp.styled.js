@@ -6,7 +6,7 @@ position:absolute;
 top:75%;
 right:10px;
 padding:10px 13px;
-
+z-index:999;
 ul{
 display:flex;
 flex-direction:column;
