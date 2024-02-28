@@ -17,7 +17,7 @@ const handleRemoveFriend=()=>{
   }
 const handleCancel=()=>{
 
-
+setSelectedFriend(null);
 }
 
 // useEffect(()=>{

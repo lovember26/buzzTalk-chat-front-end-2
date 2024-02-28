@@ -4,7 +4,7 @@ import * as yup from "yup";
 export const inputRegisterSchema = Joi.object({
   email: Joi.string()
     .regex(
-      /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/
+      /^([a-zA-Z0-9._%+-]+\.)*[a-zA-Z0-9._%+-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/
     )
     .required()
     .messages({
