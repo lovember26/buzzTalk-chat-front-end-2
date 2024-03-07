@@ -1,0 +1,24 @@
+name: Build&Push | Frontend CI
+
+on:
+  push:
+    branches: [ "dev" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Login to GitHub Container Registry
+      run: |
+        echo "${{ secrets.GIT_PAT }}" | docker login ghcr.io -u "${{ secrets.GIT_USER }}" --password-stdin
+
+    - name: Build Docker Image
+      run: |
+        docker build -t ghcr.io/buzz-talk/buzz-talk-frontend:latest .
+
+    - name: Push Docker Image
+      run: |
+        docker push ghcr.io/buzz-talk/buzz-talk-frontend:latest
