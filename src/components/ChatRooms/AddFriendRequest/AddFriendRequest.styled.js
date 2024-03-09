@@ -6,7 +6,7 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 gap:4px;
-height:53px;
+min-height:53px;
 font-size:12px;
 font-weight:600;
 box-shadow: 0 1px 7px 0 rgba(0,0,0,.2);

@@ -1,19 +1,22 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useRef, useState,  } from "react";
 import { useSelector } from "react-redux";
 import withRouter from "helpers/withRouter";
-import WebSocketInstance from "websocket";
+// import WebSocketInstance from "websocket";
 
 import { MessageInput } from "components/MessageInput/MessageInput";
 import NoMessagesSvg from "images/svg/NoMessages/NoMessages";
 import ReadMark from "images/svg/ReadMark/ReadMark";
 
 import NoFriends from "components/ChatRooms/NoFriends/NoFriends";
-
+import {ReactComponent as EditIconBig} from "../../../images/edit-big.svg";
+import {ReactComponent as ReplyIconBig} from "../../../images/reply-big.svg";
+import {ReactComponent as CloseIcon} from "../../../images/close-reply-window.svg"
+import {ReactComponent as PurpleLineIcon} from "../../../images/purple-line-reply-window.svg"
 import { selectFetchAllPrivateChats } from "redux/chat/chatSelectors";
 import { selectFetchAllPublicChats } from "redux/chat/chatSelectors";
 
 import {
-  DateNowText,
+  // DateNowText,
   ReplyToText,
   MessageInputWrapper,
   ChatBlockWrapper,
@@ -29,8 +32,7 @@ import {
   Wrp,
   ReplyInputWrapper,
   TimestampWrapper,
-  ReplyButton,
-  ReplyIcons,
+
   MessageListItemReply,
   TimestampReply,
   WrpReply,
@@ -41,30 +43,34 @@ import {
   WrapperUsernameReply,
   MessageListItemUsernameReply,
   TimestampWrapperReply,
-  ReplyIconsReply,
+  
   WrapperSecond,
   LineReply,
   WhoReply,
   TextReply,
-  DownloadMoreButton,
+  // DownloadMoreButton,
   ReadMarkWrapper,
+  SelectedMessageText,
 } from "./Chat.styled";
 import FriendInfo from "../FriendInfo/FriendInfo";
 import AddFriendRequest from "../AddFriendRequest/AddFriendRequest";
-// import { connectWebSocketChat, disconnectWebSocketChat } from "websocketChat";
-// import { selectAccessToken } from "redux/auth/authSelectors";
+import { connectWebSocketChat, disconnectWebSocketChat, sendMessageWebSocketChat } from "websocketChat";
+import { selectAccessToken } from "redux/auth/authSelectors";
+import MessageActionMenu from "./MessageActionMenu/MessageActionMenu";
+import { errorNotification } from "helpers/notification";
+import { AppToastContainer } from "components/AppToastContainer/AppToastContainer";
 // import { useParams } from "react-router";
 
 const Chat = (props) => {
   // State for usual messages
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
-
+  
   const [page, setPage] = useState(1);
-  const pageSize = 2;
-
+  // const pageSize = 2;
+const [selectedMessage, setSelectedMessage]=useState(null);
   // const [fetching, setFetching] = useState(true);
-
+const [isOpenMessageMenu, setIsOpenMessageMenu]=useState(false);
   console.log("page:", page);
 
   // State for reply messages
@@ -72,46 +78,127 @@ const Chat = (props) => {
   const [replyMessageId, setReplyMessageId] = useState(null);
   const [replyTo, setReplyTo] = useState(null);
 
+const [isEdit, setIsEdit]=useState(false);
+
   const privateChats = useSelector(selectFetchAllPrivateChats);
   const publicChats = useSelector(selectFetchAllPublicChats);
-//   const accessToken=useSelector(selectAccessToken);
-// const chatSlug=props.params.chatSlug;
+  const accessToken=useSelector(selectAccessToken);
+const chatSlug=props.params.chatSlug;
 
-  // const [socket, setSocket] = useState(null);
+  const [socket, setSocket] = useState(null);
+
+  const bottomRef = useRef(null);
+
+  const [position, setPosition] = useState({ x: null, y: null });
+  const handleWheel = (event) => {
+    // const deltaY = event.deltaY; // Визначаємо напрямок прокрутки (вгору або вниз)
+    // const scrollTop = event.currentTarget.scrollTop; // Поточна прокрутка
+    // const newScrollTop = scrollTop + deltaY; // Нова прокрутка
+ 
+    // setWindowPosition(scrollTop);
+  };
+  const handleMouseClick = ( event,message) => {
+    setIsOpenMessageMenu(prevState=>!prevState)
+  
+   setSelectedMessage(message);
+  
+    const boundingRect = event.target.getBoundingClientRect(); // Отримати координати і розміри батьківського елемента
+   
+  //  console.log("windowPos",windowPosition);
+  //  console.log(boundingRect)
+  //  console.log("eventY",event.clientY)
+   const windowScroll=window.scrollY;
+    const x = event.clientX - boundingRect.left; // Визначити позицію ікс відносно батьківського елемента
+    const y = boundingRect.top + windowScroll; // Визначити позицію ігрик відносно батьківського елемента
+    // console.log(windowScroll);
+    setPosition({ x, y });
+ 
+    // const x = event.clientX; // Координата x відносно документу
+    // const y = event.clientY; // Координата y відносно документу
+    // setPosition({ x, y });
+  };
+
+  useEffect(() => {
+  setIsEdit(false);
+  setIsReply(false);
+      const socket = connectWebSocketChat(chatSlug, accessToken);
+
+      setSocket(socket);
+
+      return () => {
+          disconnectWebSocketChat(socket);
+      };
+  }, [chatSlug,accessToken]);
+
+  useEffect(() => {
+
+    if (socket) {
+        socket.onmessage = (event) => {
+          
+            const messageData = JSON.parse(event.data);
+           console.log(messageData);
+            if (messageData.command === "messages") {
+                setMessages(messageData.messages);
+               
+            } if (messageData.command === "new_message") {
+              setMessages(prevState=>[messageData.message,...prevState]);
+              if (bottomRef.current) {
+                bottomRef.current.scrollIntoView({ behavior: "smooth" });
+              }
+          } if(messageData.command==="deleted_message"){
+          
+            setMessages(prevState=>prevState.filter(message=>{
+             return messageData.deleted !== message.id;}))
+            }
+      if(messageData.command==="edited_message"){
+       
+        setMessages(prevState =>
+          prevState.map(message => {
+              if (messageData.edited.id === message.id) {
+                  return { ...message, content: messageData.edited.content };
+              } else {
+                  return message;
+              }
+          }))
+      } if(messageData.message==="not_creator"){
+        console.log("not_creator")
+        errorNotification("Not creator!");
+      };}
+    
+      }
+}, [socket, messages]);
+
+// const scrollToBottom = () => {
+//   if (bottomRef.current) {
+//     bottomRef.current.scrollIntoView({ behavior: "smooth" });
+//   }
+// };
+// useEffect(() => {
+//   scrollToBottom();
+// }, [messages]);
+//це старі вебсокети
+  // const waitForSocketConnection = useCallback((callback) => {
+  //   setTimeout(function () {
+  //     if (WebSocketInstance.state() === 1) {
+  //       console.log("Connection is secure");
+  //       callback();
+  //     } else {
+  //       console.log("Waiting for connection...");
+  //       waitForSocketConnection(callback);
+  //     }
+  //   }, 100);
+  // }, []);
 
   // useEffect(() => {
     
-  //     const socket = connectWebSocketChat(chatSlug, accessToken);
+  //   WebSocketInstance.connect(props.params.chatSlug, props.accessToken);
 
-  //     setSocket(socket);
-
-  //     return () => {
-  //         disconnectWebSocketChat(socket);
-  //     };
-  // }, [chatSlug]);
-//це старі вебсокети
-  const waitForSocketConnection = useCallback((callback) => {
-    setTimeout(function () {
-      if (WebSocketInstance.state() === 1) {
-        console.log("Connection is secure");
-        callback();
-      } else {
-        console.log("Waiting for connection...");
-        waitForSocketConnection(callback);
-      }
-    }, 100);
-  }, []);
-
-  useEffect(() => {
-    
-    WebSocketInstance.connect(props.params.chatSlug, props.accessToken);
-
-    waitForSocketConnection(() => {
-      WebSocketInstance.addCallbacks(setMessages, addMessage);
-      WebSocketInstance.fetchMessages();
+  //   waitForSocketConnection(() => {
+  //     WebSocketInstance.addCallbacks(setMessages, addMessage);
+  //     WebSocketInstance.fetchMessages();
       
-    });
-  }, [waitForSocketConnection, props.params.chatSlug, props.accessToken]);
+  //   });
+  // }, [waitForSocketConnection, props.params.chatSlug, props.accessToken]);
   //тут кінець старих вебсокетів
 
   useEffect(() => {
@@ -156,9 +243,9 @@ const Chat = (props) => {
   // };
 
   // The new message object returned from the backend is written into the message variable
-  const addMessage = (message) => {
-    setMessages((prevMessages) => [message, ...prevMessages]);
-  };
+  // const addMessage = (message) => {
+  //   setMessages((prevMessages) => [message, ...prevMessages]);
+  // };
 
   const messageChangeHandler = (event) => {
     setMessage(event.target.value);
@@ -166,9 +253,12 @@ const Chat = (props) => {
 
   const sendMessageHandler = (event) => {
     event.preventDefault();
-
-    WebSocketInstance.newChatMessage(message, isReply, replyMessageId);
+    sendMessageWebSocketChat(socket,message, isReply, replyMessageId, isEdit,selectedMessage);
+    // WebSocketInstance.newChatMessage(message, isReply, replyMessageId);
     setMessage("");
+    setIsReply(false);
+   setIsEdit(false);
+    
   };
 
   const renderTimestamp = (timestamp) => {
@@ -189,18 +279,19 @@ const Chat = (props) => {
     }
   };
 
-  const onReplyHandler = async (messageId, messageAuthorName) => {
-    setIsReply(true);
-    setReplyMessageId(messageId);
-    setReplyTo(messageAuthorName);
-  };
+  // const onReplyHandler = async (messageId, messageAuthorName) => {
+  //   setIsReply(true);
+  //   setReplyMessageId(messageId);
+  //   setReplyTo(messageAuthorName);
+  // };
 
   const renderMessages = (messages) => {
     const reversedMessages = [...messages].reverse();
 
     return reversedMessages.map((message, i, arr) => {
       return !message.reply_to ? (
-        <MessageListItem key={`${message.id}_${i}`}>
+        <MessageListItem key={`${message.id}_${i}`} onClick={(event)=>handleMouseClick(event, message)}>
+          {message===selectedMessage && isOpenMessageMenu && <MessageActionMenu position={position} message={message} socket={socket} setIsReply={setIsReply} setReplyMessageId={setReplyMessageId} setReplyTo={setReplyTo}  setIsEdit={setIsEdit} setMessage={setMessage}/>}
           <MessageListItemUsernameWrapper>
             <Wrp>
               <MessageListItemUsernameImageWrapper>
@@ -224,22 +315,23 @@ const Chat = (props) => {
               <ReadMark read={message.read} />
             </ReadMarkWrapper>
             <Timestamp>{renderTimestamp(message.timestamp)}</Timestamp>
-            <ReplyButton
+            {/* <ReplyButton
               onClick={() =>
                 onReplyHandler(message.id, message.author[0].username)
               }
             >
               <ReplyIcons />
-            </ReplyButton>
+            </ReplyButton> */}
           </TimestampWrapper>
         </MessageListItem>
       ) : (
         // When reply
-        <MessageListItemReply key={`${message.id}_${i}`}>
+        <MessageListItemReply key={`${message.id}_${i}`} onClick={(event)=>handleMouseClick(event, message)}>
+           {message===selectedMessage && isOpenMessageMenu && <MessageActionMenu position={position} message={message} socket={socket} setIsReply={setIsReply} setReplyMessageId={setReplyMessageId} setReplyTo={setReplyTo}  setIsEdit={setIsEdit} setMessage={setMessage}/>}
           <WrapperSecond>
             <MessageListItemUsernameImageWrapperReply>
               <MessageListItemUsernameImageReply
-                src={message.reply_to.author[0].image}
+                src={message.author[0].image}
                 alt="avatar"
               />
             </MessageListItemUsernameImageWrapperReply>
@@ -264,15 +356,15 @@ const Chat = (props) => {
               <ReadMark read={message.read} />
             </ReadMarkWrapper>
             <TimestampReply>
-              {renderTimestamp(message.reply_to.timestamp)}
+              {renderTimestamp(message.timestamp)}
             </TimestampReply>
-            <ReplyButton
+            {/* <ReplyButton
               onClick={() =>
                 onReplyHandler(message.id, message.author[0].username)
               }
             >
               <ReplyIconsReply />
-            </ReplyButton>
+            </ReplyButton> */}
           </TimestampWrapperReply>
         </MessageListItemReply>
       );
@@ -283,11 +375,11 @@ const Chat = (props) => {
   //   setPage((prevState) => prevState + 1);
   // };
 
-  const onLoadMore = () => {
-    const nextPage = page + 1;
-    WebSocketInstance.fetchMessages(nextPage, pageSize);
-    setPage(nextPage);
-  };
+  // const onLoadMore = () => {
+  //   const nextPage = page + 1;
+  //   WebSocketInstance.fetchMessages(nextPage, pageSize);
+  //   setPage(nextPage);
+  // };
 
   const onResetPage = () => {
     setPage(1);
@@ -304,26 +396,48 @@ const Chat = (props) => {
           height: "calc(100% - 80px)",
          
         }}>
-          <ChatBlockWrapper className="messages-wrapper">
+          <ChatBlockWrapper className="messages-wrapper" >
             {!messages?.length ? (
               <NoMessagesSvg />
             ) : (
               <><AddFriendRequest/>
-                <DateNowText>Today</DateNowText>
+                {/* <DateNowText>Today</DateNowText> */}
                 {/* <MessageList className="messages" onScroll={handleScroll}> */}
-                <MessageList className="messages">
+                <MessageList className="messages" onScroll={handleWheel}>
                   {messages && renderMessages(messages)}
+                
+                 <div ref={bottomRef}></div>
                 </MessageList>
-                <DownloadMoreButton onClick={onLoadMore}>
+                {/* <DownloadMoreButton onClick={onLoadMore}>
                   More messages
-                </DownloadMoreButton>
+                </DownloadMoreButton> */}
               </>
             )}
-            <MessageInputWrapper>
-              {isReply && (
+            <MessageInputWrapper >
+              {isReply  && (
                 <ReplyInputWrapper>
-                  <ReplyToText>I am replying to {replyTo}</ReplyToText>
-                  <button onClick={() => setIsReply(false)}>Close</button>
+                  <div className="container">
+                  <ReplyIconBig style={{marginRight:"18px"}}/>
+                  <PurpleLineIcon/>
+                  <div className="small-container">
+                  <ReplyToText>Reply to @{replyTo}</ReplyToText>
+                  <SelectedMessageText>{selectedMessage.content}</SelectedMessageText>
+                  </div>
+                  </div>
+                  <button onClick={() => setIsReply(false)}><CloseIcon/></button>
+                </ReplyInputWrapper>
+              )}
+              {isEdit && (
+                <ReplyInputWrapper>
+                  <div className="container">
+                  <EditIconBig style={{marginRight:"18px"}}/>
+                  <PurpleLineIcon/>
+                  <div className="small-container">
+                  <ReplyToText>Edit Message</ReplyToText>
+                  <SelectedMessageText>{selectedMessage.content}</SelectedMessageText>
+                  </div>
+                  </div>
+                  <button onClick={() => setIsEdit(false)}><CloseIcon/></button>
                 </ReplyInputWrapper>
               )}
               <MessageInput
@@ -334,6 +448,7 @@ const Chat = (props) => {
             </MessageInputWrapper>
           </ChatBlockWrapper>
           <FriendInfo />
+          <AppToastContainer />
         </div>
       )}
     </>
