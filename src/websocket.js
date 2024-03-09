@@ -18,7 +18,7 @@ class WebSocketService {
   }
 
   connect(chatSlug, accessToken) {
-    const path = `wss://backend/ws/chat/${chatSlug}/?token=${accessToken}`;
+    const path = `wss://buzz-talk-api.onrender.com/ws/chat/${chatSlug}/?token=${accessToken}`;
     // const path = `ws://127.0.0.1:8000/ws/chat/${chatSlug}/?token=${accessToken}`;
 
     this.socketRef = new WebSocket(path);
