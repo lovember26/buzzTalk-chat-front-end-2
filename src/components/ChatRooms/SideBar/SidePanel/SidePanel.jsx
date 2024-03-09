@@ -20,7 +20,7 @@ import { ReactComponent as AddChatButton } from "../../../../images/addChatBtn.s
 import { ReactComponent as ChatsBtn } from "../../../../images/chatsBtn.svg";
 import { ReactComponent as SearchIcon } from "../../../../images/search.svg";
 
-import { connectWebSocketNotification, disconnectWebSocketNotification } from "../../../../websocketNotification.js"
+// import { connectWebSocketNotification, disconnectWebSocketNotification } from "../../../../websocketNotification.js"
 
 import {
   SearchBar,
@@ -39,13 +39,13 @@ import {
 // import { ChatProvider } from "contexts/ChatContext";
 import { useChat } from "contexts/ChatContext";
 import { SearchChatList } from "components/SearchChatList/SearchChatList";
-import { selectAccessToken } from "redux/auth/authSelectors";
+// import { selectAccessToken } from "redux/auth/authSelectors";
 
 export default function SidePanel() {
   const [modalActive, setModalActive] = useState(false);
   const [value, setValue] = useState("");
   const { results } = useSelector(selectAllUsers);
-const accessToken=useSelector(selectAccessToken);
+// const accessToken=useSelector(selectAccessToken);
   const { isPrivateChat } = useChat();
 
   const dispatch = useDispatch();
@@ -58,17 +58,17 @@ const accessToken=useSelector(selectAccessToken);
     setValue(target.value);
   };
 
-  const [socket, setSocket] = useState(null);
+  // const [socket, setSocket] = useState(null);
 
-  useEffect(() => {
-      const socket = connectWebSocketNotification(accessToken);
+  // useEffect(() => {
+  //     const socket = connectWebSocketNotification(accessToken);
 
-      setSocket(socket);
+  //     setSocket(socket);
 
-      return () => {
-          disconnectWebSocketNotification(socket);
-      };
-  }, []);
+  //     return () => {
+  //         disconnectWebSocketNotification(socket);
+  //     };
+  // }, []);
 
   return (
     <>
