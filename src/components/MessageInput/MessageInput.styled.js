@@ -4,14 +4,15 @@ import { BsSend } from "react-icons/bs";
 import { ReactComponent as PinIcon } from "../../images/pin.svg";
 import { ReactComponent as MicIcon } from "../../images/mic.svg";
 import { ReactComponent as EmojiIcon } from "../../images/emoji.svg";
+import { theme } from "theme";
 
 export const StyledForm = styled.form`
 width:100%;
-  padding: 12px 34px;
+  padding: 12px 24px;
   height: 60px;
   position:relative;
   border-radius: 24px;
-  background: #7e5d88;
+  background: ${theme.colors.BTN_COLOR_HOVER};
 `;
 
 export const Input = styled.input`

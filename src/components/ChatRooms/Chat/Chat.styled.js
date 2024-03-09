@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { BsReply } from "react-icons/bs";
+import { theme } from "theme";
 
 export const ChatBlockWrapper = styled.div`
   position: relative;
@@ -81,10 +82,11 @@ export const ActionBar = styled.ul`
 `;
 
 export const MessageList = styled.ul`
+
   display: flex;
   flex-direction: column;
-
-  height: calc(100vh - 320px);
+height:100%;
+  // height: calc(100vh - 320px);
   overflow-y: auto;
 
   ::-webkit-scrollbar {
@@ -204,23 +206,39 @@ export const MessageInputWrapper = styled.div`
   display: flex;
   flex-direction: column;
 
-  background-color: lightgray;
+ background: ${theme.colors.BTN_COLOR_HOVER};
 
   border-radius: 24px;
 `;
 
-export const ReplyToText = styled.p``;
+export const ReplyToText = styled.p`
+font-size:14px;
+color:${theme.colors.MAIN_COLOR}`;
+
+export const SelectedMessageText=styled.p`
+font-size:12px;
+color:${theme.colors.white[100]};
+`
 
 export const ReplyInputWrapper = styled.div`
   padding-top: 12px;
-  padding-left: 34px;
-  padding-right: 34px;
-
+  padding-left: 24px;
+  padding-right: 24px;
+  margin-bottom:-12px;
+  z-index:999;
+// border:1px solid red;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-
-  margin-bottom: 12px;
+align-items:flex-start;
+  .container{
+    display:flex;
+    align-items:center;
+    gap:4px;
+  }
+  .small-container{
+   
+  }
 `;
 
 // Reply

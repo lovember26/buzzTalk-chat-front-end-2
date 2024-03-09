@@ -7,7 +7,7 @@ export default function ChatRoom() {
       style={{
         display: "flex",
         flexDirection: "column",
-      
+      height:"100vh",
         // minHeight: "100%",
         width: "calc(100% - 336px)",
       }}
