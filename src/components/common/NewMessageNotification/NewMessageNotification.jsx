@@ -12,7 +12,7 @@ export default function NewMessageNotification({setIsVisible, notification}) {
 
    
     return () => clearTimeout(timer);
-  }, []);
+  }, [setIsVisible]);
     return (
     notification &&  <NotificationWrapper>
         <NowWrap>Now</NowWrap>
