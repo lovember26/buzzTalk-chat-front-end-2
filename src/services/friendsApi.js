@@ -8,7 +8,7 @@ axios.defaults.baseURL = BASE_URL;
 
 export const addFriend = async ( username) => {
     const { data } = await axios.post(
-      `/chat/friends/add-request/`,
+      `/chat/friends/add/`,
       {
         username,
         // headers: {

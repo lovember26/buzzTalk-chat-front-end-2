@@ -20,5 +20,5 @@ export const routes = {
   PROFILE_PAGE: "/profile",
   EDIT_PROFILE_PAGE: "/profile/edit",
 
-  RESTRICTED_PUBLIC_PAGE: "/chat-rooms/friends",
+  RESTRICTED_PUBLIC_PAGE: "/chat-rooms/friends/add-friend",
 };

@@ -9,35 +9,49 @@ import { theme } from "theme";
 export const StyledForm = styled.form`
 width:100%;
   padding: 12px 24px;
-  height: 60px;
+  min-height: 60px;
   position:relative;
   border-radius: 24px;
   background: ${theme.colors.BTN_COLOR_HOVER};
 `;
 
-export const Input = styled.input`
+export const Input = styled.textarea`
   width: 100%;
-  height: 100%;
+  height: 36px ;
   padding: 10px 12px;
   border-radius: 24px;
   background: #f39f5a;
-  border: none;
-
+  font-size:12px;
+  overflow:hidden;
+  resize: none;
   margin-left: 20px;
   margin-right: 20px;
-
+  ;
+  outline:none;
+  border:none;
+color:white;
   &::placeholder {
     color: white;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 500;
   }
-
+&:focus{
+  outline:none;
+  border:none;
+}
   &[value] {
     color: white;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 500;
   }
 `;
+export const MessageLimitMessage=styled.p`
+font-size:10px;
+color:white;
+opacity:0.5;
+position:absolute;
+left:55px;
+bottom:5px;`
 
 export const Pin = styled(PinIcon)`
   fill: white;
@@ -49,7 +63,8 @@ export const Mic = styled(MicIcon)`
 `;
 export const Emoji = styled(EmojiIcon)`
   position: absolute;
-  right: 85px;
+  bottom:5px;
+  right: 80px;
   fill: #f39f5a;
   width: 24px;
 `;

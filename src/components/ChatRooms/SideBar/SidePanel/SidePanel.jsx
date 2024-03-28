@@ -20,7 +20,7 @@ import { ReactComponent as AddChatButton } from "../../../../images/addChatBtn.s
 import { ReactComponent as ChatsBtn } from "../../../../images/chatsBtn.svg";
 import { ReactComponent as SearchIcon } from "../../../../images/search.svg";
 
-// import { connectWebSocketNotification, disconnectWebSocketNotification } from "../../../../websocketNotification.js"
+import { connectWebSocketNotification, disconnectWebSocketNotification } from "../../../../websocketNotification.js"
 
 import {
   SearchBar,
@@ -39,17 +39,18 @@ import {
 // import { ChatProvider } from "contexts/ChatContext";
 import { useChat } from "contexts/ChatContext";
 import { SearchChatList } from "components/SearchChatList/SearchChatList";
-// import { selectAccessToken } from "redux/auth/authSelectors";
+import { selectAccessToken } from "redux/auth/authSelectors";
+import NewMessageNotification from "components/common/NewMessageNotification/NewMessageNotification";
 
 export default function SidePanel() {
   const [modalActive, setModalActive] = useState(false);
   const [value, setValue] = useState("");
   const { results } = useSelector(selectAllUsers);
-// const accessToken=useSelector(selectAccessToken);
+const accessToken=useSelector(selectAccessToken);
   const { isPrivateChat } = useChat();
-
+const [notification, setNotification]=useState(null);
   const dispatch = useDispatch();
-
+  const [isVisible, setIsVisible] = useState(false);
   useEffect(() => {
     dispatch(fetchAllUsersThunk());
   }, [dispatch]);
@@ -58,17 +59,33 @@ export default function SidePanel() {
     setValue(target.value);
   };
 
-  // const [socket, setSocket] = useState(null);
+  const [socket, setSocket] = useState(null);
 
-  // useEffect(() => {
-  //     const socket = connectWebSocketNotification(accessToken);
+  useEffect(() => {
+      const socket = connectWebSocketNotification(accessToken);
 
-  //     setSocket(socket);
+      setSocket(socket);
 
-  //     return () => {
-  //         disconnectWebSocketNotification(socket);
-  //     };
-  // }, []);
+      return () => {
+          disconnectWebSocketNotification(socket);
+          
+      };
+  }, [accessToken]);
+  useEffect(() => {
+
+    if (socket) {
+        socket.onmessage = (event) => {
+          
+            const messageData = JSON.parse(event.data);
+        
+            if (messageData.type === "new_message") {
+             
+              setIsVisible(true);
+
+              setNotification(messageData.message)
+            }}}
+   
+          },[socket])
 
   return (
     <>
@@ -93,7 +110,7 @@ export default function SidePanel() {
           <Title>
             {isPrivateChat ? "Private messages" : "Public messages"}
           </Title>
-
+         
           <Form>
             <SearchIcon />
             <SearchInput
@@ -110,12 +127,14 @@ export default function SidePanel() {
 
          {value==="" ? <PrivateChatList  /> : <SearchChatList searchQuery={value}/>}
         </SearchBar>
+       
       </StyledSideBar>
-
+     {isVisible && <NewMessageNotification setIsVisible={setIsVisible} notification={notification}/>}
       <Modal active={modalActive} setActive={setModalActive}>
         <ChatModal users={results} setActive={setModalActive} />
       </Modal>
       <Outlet />
+     
     </>
   );
 }
