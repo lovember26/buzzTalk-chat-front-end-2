@@ -68,11 +68,11 @@ const Chat = (props) => {
   const [message, setMessage] = useState("");
   
   const [page, setPage] = useState(1);
-  const pageSize = 5;
+  
 const [selectedMessage, setSelectedMessage]=useState(null);
   // const [fetching, setFetching] = useState(true);
 const [isOpenMessageMenu, setIsOpenMessageMenu]=useState(false);
-  console.log("page:", page);
+  // console.log("page:", page);
 
   // State for reply messages
   const [isReply, setIsReply] = useState(false);
@@ -198,10 +198,16 @@ useEffect(() => {
 const handleScroll = () => {
   if (chatRef.current.scrollTop === 0) {
     setPage(prevState=>prevState + 1)
-    console.log(page);
-    fetchPreviousMessages(socket,page,pageSize)
+ 
+    const newPage=page+1;
+  
+    fetchPreviousMessages(socket,newPage)
+
   }
 };
+
+
+
 //це старі вебсокети
   // const waitForSocketConnection = useCallback((callback) => {
   //   setTimeout(function () {
