@@ -69,15 +69,15 @@ const disconnectWebSocketChat = (socket) => {
         socket.close();
     }
 };
-const fetchPreviousMessages=(socket,page,page_size)=>{
-    if (socket.readyState === WebSocket.OPEN) {
+const fetchPreviousMessages=(socket,page)=>{
+    if (socket.readyState === WebSocket.OPEN && page>1) {
         const messageData =
         {
             command: "fetch_messages",
             page,
-            page_size,
+          
           };
-        
+        console.log("fetch",messageData);
         socket.send(JSON.stringify(messageData));
         
     } 
