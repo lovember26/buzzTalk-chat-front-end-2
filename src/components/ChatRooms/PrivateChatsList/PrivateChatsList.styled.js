@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { NavLink } from "react-router-dom";
+import { theme } from "theme";
 
 export const ChatList = styled.ul`
   display: flex;
@@ -57,3 +58,15 @@ export const ChatItemText = styled.p`
   color: white;
   font-size: 12px;
 `;
+
+export const UnreadCounter=styled.span`
+display:flex;
+align-items:center;
+justify-content:center;
+margin-left:5px;
+width:15px;
+height:15px;
+background-color:${theme.colors.MAIN_COLOR};
+border-radius:50%;
+color:white;
+font-size:10px;`

@@ -6,6 +6,7 @@ export const fetchAllPrivateChatsThunk = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const chats = await chatAPI.getPrivateChatsService();
+      console.log("thunk", chats);
       return chats;
     } catch (error) {
       return rejectWithValue(error.message);

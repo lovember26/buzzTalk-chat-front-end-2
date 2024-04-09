@@ -5,15 +5,17 @@ import {ReactComponent as CancelFriendIcon} from '../../../images/cancel-gray.sv
 import { useChat } from "contexts/ChatContext";
 import { addFriend, removeFriend } from "services/friendsApi";
 import { useEffect } from "react";
-
+import {useDispatch} from "react-redux";
+import { fetchAllPrivateChatsThunk } from "redux/chat/chatThunk";
 
 export default function AddFriendPopUp({isOpen, setIsOpen}) {
   const {isFriend,setIsFriend, isPrivateChat, privateChatName}=useChat();
- 
+ const dispatch= useDispatch();
 
   const handleAddFriend=()=>{
     if(isPrivateChat){
       addFriend(privateChatName);
+      dispatch(fetchAllPrivateChatsThunk());
     setIsFriend(true);}
   setIsOpen(false);
   }
@@ -22,7 +24,8 @@ export default function AddFriendPopUp({isOpen, setIsOpen}) {
     if(isPrivateChat){
      console.log("hello");
       removeFriend(privateChatName);
-    setIsFriend(false);}
+    setIsFriend(false);
+    dispatch(fetchAllPrivateChatsThunk());}
   setIsOpen(false);
   }
 const handleCancel=()=>{
