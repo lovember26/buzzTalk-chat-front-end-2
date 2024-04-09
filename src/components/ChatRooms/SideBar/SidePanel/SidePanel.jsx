@@ -42,6 +42,8 @@ import { SearchChatList } from "components/SearchChatList/SearchChatList";
 import { selectAccessToken } from "redux/auth/authSelectors";
 import NewMessageNotification from "components/common/NewMessageNotification/NewMessageNotification";
 
+import { fetchAllPrivateChatsThunk } from "redux/chat/chatThunk";
+
 export default function SidePanel() {
   const [modalActive, setModalActive] = useState(false);
   const [value, setValue] = useState("");
@@ -51,6 +53,8 @@ const accessToken=useSelector(selectAccessToken);
 const [notification, setNotification]=useState(null);
   const dispatch = useDispatch();
   const [isVisible, setIsVisible] = useState(false);
+// const [unreaded, setUnreaded]=useState(null);
+const [onlineUsers, setOnlineUsers]=useState(null);
   useEffect(() => {
     dispatch(fetchAllUsersThunk());
   }, [dispatch]);
@@ -71,6 +75,23 @@ const [notification, setNotification]=useState(null);
           
       };
   }, [accessToken]);
+  // const unreadMessageCounter=(messageData)=>{
+  //  console.log("counter");
+  //               const updatedState = [...unreaded]; 
+               
+  //               const existingItemIndex = updatedState.findIndex(item => item.slug === messageData.chat_slug);
+            
+  //               if (existingItemIndex !== -1) {
+                    
+  //                   updatedState[existingItemIndex].count++;
+  //               } else {
+                   
+  //                   updatedState.push({ slug: messageData.chat_slug, count: 1 });
+  //               }
+            
+  //               setUnreaded( updatedState);
+  //           };
+  
   useEffect(() => {
 
     if (socket) {
@@ -83,9 +104,23 @@ const [notification, setNotification]=useState(null);
               setIsVisible(true);
 
               setNotification(messageData.message)
-            }}}
+              dispatch(fetchAllPrivateChatsThunk());
+              console.log("notification", messageData)
+// unreadMessageCounter(messageData);
+           
+            } else if (messageData.type==="users_online_updates"){
+
+setOnlineUsers(messageData.users_online);
+console.log("online", messageData.users_online);
+            }
+            else{
+            console.log("notification", messageData)
+            }
+          
+          }}
    
-          },[socket])
+          },[socket, dispatch])
+        
 
   return (
     <>
@@ -125,7 +160,7 @@ const [notification, setNotification]=useState(null);
             <FriendsLink to={"friends/all"}>Friends</FriendsLink>
           </FriendsLinkWrapper>
 
-         {value==="" ? <PrivateChatList  /> : <SearchChatList searchQuery={value}/>}
+         {value==="" ? <PrivateChatList onlineUsers={onlineUsers}/> : <SearchChatList searchQuery={value}/>}
         </SearchBar>
        
       </StyledSideBar>

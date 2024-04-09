@@ -6,6 +6,7 @@ axios.defaults.baseURL = BASE_URL;
 
 export const getPrivateChatsService = async () => {
   const { data } = await axios.get("/chat/private-chat/");
+  console.log("чати", data);
   return data;
 };
 
@@ -83,3 +84,4 @@ export const changeChatByIdService = async (object, id) => {
   const { data } = await axios.patch(`/chat/${id}/update/`);
   return data;
 };
+

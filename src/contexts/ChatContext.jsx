@@ -19,6 +19,7 @@ export const ChatProvider = ({ children }) => {
   const [publicChatParticipants, setPublicChatParticipants]=useState(null);
   const [isFriend,setIsFriend]=useState(null);
 
+
   return (
     <ChatContext.Provider
       value={{
@@ -38,6 +39,7 @@ export const ChatProvider = ({ children }) => {
         setPublicChatImage,
         publicChatParticipants, setPublicChatParticipants,
         isFriend, setIsFriend,
+     
       }}
     >
       {children}
