@@ -30,7 +30,7 @@ const removeFriendFromList = (username) => {
   const updatedUserFriends = userFriends.filter(item => item.username !== username);
 
  setUserFriends(updatedUserFriends);
- console.log(updatedUserFriends);
+ 
 }
   const handleMoreIcon=(friend)=>{
     

@@ -47,7 +47,7 @@ import { fetchAllPrivateChatsThunk } from "redux/chat/chatThunk";
 export default function SidePanel() {
   const [modalActive, setModalActive] = useState(false);
   const [value, setValue] = useState("");
-  const { results } = useSelector(selectAllUsers);
+  const results  = useSelector(selectAllUsers);
 const accessToken=useSelector(selectAccessToken);
   const { isPrivateChat } = useChat();
 const [notification, setNotification]=useState(null);

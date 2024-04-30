@@ -40,7 +40,7 @@ const CreatePublicChat = ({ users, handleNavigate, setActive }) => {
   const [userPublicChatChoice, setUserPublicChatChoice] = useState(null);
   const [privateChatName, ,] = useState("");
   const [file, setFile] = useState("");
-  console.log("file", file);
+ 
 
   const dispatch = useDispatch();
   const filePicker = useRef(null);
@@ -59,8 +59,7 @@ const CreatePublicChat = ({ users, handleNavigate, setActive }) => {
     },
   });
 
-  console.log("errors", errors);
-  console.log("isValid", isValid);
+ 
 
   const onSubmit = async ({ title, participants }) => {
     console.log("participants", participants);
@@ -87,8 +86,8 @@ const CreatePublicChat = ({ users, handleNavigate, setActive }) => {
   };
 
   const titleError = selectInputNotification(errors["title"]);
-  // const participantsError = selectInputNotification(errors["participants"]);
-  console.log("titleError", titleError);
+  const participantsError = selectInputNotification(errors["participants"]);
+  
 
   return (
     <Wrapper>
@@ -144,18 +143,18 @@ const CreatePublicChat = ({ users, handleNavigate, setActive }) => {
 
         <>
           <SelectPublicChat
-            // register={{ ...register("participants") }}
-            // value={watch("participants")}
-            // error={participantsError}
+            register={{ ...register("participants") }}
+            value={watch("participants")}
+            error={participantsError}
             users={users}
             choice={userPublicChatChoice}
             setChoice={setUserPublicChatChoice}
           />
 
-          {/* {!userPublicChatChoice && (
+          {!userPublicChatChoice && (
             <InputNotification text={"Choose friends to create a chat!"} />
-          )} */}
-          {/* {participantsError ? (
+          )}
+          {participantsError ? (
             <InputNotification
               text={participantsError}
               error={participantsError}
@@ -165,7 +164,7 @@ const CreatePublicChat = ({ users, handleNavigate, setActive }) => {
             <InputNotification
               text={createPublicChatPageRules.PUBLIC_CHAT_TITLE}
             />
-          )} */}
+          )}
         </>
 
         <ButtonsWrapper>
