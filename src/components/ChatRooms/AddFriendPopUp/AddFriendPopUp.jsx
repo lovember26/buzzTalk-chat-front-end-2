@@ -22,7 +22,7 @@ export default function AddFriendPopUp({isOpen, setIsOpen}) {
 
   const handleRemoveFriend=()=>{
     if(isPrivateChat){
-     console.log("hello");
+  
       removeFriend(privateChatName);
     setIsFriend(false);
     dispatch(fetchAllPrivateChatsThunk());}

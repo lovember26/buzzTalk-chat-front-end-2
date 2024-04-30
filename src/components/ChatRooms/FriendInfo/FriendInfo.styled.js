@@ -28,6 +28,7 @@ export const AvatarBlock = styled.div`
     background-color: black;
     border-radius: 50%;
   }
+  
   p {
     color: ${theme.colors.white[100]};
     font-size: 15px;

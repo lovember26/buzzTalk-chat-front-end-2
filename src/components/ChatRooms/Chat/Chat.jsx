@@ -139,14 +139,14 @@ const chatSlug=props.params.chatSlug;
         socket.onmessage = (event) => {
           
             const messageData = JSON.parse(event.data);
-             console.log(messageData);
-           console.log(messageData);
+            
+          
             if (messageData.command === "messages") {
               if(page===1){
                setToScroll(true);
                 setMessages(messageData.messages);
               } else{
-                console.log("туткаво:", messageData.messages, messages)
+             
                 setToScroll(false);
                 prevScrollHeightRef.current = chatRef.current.scrollHeight;
               setMessages([...messages,...messageData.messages]);
@@ -174,7 +174,7 @@ const chatSlug=props.params.chatSlug;
           }))
       } if(messageData.message==="not_creator"){
         setToScroll(true);
-        console.log("not_creator")
+      
         errorNotification("Not creator!");
       };}
     
@@ -320,7 +320,7 @@ const handleScroll = () => {
 
   const renderMessages = (messages) => {
     const reversedMessages = [...messages].reverse();
-
+console.log(reversedMessages);
     return reversedMessages.map((message, i, arr) => {
       return !message.reply_to ? (
         <MessageListItem key={`${message.id}_${i}`} onClick={(event)=>handleMouseClick(event, message)} >

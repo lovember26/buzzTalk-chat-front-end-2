@@ -113,7 +113,8 @@ export const inputCreatePublicChatSchema = yup.object({
   title: yup
     .string()
     .min(1, "*Title must contain at least one letter")
-    .max(10, "*The title exceeds the maximum 150 length")
+    .max(30, "*The title exceeds the maximum 30 length")
+    .matches(/^[\u0020-\uD7FF\uE000-\uFFFD]*$/, "Only UTF-8 characters are allowed")
     .required("*This field is required"),
   // participants: yup.array().required("*This field is required"),
 });

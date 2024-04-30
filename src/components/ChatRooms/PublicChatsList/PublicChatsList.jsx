@@ -23,7 +23,8 @@ export const PublicChatsList = () => {
     setPublicChatName,
     setIsPrivateChat,
     setPublicChatImage,
-    setPublicChatParticipants
+    setPublicChatParticipants,
+    setPublicChatId,
   } = useChat();
 
   const dispatch = useDispatch();
@@ -40,12 +41,14 @@ export const PublicChatsList = () => {
   //   await dispatch(fetchAllPublicChatsThunk(username));
   // }, [dispatch, username]);
 
-  const onClickChatHandler = (slug, isPrivateChat, title, image, participants) => {
+  const onClickChatHandler = (slug, isPrivateChat, title, image, participants,id) => {
+   
     setChatSlug(slug);
     setIsPrivateChat(isPrivateChat);
     setPublicChatName(title);
     setPublicChatImage(image);
     setPublicChatParticipants(participants);
+    setPublicChatId(id);
   };
 
   return (
@@ -60,7 +63,8 @@ export const PublicChatsList = () => {
                   chat.is_private,
                   chat.title,
                   chat.image || chat.gravatar,
-                  chat.participants
+                  chat.participants,
+                  chat.id,
                 )
               }
               to={`chats/${chat?.slug}`}

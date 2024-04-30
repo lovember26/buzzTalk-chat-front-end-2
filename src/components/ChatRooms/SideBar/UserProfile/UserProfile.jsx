@@ -30,7 +30,7 @@ export default function UserProfile() {
   
   const username = useSelector(selectUserName);
   const description = useSelector(selectUserDescription);
-  const image = useSelector(selectUserImage);
+  const [image, setImage] = useState(useSelector(selectUserImage));
   const [file, setFile] = useState("");
   
   const [isProfileOpen, setIsProfileOpen]=useState(false);
@@ -51,14 +51,15 @@ const {
   },
 });
 const onSubmit = async ({ name, aboutMe }) => {
-  console.log("hello");
+
   try {
     const formData = new FormData();
 
-    formData.append("image", file);
-    formData.append("username", name);
-    formData.append("description", aboutMe);
-
+  
+    formData.append('username', name);
+    formData.append('description', aboutMe);
+    formData.append('image', file);
+  
     await dispatch(updateUserInfoThunk(formData));
     setIsEditOpen(false);
   } catch (error) {
@@ -163,7 +164,7 @@ const aboutError = selectInputNotification(errors["aboutMe"]);
         <button className="deleteBtn">Delete account</button>
         <button className="logOutBtn" onClick={handlelogOut}>Log out</button></div></div>):(
           <div className="edit-container">
-             {isPopUpOpen && <EditPhotoPopUp setFile={setFile} setIsPopUpOpen={setIsPopUpOpen}/>}
+             {isPopUpOpen && <EditPhotoPopUp setFile={setFile} setIsPopUpOpen={setIsPopUpOpen} setImage={setImage}/>}
             <button className="hideUser" onClick={closeProfile}>
           <HideUser />
         </button>
