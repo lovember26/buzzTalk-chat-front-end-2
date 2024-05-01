@@ -6,6 +6,7 @@ axios.defaults.baseURL = BASE_URL;
 
 export const getPrivateChatsService = async () => {
   const { data } = await axios.get("/chat/private-chat/");
+ 
   return data;
 };
 
@@ -52,13 +53,17 @@ export const updatePublicChatService = async (credentials) => {
   return data;
 };
 
-export const generatePublicChatGravatarService = async (id) => {
-  const { data } = await axios.put("/chat/public-chat/generate-gravatar/", id);
+export const generatePublicChatGravatarService = async (chat_id) => {
+
+  const { data } = await axios.put("/chat/public-chat/generate-gravatar/", {chat_id});
+ 
   return data;
 };
 
-export const removePublicChatImageService = async (id) => {
-  const { data } = await axios.delete("/chat/public-chat/delete-image/", id);
+export const removePublicChatImageService = async (chat_id) => {
+
+  const { data } = await axios.delete("/chat/public-chat/delete-image/", { data: { chat_id } });
+
   return data;
 };
 
@@ -83,3 +88,4 @@ export const changeChatByIdService = async (object, id) => {
   const { data } = await axios.patch(`/chat/${id}/update/`);
   return data;
 };
+

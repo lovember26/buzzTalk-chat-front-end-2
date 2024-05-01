@@ -51,10 +51,11 @@ import {
   // DownloadMoreButton,
   ReadMarkWrapper,
   SelectedMessageText,
+  EditedText,
 } from "./Chat.styled";
 import FriendInfo from "../FriendInfo/FriendInfo";
 import AddFriendRequest from "../AddFriendRequest/AddFriendRequest";
-import { connectWebSocketChat, disconnectWebSocketChat, sendMessageWebSocketChat } from "websocketChat";
+import { connectWebSocketChat, disconnectWebSocketChat, fetchPreviousMessages, sendMessageWebSocketChat } from "websocketChat";
 import { selectAccessToken } from "redux/auth/authSelectors";
 import MessageActionMenu from "./MessageActionMenu/MessageActionMenu";
 import { errorNotification } from "helpers/notification";
@@ -67,11 +68,11 @@ const Chat = (props) => {
   const [message, setMessage] = useState("");
   
   const [page, setPage] = useState(1);
-  // const pageSize = 2;
+  
 const [selectedMessage, setSelectedMessage]=useState(null);
   // const [fetching, setFetching] = useState(true);
 const [isOpenMessageMenu, setIsOpenMessageMenu]=useState(false);
-  console.log("page:", page);
+  // console.log("page:", page);
 
   // State for reply messages
   const [isReply, setIsReply] = useState(false);
@@ -79,7 +80,7 @@ const [isOpenMessageMenu, setIsOpenMessageMenu]=useState(false);
   const [replyTo, setReplyTo] = useState(null);
 
 const [isEdit, setIsEdit]=useState(false);
-
+const [toScroll, setToScroll]=useState(true);
   const privateChats = useSelector(selectFetchAllPrivateChats);
   const publicChats = useSelector(selectFetchAllPublicChats);
   const accessToken=useSelector(selectAccessToken);
@@ -88,15 +89,16 @@ const chatSlug=props.params.chatSlug;
   const [socket, setSocket] = useState(null);
 
   const bottomRef = useRef(null);
-
+  const chatRef = useRef(null);
+  const prevScrollHeightRef = useRef(0);
   const [position, setPosition] = useState({ x: null, y: null });
-  const handleWheel = (event) => {
+  // const handleWheel = (event) => {
     // const deltaY = event.deltaY; // Визначаємо напрямок прокрутки (вгору або вниз)
     // const scrollTop = event.currentTarget.scrollTop; // Поточна прокрутка
     // const newScrollTop = scrollTop + deltaY; // Нова прокрутка
  
     // setWindowPosition(scrollTop);
-  };
+  // };
   const handleMouseClick = ( event,message) => {
     setIsOpenMessageMenu(prevState=>!prevState)
   
@@ -121,6 +123,7 @@ const chatSlug=props.params.chatSlug;
   useEffect(() => {
   setIsEdit(false);
   setIsReply(false);
+  setMessage('');
       const socket = connectWebSocketChat(chatSlug, accessToken);
 
       setSocket(socket);
@@ -136,46 +139,75 @@ const chatSlug=props.params.chatSlug;
         socket.onmessage = (event) => {
           
             const messageData = JSON.parse(event.data);
-           console.log(messageData);
+            
+          
             if (messageData.command === "messages") {
+              if(page===1){
+               setToScroll(true);
                 setMessages(messageData.messages);
-               
+              } else{
+             
+                setToScroll(false);
+                prevScrollHeightRef.current = chatRef.current.scrollHeight;
+              setMessages([...messages,...messageData.messages]);
+              }
             } if (messageData.command === "new_message") {
+              setToScroll(true);
               setMessages(prevState=>[messageData.message,...prevState]);
               if (bottomRef.current) {
                 bottomRef.current.scrollIntoView({ behavior: "smooth" });
               }
           } if(messageData.command==="deleted_message"){
-          
+            setToScroll(true);
             setMessages(prevState=>prevState.filter(message=>{
              return messageData.deleted !== message.id;}))
             }
       if(messageData.command==="edited_message"){
-       
+        setToScroll(false);
         setMessages(prevState =>
           prevState.map(message => {
               if (messageData.edited.id === message.id) {
-                  return { ...message, content: messageData.edited.content };
+                  return { ...message, content: messageData.edited.content, edited:true };
               } else {
                   return message;
               }
           }))
       } if(messageData.message==="not_creator"){
-        console.log("not_creator")
+        setToScroll(true);
+      
         errorNotification("Not creator!");
       };}
     
       }
-}, [socket, messages]);
+}, [socket, messages,page]);
 
-// const scrollToBottom = () => {
-//   if (bottomRef.current) {
-//     bottomRef.current.scrollIntoView({ behavior: "smooth" });
-//   }
-// };
-// useEffect(() => {
-//   scrollToBottom();
-// }, [messages]);
+const scrollToBottom = () => {
+  if (bottomRef.current) {
+    bottomRef.current.scrollIntoView({ behavior: "smooth" });
+  }
+};
+useEffect(() => {
+  if (toScroll){
+  scrollToBottom();}
+  else{
+    chatRef.current.scrollTop =
+        chatRef.current.scrollHeight - prevScrollHeightRef.current;
+  }
+}, [messages, toScroll]);
+
+const handleScroll = () => {
+  if (chatRef.current.scrollTop === 0) {
+    setPage(prevState=>prevState + 1)
+ 
+    const newPage=page+1;
+  
+    fetchPreviousMessages(socket,newPage)
+
+  }
+};
+
+
+
 //це старі вебсокети
   // const waitForSocketConnection = useCallback((callback) => {
   //   setTimeout(function () {
@@ -253,12 +285,13 @@ const chatSlug=props.params.chatSlug;
 
   const sendMessageHandler = (event) => {
     event.preventDefault();
+   if(message.trim()!==""){
     sendMessageWebSocketChat(socket,message, isReply, replyMessageId, isEdit,selectedMessage);
     // WebSocketInstance.newChatMessage(message, isReply, replyMessageId);
     setMessage("");
     setIsReply(false);
    setIsEdit(false);
-    
+   }
   };
 
   const renderTimestamp = (timestamp) => {
@@ -287,10 +320,10 @@ const chatSlug=props.params.chatSlug;
 
   const renderMessages = (messages) => {
     const reversedMessages = [...messages].reverse();
-
+console.log(reversedMessages);
     return reversedMessages.map((message, i, arr) => {
       return !message.reply_to ? (
-        <MessageListItem key={`${message.id}_${i}`} onClick={(event)=>handleMouseClick(event, message)}>
+        <MessageListItem key={`${message.id}_${i}`} onClick={(event)=>handleMouseClick(event, message)} >
           {message===selectedMessage && isOpenMessageMenu && <MessageActionMenu position={position} message={message} socket={socket} setIsReply={setIsReply} setReplyMessageId={setReplyMessageId} setReplyTo={setReplyTo}  setIsEdit={setIsEdit} setMessage={setMessage}/>}
           <MessageListItemUsernameWrapper>
             <Wrp>
@@ -303,10 +336,12 @@ const chatSlug=props.params.chatSlug;
               <WrapperUsername>
                 <MessageListItemUsername>
                   {message.author[0].username}
+                  
                 </MessageListItemUsername>
                 <MessageListItemMessage>
                   {message.content}
                 </MessageListItemMessage>
+                {message.edited && (<EditedText>(edited)</EditedText>)}
               </WrapperUsername>
             </Wrp>
           </MessageListItemUsernameWrapper>
@@ -403,7 +438,7 @@ const chatSlug=props.params.chatSlug;
               <><AddFriendRequest/>
                 {/* <DateNowText>Today</DateNowText> */}
                 {/* <MessageList className="messages" onScroll={handleScroll}> */}
-                <MessageList className="messages" onScroll={handleWheel}>
+                <MessageList   ref={chatRef} className="messages" onScroll={handleScroll}>
                   {messages && renderMessages(messages)}
                 
                  <div ref={bottomRef}></div>
@@ -444,6 +479,7 @@ const chatSlug=props.params.chatSlug;
                 onSubmit={sendMessageHandler}
                 onChange={messageChangeHandler}
                 value={message}
+                chatSlug={chatSlug}
               />
             </MessageInputWrapper>
           </ChatBlockWrapper>

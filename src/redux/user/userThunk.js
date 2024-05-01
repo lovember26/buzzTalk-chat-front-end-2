@@ -17,6 +17,7 @@ export const fetchAllUsersThunk = createAsyncThunk(
 export const updateUserInfoThunk = createAsyncThunk(
   "users/update",
   async (credentials, { rejectWithValue }) => {
+   
     try {
       const data = await userAPI.updateUserService(credentials);
       successNotification("Updating successful");

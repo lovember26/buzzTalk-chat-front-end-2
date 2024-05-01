@@ -13,7 +13,7 @@ export const ChatBlockWrapper = styled.div`
   padding-bottom: 30px;
   padding-left: 16px;
   padding-right: 16px;
-  
+ 
   flex: 1;
 `;
 
@@ -31,6 +31,7 @@ export const DateNowText = styled.p`
 export const ChatContainer = styled.div`
   display: flex;
   flex-direction: column;
+ 
 `;
 
 export const WrapperUsername = styled.div`
@@ -82,13 +83,13 @@ export const ActionBar = styled.ul`
 `;
 
 export const MessageList = styled.ul`
-
+// border:1px solid green;
   display: flex;
   flex-direction: column;
 height:100%;
   // height: calc(100vh - 320px);
   overflow-y: auto;
-
+ 
   ::-webkit-scrollbar {
     /* If scrolling is not visible */
     /* width: 0; */
@@ -116,12 +117,13 @@ export const MessageListItem = styled.li`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-
+  // flex-grow: 1;
   margin-bottom: 8px;
   padding: 8px 10px;
   /* To expand a block by its contents */
-  /* width: fit-content; */
-  width: 100%;
+  
+  // width: inherit;
+  
 `;
 
 export const MessageListItemUsernameWrapper = styled.div`
@@ -146,17 +148,20 @@ export const MessageListItemUsernameImageWrapper = styled.div`
   justify-content: center;
   align-items: center;
 
-  width: 50px;
-  height: 50px;
-  overflow: hidden;
-  border-radius: 50%;
+  width: 41px;
+  height: 41px;
+  // overflow: hidden;
+  // border-radius: 50%;
 
   margin-right: 10px;
 `;
 
 export const MessageListItemUsernameImage = styled.img`
-  width: auto;
-  height: 100%;
+  // width: auto;
+  // height: 100%;
+  border-radius: 50%;
+  width: 41px;
+  height: 41px;
 `;
 //A round picture in a block
 
@@ -164,6 +169,11 @@ export const MessageListItemMessage = styled.p`
   margin-bottom: 4px;
   font-size: 16px;
   color: #696969;
+  // border:1px solid red;
+  // width:calc(100% - 136px);
+  // width:700px;
+  // width:fit-content;
+  // overflow-wrap: break-word;
 `;
 
 export const Wrapper = styled.div`
@@ -200,7 +210,7 @@ export const ReadMarkWrapper = styled.div`
 
 export const MessageInputWrapper = styled.div`
   // position: absolute;
-  width:100%;
+  // width:100%;
   bottom: 20px;
 
   display: flex;
@@ -251,13 +261,14 @@ export const MessageListItemReply = styled.li`
   margin-bottom: 8px;
   padding: 8px 10px;
   /* To expand a block by its contents */
-  /* width: fit-content; */
-  width: 100%;
+  //  width: fit-content; 
+  // width: 100%;
 `;
 
 export const MessageListItemUsernameImageReply = styled.img`
-  width: auto;
-  height: 100%;
+width:41px;
+height:41px;
+border-radius:50%;
 `;
 
 export const MessageListItemMessageReply = styled.p`
@@ -284,10 +295,9 @@ export const MessageListItemUsernameImageWrapperReply = styled.div`
   justify-content: center;
   align-items: center;
 
-  width: 50px;
-  height: 50px;
-  overflow: hidden;
-  border-radius: 50%;
+  width: 41px;
+  height: 41px;
+
 
   margin-right: 10px;
 `;
@@ -386,3 +396,7 @@ export const DownloadMoreButton = styled.button`
     border-color: grey;
   }
 `;
+
+export const EditedText=styled.p`
+font-size:10px;
+opacity:0.5;`;

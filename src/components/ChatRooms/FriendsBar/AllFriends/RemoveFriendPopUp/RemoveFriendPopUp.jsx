@@ -9,10 +9,11 @@ import { PopUpWrapper } from './RemoveFrienfPopUp.styled';
 
 
 
-export default function RemoveFriendPopUp({setSelectedFriend, username}) {
+export default function RemoveFriendPopUp({setSelectedFriend, username,removeFriendFromList}) {
 
 const handleRemoveFriend=()=>{
     removeFriend(username);
+    removeFriendFromList(username);
     setSelectedFriend(null);
   }
 const handleCancel=()=>{

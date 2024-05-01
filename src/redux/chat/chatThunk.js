@@ -1,4 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { errorNotification } from "helpers/notification";
 import { chatAPI } from "services";
 
 export const fetchAllPrivateChatsThunk = createAsyncThunk(
@@ -6,6 +7,7 @@ export const fetchAllPrivateChatsThunk = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const chats = await chatAPI.getPrivateChatsService();
+     
       return chats;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -68,6 +70,7 @@ export const createPublicChatThunk = createAsyncThunk(
       const data = await chatAPI.createPublicChatService(credentials);
       return data;
     } catch (error) {
+      errorNotification(error.response.data[4014]);
       return rejectWithValue(error.message);
     }
   }
@@ -93,6 +96,8 @@ export const updatePublicChatThunk = createAsyncThunk(
 
       return data;
     } catch (error) {
+      errorNotification(error.response.data[4020]);
+  
       return rejectWithValue(error.message);
     }
   }
@@ -120,7 +125,9 @@ export const removePublicChatImageThunk = createAsyncThunk(
 
       return data;
     } catch (error) {
+      errorNotification(error.message);
       return rejectWithValue(error.message);
+      
     }
   }
 );
@@ -145,6 +152,8 @@ export const updateChatByIdThunk = createAsyncThunk(
       const data = await chatAPI.updateChatByIdService(credentials);
       return data;
     } catch (error) {
+      
+      console.log(error.message);
       return rejectWithValue(error.message);
     }
   }

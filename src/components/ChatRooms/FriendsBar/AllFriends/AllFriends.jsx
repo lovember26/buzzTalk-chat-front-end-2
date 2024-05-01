@@ -8,7 +8,7 @@ import { ReactComponent as MoreIcon } from "../../../../images/more-gray.svg";
 
 import { ReactComponent as MessageIcon } from "../../../../images/message-gray.svg";
 import { useEffect, useState } from "react";
-import { fetchFriends } from "services/friendsApi";
+import { fetchFriends} from "services/friendsApi";
 import RemoveFriendPopUp from "./RemoveFriendPopUp/RemoveFriendPopUp";
 
 export default function AllFriends() {
@@ -25,7 +25,13 @@ useEffect(() => {
 
   getFriends();
 }, []);
+const removeFriendFromList = (username) => {
+ 
+  const updatedUserFriends = userFriends.filter(item => item.username !== username);
 
+ setUserFriends(updatedUserFriends);
+ 
+}
   const handleMoreIcon=(friend)=>{
     
     setSelectedFriend(friend);
@@ -48,7 +54,7 @@ useEffect(() => {
       <div>
         <MessageIcon style={{marginRight:"8px"}}/>
         <button type="button" onClick={() => handleMoreIcon(friend)} className="ignore-click"><MoreIcon pointerEvents="none"/></button>
-      {friend===selectedFriend && <RemoveFriendPopUp setSelectedFriend={setSelectedFriend} username={friend.username} />}
+      {friend===selectedFriend && <RemoveFriendPopUp setSelectedFriend={setSelectedFriend} username={friend.username} removeFriendFromList={removeFriendFromList}/>}
        
         </div>
      

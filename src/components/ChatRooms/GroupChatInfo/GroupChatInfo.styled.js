@@ -72,8 +72,36 @@ color:${theme.colors.white[100]};
 margin-bottom:11px;
 img{
     width:48px;
+    height:48px;
     border-radius:50%;
 }
 p{
     font-size: 12px;
 }`
+
+export const EditButton=styled.button`
+position:absolute;
+right:16px;
+font-size:16px;
+color:${theme.colors.BTN_COLOR};`
+
+export const CancelButton=styled.button`
+position:absolute;
+left:0;
+font-size:16px;
+color:${theme.colors.BTN_COLOR};`
+
+export const DoneButton=styled.button`
+position:absolute;
+right:16px;
+font-size:16px;
+color:#69A2FF;`
+
+export const ChatNameInput=styled.input`
+width:343px;
+background:#A494A9;
+color:${theme.colors.white[100]};
+border:none;
+border-radius:10px;
+height:36px;
+padding:0 20px;`

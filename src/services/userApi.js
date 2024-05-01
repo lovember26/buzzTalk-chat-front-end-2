@@ -11,10 +11,12 @@ export const fetchAllUsersService = async () => {
 };
 
 export const updateUserService = async (credentials) => {
+  
   const { data } = await axios.patch(
     "/api/accounts/users/update/",
-    credentials
+    credentials, 
   );
+  
   return data;
 };
 

@@ -69,5 +69,22 @@ const disconnectWebSocketChat = (socket) => {
         socket.close();
     }
 };
-
-export { connectWebSocketChat, disconnectWebSocketChat, sendMessageWebSocketChat,deleteMessageWebSocketChat };
+const fetchPreviousMessages=(socket,page)=>{
+    if (socket.readyState === WebSocket.OPEN && page>1) {
+        const messageData =
+        {
+            command: "fetch_messages",
+            page,
+          
+          };
+        console.log("fetch",messageData);
+        socket.send(JSON.stringify(messageData));
+        
+    } 
+    
+    else {
+        console.error("WebSocket is not open. Cannot fetch previous messages.");
+    }
+   
+}
+export { connectWebSocketChat, disconnectWebSocketChat, sendMessageWebSocketChat,deleteMessageWebSocketChat, fetchPreviousMessages };
