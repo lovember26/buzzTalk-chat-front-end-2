@@ -66,14 +66,14 @@ const [onlineUsers, setOnlineUsers]=useState(null);
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-      const socket = connectWebSocketNotification(accessToken);
+    if (accessToken) {
+        const socket = connectWebSocketNotification(accessToken);
+        setSocket(socket);
 
-      setSocket(socket);
-
-      return () => {
-          disconnectWebSocketNotification(socket);
-          
-      };
+        return () => {
+            disconnectWebSocketNotification(socket);
+        };
+    }
   }, [accessToken]);
   // const unreadMessageCounter=(messageData)=>{
   //  console.log("counter");
