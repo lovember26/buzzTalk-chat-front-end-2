@@ -8,7 +8,7 @@ echo "Modified Nginx configuration:"
 cat /etc/nginx/conf.d/default.conf
 
 # Replace the placeholder in baseURL.js with the actual environment variable for WEBSOCKET
-sed -i "s|__WEBSOCKET_IP__|${WEBSOCKET_IP}|g" /usr/share/nginx/html/static/js/*.js
+sed -i "s|__PUBLIC_HOST__|${PUBLIC_HOST}|g" /usr/share/nginx/html/static/js/*.js
 
 # Start Nginx server
 nginx -g "daemon off;"

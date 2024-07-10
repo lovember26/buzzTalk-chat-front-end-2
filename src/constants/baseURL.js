@@ -2,5 +2,5 @@
 //export const WEBSOCKET_URL="wss://buzz-talk-api.onrender.com/ws"
 // export const BASE_URL = "http://127.0.0.1:8000" ;
 // export const WEBSOCKET_URL="ws://127.0.0.1:8000/ws"
-export const BASE_URL = "buzztalk-api";
-export const WEBSOCKET_URL="http://__WEBSOCKET_IP__/websocket"
+export const BASE_URL = "http://__PUBLIC_HOST__/buzztalk-api";
+export const WEBSOCKET_URL="http://__PUBLIC_HOST__/websocket"
