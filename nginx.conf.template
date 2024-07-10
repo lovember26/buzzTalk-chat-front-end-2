@@ -14,7 +14,7 @@ server {
         proxy_set_header X-Forwarded-Proto $scheme;
     }
 
-    location /ws/ {
+    location /websocket/ {
         proxy_pass http://$BACKEND_SERVICE_IP:8000/ws/;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;

@@ -3,4 +3,4 @@
 // export const BASE_URL = "http://127.0.0.1:8000" ;
 // export const WEBSOCKET_URL="ws://127.0.0.1:8000/ws"
 export const BASE_URL = "buzztalk-api";
-export const WEBSOCKET_URL="http://__WEBSOCKET_IP__/ws"
+export const WEBSOCKET_URL="http://__WEBSOCKET_IP__/websocket"
